@@ -1,0 +1,264 @@
+/*
+ * Medical Specification Functions.
+ */
+var express = require('express');
+var router = express.Router();
+var sql = require('mssql');
+var sqlConn = sql.globalConnection;
+var Promise = require('bluebird');
+
+router.get('/', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query("SELECT * FROM dbo.vwDestinations")
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+
+router.get('/:id(\\d+)', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query(`SELECT * FROM dbo.vwDestinations Where DestID= ${req.params.id}`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.get('/region/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query(`SELECT * FROM dbo.vwDestinations Where RegionID= ${req.params.id}`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.get('/userChain/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    // request.input("UserID", req.params.id);
+    request.query(`SELECT DISTINCT d.* FROM dbo.vwDestinations d
+                JOIN dbo.UserDestinations ud ON d.DestID = ud.DestID
+                AND ud.UserID IN (SELECT ${req.params.id} UNION SELECT UserID FROM dbo.fncUserChain(${req.params.id}))`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.get('/userChainCount/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    // request.input("UserID", req.params.id);
+    request.query(`SELECT ISNULL(COUNT(DISTINCT d.DestID), 0) AS DestCount FROM dbo.vwDestinations d
+                JOIN dbo.UserDestinations ud ON d.DestID = ud.DestID
+                AND ud.UserID IN (SELECT ${req.params.id} UNION SELECT UserID FROM dbo.fncUserChain(${req.params.id}))`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+
+router.get('/aprvregion/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query(`SELECT * FROM dbo.vwDestinations Where RegionID= ${req.params.id} And Approved = 1`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.get('/planAprvRegion/:id.:userID.:visitDate', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("RegionID", req.params.id);
+    request.input("UserID", req.params.userID);
+    request.input("VisitDate", req.params.visitDate);
+    request.execute(`procGetUserPlanRegionDestinations`)
+        .then(function (recordset) { res.json(recordset) })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+})
+router.get('/checkMaxVisit/:destID.:userID.:visitDate', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input('DestID', req.params.destID)
+    request.input("UserID", req.params.userID);
+    request.input("VisitDate", req.params.visitDate);
+    request.execute(`ProcChechMaxVisits`) //'12-2016'
+        .then(function (recordset) { res.json(recordset[0]); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+})
+router.get('/destUsers/:destID', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", req.params.destID);
+    request.execute(`procGetDestinationUsers`)
+        .then(function (recordset) { res.json(recordset) })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+})
+router.get('/AlldestUsers', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query(`SELECT DISTINCT s.SalesLineID, LineName, u.UserID, u.UserName, CAST(0 AS BIT) selected FROM dbo.Users u
+                    JOIN dbo.SalesLines s ON u.SalesLineID = s.SalesLineID AND u.JobClass = 'Medical Rep.'
+                    LEFT JOIN dbo.UserDestinations ud ON u.UserID = ud.UserID`)
+        .then(function (recordset) { res.json(recordset) })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+})
+router.post('/', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var dest = req.body.dst;
+    var users = req.body.users;
+    var conf = require('../SQLconfig');
+    var connection = new sql.Connection(conf.config);
+    connection.connect().then(function () {
+        var trans = new sql.Transaction(connection);
+        trans.begin()
+            .then(function () {
+                var promises = [];
+                var request = trans.request();
+                request.input("Destination", dest.Destination);
+                request.input("DestType", dest.DestType);
+                request.input("Address", dest.Address);
+                request.input("RegionID", dest.RegionID);
+                request.input("MedSpecID", dest.MedSpecID);
+                request.input("VisitImpID", dest.VisitImpID);
+                request.input("CreateUser", dest.CreateUser);
+                request.input("IMSID", dest.IMSID);
+                request.execute("DestinationInsert")
+                    .then(function (recordset) {
+                        console.log(recordset)
+                        destID = recordset[0][0].DestID;
+                        console.log(destID)
+                        promises.push(Promise.map(users, function (user) {
+                            var request = trans.request();
+                            request.input("DestID", destID);
+                            request.input("UserID", user.UserID);
+                            return request.execute("UserDestinationInsert")
+                        }));
+
+                        Promise.all(promises)
+                            .then(function (recordset) {
+                                trans.commit().then(function (recordset) {
+                                    res.json({ set: { DestID: destID }, returnValue: 1, affected: 1 });
+                                }).catch(function (err) {
+                                    trans.rollback();
+                                    res.json({ error: err }); console.log(err);
+                                })
+                            }).catch(function (err) {
+                                trans.rollback();
+                                console.log('Transaction Rolled Back');
+                                res.json({ error: err }); console.log(err);
+                            })
+                    }).catch(function (err) {
+                        trans.rollback();
+                        res.json({ error: err }); console.log(err);
+                    })
+            }).catch(function (err) {
+                trans.rollback();
+                res.json({ error: err }); console.log(err);
+            })
+    }).catch(function (err) {
+        res.json({ error: err }); console.log(err); connection.close();
+    })
+
+});
+
+router.put('/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var dest = req.body.dst;
+    var users = req.body.users;
+    var conf = require('../SQLconfig');
+    var connection = new sql.Connection(conf.config);
+    connection.connect().then(function () {
+        var trans = new sql.Transaction(connection);
+        trans.begin()
+            .then(function () {
+                var promises = [];
+                var request = trans.request();
+                request.input("DestID", req.params.id);
+                request.input("Destination", dest.Destination);
+                request.input("DestType", dest.DestType);
+                request.input("Address", dest.Address);
+                request.input("RegionID", dest.RegionID);
+                request.input("MedSpecID", dest.MedSpecID);
+                request.input("VisitImpID", dest.VisitImpID);
+                request.input("CreateUser", dest.CreateUser);
+                request.input("IMSID", dest.IMSID);
+                request.execute("DestinationUpdate")
+                    .then(function (recordset) {
+
+                        var request = trans.request();
+                        request.input("DestID", req.params.id);
+                        promises.push(request.execute("UserDestinationDelete"))
+
+                        promises.push(Promise.map(users, function (user) {
+                            var request = trans.request();
+                            request.input("DestID", user.DestID);
+                            request.input("UserID", user.UserID);
+                            return request.execute("UserDestinationInsert")
+                        }));
+
+                        Promise.all(promises)
+                            .then(function (recordset) {
+                                trans.commit().then(function () {
+                                    res.json({ returnValue: 1, affected: 1 });
+                                }).catch(function (err) {
+                                    trans.rollback();
+                                    res.json({ error: err }); console.log(err);
+                                })
+                            }).catch(function (err) {
+                                trans.rollback();
+                                console.log('Transaction Rolled Back');
+                                res.json({ error: err }); console.log(err);
+                            })
+                    }).catch(function (err) {
+                        trans.rollback();
+                        res.json({ error: err }); console.log(err);
+                    })
+            }).catch(function (err) {
+                trans.rollback();
+                res.json({ error: err }); console.log(err);
+            })
+    }).catch(function (err) {
+        res.json({ error: err }); console.log(err); connection.close();
+    })
+});
+
+router.delete('/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var conf = require('../SQLconfig');
+    var connection = new sql.Connection(conf.config);
+    connection.connect().then(function () {
+        var trans = new sql.Transaction(connection);
+        trans.begin()
+            .then(function () {
+                var promises = [];
+                var request = trans.request();
+                request.input("DestID", req.params.id);
+                request.execute("DestinationDelete")
+                    .then(function (recset) {
+                        trans.commit().then(function () {
+                            res.json({ returnValue: 1, affected: 1 });
+                        }).catch(function (err) {
+                            trans.rollback();
+                            res.json({ error: err }); console.log(err);
+                        })
+                    }).catch(function (err) {
+                        trans.rollback();
+                        console.log('Transaction Rolled Back');
+                        res.json({ error: err }); console.log(err);
+                    })
+            }).catch(function (err) {
+                trans.rollback();
+                res.json({ error: err }); console.log(err);
+            })
+    }).catch(function (err) {
+        res.json({ error: err }); console.log(err); connection.close();
+    })
+});
+
+router.put('/Approve/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var data = req.body;
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", data.id);
+    request.input("ApproveUser", data.appuser);
+    request.execute("DestinationApprove")
+        .then(function (recset) {
+            res.json({ recordset: recset, returnValue: recset.returnValue, affected: recset.returnValue + 1 })
+        }).catch(function (err) {
+            if (err) { res.json({ error: err }); console.log(err); }
+        });
+});
+
+module.exports = router;

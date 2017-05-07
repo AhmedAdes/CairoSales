@@ -1,0 +1,109 @@
+<div class="panel panel-default zz">
+    <div class="panel-heading">
+
+        <h2> {{headerText}} </h2>
+        <button *ngIf="!Formstate && currentUser.jobClass < 1" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+        <br><br>
+        <div class="alert alert-danger" *ngIf="errorMessage">
+            <p>{{errorMessage}}</p>
+        </div>
+    </div>
+    <div class="panel-body table-responsive" *ngIf="showTable">
+        <table id="tblPromoTools" class="table table-hover table-striped">
+            <colgroup>
+                <col width="20%" />
+                <col width="20%" />
+                <col width="40%" />
+                <col width="20%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th> Promo Type <i (click)="SortTable('GiftName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('GiftName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Product <i (click)="SortTable('DrugName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('DrugName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Tool Name <i (click)="SortTable('ToolName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ToolName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                            <input type="text" class="form-control" id="srchgiftName" name="GiftName" [(ngModel)]="srchObj.GiftName">
+                        </div>
+                    </th>
+                    <th>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                            <input type="text" class="form-control" id="srchdrugName" name="DrugName" [(ngModel)]="srchObj.DrugName">
+                        </div>
+                    </th>
+                    <th>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                            <input type="text" class="form-control" id="srchtoolName" name="ToolName" [(ngModel)]="srchObj.ToolName">
+                        </div>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
+                    <td>{{item.GiftName}}</td>
+                    <td>{{item.DrugName}}</td>
+                    <td>{{item.ToolName}}</td>
+                    <td>
+                        <button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.ToolID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+                        <button (click)="ShowDetails(item.ToolID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
+                        <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.ToolID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+    </div>
+
+    <div class="panel-body" *ngIf="Formstate">
+        <form [formGroup]="inFrm" (submit)="inFrm.valid && HandleForm($event)" novalidate>
+            <div class="form-horizontal">
+
+                <h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this promotional tool ?</h2>
+                <br>
+                <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['GiftName'].valid }">
+                    <label for="GiftID" class="control-label col-md-2 col-sm-2">Promo Type</label>
+                    <div class="col-md-10 col-sm-10">
+                        <select class="form-control" name="GiftID" [(ngModel)]="model.GiftID" [formControl]="inFrm.controls['GiftName']" (change)="onGiftChange($event)">
+							<option value="">Select a Promo Type...</option>
+							<option *ngFor="let i of giftList" [ngValue]="i.GiftID">{{i.GiftName}}</option>
+						</select>
+                        <div class='error' *ngIf="inFrm.controls['GiftName'].touched && !inFrm.controls['GiftName'].valid">
+                            <div class="alert alert-danger" *ngIf="inFrm.controls['GiftName'].hasError('required')">Promo Type is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['DrugName'].valid }">
+                    <label for="DrugID" class="control-label col-md-2 col-sm-2">Product</label>
+                    <div class="col-md-10 col-sm-10">
+                        <select class="form-control" name="DrugID" [(ngModel)]="model.DrugID" [formControl]="inFrm.controls['DrugName']" (change)="onDrugChange($event)">
+							<option value="">Select a Product...</option>
+							<option *ngFor="let i of drugList" [ngValue]="i.DrugID">{{i.DrugName}}</option>
+						</select>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['ToolName'].valid }">
+                    <label for="ToolName" class="control-label col-md-2 col-sm-2">Promotional Tool Name</label>
+                    <div class="col-md-10 col-sm-10">
+                        <input class="form-control" type="text" name="ToolName" [(ngModel)]="model.ToolName" [formControl]="inFrm.controls['ToolName']">
+                        <div class='error' *ngIf="(inFrm.controls['GiftName'].touched && !inFrm.controls['ToolName'].valid)">
+                            <div class="alert alert-danger" *ngIf="inFrm.controls['ToolName'].hasError('required')">Promotional Tool Name is required.</div>
+                            <div class="alert alert-danger" *ngIf="inFrm.controls['ToolName'].hasError('alreadyexist')">Promotional Tool Name already exist.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
+                    <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'" [disabled]='!inFrm.valid'>Save</button>                    |
+                    <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button>                    |
+                    <button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

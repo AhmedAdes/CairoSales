@@ -1,0 +1,54 @@
+<div class="card">
+    <h3 class="card-title">
+        <a class="btn btn-warning" data-toggle="collapse" [href]="'#'+'plan'+currentUser.userID" aria-expanded="true" [attr.aria-controls]="'plan'+currentUser.userID"
+            (click)="changeArrowClass()">
+            <i class="glyphicon" [ngClass]="appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'"></i>
+        </a>
+        {{currentUser.UserName}} Assigned Plan
+    </h3>
+    <!--(dateChanged)="newSchedule($event)"-->
+
+    <div [id]="'plan'+currentUser.userID" class="panel-collapse collapse in">
+        <div class="card-block">
+            <plan-slider [currentUser]="currentUser" (planChanged)="newPlan($event)"></plan-slider>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Products</h3>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let item of plnDrugs | orderby:'+DrugName'">{{item.DrugName}}
+                            <!--<input type="checkbox" [name]="item.DrugID" [checked]="item.Checked" readonly>{{item.DrugName}}-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Accounts</h3>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let item of plnSpecs | orderby:'+SpecName'">{{item.SpecName}}
+                            <!--<input type="checkbox" [name]="item.SpecID" [checked]="item.Checked" readonly>{{item.SpecName}}-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Cycles</h3>
+                </div>
+                <div class="card-block">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let item of plnImps | orderby:'+ImpName'">{{item.ImpName}}
+                            <!--<input type="checkbox" [name]="item.ImpID" [checked]="item.Checked" readonly>{{item.ImpName}}-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<form [formGroup]="drgform" (submit)="drgform.valid && AddDrug($event)">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="DrugID" class="control-label col-md-2 col-sm-2">Product</label>
+            <div class="col-md-10 col-sm-10">
+                <select class="form-control" name="DrugID" [(ngModel)]="drugmodel.DrugID" [formControl]="drgform.controls['drugID']">
+                    <option value="">Select a Product...</option>
+                    <option *ngFor="let item of drugs | orderby:'+DrugName'" [ngValue]="item.DrugID">{{item.DrugName}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="(drgform.submitted || drgform.controls['drugID'].touched)  && !drgform.controls['drugID'].valid">
+                    <span *ngIf="drgform.controls['drugID'].hasError('required')">Product is Required</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="Comment" class="control-label col-md-2 col-sm-2">Comment</label>
+            <div class="col-md-10 col-sm-10">
+                <textarea rows="2" cols="10" class="form-control" type="text" name="Comment" [(ngModel)]="drugmodel.Comment" [formControl]="drgform.controls['comment']"></textarea> 
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!drgform.valid">Add Drug</button>
+    </div>
+</form>

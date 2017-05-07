@@ -1,0 +1,90 @@
+<div class="card" *ngIf="userVisits">
+    <h3 class="card-title text-left">
+        <a [id]="'toggle'+UserID" class="btn btn-warning" data-toggle="collapse" [href]="'#'+UserID" aria-expanded="true" [attr.aria-controls]="UserID" (click)="changeArrowClass()">
+            <i class="glyphicon" [ngClass]="appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'"></i>
+        </a>
+        {{userName}} visits
+    </h3>
+    <div [id]="UserID" class="panel-collapse collapse in">
+        <div class="card-block">
+            <table id="tblVisits" class="table table-hover table-striped">
+                <colgroup>
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="20%" />
+                    <col width="20%" />
+                    <col width="10%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th> Visit Date <i (click)="SortTable('VisitDate')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                        <th> Time <i (click)="SortTable('VisitTime')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitTime') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                        <th> Customer <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                        <th> Province <i (click)="SortTable('RegionName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                        <th> Speciality <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                        <th> Visit Type <i (click)="SortTable('VisitType')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control" id="srchVisitDate" name="VisitDate" [(ngModel)]="srchObj.VisitDate">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control" id="srchVisitTime" name="VisitTime" [(ngModel)]="srchObj.VisitTime">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control" id="srchDestination" name="Destination" [(ngModel)]="srchObj.Destination">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control" id="srchRegionName" name="RegionName" [(ngModel)]="srchObj.RegionName">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control" id="srchSpecName" name="SpecName" [(ngModel)]="srchObj.SpecName">
+                            </div>
+                        </th>
+                        <th>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                                <input type="text" class="form-control" id="srchVisitType" name="VisitType" [(ngModel)]="srchObj.VisitType">
+                            </div>
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of (userVisits | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
+                        <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{item.VisitTime | date:'shortTime'}}</td>
+                        <td>{{item.Destination}}</td>
+                        <td>{{item.RegionName}} - {{item.ProvinceID}}</td>
+                        <td>{{item.SpecName}}</td>
+                        <td>{{item.VisitType}}</td>
+                        <td>
+                            <!--<button *ngIf="currentUser.jobClass < 4 && currentUser.userID == item.UserID" (click)='onEdit(item.VisitID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>-->
+                            <button (click)="onDetail(item.VisitID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
+                            <button *ngIf="currentUser.userID == item.UserID" (click)="onDelete(item.VisitID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+        </div>
+    </div>
+</div>

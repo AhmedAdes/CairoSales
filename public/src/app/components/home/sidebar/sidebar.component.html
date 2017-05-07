@@ -1,0 +1,44 @@
+<nav class="demo-sidebar">
+    <ul class="nav-list list-group" id="accordion">
+        <li *ngIf="currentUser.jobClass <= 1">
+            <a class="list-group-item" data-toggle="collapse" href="#basicMenu" aria-expanded="false" aria-controls="basicMenu">
+                Startup Data
+            </a>
+        </li>
+        <div id="basicMenu" class="panel-collapse collapse">
+            <ul class="list-group">
+                <li><a [routerLink]="['/home/basic/lines']" [routerLinkActive]="['router-link-active']" class="list-group-item">Sales Lines</a></li>
+                <li><a [routerLink]="['/home/basic/drugs']" [routerLinkActive]="['router-link-active']" class="list-group-item">Products</a></li>
+                <li><a [routerLink]="['/home/basic/specs']" [routerLinkActive]="['router-link-active']" class="list-group-item">Accounts</a></li>
+                <li><a [routerLink]="['/home/basic/vimp']" [routerLinkActive]="['router-link-active']" class="list-group-item">Visit Cycles</a></li>
+                <li><a [routerLink]="['/home/basic/gifts']" [routerLinkActive]="['router-link-active']" class="list-group-item">Promotional Tools Types</a></li>
+                <li><a [routerLink]="['/home/basic/promo']" [routerLinkActive]="['router-link-active']" class="list-group-item">Promotional Tools</a></li>
+            </ul>
+        </div>
+        <li *ngIf="currentUser.jobClass <= 1"><a data-parent="#accordion" [routerLink]="['/home/user']" [routerLinkActive]="['router-link-active']" class="list-group-item">Users</a>            </li>
+
+        <li><a data-parent="#accordion" [routerLink]="['/home/regions']" [routerLinkActive]="['router-link-active']" class="list-group-item">Provinces</a></li>
+
+        <li><a data-parent="#accordion" [routerLink]="['/home/dest']" [routerLinkActive]="['router-link-active']" class="list-group-item">Customers</a></li>
+
+        <li><a data-parent="#accordion" [routerLink]="['/home/visit']" [routerLinkActive]="['router-link-active']" class="list-group-item">Visits</a></li>
+
+        <li *ngIf="currentUser.jobClass <= 1"><a data-parent="#accordion" [routerLink]="['/home/plan']" [routerLinkActive]="['router-link-active']" class="list-group-item">Plans</a></li>
+
+        <li *ngIf="currentUser.jobClass <= 4">
+            <a class="list-group-item" data-toggle="collapse" href="#reportsMenu" aria-expanded="false" aria-controls="reportsMenu">
+                Reports
+            </a>
+        </li>
+        <div id="reportsMenu" class="panel-collapse collapse">
+            <ul class="list-group">
+                <li><a [routerLink]="['/home/reports/visCount']" [routerLinkActive]="['router-link-active']" class="list-group-item">Visit Counts Comparison</a></li>
+                <!--<li><a [routerLink]="['/home/basic/drugs']" [routerLinkActive]="['router-link-active']" class="list-group-item">Products</a></li>
+                <li><a [routerLink]="['/home/basic/specs']" [routerLinkActive]="['router-link-active']" class="list-group-item">Accounts</a></li>
+                <li><a [routerLink]="['/home/basic/vimp']" [routerLinkActive]="['router-link-active']" class="list-group-item">Visit Cycles</a></li>
+                <li><a [routerLink]="['/home/basic/gifts']" [routerLinkActive]="['router-link-active']" class="list-group-item">Promotional Tools Types</a></li>
+                <li><a [routerLink]="['/home/basic/promo']" [routerLinkActive]="['router-link-active']" class="list-group-item">Promotional Tools</a></li>-->
+            </ul>
+        </div>
+    </ul>
+</nav>

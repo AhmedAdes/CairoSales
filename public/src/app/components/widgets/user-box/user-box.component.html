@@ -1,0 +1,34 @@
+<!-- Menu Toggle Button -->
+<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"> <!-- The user image in the navbar-->
+	<img [src]="currentUser.photo" class="user-image" alt="currentUser.UserName"> <!-- hidden-xs hides the username on small devices so only the image appears. -->
+	<span class="hidden-xs">{{currentUser.UserName}}</span>
+</a>
+<ul class="dropdown-menu">
+	<!-- The user image in the menu -->
+	<li class="user-header"><img [src]="currentUser.photo"
+		class="img-circle" alt="currentUser.UserName">
+		<p>
+			{{currentUser.UserName}} <small>{{currentUser.loginName}}</small>
+		</p></li>
+	<!-- Menu Body -->
+	<li class="user-body">
+		<div class="col-xs-6 text-center">
+			<a class="label label-default" href="javascript:void(0)">Customers <span class="badge">{{DestCount}}</span></a>
+		</div>
+		<div class="col-xs-6 text-center">
+			<a class="label label-default" href="javascript:void(0)">this Month Visits <span class="badge">{{visCount}}</span></a>
+		</div>
+		<!--<div class="col-xs-4 text-center">
+			<a href="javascript:void(0)">Friends</a>
+		</div>-->
+	</li>
+	<!-- Menu Footer-->
+	<li class="user-footer">
+		<div class="pull-left">
+			<a [routerLink]="['/home/pass']" class="btn btn-default btn-flat">Change Password</a>
+		</div>
+		<div class="pull-right">
+			<a [routerLink]="['/logout']" class="btn btn-default btn-flat">Sign out</a>
+		</div>
+	</li>
+</ul>

@@ -1,0 +1,84 @@
+<div class="well no-print">
+    <form #f="ngForm" novalidate *ngIf="currentUser.jobClass != 3" (submit)="f.valid && ViewReport()">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div [ngClass]="{ 'has-error': f.submitted && !from.valid }">
+                    <label for="fromDate" class="control-label col-md-2 col-sm-4">From</label>
+                    <div class="col-md-4 col-sm-8">
+                        <input class="form-control" type="date" name="fromDate" [(ngModel)]="fromDate" #from="ngModel" required>
+                    </div>
+                </div>
+                <div [ngClass]="{ 'has-error': f.submitted && !to.valid }">
+                    <label for="toDate" class="control-label col-md-2 col-sm-4">To</label>
+                    <div class="col-md-4 col-sm-8">
+                        <input class="form-control" type="date" name="toDate" [(ngModel)]="toDate" #to="ngModel" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="DrugID" class="control-label col-md-3 col-sm-4">Select a Product</label>
+                <div class="col-md-9 col-sm-8">
+                    <select class="form-control" name="DrugID" [(ngModel)]="drugID">
+                        <option [value]="null">Select a Product</option>
+                        <option *ngFor="let drug of drugList" [ngValue]="drug.DrugID">{{drug.DrugName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="submit" class="btn btn-primary btn-block">View</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-info btn-block" (click)="printReport()">Print</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-danger btn-block" (click)="goBack()">Back</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-center">{{reportHeader}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <dash-score [heading]="'Total Visits'" [score]="collection.length" [icon]="'fa fa-thumb-tack fa-4x'" [alertColor]="'alert alert-danger'"></dash-score>
+            </div>
+        </div>
+        <table id="tblRegions" class="table table-hover table-striped table-responsive table-bordered">
+            <colgroup>
+                <col width="20%" />
+                <col width="20%" />
+                <col width="15%" />
+                <col width="15%" />
+                <col width="10%" />3
+                <col width="20%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th> IMS Region <i (click)="SortTable('IMS')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Medical Rep. <i (click)="SortTable('UserName')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Visit Date <i (click)="SortTable('VisitDate')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Customer <i (click)="SortTable('Destination')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Speciality <i (click)="SortTable('SpecName')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Comment <i (click)="SortTable('Comment')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of collection | orderby:orderbyString">
+                    <td>{{item.IMS}}</td>
+                    <td>{{item.UserName}}</td>
+                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item.Destination}}</td>
+                    <td>{{item.SpecName}}</td>
+                    <td>{{item.Comment}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!--<pagination-controls class="no-print"  (pageChange)="p = $event" maxSize="10"></pagination-controls>-->
+    </div>
+</div>

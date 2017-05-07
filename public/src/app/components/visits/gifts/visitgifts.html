@@ -1,0 +1,39 @@
+<form [formGroup]="gftform" (submit)="gftform.valid && AddGift($event)">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="GiftID" class="control-label col-md-2 col-sm-2">Promo Type</label>
+            <div class="col-md-10 col-sm-10">
+                <select class="form-control" name="GiftID" [(ngModel)]="giftmodel.GiftID" [formControl]="gftform.controls['giftID']" (change)="ongiftChange($event)">
+                    <option value="">Select a Promo Type...</option>
+                    <option *ngFor="let item of gifts" [ngValue]="item.GiftID">{{item.GiftName}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="(gftform.submitted || gftform.controls['giftID'].touched)  && !gftform.controls['giftID'].valid">
+                    <span *ngIf="gftform.controls['giftID'].hasError('required')">Promo Type is Required</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ToolID" class="control-label col-md-2 col-sm-2">Promo Tool</label>
+            <div class="col-md-10 col-sm-10">
+                <select class="form-control" name="ToolID" [(ngModel)]="giftmodel.ToolID" [formControl]="gftform.controls['toolID']">
+                    <option value="">Select a Promo Tool...</option>
+                    <option *ngFor="let item of dispTools" [ngValue]="item.ToolID">{{item.ToolName}}</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="(gftform.submitted || gftform.controls['toolID'].touched)  && !gftform.controls['toolID'].valid">
+                    <span *ngIf="gftform.controls['toolID'].hasError('required')">Promo Tool is Required</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="Qty" class="control-label col-md-2 col-sm-2">Quantity</label>
+            <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="number" name="Qty" [(ngModel)]="giftmodel.Qty" [formControl]="gftform.controls['qty']">
+                <div class="alert alert-danger" *ngIf="(gftform.submitted || gftform.controls['qty'].touched)  && !gftform.controls['qty'].valid">
+                    <span *ngIf="gftform.controls['qty'].hasError('required')">Quantity is Required</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!gftform.valid">Add Tool</button>
+    </div>
+</form>

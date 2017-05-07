@@ -1,0 +1,69 @@
+<div class="panel panel-default zz">
+	<div class="panel-heading">
+
+		<h2> {{headerText}} </h2>
+		<button *ngIf="!Formstate && currentUser.jobClass < 1" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+		<br><br>
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<p>{{errorMessage}}</p>
+		</div>
+	</div>
+	<div class="panel-body table-responsive" *ngIf="showTable">
+		<table id="tblIMS" class="table table-hover table-striped">
+			<colgroup>
+				<col width="70%" />
+				<col width="30%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>IMS Region<i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchIMS" name="IMS" [(ngModel)]="srchObj.IMS">
+						</div>
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
+					<td>{{item.IMS}}</td>
+					<td>
+						<button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.IMSID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+						<button (click)="ShowDetails(item.IMSID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
+						<button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.IMSID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+        <pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+	</div>
+
+	<div class="panel-body" *ngIf="Formstate">
+		<form (submit)="HandleForm($event)" #f="ngForm" novalidate>
+			<div class="form-horizontal">
+
+				<h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this IMS ?</h2>
+				<br>
+
+				<div class="form-group">
+					<label for="IMS" class="control-label col-md-2 col-sm-2">IMS</label>
+					<div class="col-md-10 col-sm-10">
+						<input class="form-control" type="text" name="IMS" [(ngModel)]="model.IMS" #specName="ngModel" required>
+						<div *ngIf="f.submitted && !specName.valid" class="help-block">IMS Region is required</div>
+					</div>
+				</div>
+				<div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
+					<button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'">Save</button> |
+					<button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
+					<button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

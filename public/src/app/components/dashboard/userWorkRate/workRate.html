@@ -1,0 +1,19 @@
+<div class="card">
+    <h3 class="card-title">
+        <a class="btn btn-warning" data-toggle="collapse" [href]="'#'+'rate'+dispUser.userID" aria-expanded="true" [attr.aria-controls]="'rate'+dispUser.userID"
+            (click)="changeArrowClass()">
+            <i class="glyphicon" [ngClass]="appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'"></i>
+        </a>
+        {{dispUser.UserName}} Work Rate</h3>
+    <div [id]="'rate'+dispUser.userID" class="panel-collapse collapse in">
+        <div class="card-block">
+            <date-slider (dateChanged)="newSchedule($event)"></date-slider>
+            <!--<nvd3 [options]="options" [data]="data"></nvd3>-->
+
+            <div style="display: block;">
+                <canvas baseChart [datasets]="chartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+                    [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

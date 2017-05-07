@@ -1,0 +1,13 @@
+<div class="row row-centered">
+    <div class="view col-md-12 col-sm-12 col-xs-12">
+        <button [disabled]="selectedPlan == 0" class="btn btn-large btn-primary pull-left col-md-2 col-sm-2 col-xs-2 col-centered" type="button" (click)="previousPlan()">
+            <i class="glyphicon glyphicon-circle-arrow-left"></i>
+        </button>
+        <div class="text-center col-md-8 col-sm-8 col-xs-8 col-centered">
+            <h2 class="text-center">{{FromDate}} - {{ToDate}}</h2>
+        </div>
+        <button [disabled]="selectedPlan == userPlan.length-1" class="btn btn-large btn-primary pull-right col-md-2 col-sm-2 col-xs-2 col-centered" type="button" (click)="nextPlan()">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+        </button>
+    </div>
+</div>

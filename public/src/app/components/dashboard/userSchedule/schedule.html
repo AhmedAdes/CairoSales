@@ -1,0 +1,57 @@
+<div class="card">
+    <h3 class="card-title">
+        <a [id]="'toggle'+dispUser.userID" class="btn btn-warning" data-toggle="collapse" [href]="'#'+dispUser.userID" aria-expanded="true"
+            [attr.aria-controls]="dispUser.userID" (click)="changeArrowClass()">
+            <i class="glyphicon" [ngClass]="appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'"></i>
+        </a>
+        {{dispUser.UserName}} Schedule
+    </h3>
+    <!--(dateChanged)="newSchedule($event)"-->
+
+    <div [id]="dispUser.userID" class="panel-collapse collapse in">
+        <div class="card-block">
+            <date-slider (dateChanged)="newSchedule($event)"></date-slider>
+            <table class="table table-hover table-striped">
+                <colgroup>
+                    <col width="15%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="15%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <td>Customer</td>
+                        <td>Type</td>
+                        <td>Class</td>
+                        <td>Region</td>
+                        <td>Planned Visits</td>
+                        <td>Commited Visits</td>
+                        <td>Remaining</td>
+                        <td>Loss Percentage</td>
+                        <td>Dist. Manager Visits</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of userSched | orderby: '+RegionName; +ProvinceID; +DestType; +Destination'">
+                        <td>{{item.Destination}}</td>
+                        <td>{{item.DestType}}</td>
+                        <td>{{item.ImpName}}</td>
+                        <td>{{item.RegionName}} - {{item.ProvinceID}}</td>
+                        <td>{{item.VisitsNo}}</td>
+                        <td>{{item.visCount}}</td>
+                        <td>{{item.RemVisits}}</td>
+                        <td [style.color]="item.visLossPercent == 1 ? 'red': item.visLossPercent == 0 ? 'green': '#FFC400'">
+                            {{item.visLossPercent | percent:'3.2-2'}}
+                        </td>
+                        <td>{{item.DistManVisits}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

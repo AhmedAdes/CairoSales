@@ -1,0 +1,57 @@
+<div class="well no-print">
+    <form #f="ngForm" novalidate *ngIf="currentUser.jobClass != 3" (submit)="f.valid && ViewReport()">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div [ngClass]="{ 'has-error': f.submitted && !from.valid }">
+                    <label for="fromDate" class="control-label col-md-2 col-sm-4">From</label>
+                    <div class="col-md-4 col-sm-8">
+                        <input class="form-control" type="date" name="fromDate" [(ngModel)]="fromDate" #from="ngModel" required>
+                    </div>
+                </div>
+                <div [ngClass]="{ 'has-error': f.submitted && !to.valid }">
+                    <label for="toDate" class="control-label col-md-2 col-sm-4">To</label>
+                    <div class="col-md-4 col-sm-8">
+                        <input class="form-control" type="date" name="toDate" [(ngModel)]="toDate" #to="ngModel" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !spec.valid }">
+                <label for="selectedSpec" class="control-label col-md-2 col-sm-4">Select Medical Account</label>
+                <div class="col-md-10 col-sm-8">
+                    <select class="form-control" name="selectedSpec" [(ngModel)]="selectedSpec" #spec="ngModel" required>
+                        <option [ngValue]="null">Select Medical Account..</option>
+                        <option *ngFor="let spec of specList" [ngValue]="spec.SpecID">{{spec.SpecName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="imsID" class="control-label col-md-2 col-sm-4">Select IMS Region</label>
+                <div class="col-md-10 col-sm-8">
+                    <select class="form-control" name="imsID" [(ngModel)]="imsID">
+                        <option [value]="">Select IMS Region</option>
+                        <option *ngFor="let ims of imsList" [ngValue]="ims.IMSID">{{ims.IMS}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="submit" class="btn btn-primary btn-block">View</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-info btn-block" (click)="printReport()">Print</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-danger btn-block" (click)="goBack()">Back</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="card-block">
+    <pre>
+    {{data | json}}
+    </pre>
+</div>
+<div class="card-block">
+    <!--<nvd3 [options]="options" [data]="data"></nvd3>-->
+</div>

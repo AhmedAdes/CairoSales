@@ -1,0 +1,41 @@
+<h1>Dashboard</h1>
+<!--<div class="userchain" *ngIf="currentUser.jobClass >= 1">
+    <div *ngFor="let user of users">
+        <dash-schedule [currentUser]="currentUser" [user]="user" [chain]="true" ></dash-schedule>
+        <dash-workRate [currentUser]="currentUser" [user]="user" [chain]="true"></dash-workRate>
+    </div>
+</div>-->
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-3">
+        <dash-score [heading]="headings[0]" [score]="planned" [icon]="'fa fa-calendar fa-4x'" [alertColor]="'alert alert-danger'"></dash-score>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+        <dash-score [heading]="headings[1]" [score]="committed" [icon]="'fa fa-thumb-tack fa-4x'" [alertColor]="'alert alert-warning'"></dash-score>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+        <dash-score [heading]="headings[2]" [score]="today" [icon]="'fa fa-calendar-check-o fa-4x'" [alertColor]="'alert alert-info'"></dash-score>
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-3">
+        <dash-score [heading]="headings[3]" [score]="promo" [icon]="'fa fa-gift fa-4x'" [alertColor]="'alert alert-success'"></dash-score>
+    </div>
+</div>
+<div class="userchain" *ngIf="currentUser.jobClass != 3">
+    <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;">
+        <label for="userID" class="control-lable col-md-3 text-right">Select a User</label>
+        <div class="col-md-9">
+            <select class="form-control" name="userID" (change)="UserChanged($event)">
+            <option value="null">Select a User</option>
+            <option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName}}</option>
+        </select>
+        </div>
+    </div>
+    <dash-schedule *ngIf="seluser" [currentUser]="currentUser" [user]="seluser" [chain]="true"></dash-schedule>
+    <dash-workRate *ngIf="seluser" [currentUser]="currentUser" [user]="seluser" [chain]="true"></dash-workRate>
+</div>
+
+<div class="userchain" *ngIf="currentUser.jobClass == 3">
+    <dash-plan [currentUser]="currentUser"></dash-plan>
+    <dash-schedule [currentUser]="currentUser"></dash-schedule>
+    <dash-workRate [currentUser]="currentUser"></dash-workRate>
+</div>

@@ -1,0 +1,51 @@
+<!--<div>
+    <ng-sidebar-container>
+
+        <ng-sidebar [sidebarClass]="'demo-sidebar'" [(opened)]="_opened" [animate]="_animate" [mode]="_MODES[1]" [closeOnClickOutside]="_closeOnClick"
+            [position]="_POSITIONS[0]">
+            <sidebar></sidebar>
+        </ng-sidebar>
+
+        <header class="navbar demo-header">
+            <div class="topnav">
+                <div class="navbar-brand">
+                    <button (click)="_toggleSidebar()" class="demo-header__toggle">Toggle sidebar</button>
+                    <a [routerLink]="['dashboard']" class="">IDI Sales & Marketing</a>
+                </div>
+                <ul class="nav navbar-nav top-nav navbar-right pull-right top-right-nav">
+                    <li><a href="javascript:void(0)">{{currentUser.UserName}}</a></li>
+                    <li><a [routerLink]="['/logout']">Logout</a></li>
+                </ul>
+            </div>
+        </header>
+        <section class="main-container shuffle-animation demo-contents">
+            <router-outlet></router-outlet>
+        </section>
+
+    </ng-sidebar-container>
+
+</div>-->
+
+<app-header>{{'LOADING'}} header...</app-header>
+
+<app-menu-aside>{{'LOADING'}} menu...</app-menu-aside>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<toaster-container [toasterconfig]="toastrConfig"></toaster-container>
+	<app-breadcrumb></app-breadcrumb>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="box box-default">
+			<div class="box-body">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<app-footer>{{'LOADING'}} footer...</app-footer>
+<!--<app-aside>{{'LOADING'}} control sidebar...</app-aside>-->

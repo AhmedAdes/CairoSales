@@ -1,0 +1,110 @@
+<div class="panel panel-default zz">
+	<div class="panel-heading">
+
+		<h2> {{headerText}} </h2>
+		<button *ngIf="!Formstate" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+		<br><br>
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<p>{{errorMessage}}</p>
+		</div>
+	</div>
+	<div class="panel-body table-responsive" *ngIf="showTable">
+		<table id="tblMsgs" class="table table-hover table-striped">
+			<colgroup>
+				<col width="20%" />
+				<col width="10%" />
+				<col width="20%" />
+				<col width="20%" />
+				<col width="10%" />
+				<col width="20%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th> From User <i (click)="SortTable('UserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Create Date <i (click)="SortTable('CreateDate')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('CreateDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Message Type <i (click)="SortTable('IssueType')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IssueType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Title <i (click)="SortTable('Title')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Title') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Solved <i (click)="SortTable('Solved')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Solved') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchUserName" name="UserName" [(ngModel)]="srchObj.UserName">
+						</div>
+					</th>
+					<th></th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchIssueType" name="IssueType" [(ngModel)]="srchObj.IssueType">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchTitle" name="Title" [(ngModel)]="srchObj.Title">
+						</div>
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
+					<td>{{item.UserName}}</td>
+					<td>{{item.CreateDate | date:'dd/MM/yyyy'}}</td>
+					<td>{{item.IssueType}}</td>
+					<td>{{item.Title}}</td>
+					<td>{{item.Solved}}</td>
+					<td>
+						<button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.ID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+						<button (click)="ShowDetails(item.ID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
+						<button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.ID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+	</div>
+
+	<div class="panel-body" *ngIf="Formstate">
+		<form (submit)="f.form.valid && HandleForm($event)" #f="ngForm" novalidate>
+			<div class="form-horizontal">
+
+				<h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this message ?</h2>
+				<br>
+				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Type.valid }">
+					<label for="IssueType" class="control-label col-md-2 col-sm-2">Message Type</label>
+					<div class="col-md-10 col-sm-10">
+						<select class="form-control" name="IssueType" [(ngModel)]="model.IssueType" #Type="ngModel" required>
+							<option ngValue="null">Select a Message Type...</option>
+							<option *ngFor="let i of msgTypeList" [ngValue]="i.name">{{i.name}}</option>
+						</select>
+						<div *ngIf="f.submitted && !Type.valid" class="help-block">Message Type is required</div>
+					</div>
+				</div>
+				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }">
+					<label for="title" class="control-label col-md-2 col-sm-2">Title</label>
+					<div class="col-md-10 col-sm-10">
+						<input class="form-control" type="text" name="Title" [(ngModel)]="model.Title" #title="ngModel" required>
+						<div *ngIf="f.submitted && !title.valid" class="help-block">Title is required</div>
+					</div>
+				</div>
+				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !IDesc.valid }">
+					<label for="IDescription" class="control-label col-md-2 col-sm-2">Description</label>
+					<div class="col-md-10 col-sm-10">
+						<textarea rows="" cols="" class="form-control" type="text" name="IDescription" [(ngModel)]="model.IDescription" #IDesc="ngModel"
+						 required></textarea>
+						<div *ngIf="f.submitted && !IDesc.valid" class="help-block">Description is required</div>
+					</div>
+				</div>
+				<div class="form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10">
+					<button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'">Save</button>					|
+					<button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
+					<button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

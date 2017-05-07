@@ -1,0 +1,97 @@
+<div class="panel panel-default zz">
+	<div class="panel-heading">
+
+		<h2> {{headerText}} </h2>
+		<button *ngIf="!Formstate && currentUser.jobClass < 1" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+		<br><br>
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<p>{{errorMessage}}</p>
+		</div>
+	</div>
+	<div class="panel-body table-responsive" *ngIf="showTable">
+		<table id="tblRegions" class="table table-hover table-striped table-responsive">
+			<colgroup>
+				<col width="40%" />
+				<col width="20%" />
+				<col width="15%" />
+				<col width="25%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th> Province Name <i (click)="SortTable('RegionName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Governerate <i (click)="SortTable('ProvinceID')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ProvinceID') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchRegionName" name="RegionName" [(ngModel)]="srchObj.RegionName">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchProvinceID" name="ProvinceID" [(ngModel)]="srchObj.ProvinceID">
+						</div>
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
+					<td>{{item.RegionName}}</td>
+					<td>{{item.ProvinceID}}</td>
+					<td>
+						<button *ngIf="currentUser.jobClass < 1" [disabled]="item.Approved" (click)='ApproveRegion(item.RegionID)' class="btn btn-success" title="Approve"><i class="glyphicon glyphicon-ok"></i></button>
+						<button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.RegionID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+						<button (click)="ShowDetails(item.RegionID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
+						<button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.RegionID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+        <pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+	</div>
+
+	<div class="panel-body" *ngIf="Formstate">
+		<form #f="ngForm" (submit)="HandleForm($event)">
+			<div class="form-horizontal">
+
+				<h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this province ?</h2>
+				<br>
+
+				<div class="form-group hidden">
+					<input class="form-control" type="text" name="RegionID" [(ngModel)]="model.RegionID">
+				</div>				
+				<div class="form-group">
+					<label for="RegionName" class="control-label col-md-2 col-sm-2">Province Name</label>
+					<div class="col-md-10 col-sm-10">
+						<input class="form-control" type="text" name="RegionName" [(ngModel)]="model.RegionName" #RegionName="ngModel" required>
+						<div class='error' *ngIf="RegionName.touched && !RegionName.valid">
+							<div class="alert alert-danger" *ngIf="RegionName.errors.required">Province Name is required.</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="ProvinceID" class="control-label col-md-2 col-sm-2">Governerate</label>
+					<div class="col-md-10 col-sm-10">
+						<select class="form-control" name="ProvinceID" [(ngModel)]="model.ProvinceID" #ProvinceID="ngModel" required>
+							<option value="">Select a Governerate...</option>
+							<option *ngFor="let i of ProvinceList" [ngValue]="i.name">{{i.name}}</option>
+						</select>
+						<div class='error' *ngIf="ProvinceID.touched && !ProvinceID.valid">
+							<div class="alert alert-danger" *ngIf="ProvinceID.errors.required">Governerate is required.</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
+					<button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'" [disabled]='!f.valid'>Save</button> |
+					<button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
+					<button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

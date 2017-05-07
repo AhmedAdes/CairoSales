@@ -1,0 +1,27 @@
+<div class="well no-print">
+    <form>
+        <div class="form-horizontal">
+            <div class="form-group" *ngIf="currentUser.jobClass != 3">
+                <label for="selectedUser" class="control-label col-md-4 col-sm-4">Select Medical Rep.</label>
+                <div class="col-md-8 col-sm-8">
+                    <select class="form-control" name="selectedUser" [(ngModel)]="selectedUser" (change)="newUser()">
+                        <option [value]="currentUser.userID">{{currentUser.UserName}}</option>
+                        <option *ngFor="let user of userList" [ngValue]="user.UserID">{{user.UserName}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-4">
+            <button type="button" class="btn btn-info btn-block" (click)="window.print()">Print</button>
+        </div>
+        <div class="col-md-offset-1 col-md-4">
+            <button type="button" class="btn btn-danger btn-block" (click)="goBack()">Back</button>
+        </div>
+    </div>
+</div>
+<div class="card-block">
+    <date-slider (dateChanged)="newSchedule($event)"></date-slider>
+    <!--<nvd3 [options]="options" [data]="data"></nvd3>-->
+</div>

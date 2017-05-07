@@ -1,0 +1,268 @@
+<div class="panel panel-default zz">
+	<div class="panel-heading">
+
+		<h2> {{headerText}} </h2>
+		<button *ngIf="!Formstate && currentUser.jobClass < 1" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+		<br><br>
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<p>{{errorMessage}}</p>
+		</div>
+	</div>
+	<div class="panel-body table-responsive" *ngIf="showTable">
+		<table id="tblUsers" class="table table-hover table-striped">
+			<colgroup>
+				<col width="25%" />
+				<col width="20%" />
+				<col width="15%" />
+				<col width="15%" />
+				<col width="10%" />
+				<col width="15%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th> User Name <i (click)="SortTable('UserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Direct Manager <i (click)="SortTable('DirectManagerName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('DirectManagerName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Title <i (click)="SortTable('JobClass')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('JobClass') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Sales Line <i (click)="SortTable('LineName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> IMS <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchUserName" name="UserName" [(ngModel)]="searchUser.UserName">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchDirectManagerName" name="DirectManagerName" [(ngModel)]="searchUser.DirectManagerName">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchJobClass" name="JobClass" [(ngModel)]="searchUser.JobClass">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchLineName" name="LineName" [(ngModel)]="searchUser.LineName">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchIMS" name="IMS" [(ngModel)]="searchUser.IMS">
+						</div>
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of (collection | filter:searchUser | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
+					<td>{{item.UserName}}</td>
+					<td>{{item.DirectManagerName}}</td>
+					<td>{{item.JobClass}}</td>
+					<td>{{item.LineName}}</td>
+					<td>{{item.IMS}}</td>
+					<td>
+						<button *ngIf="currentUser.jobClass < 1" [disabled]="item.Approved" (click)='ApproveUser(item.UserID)' class="btn btn-success"
+						 title="Approve User"><i class="glyphicon glyphicon-ok"></i></button>
+						<button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.UserID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+						<button (click)="ShowDetails(item.UserID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
+						<div class="btn-group">
+							<button *ngIf="currentUser.jobClass < 1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+							 aria-expanded="false">
+								More Actions <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<div><button class="btn btn-danger" (click)="Delete(item.UserID)"><i class="glyphicon glyphicon-trash"></i> Delete</button></div>
+								</li>
+								<li>
+									<div><button class="btn btn-warning" (click)="Disable(item.UserID)"><i class="glyphicon glyphicon-ban-circle"></i> Disable</button></div>
+								</li>
+								<li *ngIf="item.JobClass=='Medical Rep.'">
+									<div><button class="btn btn-default" (click)="Replace(item.UserID)"><i class="glyphicon glyphicon-refresh"></i> Reallocate</button></div>
+								</li>
+							</ul>
+						</div>
+						<!--<button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.UserID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>-->
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+		<pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+	</div>
+	<div class="panel-body" *ngIf="Formstate">
+
+		<div *ngIf="Formstate != 'Replace'">
+			<form [formGroup]="inputForm" (submit)="(inputForm.valid || Formstate == 'Delete'|| Formstate == 'Disable') && HandleForm($event)"
+			 novalidate>
+				<div class="form-horizontal">
+
+					<h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this user ?</h2>
+					<h2 *ngIf="Formstate == 'Disable'">Are you sure you want to disable this user ?</h2>
+					<br>
+
+					<!--<div class="form-group hidden">
+					<input class="form-control" type="text" name="UserID" [(ngModel)]="model.UserID" [formControl]="inputForm.controls['UserID']">
+				</div>-->
+					<div class="form-group">
+						<label for="SalesLineID" class="control-label col-md-2 col-sm-2">Sales Line</label>
+						<div class="col-md-10 col-sm-10">
+							<select class="form-control" name="SalesLineID" [(ngModel)]="model.SalesLineID" [formControl]="inputForm.controls['lineID']">
+							<option value="">Select a Sales Line...</option>
+							<option *ngFor="let i of salesLines" [ngValue]="i.SalesLineID">{{i.LineName}}</option>
+						</select>
+							<div class='error' *ngIf="inputForm.controls['lineID'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.controls['lineID'].hasError('required')">Sales Line is required.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="UserName" class="control-label col-md-2 col-sm-2">User Name</label>
+						<div class="col-md-10 col-sm-10">
+							<input class="form-control" type="text" name="UserName" (focusout)="CompleteLogin()" [(ngModel)]="model.UserName" [formControl]="inputForm.controls['UserName']">
+							<div class='error' *ngIf="inputForm.controls['UserName'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.controls['UserName'].hasError('required')">User name is required.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="LoginName" class="control-label col-md-2 col-sm-2">Login Name</label>
+						<div class="col-md-10 col-sm-10">
+							<input class="form-control" type="text" name="LoginName" [(ngModel)]="model.LoginName" [formControl]="inputForm.controls['LoginName']">
+							<div class='error' *ngIf="inputForm.controls['LoginName'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.controls['LoginName'].hasError('required')">Login Name is required.</div>
+								<div class="alert alert-danger" *ngIf="inputForm.controls['LoginName'].hasError('minlength')">Login Name must be minimum 5 characters.</div>
+								<div class="alert alert-danger" *ngIf="inputForm.controls['LoginName'].hasError('maxlength')">Login Name must be maximum 200 characters.</div>
+								<div class="alert alert-danger" *ngIf="inputForm.controls['LoginName'].hasError('alreadyexist')">Login Name already exist.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" *ngIf="Formstate!='Details' && Formstate!='Delete'">
+						<label for="UserPass" class="control-label col-md-2 col-sm-2">User Password</label>
+						<div class="col-md-10 col-sm-10">
+							<input class="form-control" type="password" name="UserPass" [(ngModel)]="model.UserPass" [formControl]="inputForm.controls['UserPass']">
+							<div class='error' *ngIf="inputForm.controls['UserPass'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.controls['UserPass'].hasError('required')">User Password is required.</div>
+								<div class="alert alert-danger" *ngIf="inputForm.controls['UserPass'].hasError('minlength')">User Password must be minimum 5 characters.</div>
+								<div class="alert alert-danger" *ngIf="inputForm.controls['UserPass'].hasError('maxlength')">User Password must be maximum 200 characters.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" *ngIf="Formstate == 'Create'">
+						<label for="ConfPass" class="control-label col-md-2 col-sm-2">Confirm Password</label>
+						<div class="col-md-10 col-sm-10">
+							<input class="form-control" type="password" name="ConfPass" [formControl]="inputForm.controls['ConfPass']">
+							<div class='error' *ngIf="inputForm.controls['ConfPass'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.hasError('mismatchedPasswords')">Passwords do not match.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="JobClass" class="control-label col-md-2 col-sm-2">Title</label>
+						<div class="col-md-10 col-sm-10">
+							<select class="form-control" name="JobClass" [(ngModel)]="model.JobClass" [formControl]="inputForm.controls['JobClass']">
+							<option value="">Select a Title...</option>
+							<option *ngFor="let i of classList" [ngValue]="i.name">{{i.name}}</option>
+						</select>
+							<div class='error' *ngIf="inputForm.controls['JobClass'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.controls['JobClass'].hasError('required')">Title is required.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="DirectManager" class="control-label col-md-2 col-sm-2">Direct Manager</label>
+						<div class="col-md-10 col-sm-10">
+							<select class="form-control" name="DirectManager" [(ngModel)]="model.DirectManager" [formControl]="inputForm.controls['manager']">
+							<option value="">Select a Manager...</option>
+							<option *ngFor="let i of managerList" [ngValue]="i.UserID">{{i.UserName}}</option>
+						</select>
+							<div class='error' *ngIf="inputForm.controls['manager'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.controls['manager'].hasError('required')">Direct Manager is required.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="Email" class="control-label col-md-2 col-sm-2">Email</label>
+						<div class="col-md-10 col-sm-10">
+							<input class="form-control" type="text" name="Email" [(ngModel)]="model.Email" [formControl]="inputForm.controls['Email']">
+							<div class='error' *ngIf="inputForm.controls['Email'].touched">
+								<div class="alert alert-danger" *ngIf="inputForm.controls['Email'].hasError('required')">Email is required.</div>
+								<div class="alert alert-danger" *ngIf="inputForm.controls['Email'].hasError('invalidEmail')">Email is invalid; must be lowercase e.g.: john@doe.com</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="Phone" class="control-label col-md-2 col-sm-2">Phone</label>
+						<div class="col-md-10 col-sm-10">
+							<input class="form-control" type="text" name="Phone" [(ngModel)]="model.Phone" [formControl]="inputForm.controls['Phone']">
+						</div>
+					</div>
+					<!--<div class="form-group">
+					<h3>Regions of Operation</h3>
+					<label for="Region" class="control-label col-md-2 col-sm-2">Add Region</label>
+					<div class="col-md-6">
+						<select class="form-control" name="selectedRegion" [(ngModel)]="selectedRegion" [ngModelOptions]="{standalone: true}">
+							<option value="">Select a region</option>
+							<option *ngFor="let item of regions" [ngValue]="item.RegionID">{{item.RegionName}} - {{item.ProvinceID}}</option>
+						</select>
+					</div>
+					<div class=" col-md-2 col-sm-2">
+						<button class="form-control btn btn-success" type="button" (click)="addRegion()">Add</button>
+					</div>					
+					<ul class="list-group col-md-8 col-md-offset-2">
+						<li class="list-group-item" *ngFor="let item of userRegions; let i = index">
+							<span class="btn btn-xs btn-danger pull-right" (click)="removeRegion(i)"><i class="glyphicon glyphicon-remove"></i></span>
+							<span hidden>{{item.RegionID}}</span>
+							<span>{{item.RegionName}} - {{item.ProvinceID}}</span> 
+						</li>
+					</ul>
+				</div>-->
+					<div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
+						<button type="submit" value="Save" class="btn btn-primary" *ngIf="Formstate!='Details' && Formstate!='Delete' && Formstate!='Disable'"
+						 [disabled]='!inputForm.valid'>Save</button> |
+						<button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
+						<button type="submit" value="Disable" class="btn btn-warning" *ngIf="Formstate == 'Disable'">Disable</button> |
+						<button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div *ngIf="Formstate == 'Replace'">
+			<form [formGroup]="replcForm" (submit)="(replcForm.valid || Formstate == 'Replace') && HandleForm($event)" novalidate>
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label for="UserName" class="control-label col-md-4 col-sm-4">User Name</label>
+						<div class="col-md-8 col-sm-8">
+							<input class="form-control" type="text" name="UserName" (focusout)="CompleteLogin()" [(ngModel)]="rplcModel.User1Name" [formControl]="replcForm.controls['User1Name']">
+							<div class='error' *ngIf="replcForm.controls['User1Name'].touched">
+								<div class="alert alert-danger" *ngIf="replcForm.controls['User1Name'].hasError('required')">User name is required.</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="replcUser" class="control-label col-md-4 col-sm-4">Reallocate Customers of</label>
+						<div class="col-md-8 col-sm-8">
+							<select class="form-control" name="replcUser" [(ngModel)]="rplcModel.user2ID" [formControl]="replcForm.controls['User2ID']">
+								<option value="">Select a User...</option>
+								<option *ngFor="let i of replcUsers" [ngValue]="i.UserID">{{i.UserName}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
+						<button type="submit" value="Replace" class="btn btn-warning" *ngIf="Formstate == 'Replace'">Replace</button> |
+						<button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>

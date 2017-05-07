@@ -1,0 +1,10 @@
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top topnav">
+    <div class="navbar-toggleable-xs clearfix text-center">
+        <button (click)="closesidebar()" class="navbar-brand demo-header__toggle">Toggle sidebar</button>
+        <a [routerLink]="['dashboard']" class="navbar-brand">IDI Sales & Marketing</a>
+        <ul class="nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav">
+            <li><a href="javascript:void(0)">{{currentUser.UserName}}</a></li>
+            <li><a [routerLink]="['/logout']">Logout</a></li>
+        </ul>
+    </div>
+</nav>
