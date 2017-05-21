@@ -9,8 +9,8 @@
         <div class="card-block">
             <table id="tblVisits" class="table table-hover table-striped">
                 <colgroup>
-                    <col width="10%" />
-                    <col width="10%" />
+                    <col width="20%" />
+                    <!--<col width="10%" />-->
                     <col width="20%" />
                     <col width="20%" />
                     <col width="10%" />
@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th> Visit Date <i (click)="SortTable('VisitDate')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-                        <th> Time <i (click)="SortTable('VisitTime')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitTime') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                        <!--<th> Time <i (click)="SortTable('VisitTime')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitTime') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>-->
                         <th> Customer <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
                         <th> Province <i (click)="SortTable('RegionName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
                         <th> Speciality <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
@@ -34,12 +34,12 @@
                                 <input type="text" class="form-control" id="srchVisitDate" name="VisitDate" [(ngModel)]="srchObj.VisitDate">
                             </div>
                         </th>
-                        <th>
+                        <!--<th>
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
                                 <input type="text" class="form-control" id="srchVisitTime" name="VisitTime" [(ngModel)]="srchObj.VisitTime">
                             </div>
-                        </th>
+                        </th>-->
                         <th>
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
@@ -70,7 +70,7 @@
                 <tbody>
                     <tr *ngFor="let item of (userVisits | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
                         <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{item.VisitTime | date:'shortTime'}}</td>
+                        <!--<td>{{item.VisitTime | date:'shortTime'}}</td>-->
                         <td>{{item.Destination}}</td>
                         <td>{{item.RegionName}} - {{item.ProvinceID}}</td>
                         <td>{{item.SpecName}}</td>

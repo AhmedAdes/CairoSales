@@ -19,7 +19,7 @@ router.get('/specVisits/:specID.:from.:to.:imsID', function (req, res, next) {
     request.input("SpecID", req.params.specID);
     request.input("From", req.params.from);
     request.input("To", req.params.to);
-    var str = `SELECT s.SpecName ,COUNT(VisitID) VisCount FROM dbo.Visits v JOIN dbo.Destinations d ON v.DestID = d.DestID 
+    var str = `SELECT ISNULL(s.SpecName, 'N/A') SpecName,ISNULL(COUNT(VisitID), 0) VisCount FROM dbo.Visits v JOIN dbo.Destinations d ON v.DestID = d.DestID 
                 JOIN dbo.MediSpecification s ON d.MedSpecID = s.SpecID WHERE CAST(v.VisitDate AS DATE) BETWEEN @From AND @To 
                 AND s.SpecID = @SpecID `
     if (req.params.imsID != 'null') {
@@ -91,6 +91,16 @@ router.get('/drugPromoAnalysis/:from.:to.:drugId.:rpttype.:crt', function (req, 
     request.input("ToDate", req.params.to);
     request.input("DrugID", req.params.drugId);
     request.query(`SELECT * From fncDrugPromoAnalysis(@FromDate, @ToDate, @DrugID) `)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.get('/UserVisitRate/:id/:month', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    // var user = req.params.id;
+    var request = new sql.Request(sqlConn);
+    request.input("UserID", req.params.id);
+    request.input("Month", req.params.month);
+    request.execute("prcUserMonthVisitsReport")
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });

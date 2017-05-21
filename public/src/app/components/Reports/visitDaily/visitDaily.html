@@ -22,9 +22,22 @@
     </div>
 </div>
 <div class="card-block">
-    <date-slider (dateChanged)="newSchedule($event)"></date-slider>
-
-    <div>
-        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [colors]="colorsEmpty"></canvas>
-    </div>
+    <table class="table table-bordered table-hover table-striped">
+        <colgroup>
+            <col width="50%">
+            <col width="50%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>VisType</th>
+                <th>VisCount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of userRate">
+                <td>{{item.DayDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{item.visCount}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

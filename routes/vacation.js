@@ -16,7 +16,16 @@ router.get('/', function (req, res, next) {
             if (err) { res.json({ error: err }); console.log(err); }
         })
 });
-
+router.get('/getUserVacations/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query(`SELECT * FROM dbo.vwVacation Where UserID IN (SELECT ${req.params.id} UNION SELECT UserID FROM dbo.fncUserChain(${req.params.id}))`)
+        .then(function (recordset) {
+            res.json(recordset);
+        }).catch(function (err) {
+            if (err) { res.json({ error: err }); console.log(err); }
+        })
+});
 router.get('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);

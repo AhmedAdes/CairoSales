@@ -12,6 +12,10 @@ export class ReportHomeComponent implements OnInit {
             heading: true
         },
         {
+            header: "User Daily Visits",
+            link: "/home/reports/visDaily"
+        },
+        {
             header: "User Visits Comparison",
             link: "/home/reports/visComp"
         },
@@ -25,7 +29,7 @@ export class ReportHomeComponent implements OnInit {
         }, 
         {
             header: "IMS Visits",
-            link: "/home/reports/visComp"
+            link: "/home/reports/visIMS"
         }, 
         {
             header: "Products Analysis",

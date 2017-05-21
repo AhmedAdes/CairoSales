@@ -28,7 +28,7 @@
                 <label for="imsID" class="control-label col-md-3 col-sm-4">Select IMS Region</label>
                 <div class="col-md-9 col-sm-8">
                     <select class="form-control" name="imsID" [(ngModel)]="imsID">
-                        <option [value]="">Select IMS Region</option>
+                        <option [ngValue]="null">Select IMS Region</option>
                         <option *ngFor="let ims of imsList" [ngValue]="ims.IMSID">{{ims.IMS}}</option>
                     </select>
                 </div>

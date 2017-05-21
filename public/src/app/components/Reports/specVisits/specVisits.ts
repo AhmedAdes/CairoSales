@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CurrentUser, rptSpecVisits, MedSpec, IMSData } from '../../../Models';
 import { ReportsService, MedSpecService, IMSService, AuthenticationService } from '../../../services';
 import { Location } from '@angular/common';
 import * as hf from '../../helpers/helper.functions'
-// import { nvD3 } from 'ng2-nvd3'
-// declare let d3, nv: any;
+import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
     selector: 'rpt-spec',
@@ -19,10 +18,14 @@ export class SpecVisitsComponent implements OnInit {
     imsList: IMSData[] = []
     today = new Date()
     fromDate: string = hf.handleDate(this.today);
-    toDate: string 
+    toDate: string = hf.handleDate(this.today);
     imsID: number = null
-    options
-    data
+
+    pieChartLabels: string[] = [];
+    pieChartData: number[] = [];
+    pieChartType: string = 'pie';
+    colorsEmpty: Array<Color> = []
+    @ViewChild(BaseChartDirective) private _chart;
 
     ngOnInit() {
         this.srvSpec.getSpec().subscribe(spc => {
@@ -30,11 +33,17 @@ export class SpecVisitsComponent implements OnInit {
             this.srvIms.getIMS().subscribe(ims => this.imsList = ims)
         })
     }
+
     ViewReport() {
         this.srv.getSpecVisits(this.selectedSpec, hf.handleDate(new Date(this.fromDate)), hf.handleDate(new Date(this.toDate)), this.imsID).subscribe(ret => {
-            this.data = ret.map(dat => {
-                return { key: dat.SpecName, y: dat.VisCount == null ? 0 : dat.VisCount }
-            })
+            if (ret.length > 0) {
+                this.pieChartLabels = ret.map(dat => { return dat.SpecName == null ? 'N/A' : dat.SpecName })
+                this.pieChartData = ret.map(dat => { return dat.VisCount == null ? 0 : dat.VisCount })
+            } else {
+                this.pieChartLabels = ['N/A']
+                this.pieChartData = [0]
+            }
+            this.forceChartRefresh()
         })
     }
     goBack() {
@@ -42,5 +51,10 @@ export class SpecVisitsComponent implements OnInit {
     }
     printReport() {
         window.print()
+    }
+    forceChartRefresh() {
+        setTimeout(() => {
+            this._chart.refresh();
+        }, 10);
     }
 }

@@ -28,4 +28,7 @@ export class ReportsService {
     getpromoAnalysis(from: string, to: string, drugId: number) {
         return this.http.get(this.url + 'drugPromoAnalysis/' + from + '.' + to + '.' + drugId, this.options).map(res => res.json());
     }
+    getUserVisitRate(id: number, month: number) {
+        return this.http.get(this.url + 'UserVisitRate/' + id + '/' + month, this.options).map(res => res.json());
+    }
 }

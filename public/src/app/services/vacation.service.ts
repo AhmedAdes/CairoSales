@@ -20,17 +20,19 @@ export class VacationService {
     }
     return this.http.get(geturl, this.options).map(res => res.json());
   }
-
+  getUserVacations(id: number) {
+    return this.http.get(this.url + 'getUserVacations/' + id).map(res => res.json());
+  }
   InsertVacation(vac: Vacation) {
-    return this.http.post(this.url , vac, this.options).map(res => res.json());
+    return this.http.post(this.url, vac, this.options).map(res => res.json());
   }
 
   UpdateVacation(id: number, vac: Vacation) {
-    return this.http.put(this.url  + id, vac, this.options).map(res => res.json());
+    return this.http.put(this.url + id, vac, this.options).map(res => res.json());
   }
 
   DeleteVacation(id: number) {
-    return this.http.delete(this.url  + id, this.options).map(res => res.json());
+    return this.http.delete(this.url + id, this.options).map(res => res.json());
   }
 
 }

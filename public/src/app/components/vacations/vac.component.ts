@@ -39,12 +39,20 @@ export class VacationComponent implements OnInit {
     orderbyClass: string = "glyphicon glyphicon-sort";
 
     ngOnInit() {
-        this.srvVac.getVacation().subscribe(cols => {
-            this.collection = cols;
-            this.srvUser.getuser().subscribe(usr => {
-                this.userList = usr;
-                this.TableBack();
-            })
+        this.srvUser.getuser().subscribe(usr => {
+            this.userList = usr;
+            if (this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99) {
+                this.srvVac.getUserVacations(this.currentUser.userID).subscribe(cols => {
+                    this.collection = cols;
+                    this.TableBack();
+                })
+            }
+            else {
+                this.srvVac.getVacation().subscribe(cols => {
+                    this.collection = cols;
+                    this.TableBack();
+                })
+            }
         }, err => this.errorMessage = err.message)
     }
 
@@ -53,7 +61,12 @@ export class VacationComponent implements OnInit {
         var today = new Date();
         this.cnvFromDate = hf.handleDate(today);
         this.cnvToDate = hf.handleDate(today);
-        this.inFrm.controls["UserID"].enable()
+        if (this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99) {
+            this.model.UserID = this.currentUser.userID
+            this.inFrm.controls["UserID"].disable()
+        } else {
+            this.inFrm.controls["UserID"].enable()
+        }
         this.updateValidators('to')
         this.showTable = false;
         this.Formstate = 'Create';

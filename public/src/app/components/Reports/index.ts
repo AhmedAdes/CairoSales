@@ -1,6 +1,7 @@
 export * from './report.component'
 export * from './reportHome/rptHome.component'
 export * from './visitCompare/visitCompare'
+export * from './visitDaily/visitDaily'
 export * from './specVisits/specVisits'
 export * from './promo/promo'
 export * from './drugAnalysis/period/drugPeriod'

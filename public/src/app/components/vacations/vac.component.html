@@ -2,7 +2,7 @@
     <div class="panel-heading">
 
         <h2> {{headerText}} </h2>
-        <button *ngIf="!Formstate && currentUser.jobClass < 1" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+        <button *ngIf="!Formstate " class="btn btn-primary" (click)="CreateNew()">Create New</button>
         <br><br>
         <div class="alert alert-danger" *ngIf="errorMessage">
             <p>{{errorMessage}}</p>
@@ -11,8 +11,8 @@
     <div class="panel-body" *ngIf="showTable">
         <table id="tblVacs" class="table table-hover table-striped table-responsive">
             <colgroup>
-                <col width="25%" />
-                <col width="15%" />
+                <col width="20%" />
+                <col width="20%" />
                 <col width="15%" />
                 <col width="15%" />
                 <col width="15%" />

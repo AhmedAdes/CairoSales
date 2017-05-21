@@ -62,7 +62,7 @@ export class MenuAsideComponent implements OnInit {
       'title': 'Vacations',
       'icon': 'dashboard',
       'link': ['/home/vac'],
-      'disabled': this.currentUser.jobClass > 2 && this.currentUser.jobClass < 99 ? true : null
+      // 'disabled': this.currentUser.jobClass > 2 && this.currentUser.jobClass < 99 ? true : null
     },
     {
       'title': 'Provinces',
