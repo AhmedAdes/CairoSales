@@ -8,7 +8,7 @@ var cors = require('cors');
 var favicon = require('serve-favicon');
 
 var sql = require('mssql');
-var con = require('./SQLconfig');
+var con = require('./SQLconfig.js');
 var connection = new sql.Connection(con.config);
 //store the connection
 sql.globalConnection = connection;
@@ -39,27 +39,27 @@ app.use(express.static(path.join(__dirname, 'public/dist')));
 //    app.use(express.errorHandler());
 //}
 
-var index = require('./routes/index');
-var user = require('./routes/user');
-var saleslines = require('./routes/saleslines');
-var regions = require('./routes/region');
-var login = require('./routes/login');
-var gift = require('./routes/gifts');
-var medspec = require('./routes/medspecs');
-var visitImp = require('./routes/visitImportance');
-var drug = require('./routes/drugs');
-var userRegion = require('./routes/userRegion');
-var dest = require('./routes/destination');
-var visits = require('./routes/visits');
-var visgift = require('./routes/visitGifts');
-var visdrug = require('./routes/visitDrugs');
-var dash = require('./routes/dashboard');
-var promo = require('./routes/promo');
-var plan = require('./routes/Plan');
-var ims = require('./routes/ims');
-var rprt = require('./routes/Reports');
-var vac = require('./routes/vacation');
-var cntct = require('./routes/contactUs')
+var index = require('./routes/index.js');
+var user = require('./routes/user.js');
+var saleslines = require('./routes/saleslines.js');
+var regions = require('./routes/region.js');
+var login = require('./routes/login.js');
+var gift = require('./routes/gifts.js');
+var medspec = require('./routes/medspecs.js');
+var visitImp = require('./routes/visitImportance.js');
+var drug = require('./routes/drugs.js');
+var userRegion = require('./routes/userRegion.js');
+var dest = require('./routes/destination.js');
+var visits = require('./routes/visits.js');
+var visgift = require('./routes/visitGifts.js');
+var visdrug = require('./routes/visitDrugs.js');
+var dash = require('./routes/dashboard.js');
+var promo = require('./routes/promo.js');
+var plan = require('./routes/Plan.js');
+var ims = require('./routes/ims.js');
+var rprt = require('./routes/Reports.js');
+var vac = require('./routes/vacation.js');
+var cntct = require('./routes/contactUs.js')
 
 app.use('/', index);
 app.use('/api/user', user);
