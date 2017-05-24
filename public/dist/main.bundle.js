@@ -1102,8 +1102,8 @@ var CustomPipesModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return VacTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return MessageTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return provinces; });
-// export const NodeUrl = '/api/'
-var NodeUrl = 'http://localhost:5500/api/';
+var NodeUrl = '/api/';
+// export const NodeUrl = 'http://localhost:5500/api/'
 var JobClass = [
     { class: 0, name: 'SysAdmin' },
     { class: 1, name: 'Line Manager' },

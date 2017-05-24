@@ -1,5 +1,5 @@
-// export const NodeUrl = '/api/'
-export const NodeUrl = 'http://localhost:5500/api/'
+export const NodeUrl = '/api/'
+// export const NodeUrl = 'http://localhost:5500/api/'
 
 export const JobClass = [
 	{ class: 0, name: 'SysAdmin' },
