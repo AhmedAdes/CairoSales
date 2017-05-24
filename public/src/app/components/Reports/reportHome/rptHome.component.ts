@@ -32,6 +32,10 @@ export class ReportHomeComponent implements OnInit {
             link: "/home/reports/visIMS"
         }, 
         {
+            header: "Medical Rep Summary",
+            link: "/home/reports/medrep"
+        }, 
+        {
             header: "Products Analysis",
             heading: true
         },

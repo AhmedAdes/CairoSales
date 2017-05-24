@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import {Ng2PaginationModule} from 'ng2-pagination'; 
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 import { VisitComponent, UserVisitsComponent, VisitDrugsComponent, VisitGiftsComponent } from './';
 import { VisitService } from "../../services";
@@ -13,7 +13,7 @@ import { CustomPipesModule } from "../../pipes/pipe.module";
     imports: [
         BrowserModule, FormsModule,
         ReactiveFormsModule, CustomPipesModule, HttpModule,
-        RouterModule, Ng2PaginationModule
+        RouterModule, NgxPaginationModule
     ],
     declarations: [
         VisitComponent, UserVisitsComponent, VisitDrugsComponent, VisitGiftsComponent

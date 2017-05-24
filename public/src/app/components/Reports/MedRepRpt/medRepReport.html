@@ -1,0 +1,100 @@
+<div class="well no-print">
+    <form #f="ngForm" novalidate *ngIf="currentUser.jobClass != 3" (submit)="f.valid && ViewReport()">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div [ngClass]="{ 'has-error': f.submitted && !from.valid }">
+                    <label for="fromDate" class="control-label col-md-2 col-sm-4">From</label>
+                    <div class="col-md-4 col-sm-8">
+                        <input class="form-control" type="date" name="fromDate" [(ngModel)]="fromDate" #from="ngModel" required>
+                    </div>
+                </div>
+                <div [ngClass]="{ 'has-error': f.submitted && !to.valid }">
+                    <label for="toDate" class="control-label col-md-2 col-sm-4">To</label>
+                    <div class="col-md-4 col-sm-8">
+                        <input class="form-control" type="date" name="toDate" [(ngModel)]="toDate" #to="ngModel" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="SalesLineID" class="control-label col-md-2 col-sm-2">Sales Line</label>
+                <div class="col-md-10 col-sm-10">
+                    <select class="form-control" name="SalesLineID" [(ngModel)]="lineID" #lineId="ngModel" required>
+                        <option ngValue="null">Select a Sales Line...</option>
+                        <option *ngFor="let i of salesLines" [ngValue]="i.SalesLineID">{{i.LineName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="submit" class="btn btn-primary btn-block">View</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-info btn-block" (click)="printReport()">Print</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-danger btn-block" (click)="goBack()">Back</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-center">{{reportHeader}}</h3>
+    </div>
+    <div class="panel-body">
+        <table id="tblReps" class="table table-hover table-striped table-responsive table-bordered">
+            <colgroup>
+                <col width="10%" />
+                <col width="20%" />
+                <col width="20%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th> UserID <i (click)="SortTable('UserID')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('UserID') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> User Name <i (click)="SortTable('UserName')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Job Class <i (click)="SortTable('JobClass')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('JobClass') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Planned <i (click)="SortTable('Planned')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Planned') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Committed Visits <i (click)="SortTable('CommittedVisits')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('CommittedVisits') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Committed Visits Percent <i (click)="SortTable('ComVisitPrcnt')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('ComVisitPrcnt') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Customers <i (click)="SortTable('Customers')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Customers') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Logins <i (click)="SortTable('Logins')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Logins') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of medicalRep | orderby:orderbyString">
+                    <td>{{item.UserID}}</td>
+                    <td>{{item.UserName}}</td>
+                    <td>{{item.JobClass}}</td>
+                    <td>{{item.Planned}}</td>
+                    <td>{{item.CommittedVisits}}</td>
+                    <td>{{item.ComVisitPrcnt}}</td>
+                    <td>{{item.Customers}}</td>
+                    <td>{{item.Logins}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr style="font-weight: bold; background-color: palegreen">
+                    <td colspan="3" class="text-center">Totals</td>
+                    <td>{{sumPlanned}}</td>
+                    <td>{{sumCommited}}</td>
+                    <td></td>
+                    <td>{{sumCustomers}}</td>
+                    <td>{{sumLogins}}</td>
+                </tr>
+            </tfoot>
+        </table>
+        <!--<pagination-controls class="no-print" (pageChange)="p = $event" maxSize="10"></pagination-controls>-->
+    </div>
+    <div class="panel-body">
+        <div style="display: block;">
+            <canvas baseChart [datasets]="chartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
+                [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+        </div>
+    </div>
+</div>

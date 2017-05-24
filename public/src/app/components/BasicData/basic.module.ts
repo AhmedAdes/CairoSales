@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { Ng2PaginationModule } from 'ng2-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { BasicDataComponent, SalesLineComponent, DrugComponent, GiftComponent, ImportanceComponent, MedSpecComponent, PromoToolsComponent, ImsDataComponent } from './';
 import { DrugService, GiftService, ImportanceService, LineService, MedSpecService, PromoToolsService, IMSService } from "../../services";
@@ -14,7 +14,7 @@ import { CustomPipesModule } from "../../pipes/pipe.module";
     imports: [
         BrowserModule, FormsModule,
         ReactiveFormsModule, CustomPipesModule, HttpModule,
-        RouterModule, Ng2PaginationModule
+        RouterModule, NgxPaginationModule
     ],
     declarations: [BasicDataComponent, SalesLineComponent, DrugComponent, 
         GiftComponent, ImportanceComponent, MedSpecComponent, PromoToolsComponent, ImsDataComponent],

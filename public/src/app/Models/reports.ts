@@ -29,3 +29,15 @@ export class rptdrugAnalysis {
     ToolName: string;
     Qty: number;
 }
+
+export class rptMedicalRep {
+    // UserID INT, UserName NVARCHAR(500), JobClass NVARCHAR(50), Planned INT, CommittedVisits INT, ComVisitPrcnt FLOAT, Customers INT, Logins INT
+    UserID: number;
+    UserName: string;
+    JobClass: string;
+    Planned: number;
+    CommittedVisits: number;
+    ComVisitPrcnt: number;
+    Customers: number;
+    Logins: number;
+}

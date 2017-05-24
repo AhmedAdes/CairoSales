@@ -24,6 +24,8 @@ export class UserWorkRateComponent implements OnInit, OnChanges {
     options;
     chartData = [{data: [], label: ''}];
     lineChartLabels: Array<any> = [];
+    public lineChartLegend: boolean = true;
+    public lineChartType: string = 'line';
     dispUser: any
 
     /* Constructor, needed to get @Injectables */
@@ -98,6 +100,4 @@ export class UserWorkRateComponent implements OnInit, OnChanges {
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(148,159,177,0.8)'
         }];
-    public lineChartLegend: boolean = true;
-    public lineChartType: string = 'line';
 }

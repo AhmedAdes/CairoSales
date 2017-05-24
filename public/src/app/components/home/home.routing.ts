@@ -45,6 +45,7 @@ export const homeRoutes: Route[] = [
                     { path: 'home', component: rpt.ReportHomeComponent, canActivate: [AuthGuard] },
                     { path: 'visComp', component: rpt.VisCompareReportComponent, canActivate: [AuthGuard] },
                     { path: 'visDaily', component: rpt.VisDailyReportComponent, canActivate: [AuthGuard] },
+                    { path: 'medrep', component: rpt.MedicalRepReportComponent, canActivate: [AuthGuard] },
                     { path: 'spec', component: rpt.SpecVisitsComponent, canActivate: [AuthGuard] },
                     { path: 'promo', component: rpt.PromoReportComponent, canActivate: [AuthGuard] },
                     { path: 'drgperiod', component: rpt.DrugPeriodReportComponent, canActivate: [AuthGuard] },

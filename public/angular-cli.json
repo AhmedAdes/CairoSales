@@ -27,8 +27,8 @@
         "../node_modules/admin-lte/dist/js/app.js",
         "../node_modules/chart.js/dist/Chart.bundle.min.js"
       ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }

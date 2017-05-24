@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { Ng2PaginationModule } from 'ng2-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { SidebarModule } from 'ng-sidebar';
 import { ToasterModule } from 'angular2-toaster/angular2-toaster';
 import { AlertModule, DatepickerModule } from 'ng2-bootstrap';
@@ -43,7 +43,7 @@ let widgets = [
   imports: [
     BrowserModule, FormsModule, SidebarModule,
     ReactiveFormsModule, HttpModule, ToasterModule,
-    RouterModule, Approuting, CustomPipesModule, Ng2PaginationModule,
+    RouterModule, Approuting, CustomPipesModule, NgxPaginationModule,
     AlertModule.forRoot(), DatepickerModule.forRoot(),
     VisitModule, BasicDataModule, HelperModule, ChartsModule, ReportsModule/**/
   ],
