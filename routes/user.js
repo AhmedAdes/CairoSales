@@ -60,7 +60,7 @@ router.post('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var user = req.body.basic;
     var regions = req.body.regions;
-    var conf = require('../SQLconfig');
+    var conf = require('../SQLConfig');
     var connection = new sql.Connection(conf.config);
     connection.connect().then(function () {
         var trans = new sql.Transaction(connection);
@@ -119,7 +119,7 @@ router.put('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var user = req.body.basic;
     var regions = req.body.regions;
-    var conf = require('../SQLconfig');
+    var conf = require('../SQLConfig');
     var connection = new sql.Connection(conf.config);
     connection.connect().then(function () {
         var trans = new sql.Transaction(connection);

@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var sql = require('mssql');
-var con = require('../SQLconfig');
+var con = require('../SQLConfig');
 var sqlConn = sql.globalConnection;
 
 router.get('/', function (req, res, next) {

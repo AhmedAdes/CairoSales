@@ -77,7 +77,7 @@ router.post('/', function (req, res, next) {
         res.json({ error: "Visit Date is before yesterday's Date" }); console.log(err);
         return
     }
-    var conf = require('../SQLconfig');
+    var conf = require('../SQLConfig');
     var connection = new sql.Connection(conf.config);
     connection.connect().then(function () {
         var trans = new sql.Transaction(connection);
@@ -148,7 +148,7 @@ router.put('/:id', function (req, res, next) {
     var vis = req.body.basic;
     var drugs = req.body.drugs;
     var gifts = req.body.gifts;
-    var conf = require('../SQLconfig');
+    var conf = require('../SQLConfig');
     var connection = new sql.Connection(conf.config);
     connection.connect().then(function () {
         var trans = new sql.Transaction(connection);
