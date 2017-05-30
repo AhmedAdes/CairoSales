@@ -7,7 +7,8 @@ import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
     selector: 'rpt-spec',
-    templateUrl: './specVisits.html'
+    templateUrl: './specVisits.html',
+    styleUrls: ['../../../Styles/PrintPortrait.css']
 })
 export class SpecVisitsComponent implements OnInit {
     constructor(private srv: ReportsService, private srvSpec: MedSpecService,
@@ -25,6 +26,10 @@ export class SpecVisitsComponent implements OnInit {
     pieChartData: number[] = [];
     pieChartType: string = 'pie';
     colorsEmpty: Array<Color> = []
+    pieChartOptions: any = {
+        responsive: true,
+        maintainAspectRatio: true
+    };
     @ViewChild(BaseChartDirective) private _chart;
 
     ngOnInit() {
@@ -37,7 +42,7 @@ export class SpecVisitsComponent implements OnInit {
     ViewReport() {
         this.srv.getSpecVisits(this.selectedSpec, hf.handleDate(new Date(this.fromDate)), hf.handleDate(new Date(this.toDate)), this.imsID).subscribe(ret => {
             if (ret.length > 0) {
-                this.pieChartLabels = ret.map(dat => { return dat.SpecName == null ? 'N/A' : dat.SpecName })
+                this.pieChartLabels = ret.map(dat => { return dat.IMS == null ? 'N/A' : dat.IMS })
                 this.pieChartData = ret.map(dat => { return dat.VisCount == null ? 0 : dat.VisCount })
             } else {
                 this.pieChartLabels = ['N/A']

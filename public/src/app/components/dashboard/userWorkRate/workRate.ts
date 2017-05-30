@@ -83,7 +83,8 @@ export class UserWorkRateComponent implements OnInit, OnChanges {
         }, 10);
     }
     public lineChartOptions: any = {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: true
     };
     // public chartData = [
     //             { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' } //,

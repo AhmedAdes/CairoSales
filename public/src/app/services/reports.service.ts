@@ -25,8 +25,8 @@ export class ReportsService {
     getdrugAnalysis(from: string, to: string, drugId: number, type: string, crt: string) {
         return this.http.get(this.url + 'drugAnalysis/' + from + '.' + to + '.' + drugId + '.' + type + '.' + crt, this.options).map(res => res.json());
     }
-    getpromoAnalysis(from: string, to: string, drugId: number) {
-        return this.http.get(this.url + 'drugPromoAnalysis/' + from + '.' + to + '.' + drugId, this.options).map(res => res.json());
+    getpromoAnalysis(from: string, to: string, drugId: number, crt: string) {
+        return this.http.get(this.url + 'drugPromoAnalysis/' + from + '.' + to + '.' + drugId + '.' + crt, this.options).map(res => res.json());
     }
     getUserVisitRate(id: number, month: number) {
         return this.http.get(this.url + 'UserVisitRate/' + id + '/' + month, this.options).map(res => res.json());

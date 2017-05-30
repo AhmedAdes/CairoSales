@@ -7,7 +7,8 @@ import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
     selector: 'rpt-medRep',
-    templateUrl: './medRepReport.html'
+    templateUrl: './medRepReport.html',
+    styleUrls: ['../../../Styles/PrintPortrait.css']
 })
 export class MedicalRepReportComponent implements OnInit {
     constructor(private srv: ReportsService, private srvln: LineService,
@@ -31,6 +32,11 @@ export class MedicalRepReportComponent implements OnInit {
     lineChartLabels: Array<any> = [];
     public lineChartLegend: boolean = true;
     public lineChartType: string = 'line';
+    lineChartOptions: any = {
+        responsive: true,
+        maintainAspectRatio: true
+    };
+    colorsEmpty: Array<Color> = []
     @ViewChild(BaseChartDirective) private _chart;
 
     ngOnInit() {

@@ -51,7 +51,8 @@ export const homeRoutes: Route[] = [
                     { path: 'drgperiod', component: rpt.DrugPeriodReportComponent, canActivate: [AuthGuard] },
                     { path: 'drgcomment', component: rpt.DrugCommentReportComponent, canActivate: [AuthGuard] },
                     { path: 'drgcust', component: rpt.DrugCustomerReportComponent, canActivate: [AuthGuard] },
-                    { path: 'drgspec', component: rpt.DrugSpecsReportComponent, canActivate: [AuthGuard] },/**/
+                    { path: 'drgspec', component: rpt.DrugSpecsReportComponent, canActivate: [AuthGuard] },
+                    { path: 'drgpromo', component: rpt.DrugPromoReportComponent, canActivate: [AuthGuard] },/**/
                 ]
             },
             { path: 'plan', component: PlanComponent, canActivate: [AuthGuard] }

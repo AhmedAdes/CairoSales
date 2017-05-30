@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'rpt-home',
-    templateUrl: './rptHome.component.html'
+    templateUrl: './rptHome.component.html',
+    styleUrls: ['../../../Styles/PrintPortrait.css']
 })
 export class ReportHomeComponent implements OnInit {
     constructor() { }
@@ -57,7 +58,7 @@ export class ReportHomeComponent implements OnInit {
         }, 
         {
             header: "Promotional Tools Analysis",
-            link: "/home/reports/promo"
+            link: "/home/reports/drgpromo"
         }
     ]
     ngOnInit() { }

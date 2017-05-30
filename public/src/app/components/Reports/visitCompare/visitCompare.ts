@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkRate, CurrentUser, User } from '../../../Models';
 import { ReportsService, AuthenticationService, UserService } from '../../../services';
 import { Location } from '@angular/common';
@@ -7,7 +7,8 @@ import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
     selector: 'rpt-visComp',
-    templateUrl: './visitCompare.html'
+    templateUrl: './visitCompare.html',
+    styleUrls: ['../../../Styles/PrintPortrait.css']
 })
 export class VisCompareReportComponent implements OnInit {
 
@@ -15,11 +16,15 @@ export class VisCompareReportComponent implements OnInit {
     selectedUser: number;
     userList: User[] = [];
     selectedDate: Date = new Date();
-    
+
     pieChartLabels: string[] = [];
     pieChartData: number[] = [];
     pieChartType: string = 'pie';
     colorsEmpty: Array<Color> = []
+    ChartOptions: any = {
+        responsive: true,
+        maintainAspectRatio: true
+    };
     @ViewChild(BaseChartDirective) private _chart;
 
     /* Constructor, needed to get @Injectables */
@@ -33,10 +38,11 @@ export class VisCompareReportComponent implements OnInit {
     }
 
     newSchedule(datevalue: Date) {
-        this.selectedDate = datevalue ? new Date() : datevalue
-        this.srv.getUserVisitCompare(this.selectedUser ? this.currentUser.userID : this.selectedUser, hf.handleDate(datevalue)).subscribe(rat => {
-            this.pieChartLabels = rat.map(data => { return  data.VisType })
-            this.pieChartData = rat.map(data => { return  data.VisCount == null ? 0 : data.VisCount  })
+        this.selectedDate = datevalue ? datevalue : new Date()
+        var user = this.selectedUser ? this.selectedUser : this.currentUser.userID
+        this.srv.getUserVisitCompare(user, hf.handleDate(this.selectedDate)).subscribe(rat => {
+            this.pieChartLabels = rat.map(data => { return data.VisType })
+            this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
             this.forceChartRefresh()
 
             // [{
@@ -48,8 +54,8 @@ export class VisCompareReportComponent implements OnInit {
     }
     newUser() {
         this.srv.getUserVisitCompare(this.selectedUser, hf.handleDate(this.selectedDate)).subscribe(rat => {
-            this.pieChartLabels = rat.map(data => { return  data.VisType })
-            this.pieChartData = rat.map(data => { return  data.VisCount == null ? 0 : data.VisCount  })
+            this.pieChartLabels = rat.map(data => { return data.VisType })
+            this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
             this.forceChartRefresh()
         });
     }

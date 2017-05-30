@@ -9,8 +9,9 @@ router.get('/visitCompare/:userID.:visitDate', function (req, res, next) {
     var request = new sql.Request(sqlConn);
     request.input("UserID", req.params.userID);
     request.input("VisitDate", req.params.visitDate);
-    request.query(`SELECT  * FROM  dbo.fncVisitComparisonReport(@UserID, @VisitDate)`)
-        .then(function (recordset) { res.json(recordset); })
+    console.log(req.params)
+    request.query(`SELECT * FROM  dbo.fncVisitComparisonReport(@UserID, @VisitDate)`)
+        .then(function (recordset) { res.json(recordset); console.log(recordset);})
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
 router.get('/specVisits/:specID.:from.:to.:imsID', function (req, res, next) {
@@ -19,14 +20,15 @@ router.get('/specVisits/:specID.:from.:to.:imsID', function (req, res, next) {
     request.input("SpecID", req.params.specID);
     request.input("From", req.params.from);
     request.input("To", req.params.to);
-    var str = `SELECT ISNULL(s.SpecName, 'N/A') SpecName,ISNULL(COUNT(VisitID), 0) VisCount FROM dbo.Visits v JOIN dbo.Destinations d ON v.DestID = d.DestID 
-                JOIN dbo.MediSpecification s ON d.MedSpecID = s.SpecID WHERE CAST(v.VisitDate AS DATE) BETWEEN @From AND @To 
+    var str = `SELECT ISNULL(s.SpecName, 'N/A') SpecName,ISNULL(IMS, 'N/A') IMS,ISNULL(COUNT(VisitID), 0) VisCount FROM dbo.Visits v JOIN dbo.Destinations d ON v.DestID = d.DestID 
+                JOIN dbo.MediSpecification s ON d.MedSpecID = s.SpecID JOIN dbo.IMSData i ON d.IMSID = i.IMSID   
+                WHERE CAST(v.VisitDate AS DATE) BETWEEN @From AND @To 
                 AND s.SpecID = @SpecID `
     if (req.params.imsID != 'null') {
-        str += `AND IMSID = @IMSID`
+        str += `AND d.IMSID = @IMSID`
         request.input("IMSID", req.params.imsID);
     }
-    str += ` GROUP BY SpecName`
+    str += ` GROUP BY SpecName, IMS`
     request.query(str)
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
@@ -84,7 +86,7 @@ router.get('/drugAnalysis/:from.:to.:drugId.:rpttype.:crt', function (req, res, 
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
-router.get('/drugPromoAnalysis/:from.:to.:drugId.:rpttype.:crt', function (req, res, next) {
+router.get('/drugPromoAnalysis/:from.:to.:drugId.:crt', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
     request.input("FromDate", req.params.from);

@@ -64,8 +64,8 @@
                 <col width="20%" />
                 <col width="15%" />
                 <col width="15%" />
-                <col width="10%" />
                 <col width="20%" />
+                <col width="10%" />
             </colgroup>
             <thead>
                 <tr>
@@ -73,8 +73,8 @@
                     <th> Medical Rep. <i (click)="SortTable('UserName')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
                     <th> Visit Date <i (click)="SortTable('VisitDate')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
                     <th> Customer <i (click)="SortTable('Destination')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-                    <th> Speciality <i (click)="SortTable('SpecName')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-                    <th> Comment <i (click)="SortTable('Comment')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Tool Name <i (click)="SortTable('ToolName')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('ToolName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Qty <i (click)="SortTable('Qty')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Qty') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -83,8 +83,8 @@
                     <td>{{item.UserName}}</td>
                     <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>
                     <td>{{item.Destination}}</td>
-                    <td>{{item.SpecName}}</td>
-                    <td>{{item.Comment}}</td>
+                    <td>{{item.ToolName}}</td>
+                    <td>{{item.Qty}}</td>
                 </tr>
             </tbody>
         </table>

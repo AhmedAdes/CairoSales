@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentUser, rptdrugAnalysis, Drugs, PromoTools, Gifts } from '../../../../Models';
-import { ReportsService, DrugService, PromoToolsService, GiftService, AuthenticationService } from '../../../../services';
+import { ReportsService, DrugService, PromoToolsService, IMSService, GiftService, AuthenticationService } from '../../../../services';
 import { Location } from '@angular/common';
 import * as hf from '../../../helpers/helper.functions'
 
@@ -11,7 +11,7 @@ import * as hf from '../../../helpers/helper.functions'
 })
 export class DrugPromoReportComponent implements OnInit {
     constructor(private srv: ReportsService, private srvDrg: DrugService, private srvPromo: PromoToolsService, private srvGft: GiftService,
-        private auth: AuthenticationService, private location: Location) { }
+        private auth: AuthenticationService, private srvIms: IMSService, private location: Location) { }
     currentUser: CurrentUser = this.auth.getUser()
     drugList: Drugs[] = []
     collection: rptdrugAnalysis[] = []
@@ -23,17 +23,17 @@ export class DrugPromoReportComponent implements OnInit {
     imsID: number = null
     orderbyString: string = "";
     orderbyClass: string = "glyphicon glyphicon-sort";
-    reportHeader = "Product Analysis (Comments In Period)"
+    reportHeader = "Product Analysis (Promo Tools In Period)"
 
     ngOnInit() {
         this.srvDrg.getDrug().subscribe(drg => {
             this.drugList = drg;
-            this.srvPromo.getPromoTools().subscribe(ims => this.imsList = ims)
+            this.srvIms.getUserIMS(this.currentUser.userID).subscribe(ims => this.imsList = ims)
         })
     }
     ViewReport() {
-        this.srv.getdrugAnalysis(hf.handleDate(new Date(this.fromDate)), hf.handleDate(new Date(this.toDate)),
-            this.drugID, 'Comments', this.imsID == null ? null : this.imsID.toString())
+        this.srv.getpromoAnalysis(hf.handleDate(new Date(this.fromDate)), hf.handleDate(new Date(this.toDate)),
+            this.drugID, this.imsID == null ? null : this.imsID.toString())
             .subscribe(ret => {
                 this.collection = ret
             })

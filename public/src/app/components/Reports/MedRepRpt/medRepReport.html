@@ -73,7 +73,7 @@
                     <td>{{item.JobClass}}</td>
                     <td>{{item.Planned}}</td>
                     <td>{{item.CommittedVisits}}</td>
-                    <td>{{item.ComVisitPrcnt}}</td>
+                    <td>{{item.ComVisitPrcnt | percent:'3.2-2'}}</td>
                     <td>{{item.Customers}}</td>
                     <td>{{item.Logins}}</td>
                 </tr>
@@ -93,7 +93,7 @@
     </div>
     <div class="panel-body">
         <div style="display: block;">
-            <canvas baseChart [datasets]="chartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
+            <canvas class="print-chart PrintnewPage" baseChart [datasets]="chartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="colorsEmpty"
                 [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
         </div>
     </div>

@@ -1,6 +1,6 @@
 webpackJsonp([0,4],{
 
-/***/ 1045:
+/***/ 1046:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(22)(false);
@@ -18,7 +18,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 1046:
+/***/ 1047:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(22)(false);
@@ -36,24 +36,6 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 1047:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(22)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\r\n.large {\r\n\tfont-size: 2em;\r\n}\r\n\r\n.text-muted {\r\n\tcolor: #fff;\r\n\tfont-size: 1.2em\r\n}\r\n\r\n.panel-widget .glyph {\r\n\tstroke-width: 2px;\r\n}\r\n\r\n.widget-right .text-muted {\r\n\tcolor: #fff;\r\n}\r\n.widget-right .large {\r\n\tcolor: #fff;\r\n}\r\n.no-padding {\r\n\tpadding: 0; margin: 0;\r\n}\r\n\r\n.no-padding i {\r\n\tpadding: 0; margin: 0;\r\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 1048:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -62,7 +44,7 @@ exports = module.exports = __webpack_require__(22)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\r\n.large {\r\n\tfont-size: 2em;\r\n}\r\n\r\n.text-muted {\r\n\tcolor: #fff;\r\n\tfont-size: 1.2em\r\n}\r\n\r\n.panel-widget .glyph {\r\n\tstroke-width: 2px;\r\n}\r\n\r\n.widget-right .text-muted {\r\n\tcolor: #fff;\r\n}\r\n.widget-right .large {\r\n\tcolor: #fff;\r\n}\r\n.no-padding {\r\n\tpadding: 0; margin: 0;\r\n}\r\n\r\n.no-padding i {\r\n\tpadding: 0; margin: 0;\r\n}", ""]);
 
 // exports
 
@@ -198,153 +180,25 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 106:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 1056:
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_forms__ = __webpack_require__(16);
-/* harmony export (immutable) */ __webpack_exports__["g"] = emailValidator;
-/* harmony export (immutable) */ __webpack_exports__["d"] = matchingPasswords;
-/* harmony export (immutable) */ __webpack_exports__["e"] = matchFieldValue;
-/* harmony export (immutable) */ __webpack_exports__["a"] = alreadyExist;
-/* unused harmony export rangeLength */
-/* unused harmony export min */
-/* unused harmony export max */
-/* harmony export (immutable) */ __webpack_exports__["c"] = minDate;
-/* harmony export (immutable) */ __webpack_exports__["b"] = maxDate;
-/* harmony export (immutable) */ __webpack_exports__["f"] = planDateInRange;
-/*
-  Custom validators to use everywhere.
-*/
+exports = module.exports = __webpack_require__(22)(false);
+// imports
 
-// SINGLE FIELD VALIDATORS
-function emailValidator(control) {
-    var emailRegexp = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-    if (control.value && !emailRegexp.test(control.value)) {
-        return { invalidEmail: true };
-    }
-}
-//CONTROL GROUP VALIDATORS
-function matchingPasswords(passwordKey, confirmPasswordKey) {
-    return function (group) {
-        var password = group.controls[passwordKey];
-        var confirmPassword = group.controls[confirmPasswordKey];
-        if (password.value !== confirmPassword.value) {
-            return {
-                mismatchedPasswords: true
-            };
-        }
-    };
-}
-function matchFieldValue(FieldName, matchValue) {
-    return function (group) {
-        var Field = group.controls[FieldName];
-        if (Field.value !== matchValue) {
-            return {
-                mismatchValue: true
-            };
-        }
-    };
-}
-function alreadyExist(list, fieldName, current) {
-    return function (control) {
-        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
-            return null;
-        var v = control.value;
-        return list.findIndex(function (p) { return p[fieldName] == v && p[fieldName] != current; }) < 0 ? null : { 'alreadyexist': true };
-    };
-}
-/**
- * Validator that requires controls to have a value of a range length.
- */
-function rangeLength(rangeLength) {
-    return function (control) {
-        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
-            return null;
-        var v = control.value;
-        return v.length >= rangeLength[0] && v.length <= rangeLength[1] ? null : { 'rangeLength': true };
-    };
-}
-/**
- * Validator that requires controls to have a value of a min value.
- */
-function min(min) {
-    return function (control) {
-        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
-            return null;
-        var v = control.value;
-        return v >= min ? null : { 'min': true };
-    };
-}
-/**
- * Validator that requires controls to have a value of a max value.
- */
-function max(max) {
-    return function (control) {
-        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
-            return null;
-        var v = control.value;
-        return v <= max ? null : { 'max': true };
-    };
-}
-/**
- * Validator that requires controls to have a value of minDate.
- */
-function minDate(minDate) {
-    if (!isDate(minDate))
-        throw Error('minDate value must be a formatted date');
-    return function (control) {
-        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
-            return null;
-        var d = new Date(control.value);
-        if (!isDate(d))
-            return { minDate: true };
-        return d >= new Date(minDate) ? null : { minDate: true };
-    };
-}
-/**
- * Validator that requires controls to have a value of maxDate.
- */
-function maxDate(maxDate) {
-    if (!isDate(maxDate))
-        throw Error('maxDate value must be a formatted date');
-    return function (control) {
-        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
-            return null;
-        var d = new Date(control.value);
-        if (!isDate(d))
-            return { maxDate: true };
-        return d <= new Date(maxDate) ? null : { maxDate: true };
-    };
-}
-function planDateInRange(Range, PlanID, SalesLine) {
-    // if (!isDate(maxDate)) throw Error('maxDate value must be a formatted date');
-    if (Range.length <= 0)
-        return null;
-    return function (control) {
-        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
-            return null;
-        var d = new Date(control.value);
-        if (!isDate(d))
-            return { inRange: true };
-        var inDates = false;
-        Range.forEach(function (rng) { if (SalesLine == rng.SalesLineID && PlanID != rng.PlanID && d >= new Date(rng.FromDate) && d <= new Date(rng.ToDate)) {
-            inDates = true;
-        } });
-        return !inDates ? null : { inRange: true };
-    };
-}
-function isPresent(obj) {
-    return obj !== undefined && obj !== null;
-}
-function isDate(obj) {
-    return !/Invalid|NaN/.test(new Date(obj).toString());
-}
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/validators.js.map
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 1061:
+/***/ 1062:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -593,370 +447,505 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 1061;
+webpackContext.id = 1062;
 
 
 /***/ }),
 
-/***/ 1092:
-/***/ (function(module, exports) {
+/***/ 108:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br *ngIf=\"!Formstate\"><br *ngIf=\"!Formstate\">\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblDrugs\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Product Name <i (click)=\"SortTable('DrugName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('DrugName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Sales Line <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Description <i (click)=\"SortTable('Description')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Description') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchDrugName\" name=\"DrugName\" [(ngModel)]=\"searchDrug.DrugName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchLineName\" name=\"LineName\" [(ngModel)]=\"searchDrug.LineName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchDescription\" name=\"Description\" [(ngModel)]=\"searchDrug.Description\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchDrug | orderby:orderbyString)  | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.DrugName}}</td>\r\n\t\t\t\t\t<td>{{item.LineName}}</td>\r\n\t\t\t\t\t<td>{{item.Description}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.DrugID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.DrugID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.DrugID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t\t<pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"f.valid && HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this drug ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"DrugID\" [(ngModel)]=\"model.DrugID\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': drugName.touched && !drugName.valid }\">\r\n\t\t\t\t\t<label for=\"DrugName\" class=\"control-label col-md-2 col-sm-2\">Product Name</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"DrugName\" [(ngModel)]=\"model.DrugName\" #drugName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"drugName.touched && !drugName.valid\" class=\"help-block\">Product Name is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': line.touched && !line.valid }\">\r\n                    <label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\" #line=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Sales Line...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of lines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div *ngIf=\"line.touched && !line.valid\" class=\"help-block\">Sales Line is required</div>\r\n                    </div>\r\n                </div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"Description\" class=\"control-label col-md-2 col-sm-2\">Description</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<textarea rows=\"10\" cols=\"10\" class=\"form-control\" name=\"Description\" [(ngModel)]=\"model.Description\"></textarea>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button>\t\t\t\t\t|\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_forms__ = __webpack_require__(16);
+/* harmony export (immutable) */ __webpack_exports__["g"] = emailValidator;
+/* harmony export (immutable) */ __webpack_exports__["d"] = matchingPasswords;
+/* harmony export (immutable) */ __webpack_exports__["e"] = matchFieldValue;
+/* harmony export (immutable) */ __webpack_exports__["a"] = alreadyExist;
+/* unused harmony export rangeLength */
+/* unused harmony export min */
+/* unused harmony export max */
+/* harmony export (immutable) */ __webpack_exports__["c"] = minDate;
+/* harmony export (immutable) */ __webpack_exports__["b"] = maxDate;
+/* harmony export (immutable) */ __webpack_exports__["f"] = planDateInRange;
+/*
+  Custom validators to use everywhere.
+*/
+
+// SINGLE FIELD VALIDATORS
+function emailValidator(control) {
+    var emailRegexp = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+    if (control.value && !emailRegexp.test(control.value)) {
+        return { invalidEmail: true };
+    }
+}
+//CONTROL GROUP VALIDATORS
+function matchingPasswords(passwordKey, confirmPasswordKey) {
+    return function (group) {
+        var password = group.controls[passwordKey];
+        var confirmPassword = group.controls[confirmPasswordKey];
+        if (password.value !== confirmPassword.value) {
+            return {
+                mismatchedPasswords: true
+            };
+        }
+    };
+}
+function matchFieldValue(FieldName, matchValue) {
+    return function (group) {
+        var Field = group.controls[FieldName];
+        if (Field.value !== matchValue) {
+            return {
+                mismatchValue: true
+            };
+        }
+    };
+}
+function alreadyExist(list, fieldName, current) {
+    return function (control) {
+        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
+            return null;
+        var v = control.value;
+        return list.findIndex(function (p) { return p[fieldName] == v && p[fieldName] != current; }) < 0 ? null : { 'alreadyexist': true };
+    };
+}
+/**
+ * Validator that requires controls to have a value of a range length.
+ */
+function rangeLength(rangeLength) {
+    return function (control) {
+        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
+            return null;
+        var v = control.value;
+        return v.length >= rangeLength[0] && v.length <= rangeLength[1] ? null : { 'rangeLength': true };
+    };
+}
+/**
+ * Validator that requires controls to have a value of a min value.
+ */
+function min(min) {
+    return function (control) {
+        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
+            return null;
+        var v = control.value;
+        return v >= min ? null : { 'min': true };
+    };
+}
+/**
+ * Validator that requires controls to have a value of a max value.
+ */
+function max(max) {
+    return function (control) {
+        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
+            return null;
+        var v = control.value;
+        return v <= max ? null : { 'max': true };
+    };
+}
+/**
+ * Validator that requires controls to have a value of minDate.
+ */
+function minDate(minDate) {
+    if (!isDate(minDate))
+        throw Error('minDate value must be a formatted date');
+    return function (control) {
+        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
+            return null;
+        var d = new Date(control.value);
+        if (!isDate(d))
+            return { minDate: true };
+        return d >= new Date(minDate) ? null : { minDate: true };
+    };
+}
+/**
+ * Validator that requires controls to have a value of maxDate.
+ */
+function maxDate(maxDate) {
+    if (!isDate(maxDate))
+        throw Error('maxDate value must be a formatted date');
+    return function (control) {
+        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
+            return null;
+        var d = new Date(control.value);
+        if (!isDate(d))
+            return { maxDate: true };
+        return d <= new Date(maxDate) ? null : { maxDate: true };
+    };
+}
+function planDateInRange(Range, PlanID, SalesLine) {
+    // if (!isDate(maxDate)) throw Error('maxDate value must be a formatted date');
+    if (Range.length <= 0)
+        return null;
+    return function (control) {
+        if (isPresent(__WEBPACK_IMPORTED_MODULE_0__angular_forms__["c" /* Validators */].required(control)))
+            return null;
+        var d = new Date(control.value);
+        if (!isDate(d))
+            return { inRange: true };
+        var inDates = false;
+        Range.forEach(function (rng) { if (SalesLine == rng.SalesLineID && PlanID != rng.PlanID && d >= new Date(rng.FromDate) && d <= new Date(rng.ToDate)) {
+            inDates = true;
+        } });
+        return !inDates ? null : { inRange: true };
+    };
+}
+function isPresent(obj) {
+    return obj !== undefined && obj !== null;
+}
+function isDate(obj) {
+    return !/Invalid|NaN/.test(new Date(obj).toString());
+}
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/validators.js.map
 
 /***/ }),
 
 /***/ 1093:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblGifts\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"70%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Promotional Tool Type <i (click)=\"SortTable('GiftName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('GiftName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchgiftName\" name=\"GiftName\" [(ngModel)]=\"searchGift.GiftName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchGift | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.GiftName}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.GiftID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.GiftID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.GiftID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"f.form.valid && HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this promotional tool type ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"GiftID\" [(ngModel)]=\"model.GiftID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !giftName.valid }\">\r\n\t\t\t\t\t<label for=\"giftName\" class=\"control-label col-md-2 col-sm-2\">Promotional Tool Type</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"GiftName\" [(ngModel)]=\"model.GiftName\" #giftName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !giftName.valid\" class=\"help-block\">Promotional Tool Type is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br *ngIf=\"!Formstate\"><br *ngIf=\"!Formstate\">\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblDrugs\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Product Name <i (click)=\"SortTable('DrugName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('DrugName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Sales Line <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Description <i (click)=\"SortTable('Description')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Description') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchDrugName\" name=\"DrugName\" [(ngModel)]=\"searchDrug.DrugName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchLineName\" name=\"LineName\" [(ngModel)]=\"searchDrug.LineName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchDescription\" name=\"Description\" [(ngModel)]=\"searchDrug.Description\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchDrug | orderby:orderbyString)  | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.DrugName}}</td>\r\n\t\t\t\t\t<td>{{item.LineName}}</td>\r\n\t\t\t\t\t<td>{{item.Description}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.DrugID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.DrugID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.DrugID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t\t<pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"f.valid && HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this drug ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"DrugID\" [(ngModel)]=\"model.DrugID\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': drugName.touched && !drugName.valid }\">\r\n\t\t\t\t\t<label for=\"DrugName\" class=\"control-label col-md-2 col-sm-2\">Product Name</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"DrugName\" [(ngModel)]=\"model.DrugName\" #drugName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"drugName.touched && !drugName.valid\" class=\"help-block\">Product Name is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': line.touched && !line.valid }\">\r\n                    <label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\" #line=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Sales Line...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of lines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div *ngIf=\"line.touched && !line.valid\" class=\"help-block\">Sales Line is required</div>\r\n                    </div>\r\n                </div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"Description\" class=\"control-label col-md-2 col-sm-2\">Description</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<textarea rows=\"10\" cols=\"10\" class=\"form-control\" name=\"Description\" [(ngModel)]=\"model.Description\"></textarea>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button>\t\t\t\t\t|\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1094:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblImportances\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Cycle <i (click)=\"SortTable('ImpName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Visits No <i (click)=\"SortTable('VisitsNo')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitsNo') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchImpName\" name=\"ImpName\" [(ngModel)]=\"searchImp.ImpName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchVisitsNo\" name=\"VisitsNo\" [(ngModel)]=\"searchImp.VisitsNo\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchImp | orderby:orderbyString)\">\r\n\t\t\t\t\t<td>{{item.ImpName}}</td>\r\n\t\t\t\t\t<td>{{item.VisitsNo}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.ImpID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.ImpID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.ImpID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form  #f=\"ngForm\" novalidate (submit)=\"HandleForm($event)\">\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this Cycle ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"ImpID\" [(ngModel)]=\"model.ImpID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"ImpName\" class=\"control-label col-md-2 col-sm-2\">Cycle</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"ImpName\" [(ngModel)]=\"model.ImpName\" #impName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !impName.valid\" class=\"help-block\">Cycle is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"VisitsNo\" class=\"control-label col-md-2 col-sm-2\">Visits No</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"number\" name=\"VisitsNo\" [(ngModel)]=\"model.VisitsNo\" #visitsNo=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !visitsNo.valid\" class=\"help-block\">Visits No is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblGifts\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"70%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Promotional Tool Type <i (click)=\"SortTable('GiftName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('GiftName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchgiftName\" name=\"GiftName\" [(ngModel)]=\"searchGift.GiftName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchGift | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.GiftName}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.GiftID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.GiftID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.GiftID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"f.form.valid && HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this promotional tool type ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"GiftID\" [(ngModel)]=\"model.GiftID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !giftName.valid }\">\r\n\t\t\t\t\t<label for=\"giftName\" class=\"control-label col-md-2 col-sm-2\">Promotional Tool Type</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"GiftName\" [(ngModel)]=\"model.GiftName\" #giftName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !giftName.valid\" class=\"help-block\">Promotional Tool Type is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1095:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblIMS\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"70%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>IMS Region<i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchIMS\" name=\"IMS\" [(ngModel)]=\"srchObj.IMS\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.IMS}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.IMSID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.IMSID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.IMSID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this IMS ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"IMS\" class=\"control-label col-md-2 col-sm-2\">IMS</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"IMS\" [(ngModel)]=\"model.IMS\" #specName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !specName.valid\" class=\"help-block\">IMS Region is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblImportances\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Cycle <i (click)=\"SortTable('ImpName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Visits No <i (click)=\"SortTable('VisitsNo')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitsNo') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchImpName\" name=\"ImpName\" [(ngModel)]=\"searchImp.ImpName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchVisitsNo\" name=\"VisitsNo\" [(ngModel)]=\"searchImp.VisitsNo\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchImp | orderby:orderbyString)\">\r\n\t\t\t\t\t<td>{{item.ImpName}}</td>\r\n\t\t\t\t\t<td>{{item.VisitsNo}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.ImpID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.ImpID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.ImpID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form  #f=\"ngForm\" novalidate (submit)=\"HandleForm($event)\">\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this Cycle ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"ImpID\" [(ngModel)]=\"model.ImpID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"ImpName\" class=\"control-label col-md-2 col-sm-2\">Cycle</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"ImpName\" [(ngModel)]=\"model.ImpName\" #impName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !impName.valid\" class=\"help-block\">Cycle is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"VisitsNo\" class=\"control-label col-md-2 col-sm-2\">Visits No</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"number\" name=\"VisitsNo\" [(ngModel)]=\"model.VisitsNo\" #visitsNo=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !visitsNo.valid\" class=\"help-block\">Visits No is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1096:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblSpecs\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"70%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Account <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchSpecName\" name=\"SpecName\" [(ngModel)]=\"searchSpec.SpecName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchSpec | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.SpecName}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.SpecID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.SpecID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.SpecID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this Account ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"SpecID\" [(ngModel)]=\"model.SpecID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"SpecName\" class=\"control-label col-md-2 col-sm-2\">Account</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"SpecName\" [(ngModel)]=\"model.SpecName\" #specName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !specName.valid\" class=\"help-block\">Account is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblIMS\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"70%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>IMS Region<i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchIMS\" name=\"IMS\" [(ngModel)]=\"srchObj.IMS\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.IMS}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.IMSID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.IMSID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.IMSID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this IMS ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"IMS\" class=\"control-label col-md-2 col-sm-2\">IMS</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"IMS\" [(ngModel)]=\"model.IMS\" #specName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !specName.valid\" class=\"help-block\">IMS Region is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1097:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n        <table id=\"tblPromoTools\" class=\"table table-hover table-striped\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"40%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> Promo Type <i (click)=\"SortTable('GiftName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('GiftName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Product <i (click)=\"SortTable('DrugName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('DrugName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Tool Name <i (click)=\"SortTable('ToolName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ToolName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchgiftName\" name=\"GiftName\" [(ngModel)]=\"srchObj.GiftName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchdrugName\" name=\"DrugName\" [(ngModel)]=\"srchObj.DrugName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchtoolName\" name=\"ToolName\" [(ngModel)]=\"srchObj.ToolName\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                    <td>{{item.GiftName}}</td>\r\n                    <td>{{item.DrugName}}</td>\r\n                    <td>{{item.ToolName}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.ToolID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.ToolID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.ToolID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this promotional tool ?</h2>\r\n                <br>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['GiftName'].valid }\">\r\n                    <label for=\"GiftID\" class=\"control-label col-md-2 col-sm-2\">Promo Type</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"GiftID\" [(ngModel)]=\"model.GiftID\" [formControl]=\"inFrm.controls['GiftName']\" (change)=\"onGiftChange($event)\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Promo Type...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of giftList\" [ngValue]=\"i.GiftID\">{{i.GiftName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"inFrm.controls['GiftName'].touched && !inFrm.controls['GiftName'].valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['GiftName'].hasError('required')\">Promo Type is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['DrugName'].valid }\">\r\n                    <label for=\"DrugID\" class=\"control-label col-md-2 col-sm-2\">Product</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"model.DrugID\" [formControl]=\"inFrm.controls['DrugName']\" (change)=\"onDrugChange($event)\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Product...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of drugList\" [ngValue]=\"i.DrugID\">{{i.DrugName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['ToolName'].valid }\">\r\n                    <label for=\"ToolName\" class=\"control-label col-md-2 col-sm-2\">Promotional Tool Name</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"text\" name=\"ToolName\" [(ngModel)]=\"model.ToolName\" [formControl]=\"inFrm.controls['ToolName']\">\r\n                        <div class='error' *ngIf=\"(inFrm.controls['GiftName'].touched && !inFrm.controls['ToolName'].valid)\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['ToolName'].hasError('required')\">Promotional Tool Name is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['ToolName'].hasError('alreadyexist')\">Promotional Tool Name already exist.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblSpecs\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"70%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Account <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchSpecName\" name=\"SpecName\" [(ngModel)]=\"searchSpec.SpecName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchSpec | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.SpecName}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.SpecID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.SpecID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.SpecID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this Account ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"SpecID\" [(ngModel)]=\"model.SpecID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"SpecName\" class=\"control-label col-md-2 col-sm-2\">Account</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"SpecName\" [(ngModel)]=\"model.SpecName\" #specName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !specName.valid\" class=\"help-block\">Account is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1098:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblSalesLines\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Line Name <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Manager <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchLineName\" name=\"LineName\" [(ngModel)]=\"searchLine.LineName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchUserName\" name=\"UserName\" [(ngModel)]=\"searchLine.UserName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchLine | orderby:orderbyString)\">\r\n\t\t\t\t\t<td>{{item.LineName}}</td>\r\n\t\t\t\t\t<td>{{item.UserName}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.SalesLineID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.SalesLineID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.SalesLineID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form #f=\"ngForm\" (submit)=\"HandleForm($event)\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this sales line ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"LineName\" class=\"control-label col-md-2 col-sm-2\">Line Name</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"LineName\" [(ngModel)]=\"model.LineName\" #LineName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"LineName.touched && !LineName.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"LineName.errors.required\">Line Name is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"UserID\" class=\"control-label col-md-2 col-sm-2\">Manager</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"UserID\" [(ngModel)]=\"model.UserID\" #Manager=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Manager...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let user of users\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"Manager.touched && !Manager.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"Manager.errors.required\">Manager is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n        <table id=\"tblPromoTools\" class=\"table table-hover table-striped\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"40%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> Promo Type <i (click)=\"SortTable('GiftName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('GiftName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Product <i (click)=\"SortTable('DrugName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('DrugName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Tool Name <i (click)=\"SortTable('ToolName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ToolName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchgiftName\" name=\"GiftName\" [(ngModel)]=\"srchObj.GiftName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchdrugName\" name=\"DrugName\" [(ngModel)]=\"srchObj.DrugName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchtoolName\" name=\"ToolName\" [(ngModel)]=\"srchObj.ToolName\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                    <td>{{item.GiftName}}</td>\r\n                    <td>{{item.DrugName}}</td>\r\n                    <td>{{item.ToolName}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.ToolID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.ToolID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.ToolID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this promotional tool ?</h2>\r\n                <br>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['GiftName'].valid }\">\r\n                    <label for=\"GiftID\" class=\"control-label col-md-2 col-sm-2\">Promo Type</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"GiftID\" [(ngModel)]=\"model.GiftID\" [formControl]=\"inFrm.controls['GiftName']\" (change)=\"onGiftChange($event)\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Promo Type...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of giftList\" [ngValue]=\"i.GiftID\">{{i.GiftName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"inFrm.controls['GiftName'].touched && !inFrm.controls['GiftName'].valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['GiftName'].hasError('required')\">Promo Type is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['DrugName'].valid }\">\r\n                    <label for=\"DrugID\" class=\"control-label col-md-2 col-sm-2\">Product</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"model.DrugID\" [formControl]=\"inFrm.controls['DrugName']\" (change)=\"onDrugChange($event)\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Product...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of drugList\" [ngValue]=\"i.DrugID\">{{i.DrugName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['ToolName'].valid }\">\r\n                    <label for=\"ToolName\" class=\"control-label col-md-2 col-sm-2\">Promotional Tool Name</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"text\" name=\"ToolName\" [(ngModel)]=\"model.ToolName\" [formControl]=\"inFrm.controls['ToolName']\">\r\n                        <div class='error' *ngIf=\"(inFrm.controls['GiftName'].touched && !inFrm.controls['ToolName'].valid)\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['ToolName'].hasError('required')\">Promotional Tool Name is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['ToolName'].hasError('alreadyexist')\">Promotional Tool Name already exist.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1099:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"lineID\" #lineId=\"ngModel\" required>\r\n                        <option ngValue=\"null\">Select a Sales Line...</option>\r\n                        <option *ngFor=\"let i of salesLines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <table id=\"tblReps\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> UserID <i (click)=\"SortTable('UserID')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserID') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> User Name <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Job Class <i (click)=\"SortTable('JobClass')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('JobClass') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Planned <i (click)=\"SortTable('Planned')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Planned') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Committed Visits <i (click)=\"SortTable('CommittedVisits')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('CommittedVisits') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Committed Visits Percent <i (click)=\"SortTable('ComVisitPrcnt')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('ComVisitPrcnt') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customers <i (click)=\"SortTable('Customers')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Customers') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Logins <i (click)=\"SortTable('Logins')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Logins') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of medicalRep | orderby:orderbyString\">\r\n                    <td>{{item.UserID}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.JobClass}}</td>\r\n                    <td>{{item.Planned}}</td>\r\n                    <td>{{item.CommittedVisits}}</td>\r\n                    <td>{{item.ComVisitPrcnt}}</td>\r\n                    <td>{{item.Customers}}</td>\r\n                    <td>{{item.Logins}}</td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr style=\"font-weight: bold; background-color: palegreen\">\r\n                    <td colspan=\"3\" class=\"text-center\">Totals</td>\r\n                    <td>{{sumPlanned}}</td>\r\n                    <td>{{sumCommited}}</td>\r\n                    <td></td>\r\n                    <td>{{sumCustomers}}</td>\r\n                    <td>{{sumLogins}}</td>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div style=\"display: block;\">\r\n            <canvas baseChart [datasets]=\"chartData\" [labels]=\"lineChartLabels\" [options]=\"lineChartOptions\" [colors]=\"lineChartColors\"\r\n                [legend]=\"lineChartLegend\" [chartType]=\"lineChartType\"></canvas>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblSalesLines\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t\t<col width=\"30%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Line Name <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Manager <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchLineName\" name=\"LineName\" [(ngModel)]=\"searchLine.LineName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchUserName\" name=\"UserName\" [(ngModel)]=\"searchLine.UserName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchLine | orderby:orderbyString)\">\r\n\t\t\t\t\t<td>{{item.LineName}}</td>\r\n\t\t\t\t\t<td>{{item.UserName}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.SalesLineID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.SalesLineID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.SalesLineID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form #f=\"ngForm\" (submit)=\"HandleForm($event)\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this sales line ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\">\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"LineName\" class=\"control-label col-md-2 col-sm-2\">Line Name</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"LineName\" [(ngModel)]=\"model.LineName\" #LineName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"LineName.touched && !LineName.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"LineName.errors.required\">Line Name is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"UserID\" class=\"control-label col-md-2 col-sm-2\">Manager</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"UserID\" [(ngModel)]=\"model.UserID\" #Manager=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Manager...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let user of users\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"Manager.touched && !Manager.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"Manager.errors.required\">Manager is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1100:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !drug.valid }\">\r\n                <label for=\"drugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"drugID\" [(ngModel)]=\"drugID\" #drug=\"ngModel\" required>\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !spec.valid }\">\r\n                <label for=\"specID\" class=\"control-label col-md-2 col-sm-2\">Speciality</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"specID\" [(ngModel)]=\"specID\" #spec=\"ngModel\" required>\r\n                        <option [value]=\"null\">Select a Speciality...</option>\r\n                        <option *ngFor=\"let i of specList\" [ngValue]=\"i.SpecID\">{{i.SpecName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"lineID\" #lineId=\"ngModel\" required>\r\n                        <option ngValue=\"null\">Select a Sales Line...</option>\r\n                        <option *ngFor=\"let i of salesLines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <table id=\"tblReps\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> UserID <i (click)=\"SortTable('UserID')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserID') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> User Name <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Job Class <i (click)=\"SortTable('JobClass')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('JobClass') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Planned <i (click)=\"SortTable('Planned')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Planned') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Committed Visits <i (click)=\"SortTable('CommittedVisits')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('CommittedVisits') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Committed Visits Percent <i (click)=\"SortTable('ComVisitPrcnt')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('ComVisitPrcnt') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customers <i (click)=\"SortTable('Customers')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Customers') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Logins <i (click)=\"SortTable('Logins')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Logins') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of medicalRep | orderby:orderbyString\">\r\n                    <td>{{item.UserID}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.JobClass}}</td>\r\n                    <td>{{item.Planned}}</td>\r\n                    <td>{{item.CommittedVisits}}</td>\r\n                    <td>{{item.ComVisitPrcnt | percent:'3.2-2'}}</td>\r\n                    <td>{{item.Customers}}</td>\r\n                    <td>{{item.Logins}}</td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr style=\"font-weight: bold; background-color: palegreen\">\r\n                    <td colspan=\"3\" class=\"text-center\">Totals</td>\r\n                    <td>{{sumPlanned}}</td>\r\n                    <td>{{sumCommited}}</td>\r\n                    <td></td>\r\n                    <td>{{sumCustomers}}</td>\r\n                    <td>{{sumLogins}}</td>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div style=\"display: block;\">\r\n            <canvas class=\"print-chart PrintnewPage\" baseChart [datasets]=\"chartData\" [labels]=\"lineChartLabels\" [options]=\"lineChartOptions\" [colors]=\"colorsEmpty\"\r\n                [legend]=\"lineChartLegend\" [chartType]=\"lineChartType\"></canvas>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1101:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"DrugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugID\">\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"imsID\" class=\"control-label col-md-3 col-sm-4\">Select IMS Region</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"imsID\" [(ngModel)]=\"imsID\">\r\n                        <option [value]=\"null\">Select IMS Region</option>\r\n                        <option *ngFor=\"let ims of imsList\" [ngValue]=\"ims.IMSID\">{{ims.IMS}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !drug.valid }\">\r\n                <label for=\"drugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"drugID\" [(ngModel)]=\"drugID\" #drug=\"ngModel\" required>\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !spec.valid }\">\r\n                <label for=\"specID\" class=\"control-label col-md-2 col-sm-2\">Speciality</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"specID\" [(ngModel)]=\"specID\" #spec=\"ngModel\" required>\r\n                        <option [value]=\"null\">Select a Speciality...</option>\r\n                        <option *ngFor=\"let i of specList\" [ngValue]=\"i.SpecID\">{{i.SpecName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1102:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"DrugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugID\">\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !region.valid }\">\r\n                <label for=\"RegionID\" class=\"control-label col-md-2 col-sm-2\">Regions</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"RegionID\" [(ngModel)]=\"regionID\" #region=\"ngModel\" (change)=\"onRegChange($event)\" required>\r\n                        <option [value]=\"null\">Select a Province...</option>\r\n                        <option *ngFor=\"let i of regionList\" [ngValue]=\"i.RegionID\">{{i.RegionName}} - {{i.ProvinceID}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !destination.valid }\">\r\n                <label for=\"DestID\" class=\"control-label col-md-2 col-sm-2\">Customer</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"DestID\" [(ngModel)]=\"destID\" #destination=\"ngModel\" required>\r\n                        <option [value]=\"null\">Select a Customer...</option>\r\n                        <option *ngFor=\"let i of destList\" [ngValue]=\"i.DestID\">{{i.Destination}}</option>\r\n                    </select>\r\n                    <div class='error' *ngIf=\"(destination.touched && !destination.valid) || (f.submitted && !destination.valid)\">\r\n                        <div class=\"alert alert-danger\" *ngIf=\"destination.hasError('required')\">Customer is required.</div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"DrugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugID\">\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"imsID\" class=\"control-label col-md-3 col-sm-4\">Select IMS Region</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"imsID\" [(ngModel)]=\"imsID\">\r\n                        <option [value]=\"null\">Select IMS Region</option>\r\n                        <option *ngFor=\"let ims of imsList\" [ngValue]=\"ims.IMSID\">{{ims.IMS}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1103:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"DrugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugID\">\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />3\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\"  (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"DrugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugID\">\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !region.valid }\">\r\n                <label for=\"RegionID\" class=\"control-label col-md-2 col-sm-2\">Regions</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"RegionID\" [(ngModel)]=\"regionID\" #region=\"ngModel\" (change)=\"onRegChange($event)\" required>\r\n                        <option [value]=\"null\">Select a Province...</option>\r\n                        <option *ngFor=\"let i of regionList\" [ngValue]=\"i.RegionID\">{{i.RegionName}} - {{i.ProvinceID}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !destination.valid }\">\r\n                <label for=\"DestID\" class=\"control-label col-md-2 col-sm-2\">Customer</label>\r\n                <div class=\"col-md-10 col-sm-10\">\r\n                    <select class=\"form-control\" name=\"DestID\" [(ngModel)]=\"destID\" #destination=\"ngModel\" required>\r\n                        <option [value]=\"null\">Select a Customer...</option>\r\n                        <option *ngFor=\"let i of destList\" [ngValue]=\"i.DestID\">{{i.Destination}}</option>\r\n                    </select>\r\n                    <div class='error' *ngIf=\"(destination.touched && !destination.valid) || (f.submitted && !destination.valid)\">\r\n                        <div class=\"alert alert-danger\" *ngIf=\"destination.hasError('required')\">Customer is required.</div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1104:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!--<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !gft.valid }\">\r\n                <label for=\"selectedGift\" class=\"control-label col-md-3 col-sm-4\">Select Promo Tool Type</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedGift\" [(ngModel)]=\"selectedGift\" #gft=\"ngModel\" required>\r\n                        <option [ngValue]=\"null\">Select Promo Tool Type..</option>\r\n                        <option *ngFor=\"let gft of gftList\" [ngValue]=\"gft.GiftID\">{{gft.GiftName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>-->\r\n            <div class=\"form-group\">\r\n                <label for=\"imsID\" class=\"control-label col-md-3 col-sm-4\">Select IMS Region</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"imsID\" [(ngModel)]=\"imsID\">\r\n                        <option [ngValue]=\"null\">Select IMS Region</option>\r\n                        <option *ngFor=\"let ims of imsList\" [ngValue]=\"ims.IMSID\">{{ims.IMS}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <pre>\r\n        {{data | json}}\r\n        {{original | json}}\r\n        </pre>\r\n    </div>\r\n</div>\r\n<div class=\"svgRpt well\">\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"DrugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugID\">\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />3\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Comment <i (click)=\"SortTable('Comment')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Comment') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.Comment}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\"  (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1105:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <template ngFor let-rpt [ngForOf]=\"reports\">\r\n        <div class=\"col-xs-12 col-md-12\" *ngIf=\"rpt.heading\">\r\n            <h2>{{rpt.header}}</h2>\r\n        </div>\r\n        <div class=\"col-xs-6 col-md-3\" *ngIf=\"!rpt.heading\">\r\n            <a [routerLink]=\"rpt.link\" class=\"thumbnail\">\r\n                <img src=\"./assets/img/ReportIcon.svg\" alt=\"Report\" style=\"max-height: 150px; max-width: 100px\">\r\n                <div class=\"caption text-center\">\r\n                    <h4>{{rpt.header}}</h4>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </template>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"DrugID\" class=\"control-label col-md-3 col-sm-4\">Select a Product</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugID\">\r\n                        <option [value]=\"null\">Select a Product</option>\r\n                        <option *ngFor=\"let drug of drugList\" [ngValue]=\"drug.DrugID\">{{drug.DrugName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"imsID\" class=\"control-label col-md-3 col-sm-4\">Select IMS Region</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"imsID\" [(ngModel)]=\"imsID\">\r\n                        <option [value]=\"null\">Select IMS Region</option>\r\n                        <option *ngFor=\"let ims of imsList\" [ngValue]=\"ims.IMSID\">{{ims.IMS}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"panel panel-default\">\r\n    <div class=\"panel-heading\">\r\n        <h3 class=\"text-center\">{{reportHeader}}</h3>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n                <dash-score [heading]=\"'Total Visits'\" [score]=\"collection.length\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive table-bordered\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"10%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> IMS Region <i (click)=\"SortTable('IMS')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Medical Rep. <i (click)=\"SortTable('UserName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Tool Name <i (click)=\"SortTable('ToolName')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('ToolName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Qty <i (click)=\"SortTable('Qty')\" class=\"btn btn-default no-print\" [ngClass]=\"(orderbyString.indexOf('Qty') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of collection | orderby:orderbyString\">\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.Destination}}</td>\r\n                    <td>{{item.ToolName}}</td>\r\n                    <td>{{item.Qty}}</td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <!--<pagination-controls class=\"no-print\" (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>-->\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1106:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !spec.valid }\">\r\n                <label for=\"selectedSpec\" class=\"control-label col-md-2 col-sm-4\">Select Medical Account</label>\r\n                <div class=\"col-md-10 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedSpec\" [(ngModel)]=\"selectedSpec\" #spec=\"ngModel\" required>\r\n                        <option [ngValue]=\"null\">Select Medical Account..</option>\r\n                        <option *ngFor=\"let spec of specList\" [ngValue]=\"spec.SpecID\">{{spec.SpecName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"imsID\" class=\"control-label col-md-2 col-sm-4\">Select IMS Region</label>\r\n                <div class=\"col-md-10 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"imsID\" [(ngModel)]=\"imsID\">\r\n                        <option [ngValue]=\"null\">Select IMS Region</option>\r\n                        <option *ngFor=\"let ims of imsList\" [ngValue]=\"ims.IMSID\">{{ims.IMS}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n<div class=\"card-block\">\r\n    <div>\r\n        <canvas baseChart [data]=\"pieChartData\" [labels]=\"pieChartLabels\" [chartType]=\"pieChartType\" [colors]=\"colorsEmpty\"></canvas>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!--<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !gft.valid }\">\r\n                <label for=\"selectedGift\" class=\"control-label col-md-3 col-sm-4\">Select Promo Tool Type</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedGift\" [(ngModel)]=\"selectedGift\" #gft=\"ngModel\" required>\r\n                        <option [ngValue]=\"null\">Select Promo Tool Type..</option>\r\n                        <option *ngFor=\"let gft of gftList\" [ngValue]=\"gft.GiftID\">{{gft.GiftName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>-->\r\n            <div class=\"form-group\">\r\n                <label for=\"imsID\" class=\"control-label col-md-3 col-sm-4\">Select IMS Region</label>\r\n                <div class=\"col-md-9 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"imsID\" [(ngModel)]=\"imsID\">\r\n                        <option [ngValue]=\"null\">Select IMS Region</option>\r\n                        <option *ngFor=\"let ims of imsList\" [ngValue]=\"ims.IMSID\">{{ims.IMS}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n        <pre>\r\n        {{data | json}}\r\n        {{original | json}}\r\n        </pre>\r\n    </div>\r\n</div>\r\n<div class=\"svgRpt well\">\r\n</div>"
 
 /***/ }),
 
 /***/ 1107:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form>\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\" *ngIf=\"currentUser.jobClass != 3\">\r\n                <label for=\"selectedUser\" class=\"control-label col-md-4 col-sm-4\">Select Medical Rep.</label>\r\n                <div class=\"col-md-8 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedUser\" [(ngModel)]=\"selectedUser\" (change)=\"newUser()\">\r\n                        <option [value]=\"currentUser.userID\">{{currentUser.UserName}}</option>\r\n                        <option *ngFor=\"let user of userList\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"window.print()\">Print</button>\r\n        </div>\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"card-block\">\r\n    <date-slider (dateChanged)=\"newSchedule($event)\"></date-slider>\r\n\r\n    <div>\r\n        <canvas baseChart [data]=\"pieChartData\" [labels]=\"pieChartLabels\" [chartType]=\"pieChartType\" [colors]=\"colorsEmpty\"></canvas>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"row\">\r\n    <template ngFor let-rpt [ngForOf]=\"reports\">\r\n        <div class=\"col-xs-12 col-md-12\" *ngIf=\"rpt.heading\">\r\n            <h2>{{rpt.header}}</h2>\r\n        </div>\r\n        <div class=\"col-xs-6 col-md-3\" *ngIf=\"!rpt.heading\">\r\n            <a [routerLink]=\"rpt.link\" class=\"thumbnail\">\r\n                <img src=\"./assets/img/ReportIcon.svg\" alt=\"Report\" style=\"max-height: 150px; max-width: 100px\">\r\n                <div class=\"caption text-center\">\r\n                    <h4>{{rpt.header}}</h4>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </template>\r\n</div>"
 
 /***/ }),
 
 /***/ 1108:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"well no-print\">\r\n    <form>\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\" *ngIf=\"currentUser.jobClass != 3\">\r\n                <label for=\"selectedUser\" class=\"control-label col-md-4 col-sm-4\">Select Medical Rep.</label>\r\n                <div class=\"col-md-8 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedUser\" [(ngModel)]=\"selectedUser\" (change)=\"newUser()\">\r\n                        <option [value]=\"currentUser.userID\">{{currentUser.UserName}}</option>\r\n                        <option *ngFor=\"let user of userList\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"window.print()\">Print</button>\r\n        </div>\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"card-block\">\r\n    <table class=\"table table-bordered table-hover table-striped\">\r\n        <colgroup>\r\n            <col width=\"50%\">\r\n            <col width=\"50%\">\r\n        </colgroup>\r\n        <thead>\r\n            <tr>\r\n                <th>VisType</th>\r\n                <th>VisCount</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let item of userRate\">\r\n                <td>{{item.DayDate | date:'dd/MM/yyyy'}}</td>\r\n                <td>{{item.visCount}}</td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form #f=\"ngForm\" novalidate *ngIf=\"currentUser.jobClass != 3\" (submit)=\"f.valid && ViewReport()\">\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\">\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !from.valid }\">\r\n                    <label for=\"fromDate\" class=\"control-label col-md-2 col-sm-4\">From</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"fromDate\" [(ngModel)]=\"fromDate\" #from=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n                <div [ngClass]=\"{ 'has-error': f.submitted && !to.valid }\">\r\n                    <label for=\"toDate\" class=\"control-label col-md-2 col-sm-4\">To</label>\r\n                    <div class=\"col-md-4 col-sm-8\">\r\n                        <input class=\"form-control\" type=\"date\" name=\"toDate\" [(ngModel)]=\"toDate\" #to=\"ngModel\" required>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !spec.valid }\">\r\n                <label for=\"selectedSpec\" class=\"control-label col-md-2 col-sm-4\">Select Medical Account</label>\r\n                <div class=\"col-md-10 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedSpec\" [(ngModel)]=\"selectedSpec\" #spec=\"ngModel\" required>\r\n                        <option [ngValue]=\"null\">Select Medical Account..</option>\r\n                        <option *ngFor=\"let spec of specList\" [ngValue]=\"spec.SpecID\">{{spec.SpecName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label for=\"imsID\" class=\"control-label col-md-2 col-sm-4\">Select IMS Region</label>\r\n                <div class=\"col-md-10 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"imsID\" [(ngModel)]=\"imsID\">\r\n                        <option [ngValue]=\"null\">Select IMS Region</option>\r\n                        <option *ngFor=\"let ims of imsList\" [ngValue]=\"ims.IMSID\">{{ims.IMS}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"submit\" class=\"btn btn-primary btn-block\">View</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"printReport()\">Print</button>\r\n                </div>\r\n                <div class=\"col-md-offset-1 col-md-3\">\r\n                    <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n<div class=\"card-block\">\r\n    <div>\r\n        <canvas class=\"print-chart\" baseChart [data]=\"pieChartData\" [labels]=\"pieChartLabels\" [options]=\"pieChartOptions\" [chartType]=\"pieChartType\" [colors]=\"colorsEmpty\"></canvas>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1109:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n        <h2> Change User Password </h2>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <form [formGroup]=\"inputForm\" (submit)=\"(inputForm.valid || Formstate == 'Delete') && SavePassword($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"OldPass\" class=\"control-label col-md-2 col-sm-2\">Old Password</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"password\" name=\"OldPass\" [formControl]=\"inputForm.controls['OldPass']\">\r\n                        <div class='error' *ngIf=\"inputForm.controls['OldPass'].touched\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['OldPass'].hasError('required')\">Old User Password is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.hasError('mismatchValue')\">Old User Password is Incorrect.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['OldPass'].hasError('minlength')\">Old User Password must be minimum 5 characters.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['OldPass'].hasError('maxlength')\">Old User Password must be maximum 200 characters.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"UserPass\" class=\"control-label col-md-2 col-sm-2\">New Password</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"password\" name=\"UserPass\" [formControl]=\"inputForm.controls['UserPass']\">\r\n                        <div class='error' *ngIf=\"inputForm.controls['UserPass'].touched\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('required')\">User Password is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('minlength')\">User Password must be minimum 5 characters.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('maxlength')\">User Password must be maximum 200 characters.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"ConfPass\" class=\"control-label col-md-2 col-sm-2\">Confirm Password</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"password\" name=\"ConfPass\" [formControl]=\"inputForm.controls['ConfPass']\">\r\n                        <div class='error' *ngIf=\"inputForm.controls['ConfPass'].touched\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.hasError('mismatchedPasswords')\">Passwords do not match.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-primary\" [disabled]='!inputForm.valid'>Save</button>                    |\r\n                    <button type=\"button\" (click)=\"Back()\" class=\"btn btn-danger\">Back to Home</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form>\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\" *ngIf=\"currentUser.jobClass != 3\">\r\n                <label for=\"selectedUser\" class=\"control-label col-md-4 col-sm-4\">Select Medical Rep.</label>\r\n                <div class=\"col-md-8 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedUser\" [(ngModel)]=\"selectedUser\" (change)=\"newUser()\">\r\n                        <option [value]=\"currentUser.userID\">{{currentUser.UserName}}</option>\r\n                        <option *ngFor=\"let user of userList\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"window.print()\">Print</button>\r\n        </div>\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"card-block\">\r\n    <date-slider (dateChanged)=\"newSchedule($event)\"></date-slider>\r\n\r\n    <div>\r\n        <canvas baseChart [data]=\"pieChartData\" [labels]=\"pieChartLabels\" [chartType]=\"pieChartType\" [options]=\"ChartOptions\" [colors]=\"colorsEmpty\"></canvas>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1110:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblMsgs\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"10%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"10%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> From User <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Create Date <i (click)=\"SortTable('CreateDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('CreateDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Message Type <i (click)=\"SortTable('IssueType')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IssueType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Title <i (click)=\"SortTable('Title')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Title') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Solved <i (click)=\"SortTable('Solved')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Solved') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchUserName\" name=\"UserName\" [(ngModel)]=\"srchObj.UserName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchIssueType\" name=\"IssueType\" [(ngModel)]=\"srchObj.IssueType\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchTitle\" name=\"Title\" [(ngModel)]=\"srchObj.Title\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.UserName}}</td>\r\n\t\t\t\t\t<td>{{item.CreateDate | date:'dd/MM/yyyy'}}</td>\r\n\t\t\t\t\t<td>{{item.IssueType}}</td>\r\n\t\t\t\t\t<td>{{item.Title}}</td>\r\n\t\t\t\t\t<td>{{item.Solved}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.ID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.ID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.ID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t\t<pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"f.form.valid && HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this message ?</h2>\r\n\t\t\t\t<br>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !Type.valid }\">\r\n\t\t\t\t\t<label for=\"IssueType\" class=\"control-label col-md-2 col-sm-2\">Message Type</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"IssueType\" [(ngModel)]=\"model.IssueType\" #Type=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option ngValue=\"null\">Select a Message Type...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of msgTypeList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !Type.valid\" class=\"help-block\">Message Type is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !title.valid }\">\r\n\t\t\t\t\t<label for=\"title\" class=\"control-label col-md-2 col-sm-2\">Title</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"Title\" [(ngModel)]=\"model.Title\" #title=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !title.valid\" class=\"help-block\">Title is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !IDesc.valid }\">\r\n\t\t\t\t\t<label for=\"IDescription\" class=\"control-label col-md-2 col-sm-2\">Description</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<textarea rows=\"\" cols=\"\" class=\"form-control\" type=\"text\" name=\"IDescription\" [(ngModel)]=\"model.IDescription\" #IDesc=\"ngModel\"\r\n\t\t\t\t\t\t required></textarea>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !IDesc.valid\" class=\"help-block\">Description is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button>\t\t\t\t\t|\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"well no-print\">\r\n    <form>\r\n        <div class=\"form-horizontal\">\r\n            <div class=\"form-group\" *ngIf=\"currentUser.jobClass != 3\">\r\n                <label for=\"selectedUser\" class=\"control-label col-md-4 col-sm-4\">Select Medical Rep.</label>\r\n                <div class=\"col-md-8 col-sm-8\">\r\n                    <select class=\"form-control\" name=\"selectedUser\" [(ngModel)]=\"selectedUser\" (change)=\"newUser()\">\r\n                        <option [value]=\"currentUser.userID\">{{currentUser.UserName}}</option>\r\n                        <option *ngFor=\"let user of userList\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </form>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-info btn-block\" (click)=\"window.print()\">Print</button>\r\n        </div>\r\n        <div class=\"col-md-offset-1 col-md-4\">\r\n            <button type=\"button\" class=\"btn btn-danger btn-block\" (click)=\"goBack()\">Back</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"well no-print\">    \r\n    <date-slider (dateChanged)=\"newSchedule($event)\"></date-slider>\r\n</div>\r\n<div class=\"card-block\">\r\n    \r\n    <table class=\"table table-bordered table-hover table-striped\">\r\n        <colgroup>\r\n            <col width=\"50%\">\r\n            <col width=\"50%\">\r\n        </colgroup>\r\n        <thead>\r\n            <tr>\r\n                <th>Day Date</th>\r\n                <th>Visit Count</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let item of userRate\">\r\n                <td>{{item.DayDate | date:'dd/MM/yyyy'}}</td>\r\n                <td>{{item.visCount}}</td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n<div class=\"card-block\">\r\n    <div>\r\n        <canvas class=\"print-chart PrintnewPage\" baseChart [datasets]=\"chartData\" [labels]=\"lineChartLabels\" [options]=\"lineChartOptions\"\r\n                    [colors]=\"colorsEmpty\" [legend]=\"lineChartLegend\" [chartType]=\"lineChartType\"></canvas>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1111:
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Dashboard</h1>\r\n<!--<div class=\"userchain\" *ngIf=\"currentUser.jobClass >= 1\">\r\n    <div *ngFor=\"let user of users\">\r\n        <dash-schedule [currentUser]=\"currentUser\" [user]=\"user\" [chain]=\"true\" ></dash-schedule>\r\n        <dash-workRate [currentUser]=\"currentUser\" [user]=\"user\" [chain]=\"true\"></dash-workRate>\r\n    </div>\r\n</div>-->\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[0]\" [score]=\"planned\" [icon]=\"'fa fa-calendar fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n    </div>\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[1]\" [score]=\"committed\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-warning'\"></dash-score>\r\n    </div>\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[2]\" [score]=\"today\" [icon]=\"'fa fa-calendar-check-o fa-4x'\" [alertColor]=\"'alert alert-info'\"></dash-score>\r\n    </div>\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[3]\" [score]=\"promo\" [icon]=\"'fa fa-gift fa-4x'\" [alertColor]=\"'alert alert-success'\"></dash-score>\r\n    </div>\r\n</div>\r\n<div class=\"userchain\" *ngIf=\"currentUser.jobClass != 3\">\r\n    <div class=\"form-group row alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\">\r\n        <label for=\"userID\" class=\"control-lable col-md-3 text-right\">Select a User</label>\r\n        <div class=\"col-md-9\">\r\n            <select class=\"form-control\" name=\"userID\" (change)=\"UserChanged($event)\">\r\n            <option value=\"null\">Select a User</option>\r\n            <option *ngFor=\"let user of users\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n        </select>\r\n        </div>\r\n    </div>\r\n    <dash-schedule *ngIf=\"seluser\" [currentUser]=\"currentUser\" [user]=\"seluser\" [chain]=\"true\"></dash-schedule>\r\n    <dash-workRate *ngIf=\"seluser\" [currentUser]=\"currentUser\" [user]=\"seluser\" [chain]=\"true\"></dash-workRate>\r\n</div>\r\n\r\n<div class=\"userchain\" *ngIf=\"currentUser.jobClass == 3\">\r\n    <dash-plan [currentUser]=\"currentUser\"></dash-plan>\r\n    <dash-schedule [currentUser]=\"currentUser\"></dash-schedule>\r\n    <dash-workRate [currentUser]=\"currentUser\"></dash-workRate>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n        <h2> Change User Password </h2>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\">\r\n        <form [formGroup]=\"inputForm\" (submit)=\"(inputForm.valid || Formstate == 'Delete') && SavePassword($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"OldPass\" class=\"control-label col-md-2 col-sm-2\">Old Password</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"password\" name=\"OldPass\" [formControl]=\"inputForm.controls['OldPass']\">\r\n                        <div class='error' *ngIf=\"inputForm.controls['OldPass'].touched\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['OldPass'].hasError('required')\">Old User Password is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.hasError('mismatchValue')\">Old User Password is Incorrect.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['OldPass'].hasError('minlength')\">Old User Password must be minimum 5 characters.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['OldPass'].hasError('maxlength')\">Old User Password must be maximum 200 characters.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"UserPass\" class=\"control-label col-md-2 col-sm-2\">New Password</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"password\" name=\"UserPass\" [formControl]=\"inputForm.controls['UserPass']\">\r\n                        <div class='error' *ngIf=\"inputForm.controls['UserPass'].touched\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('required')\">User Password is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('minlength')\">User Password must be minimum 5 characters.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('maxlength')\">User Password must be maximum 200 characters.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"ConfPass\" class=\"control-label col-md-2 col-sm-2\">Confirm Password</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"password\" name=\"ConfPass\" [formControl]=\"inputForm.controls['ConfPass']\">\r\n                        <div class='error' *ngIf=\"inputForm.controls['ConfPass'].touched\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inputForm.hasError('mismatchedPasswords')\">Passwords do not match.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-primary\" [disabled]='!inputForm.valid'>Save</button>                    |\r\n                    <button type=\"button\" (click)=\"Back()\" class=\"btn btn-danger\">Back to Home</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1112:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-blue panel-widget \">\r\n    <div class=\"row no-padding\" [ngClass]=\"alertColor\">\r\n        <div class=\"col-sm-3 col-lg-5 widget-left no-padding text-center\">\r\n            <!--<svg class=\"glyph stroked bag\">\r\n                <use xlink:href=\"#stroked-bag\"></use>\r\n            </svg>-->\r\n            <i [ngClass]=\"icon\"></i>\r\n        </div>\r\n        <div class=\"col-sm-9 col-lg-7 widget-right\">\r\n            <div class=\"large\">{{score}}</div>\r\n            <div class=\"text-muted\">{{heading}}</div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblMsgs\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"10%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"10%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> From User <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Create Date <i (click)=\"SortTable('CreateDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('CreateDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Message Type <i (click)=\"SortTable('IssueType')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IssueType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Title <i (click)=\"SortTable('Title')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Title') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Solved <i (click)=\"SortTable('Solved')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Solved') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchUserName\" name=\"UserName\" [(ngModel)]=\"srchObj.UserName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchIssueType\" name=\"IssueType\" [(ngModel)]=\"srchObj.IssueType\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchTitle\" name=\"Title\" [(ngModel)]=\"srchObj.Title\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.UserName}}</td>\r\n\t\t\t\t\t<td>{{item.CreateDate | date:'dd/MM/yyyy'}}</td>\r\n\t\t\t\t\t<td>{{item.IssueType}}</td>\r\n\t\t\t\t\t<td>{{item.Title}}</td>\r\n\t\t\t\t\t<td>{{item.Solved}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.ID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.ID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.ID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t\t<pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form (submit)=\"f.form.valid && HandleForm($event)\" #f=\"ngForm\" novalidate>\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this message ?</h2>\r\n\t\t\t\t<br>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !Type.valid }\">\r\n\t\t\t\t\t<label for=\"IssueType\" class=\"control-label col-md-2 col-sm-2\">Message Type</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"IssueType\" [(ngModel)]=\"model.IssueType\" #Type=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option ngValue=\"null\">Select a Message Type...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of msgTypeList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !Type.valid\" class=\"help-block\">Message Type is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !title.valid }\">\r\n\t\t\t\t\t<label for=\"title\" class=\"control-label col-md-2 col-sm-2\">Title</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"Title\" [(ngModel)]=\"model.Title\" #title=\"ngModel\" required>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !title.valid\" class=\"help-block\">Title is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !IDesc.valid }\">\r\n\t\t\t\t\t<label for=\"IDescription\" class=\"control-label col-md-2 col-sm-2\">Description</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<textarea rows=\"\" cols=\"\" class=\"form-control\" type=\"text\" name=\"IDescription\" [(ngModel)]=\"model.IDescription\" #IDesc=\"ngModel\"\r\n\t\t\t\t\t\t required></textarea>\r\n\t\t\t\t\t\t<div *ngIf=\"f.submitted && !IDesc.valid\" class=\"help-block\">Description is required</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">Save</button>\t\t\t\t\t|\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1113:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <h3 class=\"card-title\">\r\n        <a class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+'plan'+currentUser.userID\" aria-expanded=\"true\" [attr.aria-controls]=\"'plan'+currentUser.userID\"\r\n            (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{currentUser.UserName}} Assigned Plan\r\n    </h3>\r\n    <!--(dateChanged)=\"newSchedule($event)\"-->\r\n\r\n    <div [id]=\"'plan'+currentUser.userID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <plan-slider [currentUser]=\"currentUser\" (planChanged)=\"newPlan($event)\"></plan-slider>\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3>Products</h3>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item\" *ngFor=\"let item of plnDrugs | orderby:'+DrugName'\">{{item.DrugName}}\r\n                            <!--<input type=\"checkbox\" [name]=\"item.DrugID\" [checked]=\"item.Checked\" readonly>{{item.DrugName}}-->\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3>Accounts</h3>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item\" *ngFor=\"let item of plnSpecs | orderby:'+SpecName'\">{{item.SpecName}}\r\n                            <!--<input type=\"checkbox\" [name]=\"item.SpecID\" [checked]=\"item.Checked\" readonly>{{item.SpecName}}-->\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3>Cycles</h3>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item\" *ngFor=\"let item of plnImps | orderby:'+ImpName'\">{{item.ImpName}}\r\n                            <!--<input type=\"checkbox\" [name]=\"item.ImpID\" [checked]=\"item.Checked\" readonly>{{item.ImpName}}-->\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<h1>Dashboard</h1>\r\n<!--<div class=\"userchain\" *ngIf=\"currentUser.jobClass >= 1\">\r\n    <div *ngFor=\"let user of users\">\r\n        <dash-schedule [currentUser]=\"currentUser\" [user]=\"user\" [chain]=\"true\" ></dash-schedule>\r\n        <dash-workRate [currentUser]=\"currentUser\" [user]=\"user\" [chain]=\"true\"></dash-workRate>\r\n    </div>\r\n</div>-->\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[0]\" [score]=\"planned\" [icon]=\"'fa fa-calendar fa-4x'\" [alertColor]=\"'alert alert-danger'\"></dash-score>\r\n    </div>\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[1]\" [score]=\"committed\" [icon]=\"'fa fa-thumb-tack fa-4x'\" [alertColor]=\"'alert alert-warning'\"></dash-score>\r\n    </div>\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[2]\" [score]=\"today\" [icon]=\"'fa fa-calendar-check-o fa-4x'\" [alertColor]=\"'alert alert-info'\"></dash-score>\r\n    </div>\r\n    <div class=\"col-xs-12 col-md-6 col-lg-3\">\r\n        <dash-score [heading]=\"headings[3]\" [score]=\"promo\" [icon]=\"'fa fa-gift fa-4x'\" [alertColor]=\"'alert alert-success'\"></dash-score>\r\n    </div>\r\n</div>\r\n<div class=\"userchain\" *ngIf=\"currentUser.jobClass != 3\">\r\n    <div class=\"form-group row alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\">\r\n        <label for=\"userID\" class=\"control-lable col-md-3 text-right\">Select a User</label>\r\n        <div class=\"col-md-9\">\r\n            <select class=\"form-control\" name=\"userID\" (change)=\"UserChanged($event)\">\r\n            <option value=\"null\">Select a User</option>\r\n            <option *ngFor=\"let user of users\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n        </select>\r\n        </div>\r\n    </div>\r\n    <dash-schedule *ngIf=\"seluser\" [currentUser]=\"currentUser\" [user]=\"seluser\" [chain]=\"true\"></dash-schedule>\r\n    <dash-workRate *ngIf=\"seluser\" [currentUser]=\"currentUser\" [user]=\"seluser\" [chain]=\"true\"></dash-workRate>\r\n</div>\r\n\r\n<div class=\"userchain\" *ngIf=\"currentUser.jobClass == 3\">\r\n    <dash-plan [currentUser]=\"currentUser\"></dash-plan>\r\n    <dash-schedule [currentUser]=\"currentUser\"></dash-schedule>\r\n    <dash-workRate [currentUser]=\"currentUser\"></dash-workRate>\r\n</div>"
 
 /***/ }),
 
 /***/ 1114:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <h3 class=\"card-title\">\r\n        <a [id]=\"'toggle'+dispUser.userID\" class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+dispUser.userID\" aria-expanded=\"true\"\r\n            [attr.aria-controls]=\"dispUser.userID\" (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{dispUser.UserName}} Schedule\r\n    </h3>\r\n    <!--(dateChanged)=\"newSchedule($event)\"-->\r\n\r\n    <div [id]=\"dispUser.userID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <date-slider (dateChanged)=\"newSchedule($event)\"></date-slider>\r\n            <table class=\"table table-hover table-striped\">\r\n                <colgroup>\r\n                    <col width=\"15%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"15%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                </colgroup>\r\n                <thead>\r\n                    <tr>\r\n                        <td>Customer</td>\r\n                        <td>Type</td>\r\n                        <td>Class</td>\r\n                        <td>Region</td>\r\n                        <td>Planned Visits</td>\r\n                        <td>Commited Visits</td>\r\n                        <td>Remaining</td>\r\n                        <td>Loss Percentage</td>\r\n                        <td>Dist. Manager Visits</td>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let item of userSched | orderby: '+RegionName; +ProvinceID; +DestType; +Destination'\">\r\n                        <td>{{item.Destination}}</td>\r\n                        <td>{{item.DestType}}</td>\r\n                        <td>{{item.ImpName}}</td>\r\n                        <td>{{item.RegionName}} - {{item.ProvinceID}}</td>\r\n                        <td>{{item.VisitsNo}}</td>\r\n                        <td>{{item.visCount}}</td>\r\n                        <td>{{item.RemVisits}}</td>\r\n                        <td [style.color]=\"item.visLossPercent == 1 ? 'red': item.visLossPercent == 0 ? 'green': '#FFC400'\">\r\n                            {{item.visLossPercent | percent:'3.2-2'}}\r\n                        </td>\r\n                        <td>{{item.DistManVisits}}</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"panel panel-blue panel-widget \">\r\n    <div class=\"row no-padding\" [ngClass]=\"alertColor\">\r\n        <div class=\"col-sm-3 col-lg-5 widget-left no-padding text-center\">\r\n            <!--<svg class=\"glyph stroked bag\">\r\n                <use xlink:href=\"#stroked-bag\"></use>\r\n            </svg>-->\r\n            <i [ngClass]=\"icon\"></i>\r\n        </div>\r\n        <div class=\"col-sm-9 col-lg-7 widget-right\">\r\n            <div class=\"large\">{{score}}</div>\r\n            <div class=\"text-muted\">{{heading}}</div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1115:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <h3 class=\"card-title\">\r\n        <a class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+'rate'+dispUser.userID\" aria-expanded=\"true\" [attr.aria-controls]=\"'rate'+dispUser.userID\"\r\n            (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{dispUser.UserName}} Work Rate</h3>\r\n    <div [id]=\"'rate'+dispUser.userID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <date-slider (dateChanged)=\"newSchedule($event)\"></date-slider>\r\n            <!--<nvd3 [options]=\"options\" [data]=\"data\"></nvd3>-->\r\n\r\n            <div style=\"display: block;\">\r\n                <canvas baseChart [datasets]=\"chartData\" [labels]=\"lineChartLabels\" [options]=\"lineChartOptions\"\r\n                    [colors]=\"lineChartColors\" [legend]=\"lineChartLegend\" [chartType]=\"lineChartType\"></canvas>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"card\">\r\n    <h3 class=\"card-title\">\r\n        <a class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+'plan'+currentUser.userID\" aria-expanded=\"true\" [attr.aria-controls]=\"'plan'+currentUser.userID\"\r\n            (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{currentUser.UserName}} Assigned Plan\r\n    </h3>\r\n    <!--(dateChanged)=\"newSchedule($event)\"-->\r\n\r\n    <div [id]=\"'plan'+currentUser.userID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <plan-slider [currentUser]=\"currentUser\" (planChanged)=\"newPlan($event)\"></plan-slider>\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3>Products</h3>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item\" *ngFor=\"let item of plnDrugs | orderby:'+DrugName'\">{{item.DrugName}}\r\n                            <!--<input type=\"checkbox\" [name]=\"item.DrugID\" [checked]=\"item.Checked\" readonly>{{item.DrugName}}-->\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3>Accounts</h3>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item\" *ngFor=\"let item of plnSpecs | orderby:'+SpecName'\">{{item.SpecName}}\r\n                            <!--<input type=\"checkbox\" [name]=\"item.SpecID\" [checked]=\"item.Checked\" readonly>{{item.SpecName}}-->\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    <h3>Cycles</h3>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item\" *ngFor=\"let item of plnImps | orderby:'+ImpName'\">{{item.ImpName}}\r\n                            <!--<input type=\"checkbox\" [name]=\"item.ImpID\" [checked]=\"item.Checked\" readonly>{{item.ImpName}}-->\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1116:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <h3> {{srchObj.DestType}} </h3>\r\n        <button *ngIf=\"!Formstate && currentUser.jobClass < 1 \" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <!--<br><br>&& (curMonth==6 || curMonth==12)-->\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n        <ul class=\"nav nav-tabs nav-justified\">\r\n            <!--<li id=\"tab1\" role=\"presentation\" class=\"tabs active\"><a data-toggle=\"tab\" href=\"javascript:void(0)\" (click)=\"TabClicked('Hospital')\">Hospital</a></li> -->\r\n            <li id=\"tab2\" role=\"presentation\" class=\"tabs active\"><a data-toggle=\"tab\" href=\"javascript:void(0)\" (click)=\"TabClicked('Clinic (Doctor)')\">Clinic (Doctor)</a></li>\r\n            <li id=\"tab3\" role=\"presentation\" class=\"tabs\"><a data-toggle=\"tab\" href=\"javascript:void(0)\" (click)=\"TabClicked('Pharmacy')\">Pharmacy</a></li>\r\n        </ul>\r\n        <div class=\"form-group row alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\">\r\n            <label for=\"IMSID\" class=\"control-label col-md-2 col-sm-2 text-right\">IMS Region</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"IMSID\" [(ngModel)]=\"selIMS\" (change)=\"IMSSelected()\" required>\r\n                    <option value=\"\">Select an IMS...</option>\r\n                    <option *ngFor=\"let i of IMSList\" [ngValue]=\"i.IMSID\">{{i.IMS}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblCustomers\" class=\"table table-hover table-striped\">\r\n            <colgroup>\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col *ngIf=\"currentUser.jobClass < 1\" width=\"10%\" />\r\n                <col *ngIf=\"currentUser.jobClass > 1\" width=\"20%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col *ngIf=\"currentUser.jobClass < 1\" width=\"10%\" />\r\n                <col width=\"15%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> {{srchObj.DestType}} Name <i (click)=\"SortTable('Destination')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> IMS <i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Region - Province <i (click)=\"SortTable('RegionProvince')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Address <i (click)=\"SortTable('Address')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Med. Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Importance <i (click)=\"SortTable('ImpName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visits # <i (click)=\"SortTable('VisitsNo')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitsNo') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th>\r\n                        <select [(ngModel)]=\"ClassColumn\">\r\n                            <option value=\"Approved\">Approved</option>\r\n                            <option value=\"Assigned\">Assigned</option>\r\n                            <option value=\"PlanExist\">In Plan</option>\r\n                        </select>\r\n                        <i (click)=\"SortTable('ClassColumn')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf(ClassColumn) == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchDestination\" name=\"Destination\" [(ngModel)]=\"srchObj.Destination\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchIMS\" name=\"IMS\" [(ngModel)]=\"srchObj.IMS\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchRegionProvince\" name=\"RegionProvince\" [(ngModel)]=\"srchObj.RegionProvince\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchAddress\" name=\"Address\" [(ngModel)]=\"srchObj.Address\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchSpecName\" name=\"SpecName\" [(ngModel)]=\"srchObj.SpecName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchImpName\" name=\"ImpName\" [(ngModel)]=\"srchObj.ImpName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchVisitsNo\" name=\"VisitsNo\" [(ngModel)]=\"srchObj.VisitsNo\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\"\r\n                    [ngStyle]=\"{'background-color': !item.Approved? '#ffff80': !item.Assigned? '#66ffc2' : !item.PlanExist? '#ff9999' : '#fff'}\">\r\n                    <td class=\"text-bold\">{{item.Destination}}</td>\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.RegionProvince}}</td>\r\n                    <td>{{item.Address}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.ImpName}}</td>\r\n                    <td>{{item.VisitsNo}}</td>\r\n                    <td *ngIf=\"ClassColumn == 'Approved'\">{{item.Approved}}</td>\r\n                    <td *ngIf=\"ClassColumn == 'Assigned'\">{{item.Assigned}}</td>\r\n                    <td *ngIf=\"ClassColumn == 'PlanExist'\">{{item.PlanExist}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" [disabled]=\"item.Approved\" (click)='ApproveDestination(item.DestID)' class=\"btn btn-success\"\r\n                            title=\"Approve Customer\"><i class=\"glyphicon glyphicon-ok\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.DestID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.DestID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.DestID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr>\r\n                    <td colspan=\"3\">\r\n                        <div style=\"display:inline-block; width:40px; height:20px; background-color: #ff9999; border: 2px; border-color: black\">\r\n                        </div>\r\n                        <label>Customers not in Current Month Plan</label>\r\n                    </td>\r\n                    <td colspan=\"2\">\r\n                        <div style=\"display:inline-block; width:40px; height:20px; background-color: #ffff80; border: 2px; border-color: black\">\r\n                        </div>\r\n                        <label>Customers not Approved</label>\r\n                    </td>\r\n                    <td colspan=\"3\">\r\n                        <div style=\"display:inline-block; width:40px; height:20px; background-color: #66ffc2; border: 2px; border-color: black\">\r\n                        </div>\r\n                        <label>Customers not Assigned to Sales Lines</label>\r\n                    </td>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form #f=\"ngForm\" (submit)=\"HandleForm($event)\">\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this customer ?</h2>\r\n                <br>\r\n\r\n                <div class=\"form-group\">\r\n                    <label for=\"Destination\" class=\"control-label col-md-2 col-sm-2\">{{srchObj.DestType}} Name</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"text\" name=\"Destination\" [(ngModel)]=\"model.Destination\" #destination=\"ngModel\" required>\r\n                        <div class='error' *ngIf=\"destination.touched && !destination.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"destination.errors.required\">Customer Name is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"ProvinceID\" class=\"control-label col-md-2 col-sm-2\">Province</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"ProvinceID\" [(ngModel)]=\"model.ProvinceID\" #provinceID=\"ngModel\" required (change)=\"onProvinceChanged($event)\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Province...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of ProvinceList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"provinceID.touched && !provinceID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"provinceID.errors.required\">Province is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"RegionID\" class=\"control-label col-md-2 col-sm-2\">Region</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"RegionID\" [(ngModel)]=\"model.RegionID\" #regionID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Region...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of RegionList\" [ngValue]=\"i.RegionID\">{{i.RegionName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"regionID.touched && !regionID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"regionID.errors.required\">Region Name is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"IMSID\" class=\"control-label col-md-2 col-sm-2\">IMS Region</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"IMSID\" [(ngModel)]=\"model.IMSID\" #imsID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select an IMS...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of allIMSList\" [ngValue]=\"i.IMSID\">{{i.IMS}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"imsID.touched && !imsID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"imsID.errors.required\">IMS Region is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"Address\" class=\"control-label col-md-2 col-sm-2\">Address</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <textarea rows=\"2\" cols=\"10\" class=\"form-control\" name=\"Address\" [(ngModel)]=\"model.Address\" #address=\"ngModel\"></textarea>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"MedSpecID\" class=\"control-label col-md-2 col-sm-2\">Speciality</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"MedSpecID\" [(ngModel)]=\"model.MedSpecID\" #specID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Speciality...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of MedSpecList\" [ngValue]=\"i.SpecID\">{{i.SpecName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"specID.touched && !specID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"specID.errors.required\">Speciality is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"VisitImpID\" class=\"control-label col-md-2 col-sm-2\">Importance</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"VisitImpID\" [(ngModel)]=\"model.VisitImpID\" #impID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select an Importance...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of VisImpList\" [ngValue]=\"i.ImpID\">{{i.ImpName}} - {{i.VisitsNo}} Visits</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"impID.touched && !impID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"impID.errors.required\">Importance is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row form-group\">\r\n                    <h3>the Customer will be visited by:</h3>\r\n                    <div *ngFor=\"let line of lines\">\r\n                        <dest-lineusers [UserList]=\"UserList\" [line]=\"line\" (userSelected)=\"userSelected($event)\"></dest-lineusers>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n                <div class=\"form-group alert alert-danger\" *ngIf=\"errorMessage\">\r\n                    <p>{{errorMessage}}</p>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"card\">\r\n    <h3 class=\"card-title\">\r\n        <a [id]=\"'toggle'+dispUser.userID\" class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+dispUser.userID\" aria-expanded=\"true\"\r\n            [attr.aria-controls]=\"dispUser.userID\" (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{dispUser.UserName}} Schedule\r\n    </h3>\r\n    <!--(dateChanged)=\"newSchedule($event)\"-->\r\n\r\n    <div [id]=\"dispUser.userID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <date-slider (dateChanged)=\"newSchedule($event)\"></date-slider>\r\n            <table class=\"table table-hover table-striped\">\r\n                <colgroup>\r\n                    <col width=\"15%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"15%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"10%\" />\r\n                </colgroup>\r\n                <thead>\r\n                    <tr>\r\n                        <td>Customer</td>\r\n                        <td>Type</td>\r\n                        <td>Class</td>\r\n                        <td>Region</td>\r\n                        <td>Planned Visits</td>\r\n                        <td>Commited Visits</td>\r\n                        <td>Remaining</td>\r\n                        <td>Loss Percentage</td>\r\n                        <td>Dist. Manager Visits</td>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let item of userSched | orderby: '+RegionName; +ProvinceID; +DestType; +Destination'\">\r\n                        <td>{{item.Destination}}</td>\r\n                        <td>{{item.DestType}}</td>\r\n                        <td>{{item.ImpName}}</td>\r\n                        <td>{{item.RegionName}} - {{item.ProvinceID}}</td>\r\n                        <td>{{item.VisitsNo}}</td>\r\n                        <td>{{item.visCount}}</td>\r\n                        <td>{{item.RemVisits}}</td>\r\n                        <td [style.color]=\"item.visLossPercent == 1 ? 'red': item.visLossPercent == 0 ? 'green': '#FFC400'\">\r\n                            {{item.visLossPercent | percent:'3.2-2'}}\r\n                        </td>\r\n                        <td>{{item.DistManVisits}}</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1117:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row row-centered\">\r\n    <div class=\"view col-md-12 col-sm-12 col-xs-12\">\r\n        <button class=\"btn btn-large btn-primary pull-left col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"previousMonth()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-left\"></i>\r\n        </button>\r\n        <div class=\"text-center col-md-8 col-sm-8 col-xs-8 col-centered\">\r\n            <h2 class=\"text-center\">{{MonthName}} - {{Year}}</h2>\r\n        </div>\r\n        <button class=\"btn btn-large btn-primary pull-right col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"nextMonth()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-right\"></i>\r\n        </button>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"card\">\r\n    <h3 class=\"card-title\">\r\n        <a class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+'rate'+dispUser.userID\" aria-expanded=\"true\" [attr.aria-controls]=\"'rate'+dispUser.userID\"\r\n            (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{dispUser.UserName}} Work Rate</h3>\r\n    <div [id]=\"'rate'+dispUser.userID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <date-slider (dateChanged)=\"newSchedule($event)\"></date-slider>\r\n            <!--<nvd3 [options]=\"options\" [data]=\"data\"></nvd3>-->\r\n\r\n            <div style=\"display: block;\">\r\n                <canvas baseChart [datasets]=\"chartData\" [labels]=\"lineChartLabels\" [options]=\"lineChartOptions\"\r\n                    [colors]=\"lineChartColors\" [legend]=\"lineChartLegend\" [chartType]=\"lineChartType\"></canvas>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1118:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row row-centered\">\r\n    <div class=\"view col-md-12 col-sm-12 col-xs-12\">\r\n        <button [disabled]=\"selectedPlan == 0\" class=\"btn btn-large btn-primary pull-left col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"previousPlan()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-left\"></i>\r\n        </button>\r\n        <div class=\"text-center col-md-8 col-sm-8 col-xs-8 col-centered\">\r\n            <h2 class=\"text-center\">{{FromDate}} - {{ToDate}}</h2>\r\n        </div>\r\n        <button [disabled]=\"selectedPlan == userPlan.length-1\" class=\"btn btn-large btn-primary pull-right col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"nextPlan()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-right\"></i>\r\n        </button>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <h3> {{srchObj.DestType}} </h3>\r\n        <button *ngIf=\"!Formstate && currentUser.jobClass < 1 \" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <!--<br><br>&& (curMonth==6 || curMonth==12)-->\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n        <ul class=\"nav nav-tabs nav-justified\">\r\n            <!--<li id=\"tab1\" role=\"presentation\" class=\"tabs active\"><a data-toggle=\"tab\" href=\"javascript:void(0)\" (click)=\"TabClicked('Hospital')\">Hospital</a></li> -->\r\n            <li id=\"tab2\" role=\"presentation\" class=\"tabs active\"><a data-toggle=\"tab\" href=\"javascript:void(0)\" (click)=\"TabClicked('Clinic (Doctor)')\">Clinic (Doctor)</a></li>\r\n            <li id=\"tab3\" role=\"presentation\" class=\"tabs\"><a data-toggle=\"tab\" href=\"javascript:void(0)\" (click)=\"TabClicked('Pharmacy')\">Pharmacy</a></li>\r\n        </ul>\r\n        <div class=\"form-group row alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\">\r\n            <label for=\"IMSID\" class=\"control-label col-md-2 col-sm-2 text-right\">IMS Region</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"IMSID\" [(ngModel)]=\"selIMS\" (change)=\"IMSSelected()\" required>\r\n                    <option value=\"\">Select an IMS...</option>\r\n                    <option *ngFor=\"let i of IMSList\" [ngValue]=\"i.IMSID\">{{i.IMS}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n        <table id=\"tblCustomers\" class=\"table table-hover table-striped\">\r\n            <colgroup>\r\n                <col width=\"15%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col *ngIf=\"currentUser.jobClass < 1\" width=\"10%\" />\r\n                <col *ngIf=\"currentUser.jobClass > 1\" width=\"20%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col width=\"10%\" />\r\n                <col *ngIf=\"currentUser.jobClass < 1\" width=\"10%\" />\r\n                <col width=\"15%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> {{srchObj.DestType}} Name <i (click)=\"SortTable('Destination')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> IMS <i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Region - Province <i (click)=\"SortTable('RegionProvince')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Address <i (click)=\"SortTable('Address')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Med. Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Importance <i (click)=\"SortTable('ImpName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Visits # <i (click)=\"SortTable('VisitsNo')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitsNo') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th>\r\n                        <select [(ngModel)]=\"ClassColumn\">\r\n                            <option value=\"Approved\">Approved</option>\r\n                            <option value=\"Assigned\">Assigned</option>\r\n                            <option value=\"PlanExist\">In Plan</option>\r\n                        </select>\r\n                        <i (click)=\"SortTable('ClassColumn')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf(ClassColumn) == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchDestination\" name=\"Destination\" [(ngModel)]=\"srchObj.Destination\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchIMS\" name=\"IMS\" [(ngModel)]=\"srchObj.IMS\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchRegionProvince\" name=\"RegionProvince\" [(ngModel)]=\"srchObj.RegionProvince\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchAddress\" name=\"Address\" [(ngModel)]=\"srchObj.Address\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchSpecName\" name=\"SpecName\" [(ngModel)]=\"srchObj.SpecName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchImpName\" name=\"ImpName\" [(ngModel)]=\"srchObj.ImpName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchVisitsNo\" name=\"VisitsNo\" [(ngModel)]=\"srchObj.VisitsNo\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\"\r\n                    [ngStyle]=\"{'background-color': !item.Approved? '#ffff80': !item.Assigned? '#66ffc2' : !item.PlanExist? '#ff9999' : '#fff'}\">\r\n                    <td class=\"text-bold\">{{item.Destination}}</td>\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.RegionProvince}}</td>\r\n                    <td>{{item.Address}}</td>\r\n                    <td>{{item.SpecName}}</td>\r\n                    <td>{{item.ImpName}}</td>\r\n                    <td>{{item.VisitsNo}}</td>\r\n                    <td *ngIf=\"ClassColumn == 'Approved'\">{{item.Approved}}</td>\r\n                    <td *ngIf=\"ClassColumn == 'Assigned'\">{{item.Assigned}}</td>\r\n                    <td *ngIf=\"ClassColumn == 'PlanExist'\">{{item.PlanExist}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" [disabled]=\"item.Approved\" (click)='ApproveDestination(item.DestID)' class=\"btn btn-success\"\r\n                            title=\"Approve Customer\"><i class=\"glyphicon glyphicon-ok\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.DestID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.DestID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.DestID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n            <tfoot>\r\n                <tr>\r\n                    <td colspan=\"3\">\r\n                        <div style=\"display:inline-block; width:40px; height:20px; background-color: #ff9999; border: 2px; border-color: black\">\r\n                        </div>\r\n                        <label>Customers not in Current Month Plan</label>\r\n                    </td>\r\n                    <td colspan=\"2\">\r\n                        <div style=\"display:inline-block; width:40px; height:20px; background-color: #ffff80; border: 2px; border-color: black\">\r\n                        </div>\r\n                        <label>Customers not Approved</label>\r\n                    </td>\r\n                    <td colspan=\"3\">\r\n                        <div style=\"display:inline-block; width:40px; height:20px; background-color: #66ffc2; border: 2px; border-color: black\">\r\n                        </div>\r\n                        <label>Customers not Assigned to Sales Lines</label>\r\n                    </td>\r\n                </tr>\r\n            </tfoot>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form #f=\"ngForm\" (submit)=\"HandleForm($event)\">\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this customer ?</h2>\r\n                <br>\r\n\r\n                <div class=\"form-group\">\r\n                    <label for=\"Destination\" class=\"control-label col-md-2 col-sm-2\">{{srchObj.DestType}} Name</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input class=\"form-control\" type=\"text\" name=\"Destination\" [(ngModel)]=\"model.Destination\" #destination=\"ngModel\" required>\r\n                        <div class='error' *ngIf=\"destination.touched && !destination.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"destination.errors.required\">Customer Name is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"ProvinceID\" class=\"control-label col-md-2 col-sm-2\">Province</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"ProvinceID\" [(ngModel)]=\"model.ProvinceID\" #provinceID=\"ngModel\" required (change)=\"onProvinceChanged($event)\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Province...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of ProvinceList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"provinceID.touched && !provinceID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"provinceID.errors.required\">Province is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"RegionID\" class=\"control-label col-md-2 col-sm-2\">Region</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"RegionID\" [(ngModel)]=\"model.RegionID\" #regionID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Region...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of RegionList\" [ngValue]=\"i.RegionID\">{{i.RegionName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"regionID.touched && !regionID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"regionID.errors.required\">Region Name is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"IMSID\" class=\"control-label col-md-2 col-sm-2\">IMS Region</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"IMSID\" [(ngModel)]=\"model.IMSID\" #imsID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select an IMS...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of allIMSList\" [ngValue]=\"i.IMSID\">{{i.IMS}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"imsID.touched && !imsID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"imsID.errors.required\">IMS Region is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"Address\" class=\"control-label col-md-2 col-sm-2\">Address</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <textarea rows=\"2\" cols=\"10\" class=\"form-control\" name=\"Address\" [(ngModel)]=\"model.Address\" #address=\"ngModel\"></textarea>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"MedSpecID\" class=\"control-label col-md-2 col-sm-2\">Speciality</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"MedSpecID\" [(ngModel)]=\"model.MedSpecID\" #specID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Speciality...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of MedSpecList\" [ngValue]=\"i.SpecID\">{{i.SpecName}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"specID.touched && !specID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"specID.errors.required\">Speciality is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"VisitImpID\" class=\"control-label col-md-2 col-sm-2\">Importance</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"VisitImpID\" [(ngModel)]=\"model.VisitImpID\" #impID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select an Importance...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of VisImpList\" [ngValue]=\"i.ImpID\">{{i.ImpName}} - {{i.VisitsNo}} Visits</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"impID.touched && !impID.valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"impID.errors.required\">Importance is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row form-group\">\r\n                    <h3>the Customer will be visited by:</h3>\r\n                    <div *ngFor=\"let line of lines\">\r\n                        <dest-lineusers [UserList]=\"UserList\" [line]=\"line\" (userSelected)=\"userSelected($event)\"></dest-lineusers>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n                <div class=\"form-group alert alert-danger\" *ngIf=\"errorMessage\">\r\n                    <p>{{errorMessage}}</p>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1119:
 /***/ (function(module, exports) {
 
-module.exports = "<!--<div>\r\n    <ng-sidebar-container>\r\n\r\n        <ng-sidebar [sidebarClass]=\"'demo-sidebar'\" [(opened)]=\"_opened\" [animate]=\"_animate\" [mode]=\"_MODES[1]\" [closeOnClickOutside]=\"_closeOnClick\"\r\n            [position]=\"_POSITIONS[0]\">\r\n            <sidebar></sidebar>\r\n        </ng-sidebar>\r\n\r\n        <header class=\"navbar demo-header\">\r\n            <div class=\"topnav\">\r\n                <div class=\"navbar-brand\">\r\n                    <button (click)=\"_toggleSidebar()\" class=\"demo-header__toggle\">Toggle sidebar</button>\r\n                    <a [routerLink]=\"['dashboard']\" class=\"\">IDI Sales & Marketing</a>\r\n                </div>\r\n                <ul class=\"nav navbar-nav top-nav navbar-right pull-right top-right-nav\">\r\n                    <li><a href=\"javascript:void(0)\">{{currentUser.UserName}}</a></li>\r\n                    <li><a [routerLink]=\"['/logout']\">Logout</a></li>\r\n                </ul>\r\n            </div>\r\n        </header>\r\n        <section class=\"main-container shuffle-animation demo-contents\">\r\n            <router-outlet></router-outlet>\r\n        </section>\r\n\r\n    </ng-sidebar-container>\r\n\r\n</div>-->\r\n\r\n<app-header>{{'LOADING'}} header...</app-header>\r\n\r\n<app-menu-aside>{{'LOADING'}} menu...</app-menu-aside>\r\n\r\n<!-- Content Wrapper. Contains page content -->\r\n<div class=\"content-wrapper\">\r\n\t<!-- Content Header (Page header) -->\r\n\t<toaster-container [toasterconfig]=\"toastrConfig\"></toaster-container>\r\n\t<app-breadcrumb></app-breadcrumb>\r\n\r\n\t<!-- Main content -->\r\n\t<section class=\"content\">\r\n\t\t<div class=\"box box-default\">\r\n\t\t\t<div class=\"box-body\">\r\n\t\t\t\t<router-outlet></router-outlet>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</section>\r\n\t<!-- /.content -->\r\n</div>\r\n<!-- /.content-wrapper -->\r\n<app-footer>{{'LOADING'}} footer...</app-footer>\r\n<!--<app-aside>{{'LOADING'}} control sidebar...</app-aside>-->"
+module.exports = "<div class=\"row row-centered\">\r\n    <div class=\"view col-md-12 col-sm-12 col-xs-12\">\r\n        <button class=\"btn btn-large btn-primary pull-left col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"previousMonth()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-left\"></i>\r\n        </button>\r\n        <div class=\"text-center col-md-8 col-sm-8 col-xs-8 col-centered\">\r\n            <h2 class=\"text-center\">{{MonthName}} - {{Year}}</h2>\r\n        </div>\r\n        <button class=\"btn btn-large btn-primary pull-right col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"nextMonth()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-right\"></i>\r\n        </button>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1120:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"demo-sidebar\">\r\n    <ul class=\"nav-list list-group\" id=\"accordion\">\r\n        <li *ngIf=\"currentUser.jobClass <= 1\">\r\n            <a class=\"list-group-item\" data-toggle=\"collapse\" href=\"#basicMenu\" aria-expanded=\"false\" aria-controls=\"basicMenu\">\r\n                Startup Data\r\n            </a>\r\n        </li>\r\n        <div id=\"basicMenu\" class=\"panel-collapse collapse\">\r\n            <ul class=\"list-group\">\r\n                <li><a [routerLink]=\"['/home/basic/lines']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Sales Lines</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/drugs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Products</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/specs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Accounts</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/vimp']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visit Cycles</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/gifts']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools Types</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/promo']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools</a></li>\r\n            </ul>\r\n        </div>\r\n        <li *ngIf=\"currentUser.jobClass <= 1\"><a data-parent=\"#accordion\" [routerLink]=\"['/home/user']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Users</a>            </li>\r\n\r\n        <li><a data-parent=\"#accordion\" [routerLink]=\"['/home/regions']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Provinces</a></li>\r\n\r\n        <li><a data-parent=\"#accordion\" [routerLink]=\"['/home/dest']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Customers</a></li>\r\n\r\n        <li><a data-parent=\"#accordion\" [routerLink]=\"['/home/visit']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visits</a></li>\r\n\r\n        <li *ngIf=\"currentUser.jobClass <= 1\"><a data-parent=\"#accordion\" [routerLink]=\"['/home/plan']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Plans</a></li>\r\n\r\n        <li *ngIf=\"currentUser.jobClass <= 4\">\r\n            <a class=\"list-group-item\" data-toggle=\"collapse\" href=\"#reportsMenu\" aria-expanded=\"false\" aria-controls=\"reportsMenu\">\r\n                Reports\r\n            </a>\r\n        </li>\r\n        <div id=\"reportsMenu\" class=\"panel-collapse collapse\">\r\n            <ul class=\"list-group\">\r\n                <li><a [routerLink]=\"['/home/reports/visCount']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visit Counts Comparison</a></li>\r\n                <!--<li><a [routerLink]=\"['/home/basic/drugs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Products</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/specs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Accounts</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/vimp']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visit Cycles</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/gifts']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools Types</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/promo']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools</a></li>-->\r\n            </ul>\r\n        </div>\r\n    </ul>\r\n</nav>"
+module.exports = "<div class=\"row row-centered\">\r\n    <div class=\"view col-md-12 col-sm-12 col-xs-12\">\r\n        <button [disabled]=\"selectedPlan == 0\" class=\"btn btn-large btn-primary pull-left col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"previousPlan()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-left\"></i>\r\n        </button>\r\n        <div class=\"text-center col-md-8 col-sm-8 col-xs-8 col-centered\">\r\n            <h2 class=\"text-center\">{{FromDate}} - {{ToDate}}</h2>\r\n        </div>\r\n        <button [disabled]=\"selectedPlan == userPlan.length-1\" class=\"btn btn-large btn-primary pull-right col-md-2 col-sm-2 col-xs-2 col-centered\" type=\"button\" (click)=\"nextPlan()\">\r\n            <i class=\"glyphicon glyphicon-circle-arrow-right\"></i>\r\n        </button>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1121:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-dark bg-inverse navbar-fixed-top topnav\">\r\n    <div class=\"navbar-toggleable-xs clearfix text-center\">\r\n        <button (click)=\"closesidebar()\" class=\"navbar-brand demo-header__toggle\">Toggle sidebar</button>\r\n        <a [routerLink]=\"['dashboard']\" class=\"navbar-brand\">IDI Sales & Marketing</a>\r\n        <ul class=\"nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav\">\r\n            <li><a href=\"javascript:void(0)\">{{currentUser.UserName}}</a></li>\r\n            <li><a [routerLink]=\"['/logout']\">Logout</a></li>\r\n        </ul>\r\n    </div>\r\n</nav>"
+module.exports = "<!--<div>\r\n    <ng-sidebar-container>\r\n\r\n        <ng-sidebar [sidebarClass]=\"'demo-sidebar'\" [(opened)]=\"_opened\" [animate]=\"_animate\" [mode]=\"_MODES[1]\" [closeOnClickOutside]=\"_closeOnClick\"\r\n            [position]=\"_POSITIONS[0]\">\r\n            <sidebar></sidebar>\r\n        </ng-sidebar>\r\n\r\n        <header class=\"navbar demo-header\">\r\n            <div class=\"topnav\">\r\n                <div class=\"navbar-brand\">\r\n                    <button (click)=\"_toggleSidebar()\" class=\"demo-header__toggle\">Toggle sidebar</button>\r\n                    <a [routerLink]=\"['dashboard']\" class=\"\">IDI Sales & Marketing</a>\r\n                </div>\r\n                <ul class=\"nav navbar-nav top-nav navbar-right pull-right top-right-nav\">\r\n                    <li><a href=\"javascript:void(0)\">{{currentUser.UserName}}</a></li>\r\n                    <li><a [routerLink]=\"['/logout']\">Logout</a></li>\r\n                </ul>\r\n            </div>\r\n        </header>\r\n        <section class=\"main-container shuffle-animation demo-contents\">\r\n            <router-outlet></router-outlet>\r\n        </section>\r\n\r\n    </ng-sidebar-container>\r\n\r\n</div>-->\r\n\r\n<app-header>{{'LOADING'}} header...</app-header>\r\n\r\n<app-menu-aside>{{'LOADING'}} menu...</app-menu-aside>\r\n\r\n<!-- Content Wrapper. Contains page content -->\r\n<div class=\"content-wrapper\">\r\n\t<!-- Content Header (Page header) -->\r\n\t<toaster-container [toasterconfig]=\"toastrConfig\"></toaster-container>\r\n\t<app-breadcrumb></app-breadcrumb>\r\n\r\n\t<!-- Main content -->\r\n\t<section class=\"content\">\r\n\t\t<div class=\"box box-default\">\r\n\t\t\t<div class=\"box-body\">\r\n\t\t\t\t<router-outlet></router-outlet>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</section>\r\n\t<!-- /.content -->\r\n</div>\r\n<!-- /.content-wrapper -->\r\n<app-footer>{{'LOADING'}} footer...</app-footer>\r\n<!--<app-aside>{{'LOADING'}} control sidebar...</app-aside>-->"
 
 /***/ }),
 
 /***/ 1122:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login-page\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2\">\r\n            <h1 class=\"text-center\">IDI Sales System</h1>\r\n            <img src=\"./assets/img/SB-admin.png\" width=\"150px\" class=\"user-avatar img-responsive center-block\" />\r\n            <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\r\n                    <label for=\"username\">User Name</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"model.username\" #username=\"ngModel\" required />\r\n                    <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username is required</div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\r\n                    <label for=\"password\">Password</label>\r\n                    <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"model.password\" #password=\"ngModel\" required />\r\n                    <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password is required</div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <button [disabled]=\"loading\" class=\"btn btn-primary\">Login</button>\r\n                    <img *ngIf=\"loading\" alt=\"Image\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\r\n                    />\r\n                </div>\r\n                <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\r\n                <a href=\"javascript:void\">forget Password</a>\r\n            </form>\r\n            <div class=\"alert-warning text-center\">\r\n                copy-rights reserved IDI Pharmaceutical 2016\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<nav class=\"demo-sidebar\">\r\n    <ul class=\"nav-list list-group\" id=\"accordion\">\r\n        <li *ngIf=\"currentUser.jobClass <= 1\">\r\n            <a class=\"list-group-item\" data-toggle=\"collapse\" href=\"#basicMenu\" aria-expanded=\"false\" aria-controls=\"basicMenu\">\r\n                Startup Data\r\n            </a>\r\n        </li>\r\n        <div id=\"basicMenu\" class=\"panel-collapse collapse\">\r\n            <ul class=\"list-group\">\r\n                <li><a [routerLink]=\"['/home/basic/lines']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Sales Lines</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/drugs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Products</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/specs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Accounts</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/vimp']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visit Cycles</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/gifts']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools Types</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/promo']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools</a></li>\r\n            </ul>\r\n        </div>\r\n        <li *ngIf=\"currentUser.jobClass <= 1\"><a data-parent=\"#accordion\" [routerLink]=\"['/home/user']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Users</a>            </li>\r\n\r\n        <li><a data-parent=\"#accordion\" [routerLink]=\"['/home/regions']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Provinces</a></li>\r\n\r\n        <li><a data-parent=\"#accordion\" [routerLink]=\"['/home/dest']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Customers</a></li>\r\n\r\n        <li><a data-parent=\"#accordion\" [routerLink]=\"['/home/visit']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visits</a></li>\r\n\r\n        <li *ngIf=\"currentUser.jobClass <= 1\"><a data-parent=\"#accordion\" [routerLink]=\"['/home/plan']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Plans</a></li>\r\n\r\n        <li *ngIf=\"currentUser.jobClass <= 4\">\r\n            <a class=\"list-group-item\" data-toggle=\"collapse\" href=\"#reportsMenu\" aria-expanded=\"false\" aria-controls=\"reportsMenu\">\r\n                Reports\r\n            </a>\r\n        </li>\r\n        <div id=\"reportsMenu\" class=\"panel-collapse collapse\">\r\n            <ul class=\"list-group\">\r\n                <li><a [routerLink]=\"['/home/reports/visCount']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visit Counts Comparison</a></li>\r\n                <!--<li><a [routerLink]=\"['/home/basic/drugs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Products</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/specs']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Accounts</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/vimp']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Visit Cycles</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/gifts']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools Types</a></li>\r\n                <li><a [routerLink]=\"['/home/basic/promo']\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">Promotional Tools</a></li>-->\r\n            </ul>\r\n        </div>\r\n    </ul>\r\n</nav>"
 
 /***/ }),
 
 /***/ 1123:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\" *ngIf=\"showTable\">\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive\">\r\n            <colgroup>\r\n                <col width=\"25%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> Plan Name <i (click)=\"SortTable('PlanName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('PlanName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Sales Line <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> From Date <i (click)=\"SortTable('FromDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('FromDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> To Date <i (click)=\"SortTable('ToDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ToDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"PlanName\" [(ngModel)]=\"srchObj.PlanName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"LineName\" [(ngModel)]=\"srchObj.LineName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchFromDate\" name=\"FromDate\" [(ngModel)]=\"srchObj.FromDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchToDate\" name=\"ToDate\" [(ngModel)]=\"srchObj.ToDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                    <td>{{item.PlanName}}</td>\r\n                    <td>{{item.LineName}}</td>\r\n                    <td>{{item.FromDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.ToDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.PlanID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.PlanID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.PlanID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this plan ?</h2>\r\n                <br>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header\">Basic Data</h3>\r\n                    <div class=\"card-block\">\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['line'].valid }\">\r\n                            <label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\" [formControl]=\"inFrm.controls['line']\">\r\n                                    <option value=\"\">Select a Sales Line...</option>\r\n                                    <option *ngFor=\"let i of lines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['line'].touched && !inFrm.controls['line'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['line'].hasError('required')\">Sales Line is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['fromDate'].valid }\">\r\n                            <label for=\"FromDate\" class=\"control-label col-md-2 col-sm-2\">From Date</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"FromDate\" class=\"form-control\" type=\"date\" name=\"FromDate\" [(ngModel)]=\"cnvFromDate\" [formControl]=\"inFrm.controls['fromDate']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['fromDate'].touched && !inFrm.controls['fromDate'].valid) || (inFrm.submitted && !inFrm.controls['fromDate'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('required')\">From Date is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('inRange')\">this Date falls within a previously recorded plan </div>\r\n                                    <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('maxDate')\">From Date must be within two days old.</div>-->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['toDate'].valid }\">\r\n                            <label for=\"ToDate\" class=\"control-label col-md-2 col-sm-2\">To Date</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"ToDate\" class=\"form-control\" type=\"date\" name=\"ToDate\" [(ngModel)]=\"cnvToDate\" [formControl]=\"inFrm.controls['toDate']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['toDate'].touched && !inFrm.controls['toDate'].valid) || (inFrm.submitted && !inFrm.controls['toDate'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('required')\">To Date is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('minDate')\">To Date must be Greater Than From Date.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('inRange')\">this Date falls within a previously recorded plan </div>\r\n                                    <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('maxDate')\">To Date must be within two days old.</div>-->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['plnName'].valid }\">\r\n                            <label for=\"PlanName\" class=\"control-label col-md-2 col-sm-2\">Plan Name</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"PlanName\" class=\"form-control\" type=\"text\" name=\"PlanName\" [(ngModel)]=\"model.PlanName\" [formControl]=\"inFrm.controls['plnName']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['plnName'].touched && !inFrm.controls['plnName'].valid) || (inFrm.submitted && !inFrm.controls['plnName'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['plnName'].hasError('required')\">Plan Name is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card\">\r\n                    <div class=\"card-header\">\r\n                        <h3>Products</h3>\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ToggleAllDrugs(true)\">Select All</button>\r\n                        <button type=\"button\" class=\"btn btn-warning\" (click)=\"ToggleAllDrugs(false)\">Unselect All</button>\r\n                    </div>\r\n                    <div class=\"card-block\">\r\n                        <ul>\r\n                            <li *ngFor=\"let item of plnDrugs | orderby:'+DrugName'\">\r\n                                <input type=\"checkbox\" [name]=\"item.DrugID\" [checked]=\"item.Checked\" (change)=\"item.Checked = $event.target.checked\">                                {{item.DrugName}}\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"card\">\r\n                    <div class=\"card-header\">\r\n                        <h3>Accounts</h3>\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ToggleAllSpecs(true)\">Select All</button>\r\n                        <button type=\"button\" class=\"btn btn-warning\" (click)=\"ToggleAllSpecs(false)\">Unselect All</button>\r\n                    </div>\r\n                    <div class=\"card-block\">\r\n                        <ul>\r\n                            <li *ngFor=\"let item of plnSpecs | orderby:'+SpecName'\">\r\n                                <input type=\"checkbox\" [name]=\"item.SpecID\" [checked]=\"item.Checked\" (change)=\"item.Checked = $event.target.checked\">                                {{item.SpecName}}\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"card\">\r\n                    <div class=\"card-header\">\r\n                        <h3>Cycles</h3>\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ToggleAllImps(true)\">Select All</button>\r\n                        <button type=\"button\" class=\"btn btn-warning\" (click)=\"ToggleAllImps(false)\">Unselect All</button>\r\n                    </div>\r\n                    <div class=\"card-block\">\r\n                        <ul class=\"list-group\">\r\n                            <li class=\"list-group-item\" *ngFor=\"let item of plnImps | orderby:'+ImpName'\">\r\n                                <input type=\"checkbox\" [name]=\"item.ImpID\" [checked]=\"item.Checked\" (change)=\"item.Checked = $event.target.checked\">                                {{item.ImpName}}\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-1 col-sm-offset-1 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<nav class=\"navbar navbar-dark bg-inverse navbar-fixed-top topnav\">\r\n    <div class=\"navbar-toggleable-xs clearfix text-center\">\r\n        <button (click)=\"closesidebar()\" class=\"navbar-brand demo-header__toggle\">Toggle sidebar</button>\r\n        <a [routerLink]=\"['dashboard']\" class=\"navbar-brand\">IDI Sales & Marketing</a>\r\n        <ul class=\"nav navbar-nav top-nav navbar-right pull-xs-right top-right-nav\">\r\n            <li><a href=\"javascript:void(0)\">{{currentUser.UserName}}</a></li>\r\n            <li><a [routerLink]=\"['/logout']\">Logout</a></li>\r\n        </ul>\r\n    </div>\r\n</nav>"
 
 /***/ }),
 
 /***/ 1124:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t\t<col width=\"25%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Province Name <i (click)=\"SortTable('RegionName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('RegionName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Governerate <i (click)=\"SortTable('ProvinceID')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ProvinceID') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchRegionName\" name=\"RegionName\" [(ngModel)]=\"srchObj.RegionName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchProvinceID\" name=\"ProvinceID\" [(ngModel)]=\"srchObj.ProvinceID\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.RegionName}}</td>\r\n\t\t\t\t\t<td>{{item.ProvinceID}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" [disabled]=\"item.Approved\" (click)='ApproveRegion(item.RegionID)' class=\"btn btn-success\" title=\"Approve\"><i class=\"glyphicon glyphicon-ok\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.RegionID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.RegionID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.RegionID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form #f=\"ngForm\" (submit)=\"HandleForm($event)\">\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this province ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"RegionID\" [(ngModel)]=\"model.RegionID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"RegionName\" class=\"control-label col-md-2 col-sm-2\">Province Name</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"RegionName\" [(ngModel)]=\"model.RegionName\" #RegionName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"RegionName.touched && !RegionName.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"RegionName.errors.required\">Province Name is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"ProvinceID\" class=\"control-label col-md-2 col-sm-2\">Governerate</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"ProvinceID\" [(ngModel)]=\"model.ProvinceID\" #ProvinceID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Governerate...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of ProvinceList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"ProvinceID.touched && !ProvinceID.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"ProvinceID.errors.required\">Governerate is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"login-page\">\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2\">\r\n            <h1 class=\"text-center\">IDI Sales System</h1>\r\n            <img src=\"./assets/img/SB-admin.png\" width=\"150px\" class=\"user-avatar img-responsive center-block\" />\r\n            <form name=\"form\" (ngSubmit)=\"f.form.valid && login()\" #f=\"ngForm\" novalidate>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !username.valid }\">\r\n                    <label for=\"username\">User Name</label>\r\n                    <input type=\"text\" class=\"form-control\" name=\"username\" [(ngModel)]=\"model.username\" #username=\"ngModel\" required />\r\n                    <div *ngIf=\"f.submitted && !username.valid\" class=\"help-block\">Username is required</div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': f.submitted && !password.valid }\">\r\n                    <label for=\"password\">Password</label>\r\n                    <input type=\"password\" class=\"form-control\" name=\"password\" [(ngModel)]=\"model.password\" #password=\"ngModel\" required />\r\n                    <div *ngIf=\"f.submitted && !password.valid\" class=\"help-block\">Password is required</div>\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <button [disabled]=\"loading\" class=\"btn btn-primary\">Login</button>\r\n                    <img *ngIf=\"loading\" alt=\"Image\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\"\r\n                    />\r\n                </div>\r\n                <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\r\n                <a href=\"javascript:void\">forget Password</a>\r\n            </form>\r\n            <div class=\"alert-warning text-center\">\r\n                copy-rights reserved IDI Pharmaceutical 2016\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1125:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblUsers\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"25%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t\t<col width=\"10%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> User Name <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Direct Manager <i (click)=\"SortTable('DirectManagerName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('DirectManagerName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Title <i (click)=\"SortTable('JobClass')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('JobClass') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Sales Line <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> IMS <i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchUserName\" name=\"UserName\" [(ngModel)]=\"searchUser.UserName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchDirectManagerName\" name=\"DirectManagerName\" [(ngModel)]=\"searchUser.DirectManagerName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchJobClass\" name=\"JobClass\" [(ngModel)]=\"searchUser.JobClass\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchLineName\" name=\"LineName\" [(ngModel)]=\"searchUser.LineName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchIMS\" name=\"IMS\" [(ngModel)]=\"searchUser.IMS\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchUser | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.UserName}}</td>\r\n\t\t\t\t\t<td>{{item.DirectManagerName}}</td>\r\n\t\t\t\t\t<td>{{item.JobClass}}</td>\r\n\t\t\t\t\t<td>{{item.LineName}}</td>\r\n\t\t\t\t\t<td>{{item.IMS}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" [disabled]=\"item.Approved\" (click)='ApproveUser(item.UserID)' class=\"btn btn-success\"\r\n\t\t\t\t\t\t title=\"Approve User\"><i class=\"glyphicon glyphicon-ok\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.UserID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.UserID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<div class=\"btn-group\">\r\n\t\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" type=\"button\" class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\r\n\t\t\t\t\t\t\t aria-expanded=\"false\">\r\n\t\t\t\t\t\t\t\tMore Actions <span class=\"caret\"></span>\r\n\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t<ul class=\"dropdown-menu\">\r\n\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t<div><button class=\"btn btn-danger\" (click)=\"Delete(item.UserID)\"><i class=\"glyphicon glyphicon-trash\"></i> Delete</button></div>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t<div><button class=\"btn btn-warning\" (click)=\"Disable(item.UserID)\"><i class=\"glyphicon glyphicon-ban-circle\"></i> Disable</button></div>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t<li *ngIf=\"item.JobClass=='Medical Rep.'\">\r\n\t\t\t\t\t\t\t\t\t<div><button class=\"btn btn-default\" (click)=\"Replace(item.UserID)\"><i class=\"glyphicon glyphicon-refresh\"></i> Reallocate</button></div>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<!--<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.UserID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>-->\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t\t<pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\r\n\t\t<div *ngIf=\"Formstate != 'Replace'\">\r\n\t\t\t<form [formGroup]=\"inputForm\" (submit)=\"(inputForm.valid || Formstate == 'Delete'|| Formstate == 'Disable') && HandleForm($event)\"\r\n\t\t\t novalidate>\r\n\t\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this user ?</h2>\r\n\t\t\t\t\t<h2 *ngIf=\"Formstate == 'Disable'\">Are you sure you want to disable this user ?</h2>\r\n\t\t\t\t\t<br>\r\n\r\n\t\t\t\t\t<!--<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"UserID\" [(ngModel)]=\"model.UserID\" [formControl]=\"inputForm.controls['UserID']\">\r\n\t\t\t\t</div>-->\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\" [formControl]=\"inputForm.controls['lineID']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Sales Line...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of salesLines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['lineID'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['lineID'].hasError('required')\">Sales Line is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"UserName\" class=\"control-label col-md-2 col-sm-2\">User Name</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"UserName\" (focusout)=\"CompleteLogin()\" [(ngModel)]=\"model.UserName\" [formControl]=\"inputForm.controls['UserName']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['UserName'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserName'].hasError('required')\">User name is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"LoginName\" class=\"control-label col-md-2 col-sm-2\">Login Name</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"LoginName\" [(ngModel)]=\"model.LoginName\" [formControl]=\"inputForm.controls['LoginName']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['LoginName'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('required')\">Login Name is required.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('minlength')\">Login Name must be minimum 5 characters.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('maxlength')\">Login Name must be maximum 200 characters.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('alreadyexist')\">Login Name already exist.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">\r\n\t\t\t\t\t\t<label for=\"UserPass\" class=\"control-label col-md-2 col-sm-2\">User Password</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"password\" name=\"UserPass\" [(ngModel)]=\"model.UserPass\" [formControl]=\"inputForm.controls['UserPass']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['UserPass'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('required')\">User Password is required.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('minlength')\">User Password must be minimum 5 characters.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('maxlength')\">User Password must be maximum 200 characters.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\" *ngIf=\"Formstate == 'Create'\">\r\n\t\t\t\t\t\t<label for=\"ConfPass\" class=\"control-label col-md-2 col-sm-2\">Confirm Password</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"password\" name=\"ConfPass\" [formControl]=\"inputForm.controls['ConfPass']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['ConfPass'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.hasError('mismatchedPasswords')\">Passwords do not match.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"JobClass\" class=\"control-label col-md-2 col-sm-2\">Title</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"JobClass\" [(ngModel)]=\"model.JobClass\" [formControl]=\"inputForm.controls['JobClass']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Title...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of classList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['JobClass'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['JobClass'].hasError('required')\">Title is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"DirectManager\" class=\"control-label col-md-2 col-sm-2\">Direct Manager</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"DirectManager\" [(ngModel)]=\"model.DirectManager\" [formControl]=\"inputForm.controls['manager']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Manager...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of managerList\" [ngValue]=\"i.UserID\">{{i.UserName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['manager'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['manager'].hasError('required')\">Direct Manager is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"Email\" class=\"control-label col-md-2 col-sm-2\">Email</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"Email\" [(ngModel)]=\"model.Email\" [formControl]=\"inputForm.controls['Email']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['Email'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['Email'].hasError('required')\">Email is required.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['Email'].hasError('invalidEmail')\">Email is invalid; must be lowercase e.g.: john@doe.com</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"Phone\" class=\"control-label col-md-2 col-sm-2\">Phone</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"Phone\" [(ngModel)]=\"model.Phone\" [formControl]=\"inputForm.controls['Phone']\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<!--<div class=\"form-group\">\r\n\t\t\t\t\t<h3>Regions of Operation</h3>\r\n\t\t\t\t\t<label for=\"Region\" class=\"control-label col-md-2 col-sm-2\">Add Region</label>\r\n\t\t\t\t\t<div class=\"col-md-6\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"selectedRegion\" [(ngModel)]=\"selectedRegion\" [ngModelOptions]=\"{standalone: true}\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a region</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let item of regions\" [ngValue]=\"item.RegionID\">{{item.RegionName}} - {{item.ProvinceID}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\" col-md-2 col-sm-2\">\r\n\t\t\t\t\t\t<button class=\"form-control btn btn-success\" type=\"button\" (click)=\"addRegion()\">Add</button>\r\n\t\t\t\t\t</div>\t\t\t\t\t\r\n\t\t\t\t\t<ul class=\"list-group col-md-8 col-md-offset-2\">\r\n\t\t\t\t\t\t<li class=\"list-group-item\" *ngFor=\"let item of userRegions; let i = index\">\r\n\t\t\t\t\t\t\t<span class=\"btn btn-xs btn-danger pull-right\" (click)=\"removeRegion(i)\"><i class=\"glyphicon glyphicon-remove\"></i></span>\r\n\t\t\t\t\t\t\t<span hidden>{{item.RegionID}}</span>\r\n\t\t\t\t\t\t\t<span>{{item.RegionName}} - {{item.ProvinceID}}</span> \r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t</ul>\r\n\t\t\t\t</div>-->\r\n\t\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-primary\" *ngIf=\"Formstate!='Details' && Formstate!='Delete' && Formstate!='Disable'\"\r\n\t\t\t\t\t\t [disabled]='!inputForm.valid'>Save</button> |\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Disable\" class=\"btn btn-warning\" *ngIf=\"Formstate == 'Disable'\">Disable</button> |\r\n\t\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t</div>\r\n\t\t<div *ngIf=\"Formstate == 'Replace'\">\r\n\t\t\t<form [formGroup]=\"replcForm\" (submit)=\"(replcForm.valid || Formstate == 'Replace') && HandleForm($event)\" novalidate>\r\n\t\t\t\t<div class=\"form-horizontal\">\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"UserName\" class=\"control-label col-md-4 col-sm-4\">User Name</label>\r\n\t\t\t\t\t\t<div class=\"col-md-8 col-sm-8\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"UserName\" (focusout)=\"CompleteLogin()\" [(ngModel)]=\"rplcModel.User1Name\" [formControl]=\"replcForm.controls['User1Name']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"replcForm.controls['User1Name'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"replcForm.controls['User1Name'].hasError('required')\">User name is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"replcUser\" class=\"control-label col-md-4 col-sm-4\">Reallocate Customers of</label>\r\n\t\t\t\t\t\t<div class=\"col-md-8 col-sm-8\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"replcUser\" [(ngModel)]=\"rplcModel.user2ID\" [formControl]=\"replcForm.controls['User2ID']\">\r\n\t\t\t\t\t\t\t\t<option value=\"\">Select a User...</option>\r\n\t\t\t\t\t\t\t\t<option *ngFor=\"let i of replcUsers\" [ngValue]=\"i.UserID\">{{i.UserName}}</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Replace\" class=\"btn btn-warning\" *ngIf=\"Formstate == 'Replace'\">Replace</button> |\r\n\t\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t</div>\r\n\r\n\t</div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\" *ngIf=\"showTable\">\r\n        <table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive\">\r\n            <colgroup>\r\n                <col width=\"25%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"20%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> Plan Name <i (click)=\"SortTable('PlanName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('PlanName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Sales Line <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> From Date <i (click)=\"SortTable('FromDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('FromDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> To Date <i (click)=\"SortTable('ToDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ToDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"PlanName\" [(ngModel)]=\"srchObj.PlanName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"LineName\" [(ngModel)]=\"srchObj.LineName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchFromDate\" name=\"FromDate\" [(ngModel)]=\"srchObj.FromDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchToDate\" name=\"ToDate\" [(ngModel)]=\"srchObj.ToDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                    <td>{{item.PlanName}}</td>\r\n                    <td>{{item.LineName}}</td>\r\n                    <td>{{item.FromDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.ToDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.PlanID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.PlanID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.PlanID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this plan ?</h2>\r\n                <br>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header\">Basic Data</h3>\r\n                    <div class=\"card-block\">\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['line'].valid }\">\r\n                            <label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\" [formControl]=\"inFrm.controls['line']\">\r\n                                    <option value=\"\">Select a Sales Line...</option>\r\n                                    <option *ngFor=\"let i of lines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['line'].touched && !inFrm.controls['line'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['line'].hasError('required')\">Sales Line is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['fromDate'].valid }\">\r\n                            <label for=\"FromDate\" class=\"control-label col-md-2 col-sm-2\">From Date</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"FromDate\" class=\"form-control\" type=\"date\" name=\"FromDate\" [(ngModel)]=\"cnvFromDate\" [formControl]=\"inFrm.controls['fromDate']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['fromDate'].touched && !inFrm.controls['fromDate'].valid) || (inFrm.submitted && !inFrm.controls['fromDate'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('required')\">From Date is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('inRange')\">this Date falls within a previously recorded plan </div>\r\n                                    <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('maxDate')\">From Date must be within two days old.</div>-->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['toDate'].valid }\">\r\n                            <label for=\"ToDate\" class=\"control-label col-md-2 col-sm-2\">To Date</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"ToDate\" class=\"form-control\" type=\"date\" name=\"ToDate\" [(ngModel)]=\"cnvToDate\" [formControl]=\"inFrm.controls['toDate']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['toDate'].touched && !inFrm.controls['toDate'].valid) || (inFrm.submitted && !inFrm.controls['toDate'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('required')\">To Date is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('minDate')\">To Date must be Greater Than From Date.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('inRange')\">this Date falls within a previously recorded plan </div>\r\n                                    <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('maxDate')\">To Date must be within two days old.</div>-->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['plnName'].valid }\">\r\n                            <label for=\"PlanName\" class=\"control-label col-md-2 col-sm-2\">Plan Name</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"PlanName\" class=\"form-control\" type=\"text\" name=\"PlanName\" [(ngModel)]=\"model.PlanName\" [formControl]=\"inFrm.controls['plnName']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['plnName'].touched && !inFrm.controls['plnName'].valid) || (inFrm.submitted && !inFrm.controls['plnName'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['plnName'].hasError('required')\">Plan Name is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card\">\r\n                    <div class=\"card-header\">\r\n                        <h3>Products</h3>\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ToggleAllDrugs(true)\">Select All</button>\r\n                        <button type=\"button\" class=\"btn btn-warning\" (click)=\"ToggleAllDrugs(false)\">Unselect All</button>\r\n                    </div>\r\n                    <div class=\"card-block\">\r\n                        <ul>\r\n                            <li *ngFor=\"let item of plnDrugs | orderby:'+DrugName'\">\r\n                                <input type=\"checkbox\" [name]=\"item.DrugID\" [checked]=\"item.Checked\" (change)=\"item.Checked = $event.target.checked\">                                {{item.DrugName}}\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"card\">\r\n                    <div class=\"card-header\">\r\n                        <h3>Accounts</h3>\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ToggleAllSpecs(true)\">Select All</button>\r\n                        <button type=\"button\" class=\"btn btn-warning\" (click)=\"ToggleAllSpecs(false)\">Unselect All</button>\r\n                    </div>\r\n                    <div class=\"card-block\">\r\n                        <ul>\r\n                            <li *ngFor=\"let item of plnSpecs | orderby:'+SpecName'\">\r\n                                <input type=\"checkbox\" [name]=\"item.SpecID\" [checked]=\"item.Checked\" (change)=\"item.Checked = $event.target.checked\">                                {{item.SpecName}}\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"card\">\r\n                    <div class=\"card-header\">\r\n                        <h3>Cycles</h3>\r\n                        <button type=\"button\" class=\"btn btn-primary\" (click)=\"ToggleAllImps(true)\">Select All</button>\r\n                        <button type=\"button\" class=\"btn btn-warning\" (click)=\"ToggleAllImps(false)\">Unselect All</button>\r\n                    </div>\r\n                    <div class=\"card-block\">\r\n                        <ul class=\"list-group\">\r\n                            <li class=\"list-group-item\" *ngFor=\"let item of plnImps | orderby:'+ImpName'\">\r\n                                <input type=\"checkbox\" [name]=\"item.ImpID\" [checked]=\"item.Checked\" (change)=\"item.Checked = $event.target.checked\">                                {{item.ImpName}}\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-1 col-sm-offset-1 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1126:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate \" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\" *ngIf=\"showTable\">\r\n        <table id=\"tblVacs\" class=\"table table-hover table-striped table-responsive\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> Employee <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> IMS <i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Vacation Type <i (click)=\"SortTable('VacType')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VacType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> From Date <i (click)=\"SortTable('FromDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('FromDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> To Date <i (click)=\"SortTable('ToDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ToDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"UserName\" [(ngModel)]=\"srchObj.UserName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"IMS\" [(ngModel)]=\"srchObj.IMS\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"VacType\" [(ngModel)]=\"srchObj.VacType\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchFromDate\" name=\"FromDate\" [(ngModel)]=\"srchObj.FromDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchToDate\" name=\"ToDate\" [(ngModel)]=\"srchObj.ToDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <h4 *ngIf=\"collection.length == 0\"><span class=\"label label-warning text-center\">No Data exists to be shown</span></h4>\r\n                <tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.VacType}}</td>\r\n                    <td>{{item.FromDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.ToDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.VacID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.VacID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.VacID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n        \r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this vacation ?</h2>\r\n                <br>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['UserID'].valid }\">\r\n                    <label for=\"UserID\" class=\"control-label col-md-2 col-sm-2\">User Name</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"UserID\" [(ngModel)]=\"model.UserID\" [formControl]=\"inFrm.controls['UserID']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a User...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of userList\" [ngValue]=\"i.UserID\">{{i.UserName}} - {{i.IMS}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"inFrm.controls['UserID'].touched && !inFrm.controls['UserID'].valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['UserID'].hasError('required')\">User Name is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['VacType'].valid }\">\r\n                    <label for=\"VacType\" class=\"control-label col-md-2 col-sm-2\">Vacation Type</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"VacType\" [(ngModel)]=\"model.VacType\" [formControl]=\"inFrm.controls['VacType']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Vacation Type...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of vacTypeList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"inFrm.controls['VacType'].touched && !inFrm.controls['VacType'].valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['VacType'].hasError('required')\">Vacation Type is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['fromDate'].valid }\">\r\n                    <label for=\"FromDate\" class=\"control-label col-md-2 col-sm-2\">From Date</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input id=\"FromDate\" class=\"form-control\" type=\"date\" name=\"FromDate\" [(ngModel)]=\"cnvFromDate\" [formControl]=\"inFrm.controls['fromDate']\">\r\n                        <div class='error' *ngIf=\"(inFrm.controls['fromDate'].touched && !inFrm.controls['fromDate'].valid) || (inFrm.submitted && !inFrm.controls['fromDate'].valid)\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('required')\">From Date is required.</div>\r\n                            <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('maxDate')\">From Date must be within two days old.</div>-->\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['toDate'].valid }\">\r\n                    <label for=\"ToDate\" class=\"control-label col-md-2 col-sm-2\">To Date</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input id=\"ToDate\" class=\"form-control\" type=\"date\" name=\"ToDate\" [(ngModel)]=\"cnvToDate\" [formControl]=\"inFrm.controls['toDate']\">\r\n                        <div class='error' *ngIf=\"(inFrm.controls['toDate'].touched && !inFrm.controls['toDate'].valid) || (inFrm.submitted && !inFrm.controls['toDate'].valid)\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('required')\">To Date is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('minDate')\">To Date must be Greater Than From Date.</div>\r\n                            <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('maxDate')\">To Date must be within two days old.</div>-->\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['Notes'].valid }\">\r\n                    <label for=\"Notes\" class=\"control-label col-md-2 col-sm-2\">Notes</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <textarea rows=\"2\" cols=\"10\" class=\"form-control\" name=\"Notes\" [(ngModel)]=\"model.Notes\" [formControl]=\"inFrm.controls['Notes']\"></textarea>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblRegions\" class=\"table table-hover table-striped table-responsive\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"40%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t\t<col width=\"25%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> Province Name <i (click)=\"SortTable('RegionName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('RegionName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Governerate <i (click)=\"SortTable('ProvinceID')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ProvinceID') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchRegionName\" name=\"RegionName\" [(ngModel)]=\"srchObj.RegionName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchProvinceID\" name=\"ProvinceID\" [(ngModel)]=\"srchObj.ProvinceID\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.RegionName}}</td>\r\n\t\t\t\t\t<td>{{item.ProvinceID}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" [disabled]=\"item.Approved\" (click)='ApproveRegion(item.RegionID)' class=\"btn btn-success\" title=\"Approve\"><i class=\"glyphicon glyphicon-ok\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.RegionID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.RegionID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.RegionID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\t\t<form #f=\"ngForm\" (submit)=\"HandleForm($event)\">\r\n\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this province ?</h2>\r\n\t\t\t\t<br>\r\n\r\n\t\t\t\t<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"RegionID\" [(ngModel)]=\"model.RegionID\">\r\n\t\t\t\t</div>\t\t\t\t\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"RegionName\" class=\"control-label col-md-2 col-sm-2\">Province Name</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"RegionName\" [(ngModel)]=\"model.RegionName\" #RegionName=\"ngModel\" required>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"RegionName.touched && !RegionName.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"RegionName.errors.required\">Province Name is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label for=\"ProvinceID\" class=\"control-label col-md-2 col-sm-2\">Governerate</label>\r\n\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"ProvinceID\" [(ngModel)]=\"model.ProvinceID\" #ProvinceID=\"ngModel\" required>\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Governerate...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of ProvinceList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t<div class='error' *ngIf=\"ProvinceID.touched && !ProvinceID.valid\">\r\n\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"ProvinceID.errors.required\">Governerate is required.</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!f.valid'>Save</button> |\r\n\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1127:
 /***/ (function(module, exports) {
 
-module.exports = "<form [formGroup]=\"drgform\" (submit)=\"drgform.valid && AddDrug($event)\">\r\n    <div class=\"form-horizontal\">\r\n        <div class=\"form-group\">\r\n            <label for=\"DrugID\" class=\"control-label col-md-2 col-sm-2\">Product</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugmodel.DrugID\" [formControl]=\"drgform.controls['drugID']\">\r\n                    <option value=\"\">Select a Product...</option>\r\n                    <option *ngFor=\"let item of drugs | orderby:'+DrugName'\" [ngValue]=\"item.DrugID\">{{item.DrugName}}</option>\r\n                </select>\r\n                <div class=\"alert alert-danger\" *ngIf=\"(drgform.submitted || drgform.controls['drugID'].touched)  && !drgform.controls['drugID'].valid\">\r\n                    <span *ngIf=\"drgform.controls['drugID'].hasError('required')\">Product is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"Comment\" class=\"control-label col-md-2 col-sm-2\">Comment</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <textarea rows=\"2\" cols=\"10\" class=\"form-control\" type=\"text\" name=\"Comment\" [(ngModel)]=\"drugmodel.Comment\" [formControl]=\"drgform.controls['comment']\"></textarea> \r\n            </div>\r\n        </div>\r\n        <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!drgform.valid\">Add Drug</button>\r\n    </div>\r\n</form>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n\t<div class=\"panel-heading\">\r\n\r\n\t\t<h2> {{headerText}} </h2>\r\n\t\t<button *ngIf=\"!Formstate && currentUser.jobClass < 1\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n\t\t<br><br>\r\n\t\t<div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n\t\t\t<p>{{errorMessage}}</p>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"panel-body table-responsive\" *ngIf=\"showTable\">\r\n\t\t<table id=\"tblUsers\" class=\"table table-hover table-striped\">\r\n\t\t\t<colgroup>\r\n\t\t\t\t<col width=\"25%\" />\r\n\t\t\t\t<col width=\"20%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t\t<col width=\"10%\" />\r\n\t\t\t\t<col width=\"15%\" />\r\n\t\t\t</colgroup>\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th> User Name <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Direct Manager <i (click)=\"SortTable('DirectManagerName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('DirectManagerName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Title <i (click)=\"SortTable('JobClass')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('JobClass') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> Sales Line <i (click)=\"SortTable('LineName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('LineName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th> IMS <i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchUserName\" name=\"UserName\" [(ngModel)]=\"searchUser.UserName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchDirectManagerName\" name=\"DirectManagerName\" [(ngModel)]=\"searchUser.DirectManagerName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchJobClass\" name=\"JobClass\" [(ngModel)]=\"searchUser.JobClass\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchLineName\" name=\"LineName\" [(ngModel)]=\"searchUser.LineName\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th>\r\n\t\t\t\t\t\t<div class=\"input-group\">\r\n\t\t\t\t\t\t\t<span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" id=\"srchIMS\" name=\"IMS\" [(ngModel)]=\"searchUser.IMS\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</th>\r\n\t\t\t\t\t<th></th>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t\t<tbody>\r\n\t\t\t\t<tr *ngFor=\"let item of (collection | filter:searchUser | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n\t\t\t\t\t<td>{{item.UserName}}</td>\r\n\t\t\t\t\t<td>{{item.DirectManagerName}}</td>\r\n\t\t\t\t\t<td>{{item.JobClass}}</td>\r\n\t\t\t\t\t<td>{{item.LineName}}</td>\r\n\t\t\t\t\t<td>{{item.IMS}}</td>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" [disabled]=\"item.Approved\" (click)='ApproveUser(item.UserID)' class=\"btn btn-success\"\r\n\t\t\t\t\t\t title=\"Approve User\"><i class=\"glyphicon glyphicon-ok\"></i></button>\r\n\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.UserID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n\t\t\t\t\t\t<button (click)=\"ShowDetails(item.UserID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n\t\t\t\t\t\t<div class=\"btn-group\">\r\n\t\t\t\t\t\t\t<button *ngIf=\"currentUser.jobClass < 1\" type=\"button\" class=\"btn btn-primary dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\r\n\t\t\t\t\t\t\t aria-expanded=\"false\">\r\n\t\t\t\t\t\t\t\tMore Actions <span class=\"caret\"></span>\r\n\t\t\t\t\t\t\t</button>\r\n\t\t\t\t\t\t\t<ul class=\"dropdown-menu\">\r\n\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t<div><button class=\"btn btn-danger\" (click)=\"Delete(item.UserID)\"><i class=\"glyphicon glyphicon-trash\"></i> Delete</button></div>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t\t\t<div><button class=\"btn btn-warning\" (click)=\"Disable(item.UserID)\"><i class=\"glyphicon glyphicon-ban-circle\"></i> Disable</button></div>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t\t<li *ngIf=\"item.JobClass=='Medical Rep.'\">\r\n\t\t\t\t\t\t\t\t\t<div><button class=\"btn btn-default\" (click)=\"Replace(item.UserID)\"><i class=\"glyphicon glyphicon-refresh\"></i> Reallocate</button></div>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<!--<button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.UserID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>-->\r\n\t\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\r\n\t\t\t</tbody>\r\n\t\t</table>\r\n\t\t<pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n\t</div>\r\n\t<div class=\"panel-body\" *ngIf=\"Formstate\">\r\n\r\n\t\t<div *ngIf=\"Formstate != 'Replace'\">\r\n\t\t\t<form [formGroup]=\"inputForm\" (submit)=\"(inputForm.valid || Formstate == 'Delete'|| Formstate == 'Disable') && HandleForm($event)\"\r\n\t\t\t novalidate>\r\n\t\t\t\t<div class=\"form-horizontal\">\r\n\r\n\t\t\t\t\t<h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this user ?</h2>\r\n\t\t\t\t\t<h2 *ngIf=\"Formstate == 'Disable'\">Are you sure you want to disable this user ?</h2>\r\n\t\t\t\t\t<br>\r\n\r\n\t\t\t\t\t<!--<div class=\"form-group hidden\">\r\n\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"UserID\" [(ngModel)]=\"model.UserID\" [formControl]=\"inputForm.controls['UserID']\">\r\n\t\t\t\t</div>-->\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"SalesLineID\" class=\"control-label col-md-2 col-sm-2\">Sales Line</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"SalesLineID\" [(ngModel)]=\"model.SalesLineID\" [formControl]=\"inputForm.controls['lineID']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Sales Line...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of salesLines\" [ngValue]=\"i.SalesLineID\">{{i.LineName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['lineID'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['lineID'].hasError('required')\">Sales Line is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"UserName\" class=\"control-label col-md-2 col-sm-2\">User Name</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"UserName\" (focusout)=\"CompleteLogin()\" [(ngModel)]=\"model.UserName\" [formControl]=\"inputForm.controls['UserName']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['UserName'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserName'].hasError('required')\">User name is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"LoginName\" class=\"control-label col-md-2 col-sm-2\">Login Name</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"LoginName\" [(ngModel)]=\"model.LoginName\" [formControl]=\"inputForm.controls['LoginName']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['LoginName'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('required')\">Login Name is required.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('minlength')\">Login Name must be minimum 5 characters.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('maxlength')\">Login Name must be maximum 200 characters.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['LoginName'].hasError('alreadyexist')\">Login Name already exist.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\">\r\n\t\t\t\t\t\t<label for=\"UserPass\" class=\"control-label col-md-2 col-sm-2\">User Password</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"password\" name=\"UserPass\" [(ngModel)]=\"model.UserPass\" [formControl]=\"inputForm.controls['UserPass']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['UserPass'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('required')\">User Password is required.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('minlength')\">User Password must be minimum 5 characters.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['UserPass'].hasError('maxlength')\">User Password must be maximum 200 characters.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\" *ngIf=\"Formstate == 'Create'\">\r\n\t\t\t\t\t\t<label for=\"ConfPass\" class=\"control-label col-md-2 col-sm-2\">Confirm Password</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"password\" name=\"ConfPass\" [formControl]=\"inputForm.controls['ConfPass']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['ConfPass'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.hasError('mismatchedPasswords')\">Passwords do not match.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"JobClass\" class=\"control-label col-md-2 col-sm-2\">Title</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"JobClass\" [(ngModel)]=\"model.JobClass\" [formControl]=\"inputForm.controls['JobClass']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Title...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of classList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['JobClass'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['JobClass'].hasError('required')\">Title is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"DirectManager\" class=\"control-label col-md-2 col-sm-2\">Direct Manager</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"DirectManager\" [(ngModel)]=\"model.DirectManager\" [formControl]=\"inputForm.controls['manager']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Manager...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of managerList\" [ngValue]=\"i.UserID\">{{i.UserName}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['manager'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['manager'].hasError('required')\">Direct Manager is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"Email\" class=\"control-label col-md-2 col-sm-2\">Email</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"Email\" [(ngModel)]=\"model.Email\" [formControl]=\"inputForm.controls['Email']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"inputForm.controls['Email'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['Email'].hasError('required')\">Email is required.</div>\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"inputForm.controls['Email'].hasError('invalidEmail')\">Email is invalid; must be lowercase e.g.: john@doe.com</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"Phone\" class=\"control-label col-md-2 col-sm-2\">Phone</label>\r\n\t\t\t\t\t\t<div class=\"col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"Phone\" [(ngModel)]=\"model.Phone\" [formControl]=\"inputForm.controls['Phone']\">\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<!--<div class=\"form-group\">\r\n\t\t\t\t\t<h3>Regions of Operation</h3>\r\n\t\t\t\t\t<label for=\"Region\" class=\"control-label col-md-2 col-sm-2\">Add Region</label>\r\n\t\t\t\t\t<div class=\"col-md-6\">\r\n\t\t\t\t\t\t<select class=\"form-control\" name=\"selectedRegion\" [(ngModel)]=\"selectedRegion\" [ngModelOptions]=\"{standalone: true}\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a region</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let item of regions\" [ngValue]=\"item.RegionID\">{{item.RegionName}} - {{item.ProvinceID}}</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\" col-md-2 col-sm-2\">\r\n\t\t\t\t\t\t<button class=\"form-control btn btn-success\" type=\"button\" (click)=\"addRegion()\">Add</button>\r\n\t\t\t\t\t</div>\t\t\t\t\t\r\n\t\t\t\t\t<ul class=\"list-group col-md-8 col-md-offset-2\">\r\n\t\t\t\t\t\t<li class=\"list-group-item\" *ngFor=\"let item of userRegions; let i = index\">\r\n\t\t\t\t\t\t\t<span class=\"btn btn-xs btn-danger pull-right\" (click)=\"removeRegion(i)\"><i class=\"glyphicon glyphicon-remove\"></i></span>\r\n\t\t\t\t\t\t\t<span hidden>{{item.RegionID}}</span>\r\n\t\t\t\t\t\t\t<span>{{item.RegionName}} - {{item.ProvinceID}}</span> \r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t</ul>\r\n\t\t\t\t</div>-->\r\n\t\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Save\" class=\"btn btn-primary\" *ngIf=\"Formstate!='Details' && Formstate!='Delete' && Formstate!='Disable'\"\r\n\t\t\t\t\t\t [disabled]='!inputForm.valid'>Save</button> |\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button> |\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Disable\" class=\"btn btn-warning\" *ngIf=\"Formstate == 'Disable'\">Disable</button> |\r\n\t\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t</div>\r\n\t\t<div *ngIf=\"Formstate == 'Replace'\">\r\n\t\t\t<form [formGroup]=\"replcForm\" (submit)=\"(replcForm.valid || Formstate == 'Replace') && HandleForm($event)\" novalidate>\r\n\t\t\t\t<div class=\"form-horizontal\">\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"UserName\" class=\"control-label col-md-4 col-sm-4\">User Name</label>\r\n\t\t\t\t\t\t<div class=\"col-md-8 col-sm-8\">\r\n\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" name=\"UserName\" (focusout)=\"CompleteLogin()\" [(ngModel)]=\"rplcModel.User1Name\" [formControl]=\"replcForm.controls['User1Name']\">\r\n\t\t\t\t\t\t\t<div class='error' *ngIf=\"replcForm.controls['User1Name'].touched\">\r\n\t\t\t\t\t\t\t\t<div class=\"alert alert-danger\" *ngIf=\"replcForm.controls['User1Name'].hasError('required')\">User name is required.</div>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t\t<label for=\"replcUser\" class=\"control-label col-md-4 col-sm-4\">Reallocate Customers of</label>\r\n\t\t\t\t\t\t<div class=\"col-md-8 col-sm-8\">\r\n\t\t\t\t\t\t\t<select class=\"form-control\" name=\"replcUser\" [(ngModel)]=\"rplcModel.user2ID\" [formControl]=\"replcForm.controls['User2ID']\">\r\n\t\t\t\t\t\t\t\t<option value=\"\">Select a User...</option>\r\n\t\t\t\t\t\t\t\t<option *ngFor=\"let i of replcUsers\" [ngValue]=\"i.UserID\">{{i.UserName}}</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n\t\t\t\t\t\t<button type=\"submit\" value=\"Replace\" class=\"btn btn-warning\" *ngIf=\"Formstate == 'Replace'\">Replace</button> |\r\n\t\t\t\t\t\t<button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</form>\r\n\t\t</div>\r\n\r\n\t</div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1128:
 /***/ (function(module, exports) {
 
-module.exports = "<form [formGroup]=\"gftform\" (submit)=\"gftform.valid && AddGift($event)\">\r\n    <div class=\"form-horizontal\">\r\n        <div class=\"form-group\">\r\n            <label for=\"GiftID\" class=\"control-label col-md-2 col-sm-2\">Promo Type</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"GiftID\" [(ngModel)]=\"giftmodel.GiftID\" [formControl]=\"gftform.controls['giftID']\" (change)=\"ongiftChange($event)\">\r\n                    <option value=\"\">Select a Promo Type...</option>\r\n                    <option *ngFor=\"let item of gifts\" [ngValue]=\"item.GiftID\">{{item.GiftName}}</option>\r\n                </select>\r\n                <div class=\"alert alert-danger\" *ngIf=\"(gftform.submitted || gftform.controls['giftID'].touched)  && !gftform.controls['giftID'].valid\">\r\n                    <span *ngIf=\"gftform.controls['giftID'].hasError('required')\">Promo Type is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"ToolID\" class=\"control-label col-md-2 col-sm-2\">Promo Tool</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"ToolID\" [(ngModel)]=\"giftmodel.ToolID\" [formControl]=\"gftform.controls['toolID']\">\r\n                    <option value=\"\">Select a Promo Tool...</option>\r\n                    <option *ngFor=\"let item of dispTools\" [ngValue]=\"item.ToolID\">{{item.ToolName}}</option>\r\n                </select>\r\n                <div class=\"alert alert-danger\" *ngIf=\"(gftform.submitted || gftform.controls['toolID'].touched)  && !gftform.controls['toolID'].valid\">\r\n                    <span *ngIf=\"gftform.controls['toolID'].hasError('required')\">Promo Tool is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"form-group\">\r\n            <label for=\"Qty\" class=\"control-label col-md-2 col-sm-2\">Quantity</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <input class=\"form-control\" type=\"number\" name=\"Qty\" [(ngModel)]=\"giftmodel.Qty\" [formControl]=\"gftform.controls['qty']\">\r\n                <div class=\"alert alert-danger\" *ngIf=\"(gftform.submitted || gftform.controls['qty'].touched)  && !gftform.controls['qty'].valid\">\r\n                    <span *ngIf=\"gftform.controls['qty'].hasError('required')\">Quantity is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!gftform.valid\">Add Tool</button>\r\n    </div>\r\n</form>"
+module.exports = "<div class=\"panel panel-default zz\">\r\n    <div class=\"panel-heading\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate \" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br><br>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"panel-body\" *ngIf=\"showTable\">\r\n        <table id=\"tblVacs\" class=\"table table-hover table-striped table-responsive\">\r\n            <colgroup>\r\n                <col width=\"20%\" />\r\n                <col width=\"20%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n                <col width=\"15%\" />\r\n            </colgroup>\r\n            <thead>\r\n                <tr>\r\n                    <th> Employee <i (click)=\"SortTable('UserName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('UserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> IMS <i (click)=\"SortTable('IMS')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> Vacation Type <i (click)=\"SortTable('VacType')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VacType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> From Date <i (click)=\"SortTable('FromDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('FromDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th> To Date <i (click)=\"SortTable('ToDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('ToDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                    <th></th>\r\n                </tr>\r\n                <tr>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"UserName\" [(ngModel)]=\"srchObj.UserName\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"IMS\" [(ngModel)]=\"srchObj.IMS\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" name=\"VacType\" [(ngModel)]=\"srchObj.VacType\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchFromDate\" name=\"FromDate\" [(ngModel)]=\"srchObj.FromDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th>\r\n                        <div class=\"input-group\">\r\n                            <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                            <input type=\"text\" class=\"form-control\" id=\"srchToDate\" name=\"ToDate\" [(ngModel)]=\"srchObj.ToDate\">\r\n                        </div>\r\n                    </th>\r\n                    <th></th>\r\n                </tr>\r\n            </thead>\r\n            <tbody>\r\n                <h4 *ngIf=\"collection.length == 0\"><span class=\"label label-warning text-center\">No Data exists to be shown</span></h4>\r\n                <tr *ngFor=\"let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                    <td>{{item.UserName}}</td>\r\n                    <td>{{item.IMS}}</td>\r\n                    <td>{{item.VacType}}</td>\r\n                    <td>{{item.FromDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>{{item.ToDate | date: 'dd/MM/yyyy'}}</td>\r\n                    <td>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)='EditThis(item.VacID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>\r\n                        <button (click)=\"ShowDetails(item.VacID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                        <button *ngIf=\"currentUser.jobClass < 1\" (click)=\"Delete(item.VacID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n        <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n        \r\n    </div>\r\n\r\n    <div class=\"panel-body\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this vacation ?</h2>\r\n                <br>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['UserID'].valid }\">\r\n                    <label for=\"UserID\" class=\"control-label col-md-2 col-sm-2\">User Name</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"UserID\" [(ngModel)]=\"model.UserID\" [formControl]=\"inFrm.controls['UserID']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a User...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of userList\" [ngValue]=\"i.UserID\">{{i.UserName}} - {{i.IMS}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"inFrm.controls['UserID'].touched && !inFrm.controls['UserID'].valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['UserID'].hasError('required')\">User Name is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['VacType'].valid }\">\r\n                    <label for=\"VacType\" class=\"control-label col-md-2 col-sm-2\">Vacation Type</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <select class=\"form-control\" name=\"VacType\" [(ngModel)]=\"model.VacType\" [formControl]=\"inFrm.controls['VacType']\">\r\n\t\t\t\t\t\t\t<option value=\"\">Select a Vacation Type...</option>\r\n\t\t\t\t\t\t\t<option *ngFor=\"let i of vacTypeList\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n\t\t\t\t\t\t</select>\r\n                        <div class='error' *ngIf=\"inFrm.controls['VacType'].touched && !inFrm.controls['VacType'].valid\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['VacType'].hasError('required')\">Vacation Type is required.</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['fromDate'].valid }\">\r\n                    <label for=\"FromDate\" class=\"control-label col-md-2 col-sm-2\">From Date</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input id=\"FromDate\" class=\"form-control\" type=\"date\" name=\"FromDate\" [(ngModel)]=\"cnvFromDate\" [formControl]=\"inFrm.controls['fromDate']\">\r\n                        <div class='error' *ngIf=\"(inFrm.controls['fromDate'].touched && !inFrm.controls['fromDate'].valid) || (inFrm.submitted && !inFrm.controls['fromDate'].valid)\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('required')\">From Date is required.</div>\r\n                            <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['fromDate'].hasError('maxDate')\">From Date must be within two days old.</div>-->\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['toDate'].valid }\">\r\n                    <label for=\"ToDate\" class=\"control-label col-md-2 col-sm-2\">To Date</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <input id=\"ToDate\" class=\"form-control\" type=\"date\" name=\"ToDate\" [(ngModel)]=\"cnvToDate\" [formControl]=\"inFrm.controls['toDate']\">\r\n                        <div class='error' *ngIf=\"(inFrm.controls['toDate'].touched && !inFrm.controls['toDate'].valid) || (inFrm.submitted && !inFrm.controls['toDate'].valid)\">\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('required')\">To Date is required.</div>\r\n                            <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('minDate')\">To Date must be Greater Than From Date.</div>\r\n                            <!--<div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['toDate'].hasError('maxDate')\">To Date must be within two days old.</div>-->\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['Notes'].valid }\">\r\n                    <label for=\"Notes\" class=\"control-label col-md-2 col-sm-2\">Notes</label>\r\n                    <div class=\"col-md-10 col-sm-10\">\r\n                        <textarea rows=\"2\" cols=\"10\" class=\"form-control\" name=\"Notes\" [(ngModel)]=\"model.Notes\" [formControl]=\"inFrm.controls['Notes']\"></textarea>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1129:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\" *ngIf=\"userVisits\">\r\n    <h3 class=\"card-title text-left\">\r\n        <a [id]=\"'toggle'+UserID\" class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+UserID\" aria-expanded=\"true\" [attr.aria-controls]=\"UserID\" (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{userName}} visits\r\n    </h3>\r\n    <div [id]=\"UserID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <table id=\"tblVisits\" class=\"table table-hover table-striped\">\r\n                <colgroup>\r\n                    <col width=\"20%\" />\r\n                    <!--<col width=\"10%\" />-->\r\n                    <col width=\"20%\" />\r\n                    <col width=\"20%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"15%\" />\r\n                    <col width=\"15%\" />\r\n                </colgroup>\r\n                <thead>\r\n                    <tr>\r\n                        <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <!--<th> Time <i (click)=\"SortTable('VisitTime')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitTime') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>-->\r\n                        <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th> Province <i (click)=\"SortTable('RegionName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('RegionName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th> Visit Type <i (click)=\"SortTable('VisitType')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th></th>\r\n                    </tr>\r\n                    <tr>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchVisitDate\" name=\"VisitDate\" [(ngModel)]=\"srchObj.VisitDate\">\r\n                            </div>\r\n                        </th>\r\n                        <!--<th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchVisitTime\" name=\"VisitTime\" [(ngModel)]=\"srchObj.VisitTime\">\r\n                            </div>\r\n                        </th>-->\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchDestination\" name=\"Destination\" [(ngModel)]=\"srchObj.Destination\">\r\n                            </div>\r\n                        </th>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchRegionName\" name=\"RegionName\" [(ngModel)]=\"srchObj.RegionName\">\r\n                            </div>\r\n                        </th>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchSpecName\" name=\"SpecName\" [(ngModel)]=\"srchObj.SpecName\">\r\n                            </div>\r\n                        </th>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchVisitType\" name=\"VisitType\" [(ngModel)]=\"srchObj.VisitType\">\r\n                            </div>\r\n                        </th>\r\n                        <th></th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let item of (userVisits | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                        <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                        <!--<td>{{item.VisitTime | date:'shortTime'}}</td>-->\r\n                        <td>{{item.Destination}}</td>\r\n                        <td>{{item.RegionName}} - {{item.ProvinceID}}</td>\r\n                        <td>{{item.SpecName}}</td>\r\n                        <td>{{item.VisitType}}</td>\r\n                        <td>\r\n                            <!--<button *ngIf=\"currentUser.jobClass < 4 && currentUser.userID == item.UserID\" (click)='onEdit(item.VisitID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>-->\r\n                            <button (click)=\"onDetail(item.VisitID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                            <button *ngIf=\"currentUser.userID == item.UserID\" (click)=\"onDelete(item.VisitID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                        </td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n            </table>\r\n            <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<form [formGroup]=\"drgform\" (submit)=\"drgform.valid && AddDrug($event)\">\r\n    <div class=\"form-horizontal\">\r\n        <div class=\"form-group\">\r\n            <label for=\"DrugID\" class=\"control-label col-md-2 col-sm-2\">Product</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"DrugID\" [(ngModel)]=\"drugmodel.DrugID\" [formControl]=\"drgform.controls['drugID']\">\r\n                    <option value=\"\">Select a Product...</option>\r\n                    <option *ngFor=\"let item of drugs | orderby:'+DrugName'\" [ngValue]=\"item.DrugID\">{{item.DrugName}}</option>\r\n                </select>\r\n                <div class=\"alert alert-danger\" *ngIf=\"(drgform.submitted || drgform.controls['drugID'].touched)  && !drgform.controls['drugID'].valid\">\r\n                    <span *ngIf=\"drgform.controls['drugID'].hasError('required')\">Product is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"Comment\" class=\"control-label col-md-2 col-sm-2\">Comment</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <textarea rows=\"2\" cols=\"10\" class=\"form-control\" type=\"text\" name=\"Comment\" [(ngModel)]=\"drugmodel.Comment\" [formControl]=\"drgform.controls['comment']\"></textarea> \r\n            </div>\r\n        </div>\r\n        <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!drgform.valid\">Add Drug</button>\r\n    </div>\r\n</form>"
 
 /***/ }),
 
 /***/ 1130:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br *ngIf=\"!Formstate\">\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"card-block\" *ngIf=\"showTable\">\r\n        <div class=\"form-group row alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\" *ngIf=\"currentUser.jobClass != 3\">\r\n            <label for=\"userID\" class=\"control-lable col-md-3 text-right\">Select a User</label>\r\n            <div class=\"col-md-9\">\r\n                <select class=\"form-control\" name=\"userID\" (change)=\"UserChanged($event)\">\r\n                    <option value=\"null\">Select a User...</option>\r\n                    <option *ngFor=\"let user of users\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"selUser\">\r\n            <visit-uservisits [UserID]=\"selUser.UserID\" [currentUser]=\"currentUser\" [collection]=\"collection\" (DeleteEvent)=\"Delete($event)\" (DetailEvent)=\"ShowDetails($event)\"\r\n                (EditEvent)=\"EditThis($event)\">\r\n            </visit-uservisits>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"card-block\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this visit ?</h2>\r\n                <br>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header alert alert-info\" style=\"margin: 10px 5px; padding: 5px;\">Basic Data</h3>\r\n                    <div class=\"card-block\">\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['visType'].valid }\">\r\n                            <label for=\"VisitType\" class=\"control-label col-md-2 col-sm-2\">Visit Type</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"VisitType\" [(ngModel)]=\"model.VisitType\" [formControl]=\"inFrm.controls['visType']\">\r\n                                    <option value=\"\">Select a Visit Type...</option>\r\n                                    <option *ngFor=\"let i of visTypes\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['visType'].touched && !inFrm.controls['visType'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visType'].hasError('required')\">Visit Type is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" *ngIf=\"model.VisitType == 'Coaching Visit-With Manager'\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['accompanyID'].valid }\">\r\n                            <label for=\"AccompanyID\" class=\"control-label col-md-2 col-sm-2\">Accompanied By</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"AccompanyID\" [(ngModel)]=\"model.AccompanyID\" [formControl]=\"inFrm.controls['accompanyID']\">\r\n                                    <option value=\"\">Select a Manger...</option>\r\n                                    <option *ngFor=\"let i of managers\" [ngValue]=\"i.UserID\">{{i.UserName}} - {{i.JobClass}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['accompanyID'].touched && !inFrm.controls['accompanyID'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['accompanyID'].hasError('mngrRequired')\">Accompanied By field is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['visDate'].valid }\">\r\n                            <label for=\"VisitDate\" class=\"control-label col-md-2 col-sm-2\">Visit Date</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"VisitDate\" class=\"form-control\" type=\"date\" name=\"VisitDate\" [(ngModel)]=\"cnvVisitDate\" [formControl]=\"inFrm.controls['visDate']\"\r\n                                    [min]=\"yesterday\" [max]=\"thisday\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['visDate'].touched && !inFrm.controls['visDate'].valid) || (inFrm.submitted && !inFrm.controls['visDate'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visDate'].hasError('required')\">Visit Date is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visDate'].hasError('minDate')\">Visit Date must be within two days old.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visDate'].hasError('maxDate')\">Visit Date must be within two days old.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <!--<div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['visTime'].valid }\">\r\n                            <label for=\"VisitTime\" class=\"control-label col-md-2 col-sm-2\">Visit Time</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input class=\"form-control\" type=\"time\" name=\"VisitTime\" [(ngModel)]=\"cnvVisitTime\" [formControl]=\"inFrm.controls['visTime']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['visTime'].touched && !inFrm.controls['visTime'].valid) || (inFrm.submitted && !inFrm.controls['visTime'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visTime'].hasError('required')\">Visit Time is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visTime'].hasError('maxTime')\">Visit Time is Invalid.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>-->\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['region'].valid }\">\r\n                            <label for=\"RegionID\" class=\"control-label col-md-2 col-sm-2\">Regions</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"RegionID\" [(ngModel)]=\"model.RegionID\" [formControl]=\"inFrm.controls['region']\" (change)=\"onRegChange($event)\">\r\n                                    <option value=\"\">Select a Province...</option>\r\n                                    <option *ngFor=\"let i of regions\" [ngValue]=\"i.RegionID\">{{i.RegionName}} - {{i.ProvinceID}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['region'].touched && !inFrm.controls['region'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['region'].hasError('required')\">Province is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <div class=\"col-md-offset-2 col-sm-offset-2\">\r\n                                <label class=\"radio-inline control-label col-md-5 col-sm-5\">\r\n                                    <input type=\"radio\" name=\"DestType\" (change)=\"onDestTypeChange($event, 'Clinic (Doctor)')\" [checked]=\"model.DestType == 'Clinic (Doctor)'\">Clinic (Doctor)\r\n                                </label>\r\n                                <label class=\"radio-inline control-label col-md-5 col-sm-5\">\r\n                                    <input type=\"radio\" name=\"DestType\" (change)=\"onDestTypeChange($event, 'Pharmacy')\" [checked]=\"model.DestType == 'Pharmacy'\">Pharmacy\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['destination'].valid }\">\r\n                            <label for=\"DestID\" class=\"control-label col-md-2 col-sm-2\">Customer</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"DestID\" [(ngModel)]=\"model.DestID\" [formControl]=\"inFrm.controls['destination']\" (change)=\"onDestChange($event)\">\r\n                                    <option value=\"\">Select a Customer...</option>\r\n                                    <option *ngFor=\"let i of ViewDests\" [ngValue]=\"i.DestID\">{{i.Destination}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"(inFrm.controls['destination'].touched && !inFrm.controls['destination'].valid) || (inFrm.submitted && !inFrm.controls['destination'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['destination'].hasError('required')\">Customer is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['destination'].hasError('maxVisit')\">this Customer has been visited the max numbers of visits allowed this month.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label for=\"GeneralComment\" class=\"control-label col-md-2 col-sm-2\">Overall Comments</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <textarea rows=\"4\" cols=\"10\" class=\"form-control\" type=\"text\" name=\"GeneralComment\" [(ngModel)]=\"model.GeneralComment\" [formControl]=\"inFrm.controls['generalComment']\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\">Products</h3>\r\n                    <div class=\"card-block\">\r\n                        <visit-drugs *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [currentUser]=\"currentUser\" [visDrugs]=\"VisDrugs\" [drugmodel]=\"visDrugModel\"\r\n                            (drugChanged)=\"drugChangeEvent($event)\"></visit-drugs>\r\n                    </div>\r\n                    <table id=\"tblProducts\" class=\"table table-hover table-striped\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>Product Name</th>\r\n                                <th>Comment</th>\r\n                                <th></th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr *ngFor=\"let item of VisDrugs; let i = index\">\r\n                                <td>{{item.DrugName}}</td>\r\n                                <td>{{item.Comment}}</td>\r\n                                <td><button type=\"button\" class=\"btn btn-default\" (click)=\"DeleteDrug(i)\">Delete</button></td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header alert alert-warning\" style=\"margin: 10px 5px; padding: 5px;\">Promotional Tools</h3>\r\n                    <div class=\"card-block\">\r\n                        <visit-gifts *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [visGifts]=\"VisGifts\" [visDrugs]=\"VisDrugs\" [giftmodel]=\"visGiftModel\"\r\n                            [drgsChanged]=\"drgsChanged\" (doneFill)=\"fillDone($event)\"></visit-gifts>\r\n                    </div>\r\n                    <table id=\"tblGifts\" class=\"table table-hover table-striped\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>Promo Type</th>\r\n                                <th>Promo Tool</th>\r\n                                <th>Quantity</th>\r\n                                <th></th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr *ngFor=\"let item of VisGifts; let i = index\">\r\n                                <td>{{item.GiftName}}</td>\r\n                                <td>{{item.ToolName}}</td>\r\n                                <td>{{item.Qty}}</td>\r\n                                <td><button type=\"button\" class=\"btn btn-default\" (click)=\"DeleteGift(i)\">Delete</button></td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid || inFrm.submitted'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<form [formGroup]=\"gftform\" (submit)=\"gftform.valid && AddGift($event)\">\r\n    <div class=\"form-horizontal\">\r\n        <div class=\"form-group\">\r\n            <label for=\"GiftID\" class=\"control-label col-md-2 col-sm-2\">Promo Type</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"GiftID\" [(ngModel)]=\"giftmodel.GiftID\" [formControl]=\"gftform.controls['giftID']\" (change)=\"ongiftChange($event)\">\r\n                    <option value=\"\">Select a Promo Type...</option>\r\n                    <option *ngFor=\"let item of gifts\" [ngValue]=\"item.GiftID\">{{item.GiftName}}</option>\r\n                </select>\r\n                <div class=\"alert alert-danger\" *ngIf=\"(gftform.submitted || gftform.controls['giftID'].touched)  && !gftform.controls['giftID'].valid\">\r\n                    <span *ngIf=\"gftform.controls['giftID'].hasError('required')\">Promo Type is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <label for=\"ToolID\" class=\"control-label col-md-2 col-sm-2\">Promo Tool</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <select class=\"form-control\" name=\"ToolID\" [(ngModel)]=\"giftmodel.ToolID\" [formControl]=\"gftform.controls['toolID']\">\r\n                    <option value=\"\">Select a Promo Tool...</option>\r\n                    <option *ngFor=\"let item of dispTools\" [ngValue]=\"item.ToolID\">{{item.ToolName}}</option>\r\n                </select>\r\n                <div class=\"alert alert-danger\" *ngIf=\"(gftform.submitted || gftform.controls['toolID'].touched)  && !gftform.controls['toolID'].valid\">\r\n                    <span *ngIf=\"gftform.controls['toolID'].hasError('required')\">Promo Tool is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        \r\n        <div class=\"form-group\">\r\n            <label for=\"Qty\" class=\"control-label col-md-2 col-sm-2\">Quantity</label>\r\n            <div class=\"col-md-10 col-sm-10\">\r\n                <input class=\"form-control\" type=\"number\" name=\"Qty\" [(ngModel)]=\"giftmodel.Qty\" [formControl]=\"gftform.controls['qty']\">\r\n                <div class=\"alert alert-danger\" *ngIf=\"(gftform.submitted || gftform.controls['qty'].touched)  && !gftform.controls['qty'].valid\">\r\n                    <span *ngIf=\"gftform.controls['qty'].hasError('required')\">Quantity is Required</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <button class=\"btn btn-primary\" type=\"submit\" [disabled]=\"!gftform.valid\">Add Tool</button>\r\n    </div>\r\n</form>"
 
 /***/ }),
 
 /***/ 1131:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Main Footer -->\r\n<footer class=\"main-footer\">\r\n\t<!-- To the right -->\r\n\t<!--<div class=\"pull-right hidden-xs\">Anything you want</div>-->\r\n\t<!-- Default to the left -->\r\n\t<strong>Copyright &copy; 2016 <a href=\"#\" routerLink=\"/\">IDI Pharmaceutical</a>.\r\n\t</strong> All rights reserved.\r\n</footer>\r\n"
+module.exports = "<div class=\"card\" *ngIf=\"userVisits\">\r\n    <h3 class=\"card-title text-left\">\r\n        <a [id]=\"'toggle'+UserID\" class=\"btn btn-warning\" data-toggle=\"collapse\" [href]=\"'#'+UserID\" aria-expanded=\"true\" [attr.aria-controls]=\"UserID\" (click)=\"changeArrowClass()\">\r\n            <i class=\"glyphicon\" [ngClass]=\"appliedClass ? 'glyphicon-circle-arrow-up' : 'glyphicon-circle-arrow-down'\"></i>\r\n        </a>\r\n        {{userName}} visits\r\n    </h3>\r\n    <div [id]=\"UserID\" class=\"panel-collapse collapse in\">\r\n        <div class=\"card-block\">\r\n            <table id=\"tblVisits\" class=\"table table-hover table-striped\">\r\n                <colgroup>\r\n                    <col width=\"20%\" />\r\n                    <!--<col width=\"10%\" />-->\r\n                    <col width=\"20%\" />\r\n                    <col width=\"20%\" />\r\n                    <col width=\"10%\" />\r\n                    <col width=\"15%\" />\r\n                    <col width=\"15%\" />\r\n                </colgroup>\r\n                <thead>\r\n                    <tr>\r\n                        <th> Visit Date <i (click)=\"SortTable('VisitDate')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <!--<th> Time <i (click)=\"SortTable('VisitTime')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitTime') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>-->\r\n                        <th> Customer <i (click)=\"SortTable('Destination')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th> Province <i (click)=\"SortTable('RegionName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('RegionName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th> Speciality <i (click)=\"SortTable('SpecName')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th> Visit Type <i (click)=\"SortTable('VisitType')\" class=\"btn btn-default\" [ngClass]=\"(orderbyString.indexOf('VisitType') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'\"></i></th>\r\n                        <th></th>\r\n                    </tr>\r\n                    <tr>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchVisitDate\" name=\"VisitDate\" [(ngModel)]=\"srchObj.VisitDate\">\r\n                            </div>\r\n                        </th>\r\n                        <!--<th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchVisitTime\" name=\"VisitTime\" [(ngModel)]=\"srchObj.VisitTime\">\r\n                            </div>\r\n                        </th>-->\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchDestination\" name=\"Destination\" [(ngModel)]=\"srchObj.Destination\">\r\n                            </div>\r\n                        </th>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchRegionName\" name=\"RegionName\" [(ngModel)]=\"srchObj.RegionName\">\r\n                            </div>\r\n                        </th>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchSpecName\" name=\"SpecName\" [(ngModel)]=\"srchObj.SpecName\">\r\n                            </div>\r\n                        </th>\r\n                        <th>\r\n                            <div class=\"input-group\">\r\n                                <span class=\"input-group-addon\" id=\"basic-addon1\"><i class=\"glyphicon glyphicon-search\"></i></span>\r\n                                <input type=\"text\" class=\"form-control\" id=\"srchVisitType\" name=\"VisitType\" [(ngModel)]=\"srchObj.VisitType\">\r\n                            </div>\r\n                        </th>\r\n                        <th></th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr *ngFor=\"let item of (userVisits | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }\">\r\n                        <td>{{item.VisitDate | date: 'dd/MM/yyyy'}}</td>\r\n                        <!--<td>{{item.VisitTime | date:'shortTime'}}</td>-->\r\n                        <td>{{item.Destination}}</td>\r\n                        <td>{{item.RegionName}} - {{item.ProvinceID}}</td>\r\n                        <td>{{item.SpecName}}</td>\r\n                        <td>{{item.VisitType}}</td>\r\n                        <td>\r\n                            <!--<button *ngIf=\"currentUser.jobClass < 4 && currentUser.userID == item.UserID\" (click)='onEdit(item.VisitID)' class=\"btn btn-info\" title=\"Edit\"><i class=\"glyphicon glyphicon-pencil\"></i></button>-->\r\n                            <button (click)=\"onDetail(item.VisitID)\" class=\"btn btn-warning\" title=\"Details\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>\r\n                            <button *ngIf=\"currentUser.userID == item.UserID\" (click)=\"onDelete(item.VisitID)\" class=\"btn btn-danger\" title=\"Delete\"><i class=\"glyphicon glyphicon-trash\"></i></button>\r\n                        </td>\r\n                    </tr>\r\n\r\n                </tbody>\r\n            </table>\r\n            <pagination-controls (pageChange)=\"p = $event\" maxSize=\"10\"></pagination-controls>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1132:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Main Header -->\r\n<header class=\"main-header\">\r\n\t<!-- Logo -->\r\n\t<a href=\"javascript:void(0)\" routerLink=\"/home/dashboard\" class=\"logo\"> <!-- mini logo for sidebar mini 50x50 pixels -->\r\n\t\t<span class=\"logo-mini\"><b>IDI</b></span> <!-- logo for regular state and mobile devices -->\r\n\t\t<span class=\"logo-lg\"><b>IDI</b>-Sales</span>\r\n\t</a>\r\n\t<!-- Header Navbar -->\r\n\t<nav class=\"navbar navbar-static-top\" role=\"navigation\">\r\n\t\t<!-- Sidebar toggle button-->\r\n\t\t<a href=\"javascript:void(0)\" class=\"sidebar-toggle\" data-toggle=\"offcanvas\"\r\n\t\t\trole=\"button\"> <span class=\"sr-only\">Toggle navigation</span>\r\n\t\t</a>\r\n\t\t<!-- Navbar Right Menu -->\r\n\t\t<div class=\"navbar-custom-menu\">\r\n\t\t\t<ul class=\"nav navbar-nav\" *ngIf=\"currentUser\">\r\n\t\t\t\t<!-- Messages: style can be found in dropdown.less-->\r\n\t\t\t\t<!--<li class=\"dropdown messages-menu messagesBox\"></li>-->\r\n\t\t\t\t<!-- Notifications Menu -->\r\n\t\t\t\t<!--<li class=\"dropdown notifications-menu notificationsBox\"></li>-->\r\n\t\t\t\t<!-- Tasks Menu -->\r\n\t\t\t\t<!--<li class=\"dropdown tasks-menu tasksBox\"></li>-->\r\n\t\t\t\t<!-- User Account Menu -->\r\n\t\t\t\t<li class=\"dropdown user user-menu userBox\"></li>\r\n\t\t\t\t<!-- Control Sidebar Toggle Button -->\r\n\t\t\t\t<li><a href=\"javascript:void(0)\" data-toggle=\"control-sidebar\"\r\n\t\t\t\t\tclass=\"toggle-sidebar-right\"><i class=\"fa fa-gears\"></i></a></li>\r\n\t\t\t</ul>\r\n\t\t\t<ul class=\"nav navbar-nav\" *ngIf=\"!currentUser\">\r\n\t\t\t\t<li><a [routerLink]=\"['/login']\"><i\r\n\t\t\t\t\t\tclass=\"fa fa-sign-in\"></i> Login</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</nav>\r\n</header>\r\n"
+module.exports = "<div class=\"card\">\r\n    <div class=\"card-header\">\r\n\r\n        <h2> {{headerText}} </h2>\r\n        <button *ngIf=\"!Formstate\" class=\"btn btn-primary\" (click)=\"CreateNew()\">Create New</button>\r\n        <br *ngIf=\"!Formstate\">\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n    <div class=\"card-block\" *ngIf=\"showTable\">\r\n        <div class=\"form-group row alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\" *ngIf=\"currentUser.jobClass != 3\">\r\n            <label for=\"userID\" class=\"control-lable col-md-3 text-right\">Select a User</label>\r\n            <div class=\"col-md-9\">\r\n                <select class=\"form-control\" name=\"userID\" (change)=\"UserChanged($event)\">\r\n                    <option value=\"null\">Select a User...</option>\r\n                    <option *ngFor=\"let user of users\" [ngValue]=\"user.UserID\">{{user.UserName}}</option>\r\n                </select>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"selUser\">\r\n            <visit-uservisits [UserID]=\"selUser.UserID\" [currentUser]=\"currentUser\" [collection]=\"collection\" (DeleteEvent)=\"Delete($event)\" (DetailEvent)=\"ShowDetails($event)\"\r\n                (EditEvent)=\"EditThis($event)\">\r\n            </visit-uservisits>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"card-block\" *ngIf=\"Formstate\">\r\n        <form [formGroup]=\"inFrm\" (submit)=\"inFrm.valid && HandleForm($event)\" novalidate>\r\n            <div class=\"form-horizontal\">\r\n\r\n                <h2 *ngIf=\"Formstate == 'Delete'\">Are you sure you want to delete this visit ?</h2>\r\n                <br>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header alert alert-info\" style=\"margin: 10px 5px; padding: 5px;\">Basic Data</h3>\r\n                    <div class=\"card-block\">\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['visType'].valid }\">\r\n                            <label for=\"VisitType\" class=\"control-label col-md-2 col-sm-2\">Visit Type</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"VisitType\" [(ngModel)]=\"model.VisitType\" [formControl]=\"inFrm.controls['visType']\">\r\n                                    <option value=\"\">Select a Visit Type...</option>\r\n                                    <option *ngFor=\"let i of visTypes\" [ngValue]=\"i.name\">{{i.name}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['visType'].touched && !inFrm.controls['visType'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visType'].hasError('required')\">Visit Type is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" *ngIf=\"model.VisitType == 'Coaching Visit-With Manager'\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['accompanyID'].valid }\">\r\n                            <label for=\"AccompanyID\" class=\"control-label col-md-2 col-sm-2\">Accompanied By</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"AccompanyID\" [(ngModel)]=\"model.AccompanyID\" [formControl]=\"inFrm.controls['accompanyID']\">\r\n                                    <option value=\"\">Select a Manger...</option>\r\n                                    <option *ngFor=\"let i of managers\" [ngValue]=\"i.UserID\">{{i.UserName}} - {{i.JobClass}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['accompanyID'].touched && !inFrm.controls['accompanyID'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['accompanyID'].hasError('mngrRequired')\">Accompanied By field is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['visDate'].valid }\">\r\n                            <label for=\"VisitDate\" class=\"control-label col-md-2 col-sm-2\">Visit Date</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input id=\"VisitDate\" class=\"form-control\" type=\"date\" name=\"VisitDate\" [(ngModel)]=\"cnvVisitDate\" [formControl]=\"inFrm.controls['visDate']\"\r\n                                    [min]=\"yesterday\" [max]=\"thisday\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['visDate'].touched && !inFrm.controls['visDate'].valid) || (inFrm.submitted && !inFrm.controls['visDate'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visDate'].hasError('required')\">Visit Date is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visDate'].hasError('minDate')\">Visit Date must be within two days old.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visDate'].hasError('maxDate')\">Visit Date must be within two days old.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <!--<div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['visTime'].valid }\">\r\n                            <label for=\"VisitTime\" class=\"control-label col-md-2 col-sm-2\">Visit Time</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <input class=\"form-control\" type=\"time\" name=\"VisitTime\" [(ngModel)]=\"cnvVisitTime\" [formControl]=\"inFrm.controls['visTime']\">\r\n                                <div class='error' *ngIf=\"(inFrm.controls['visTime'].touched && !inFrm.controls['visTime'].valid) || (inFrm.submitted && !inFrm.controls['visTime'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visTime'].hasError('required')\">Visit Time is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['visTime'].hasError('maxTime')\">Visit Time is Invalid.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>-->\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['region'].valid }\">\r\n                            <label for=\"RegionID\" class=\"control-label col-md-2 col-sm-2\">Regions</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"RegionID\" [(ngModel)]=\"model.RegionID\" [formControl]=\"inFrm.controls['region']\" (change)=\"onRegChange($event)\">\r\n                                    <option value=\"\">Select a Province...</option>\r\n                                    <option *ngFor=\"let i of regions\" [ngValue]=\"i.RegionID\">{{i.RegionName}} - {{i.ProvinceID}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"inFrm.controls['region'].touched && !inFrm.controls['region'].valid\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['region'].hasError('required')\">Province is required.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <div class=\"col-md-offset-2 col-sm-offset-2\">\r\n                                <label class=\"radio-inline control-label col-md-5 col-sm-5\">\r\n                                    <input type=\"radio\" name=\"DestType\" (change)=\"onDestTypeChange($event, 'Clinic (Doctor)')\" [checked]=\"model.DestType == 'Clinic (Doctor)'\">Clinic (Doctor)\r\n                                </label>\r\n                                <label class=\"radio-inline control-label col-md-5 col-sm-5\">\r\n                                    <input type=\"radio\" name=\"DestType\" (change)=\"onDestTypeChange($event, 'Pharmacy')\" [checked]=\"model.DestType == 'Pharmacy'\">Pharmacy\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\" [ngClass]=\"{ 'has-error': inFrm.submitted && !inFrm.controls['destination'].valid }\">\r\n                            <label for=\"DestID\" class=\"control-label col-md-2 col-sm-2\">Customer</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <select class=\"form-control\" name=\"DestID\" [(ngModel)]=\"model.DestID\" [formControl]=\"inFrm.controls['destination']\" (change)=\"onDestChange($event)\">\r\n                                    <option value=\"\">Select a Customer...</option>\r\n                                    <option *ngFor=\"let i of ViewDests\" [ngValue]=\"i.DestID\">{{i.Destination}}</option>\r\n                                </select>\r\n                                <div class='error' *ngIf=\"(inFrm.controls['destination'].touched && !inFrm.controls['destination'].valid) || (inFrm.submitted && !inFrm.controls['destination'].valid)\">\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['destination'].hasError('required')\">Customer is required.</div>\r\n                                    <div class=\"alert alert-danger\" *ngIf=\"inFrm.controls['destination'].hasError('maxVisit')\">this Customer has been visited the max numbers of visits allowed this month.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label for=\"GeneralComment\" class=\"control-label col-md-2 col-sm-2\">Overall Comments</label>\r\n                            <div class=\"col-md-10 col-sm-10\">\r\n                                <textarea rows=\"4\" cols=\"10\" class=\"form-control\" type=\"text\" name=\"GeneralComment\" [(ngModel)]=\"model.GeneralComment\" [formControl]=\"inFrm.controls['generalComment']\"></textarea>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header alert alert-success\" style=\"margin: 10px 5px; padding: 5px;\">Products</h3>\r\n                    <div class=\"card-block\">\r\n                        <visit-drugs *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [currentUser]=\"currentUser\" [visDrugs]=\"VisDrugs\" [drugmodel]=\"visDrugModel\"\r\n                            (drugChanged)=\"drugChangeEvent($event)\"></visit-drugs>\r\n                    </div>\r\n                    <table id=\"tblProducts\" class=\"table table-hover table-striped\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>Product Name</th>\r\n                                <th>Comment</th>\r\n                                <th></th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr *ngFor=\"let item of VisDrugs; let i = index\">\r\n                                <td>{{item.DrugName}}</td>\r\n                                <td>{{item.Comment}}</td>\r\n                                <td><button type=\"button\" class=\"btn btn-default\" (click)=\"DeleteDrug(i)\">Delete</button></td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div class=\"card\">\r\n                    <h3 class=\"card-header alert alert-warning\" style=\"margin: 10px 5px; padding: 5px;\">Promotional Tools</h3>\r\n                    <div class=\"card-block\">\r\n                        <visit-gifts *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [visGifts]=\"VisGifts\" [visDrugs]=\"VisDrugs\" [giftmodel]=\"visGiftModel\"\r\n                            [drgsChanged]=\"drgsChanged\" (doneFill)=\"fillDone($event)\"></visit-gifts>\r\n                    </div>\r\n                    <table id=\"tblGifts\" class=\"table table-hover table-striped\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>Promo Type</th>\r\n                                <th>Promo Tool</th>\r\n                                <th>Quantity</th>\r\n                                <th></th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr *ngFor=\"let item of VisGifts; let i = index\">\r\n                                <td>{{item.GiftName}}</td>\r\n                                <td>{{item.ToolName}}</td>\r\n                                <td>{{item.Qty}}</td>\r\n                                <td><button type=\"button\" class=\"btn btn-default\" (click)=\"DeleteGift(i)\">Delete</button></td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div class=\"form-group no-print col-md-offset-2 col-md-10 col-sm-10\">\r\n                    <button type=\"submit\" value=\"Save\" class=\"btn btn-info\" *ngIf=\"Formstate!='Details' && Formstate!='Delete'\" [disabled]='!inFrm.valid || inFrm.submitted'>Save</button>                    |\r\n                    <button type=\"submit\" value=\"Delete\" class=\"btn btn-info\" *ngIf=\"Formstate == 'Delete'\">Delete</button>                    |\r\n                    <button type=\"button\" (click)=\"TableBack()\" class=\"btn btn-danger\">Back to List</button>\r\n                </div>\r\n            </div>\r\n        </form>\r\n        <div class=\"alert alert-danger\" *ngIf=\"errorMessage\">\r\n            <p>{{errorMessage}}</p>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
 /***/ 1133:
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"content-header\" *ngIf=\"display\">\r\n  <h1>\r\n    {{ header }}\r\n    <small>{{ description }}</small>\r\n  </h1>\r\n  <ol class=\"breadcrumb\">\r\n    <template let-item ngFor [ngForOf]=\"levels\">\r\n      <li [class.active]=\"item.active\">\r\n        <a [routerLink]=\"item.link\">\r\n          <i class=\"fa fa-{{item.icon}}\"></i> {{ item.title }}\r\n        </a>\r\n      </li>\r\n    </template>\r\n  </ol>\r\n</section>\r\n"
+module.exports = "<!-- Main Footer -->\r\n<footer class=\"main-footer\">\r\n\t<!-- To the right -->\r\n\t<!--<div class=\"pull-right hidden-xs\">Anything you want</div>-->\r\n\t<!-- Default to the left -->\r\n\t<strong>Copyright &copy; 2016 <a href=\"#\" routerLink=\"/\">IDI Pharmaceutical</a>.\r\n\t</strong> All rights reserved.\r\n</footer>\r\n"
 
 /***/ }),
 
 /***/ 1134:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Control Sidebar -->\r\n<aside class=\"control-sidebar control-sidebar-dark\">\r\n\t<!-- Create the tabs -->\r\n\t<ul class=\"nav nav-tabs nav-justified control-sidebar-tabs\">\r\n\t\t<li class=\"active\"><a href=\"#control-sidebar-home-tab\"\r\n\t\t\tdata-toggle=\"tab\"><i class=\"fa fa-home\"></i></a></li>\r\n\t\t<li><a href=\"#control-sidebar-settings-tab\" data-toggle=\"tab\"><i\r\n\t\t\t\tclass=\"fa fa-gears\"></i></a></li>\r\n\t</ul>\r\n\t<!-- Tab panes -->\r\n\t<div class=\"tab-content\">\r\n\t\t<!-- Home tab content -->\r\n\t\t<div class=\"tab-pane active\" id=\"control-sidebar-home-tab\">\r\n\t\t\t<h3 class=\"control-sidebar-heading\">Recent Activity</h3>\r\n\t\t\t<ul class=\"control-sidebar-menu\">\r\n\t\t\t\t<li><a href=\"javascript::;\"> <i\r\n\t\t\t\t\t\tclass=\"menu-icon fa fa-birthday-cake bg-red\"></i>\r\n\t\t\t\t\t\t<div class=\"menu-info\">\r\n\t\t\t\t\t\t\t<h4 class=\"control-sidebar-subheading\">Langdon's Birthday</h4>\r\n\t\t\t\t\t\t\t<p>Will be 23 on April 24th</p>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t</a></li>\r\n\t\t\t</ul>\r\n\t\t\t<!-- /.control-sidebar-menu -->\r\n\r\n\t\t\t<h3 class=\"control-sidebar-heading\">Tasks Progress</h3>\r\n\t\t\t<ul class=\"control-sidebar-menu\">\r\n\t\t\t\t<li><a href=\"javascript::;\">\r\n\t\t\t\t\t\t<h4 class=\"control-sidebar-subheading\">\r\n\t\t\t\t\t\t\tCustom Template Design <span\r\n\t\t\t\t\t\t\t\tclass=\"label label-danger pull-right\">70%</span>\r\n\t\t\t\t\t\t</h4>\r\n\t\t\t\t\t\t<div class=\"progress progress-xxs\">\r\n\t\t\t\t\t\t\t<div class=\"progress-bar progress-bar-danger\" style=\"width: 70%\"></div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t</a></li>\r\n\t\t\t</ul>\r\n\t\t\t<!-- /.control-sidebar-menu -->\r\n\r\n\t\t</div>\r\n\t\t<!-- /.tab-pane -->\r\n\t\t<!-- Stats tab content -->\r\n\t\t<div class=\"tab-pane\" id=\"control-sidebar-stats-tab\">Stats Tab\r\n\t\t\tContent</div>\r\n\t\t<!-- /.tab-pane -->\r\n\t\t<!-- Settings tab content -->\r\n\t\t<div class=\"tab-pane\" id=\"control-sidebar-settings-tab\">\r\n\t\t\t<form method=\"post\">\r\n\t\t\t\t<h3 class=\"control-sidebar-heading\">General Settings</h3>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label class=\"control-sidebar-subheading\"> Report panel\r\n\t\t\t\t\t\tusage <input type=\"checkbox\" class=\"pull-right\" checked>\r\n\t\t\t\t\t</label>\r\n\t\t\t\t\t<p>Some information about this general settings option</p>\r\n\t\t\t\t</div>\r\n\t\t\t\t<!-- /.form-group -->\r\n\t\t\t</form>\r\n\t\t</div>\r\n\t\t<!-- /.tab-pane -->\r\n\t</div>\r\n</aside>\r\n<!-- /.control-sidebar -->\r\n<!-- Add the sidebar's background. This div must be placed\r\n               immediately after the control sidebar -->\r\n<div class=\"control-sidebar-bg\"></div>\r\n"
+module.exports = "<!-- Main Header -->\r\n<header class=\"main-header\">\r\n\t<!-- Logo -->\r\n\t<a href=\"javascript:void(0)\" routerLink=\"/home/dashboard\" class=\"logo\"> <!-- mini logo for sidebar mini 50x50 pixels -->\r\n\t\t<span class=\"logo-mini\"><b>IDI</b></span> <!-- logo for regular state and mobile devices -->\r\n\t\t<span class=\"logo-lg\"><b>IDI</b>-Sales</span>\r\n\t</a>\r\n\t<!-- Header Navbar -->\r\n\t<nav class=\"navbar navbar-static-top\" role=\"navigation\">\r\n\t\t<!-- Sidebar toggle button-->\r\n\t\t<a href=\"javascript:void(0)\" class=\"sidebar-toggle\" data-toggle=\"offcanvas\"\r\n\t\t\trole=\"button\"> <span class=\"sr-only\">Toggle navigation</span>\r\n\t\t</a>\r\n\t\t<!-- Navbar Right Menu -->\r\n\t\t<div class=\"navbar-custom-menu\">\r\n\t\t\t<ul class=\"nav navbar-nav\" *ngIf=\"currentUser\">\r\n\t\t\t\t<!-- Messages: style can be found in dropdown.less-->\r\n\t\t\t\t<!--<li class=\"dropdown messages-menu messagesBox\"></li>-->\r\n\t\t\t\t<!-- Notifications Menu -->\r\n\t\t\t\t<!--<li class=\"dropdown notifications-menu notificationsBox\"></li>-->\r\n\t\t\t\t<!-- Tasks Menu -->\r\n\t\t\t\t<!--<li class=\"dropdown tasks-menu tasksBox\"></li>-->\r\n\t\t\t\t<!-- User Account Menu -->\r\n\t\t\t\t<li class=\"dropdown user user-menu userBox\"></li>\r\n\t\t\t\t<!-- Control Sidebar Toggle Button -->\r\n\t\t\t\t<li><a href=\"javascript:void(0)\" data-toggle=\"control-sidebar\"\r\n\t\t\t\t\tclass=\"toggle-sidebar-right\"><i class=\"fa fa-gears\"></i></a></li>\r\n\t\t\t</ul>\r\n\t\t\t<ul class=\"nav navbar-nav\" *ngIf=\"!currentUser\">\r\n\t\t\t\t<li><a [routerLink]=\"['/login']\"><i\r\n\t\t\t\t\t\tclass=\"fa fa-sign-in\"></i> Login</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</nav>\r\n</header>\r\n"
 
 /***/ }),
 
 /***/ 1135:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Left side column. contains the logo and sidebar -->\r\n<aside class=\"main-sidebar\">\r\n\t<!-- sidebar: style can be found in sidebar.less -->\r\n\t<section class=\"sidebar\" *ngIf=\"currentUser\">\r\n\t\t<!-- Sidebar user panel (optional) -->\r\n\t\t<div class=\"user-panel\">\r\n\t\t\t<div class=\"pull-left image\">\r\n\t\t\t\t<img [src]=\"currentUser.photo\" class=\"img-circle\" [alt]=\"currentUser.UserName\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"pull-left info\">\r\n\t\t\t\t<p>{{currentUser.UserName}}</p>\r\n\t\t\t\t<!-- Status -->\r\n\t\t\t\t<a href=\"javascript:void(0)\"><i class=\"fa fa-circle text-success\"></i> Online</a>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<!-- search form (Optional) -->\r\n\t\t<!--<form action=\"#\" method=\"get\" class=\"sidebar-form\">\r\n\t\t\t<div class=\"input-group\">\r\n\t\t\t\t<input type=\"text\" name=\"q\" class=\"form-control\" placeholder=\"Search...\"> <span class=\"input-group-btn\">\r\n\t\t\t\t\t<button type=\"submit\" name=\"search\" id=\"search-btn\"\r\n\t\t\t\t\t\tclass=\"btn btn-flat\">\r\n\t\t\t\t\t\t<i class=\"fa fa-search\"></i>\r\n\t\t\t\t\t</button>\r\n\t\t\t\t</span>\r\n\t\t\t</div>\r\n\t\t</form>-->\r\n\t\t<!-- /.search form -->\r\n\t\t<!-- Sidebar Menu -->\r\n\t\t<ul class=\"sidebar-menu\">\r\n\t\t\t<li class=\"header\">NAVIGATION</li>\r\n\t\t\t<template ngFor let-item [ngForOf]=\"links\">\r\n\t\t\t\t<template [ngIf]=\"!item.sublinks && !item.disabled\">\r\n\t\t\t\t\t<li [class.active]=\"item.link[0] === current_url\">\r\n\t\t\t\t\t\t<a *ngIf=\"!item.external\" [routerLink]=\"item.link\"> <i class=\"text-danger fa fa-{{item.icon}}\"></i> <span>{{item.title}}</span>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t<a *ngIf=\"item.external\" [href]=\"item.link\" [target]=\"item.target\">\r\n\t\t\t\t\t\t\t<i class=\"text-danger fa fa-{{item.icon}}\"></i> <span>{{item.title}}</span>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</template>\r\n\t\t\t\t<template [ngIf]=\"item.sublinks && !item.disabled\">\r\n\t\t\t\t\t<li class=\"treeview\">\r\n\t\t\t\t\t\t<a href=\"#\"> <i *ngIf=\"item.icon\" class=\"text-danger fa fa-{{item.icon}}\"></i> <span>{{item.title}}</span> <i class=\"fa fa-angle-left pull-right\"></i>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t<ul class=\"treeview-menu\">\r\n\t\t\t\t\t\t\t<template ngFor let-subitem [ngForOf]=\"item.sublinks\">\r\n\t\t\t\t\t\t\t\t<li [class.active]=\"subitem.link[0] === current_url\">\r\n\t\t\t\t\t\t\t\t\t<a *ngIf=\"!subitem.external\" [routerLink]=\"subitem.link\"> <i *ngIf=\"subitem.icon\" class=\"text-danger fa fa-{{subitem.icon}}\"></i> <span>{{subitem.title}}</span>\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t\t<a *ngIf=\"subitem.external\" [href]=\"subitem.link\" [target]=\"subitem.target\"> <i *ngIf=\"subitem.icon\" class=\"fa fa-{{subitem.icon}}\"></i> <span>{{subitem.title}}</span>\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t</template>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</template>\r\n\t\t\t</template>\r\n\t\t</ul>\r\n\t\t<!-- /.sidebar-menu -->\r\n\t</section>\r\n\t<!-- /.sidebar -->\r\n</aside>"
+module.exports = "<section class=\"content-header\" *ngIf=\"display\">\r\n  <h1>\r\n    {{ header }}\r\n    <small>{{ description }}</small>\r\n  </h1>\r\n  <ol class=\"breadcrumb\">\r\n    <template let-item ngFor [ngForOf]=\"levels\">\r\n      <li [class.active]=\"item.active\">\r\n        <a [routerLink]=\"item.link\">\r\n          <i class=\"fa fa-{{item.icon}}\"></i> {{ item.title }}\r\n        </a>\r\n      </li>\r\n    </template>\r\n  </ol>\r\n</section>\r\n"
 
 /***/ }),
 
 /***/ 1136:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Menu toggle button -->\r\n<a href=\"javascript:void(0)\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"> <i\r\n\tclass=\"fa fa-envelope-o\"></i> <span class=\"label label-success\"\r\n\t[innerHTML]=\"messages.length\"></span>\r\n</a>\r\n<ul class=\"dropdown-menu\">\r\n\t<li class=\"header\">{{ 'MSGBOX.COUNT' }}</li>\r\n\t<li>\r\n\t\t<!-- inner menu: contains the messages -->\r\n\t\t<ul class=\"menu\">\r\n\t\t\t<li *ngFor=\"let msg of messages; let i = index\">\r\n\t\t\t\t<!-- start message --> <a href=\"javascript:void(0)\">\r\n\t\t\t\t\t<div class=\"pull-left\">\r\n\t\t\t\t\t\t<!-- User Image -->\r\n\t\t\t\t\t\t<img src=\"{{msg.author.avatarUrl}}\" class=\"img-circle\"\r\n\t\t\t\t\t\t\talt=\"{{ msg.author.getName() }}\">\r\n\t\t\t\t\t</div> <!-- Message title and timestamp -->\r\n\t\t\t\t\t<h4>\r\n\t\t\t\t\t\t{{msg.title}} <small><i class=\"fa fa-clock-o\"></i>\r\n\t\t\t\t\t\t\t{{msg.date}}</small>\r\n\t\t\t\t\t</h4> <!-- The message -->\r\n\t\t\t\t\t<p>{{msg.content}}</p>\r\n\t\t\t</a>\r\n\t\t\t</li>\r\n\t\t\t<!-- end message -->\r\n\t\t</ul> <!-- /.menu -->\r\n\t</li>\r\n\t<li class=\"footer\"><a href=\"javascript:void(0)\">{{ 'MSGBOX.FOOTER' }}</a></li>\r\n</ul>\r\n"
+module.exports = "<!-- Control Sidebar -->\r\n<aside class=\"control-sidebar control-sidebar-dark\">\r\n\t<!-- Create the tabs -->\r\n\t<ul class=\"nav nav-tabs nav-justified control-sidebar-tabs\">\r\n\t\t<li class=\"active\"><a href=\"#control-sidebar-home-tab\"\r\n\t\t\tdata-toggle=\"tab\"><i class=\"fa fa-home\"></i></a></li>\r\n\t\t<li><a href=\"#control-sidebar-settings-tab\" data-toggle=\"tab\"><i\r\n\t\t\t\tclass=\"fa fa-gears\"></i></a></li>\r\n\t</ul>\r\n\t<!-- Tab panes -->\r\n\t<div class=\"tab-content\">\r\n\t\t<!-- Home tab content -->\r\n\t\t<div class=\"tab-pane active\" id=\"control-sidebar-home-tab\">\r\n\t\t\t<h3 class=\"control-sidebar-heading\">Recent Activity</h3>\r\n\t\t\t<ul class=\"control-sidebar-menu\">\r\n\t\t\t\t<li><a href=\"javascript::;\"> <i\r\n\t\t\t\t\t\tclass=\"menu-icon fa fa-birthday-cake bg-red\"></i>\r\n\t\t\t\t\t\t<div class=\"menu-info\">\r\n\t\t\t\t\t\t\t<h4 class=\"control-sidebar-subheading\">Langdon's Birthday</h4>\r\n\t\t\t\t\t\t\t<p>Will be 23 on April 24th</p>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t</a></li>\r\n\t\t\t</ul>\r\n\t\t\t<!-- /.control-sidebar-menu -->\r\n\r\n\t\t\t<h3 class=\"control-sidebar-heading\">Tasks Progress</h3>\r\n\t\t\t<ul class=\"control-sidebar-menu\">\r\n\t\t\t\t<li><a href=\"javascript::;\">\r\n\t\t\t\t\t\t<h4 class=\"control-sidebar-subheading\">\r\n\t\t\t\t\t\t\tCustom Template Design <span\r\n\t\t\t\t\t\t\t\tclass=\"label label-danger pull-right\">70%</span>\r\n\t\t\t\t\t\t</h4>\r\n\t\t\t\t\t\t<div class=\"progress progress-xxs\">\r\n\t\t\t\t\t\t\t<div class=\"progress-bar progress-bar-danger\" style=\"width: 70%\"></div>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t</a></li>\r\n\t\t\t</ul>\r\n\t\t\t<!-- /.control-sidebar-menu -->\r\n\r\n\t\t</div>\r\n\t\t<!-- /.tab-pane -->\r\n\t\t<!-- Stats tab content -->\r\n\t\t<div class=\"tab-pane\" id=\"control-sidebar-stats-tab\">Stats Tab\r\n\t\t\tContent</div>\r\n\t\t<!-- /.tab-pane -->\r\n\t\t<!-- Settings tab content -->\r\n\t\t<div class=\"tab-pane\" id=\"control-sidebar-settings-tab\">\r\n\t\t\t<form method=\"post\">\r\n\t\t\t\t<h3 class=\"control-sidebar-heading\">General Settings</h3>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<label class=\"control-sidebar-subheading\"> Report panel\r\n\t\t\t\t\t\tusage <input type=\"checkbox\" class=\"pull-right\" checked>\r\n\t\t\t\t\t</label>\r\n\t\t\t\t\t<p>Some information about this general settings option</p>\r\n\t\t\t\t</div>\r\n\t\t\t\t<!-- /.form-group -->\r\n\t\t\t</form>\r\n\t\t</div>\r\n\t\t<!-- /.tab-pane -->\r\n\t</div>\r\n</aside>\r\n<!-- /.control-sidebar -->\r\n<!-- Add the sidebar's background. This div must be placed\r\n               immediately after the control sidebar -->\r\n<div class=\"control-sidebar-bg\"></div>\r\n"
 
 /***/ }),
 
 /***/ 1137:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Menu toggle button -->\r\n<a href=\"javascript:void(0)\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"> <i\r\n\tclass=\"fa fa-bell-o\"></i> <span class=\"label label-warning\">10</span>\r\n</a>\r\n<ul class=\"dropdown-menu\">\r\n\t<li class=\"header\">{{ 'NOTIFBOX.COUNT' }}</li>\r\n\t<li>\r\n\t\t<!-- Inner Menu: contains the notifications -->\r\n\t\t<ul class=\"menu\">\r\n\t\t\t<li>\r\n\t\t\t\t<!-- start notification --> <a href=\"javascript:void(0)\"> <i\r\n\t\t\t\t\tclass=\"fa fa-users text-aqua\"></i> 5 new members joined today\r\n\t\t\t</a>\r\n\t\t\t</li>\r\n\t\t\t<!-- end notification -->\r\n\t\t</ul>\r\n\t</li>\r\n\t<li class=\"footer\"><a href=\"javascript:void(0)\">{{ 'NOTIFBOX.FOOTER' }}</a></li>\r\n</ul>\r\n"
+module.exports = "<!-- Left side column. contains the logo and sidebar -->\r\n<aside class=\"main-sidebar\">\r\n\t<!-- sidebar: style can be found in sidebar.less -->\r\n\t<section class=\"sidebar\" *ngIf=\"currentUser\">\r\n\t\t<!-- Sidebar user panel (optional) -->\r\n\t\t<div class=\"user-panel\">\r\n\t\t\t<div class=\"pull-left image\">\r\n\t\t\t\t<img [src]=\"currentUser.photo\" class=\"img-circle\" [alt]=\"currentUser.UserName\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"pull-left info\">\r\n\t\t\t\t<p>{{currentUser.UserName}}</p>\r\n\t\t\t\t<!-- Status -->\r\n\t\t\t\t<a href=\"javascript:void(0)\"><i class=\"fa fa-circle text-success\"></i> Online</a>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<!-- search form (Optional) -->\r\n\t\t<!--<form action=\"#\" method=\"get\" class=\"sidebar-form\">\r\n\t\t\t<div class=\"input-group\">\r\n\t\t\t\t<input type=\"text\" name=\"q\" class=\"form-control\" placeholder=\"Search...\"> <span class=\"input-group-btn\">\r\n\t\t\t\t\t<button type=\"submit\" name=\"search\" id=\"search-btn\"\r\n\t\t\t\t\t\tclass=\"btn btn-flat\">\r\n\t\t\t\t\t\t<i class=\"fa fa-search\"></i>\r\n\t\t\t\t\t</button>\r\n\t\t\t\t</span>\r\n\t\t\t</div>\r\n\t\t</form>-->\r\n\t\t<!-- /.search form -->\r\n\t\t<!-- Sidebar Menu -->\r\n\t\t<ul class=\"sidebar-menu\">\r\n\t\t\t<li class=\"header\">NAVIGATION</li>\r\n\t\t\t<template ngFor let-item [ngForOf]=\"links\">\r\n\t\t\t\t<template [ngIf]=\"!item.sublinks && !item.disabled\">\r\n\t\t\t\t\t<li [class.active]=\"item.link[0] === current_url\">\r\n\t\t\t\t\t\t<a *ngIf=\"!item.external\" [routerLink]=\"item.link\"> <i class=\"text-danger fa fa-{{item.icon}}\"></i> <span>{{item.title}}</span>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t<a *ngIf=\"item.external\" [href]=\"item.link\" [target]=\"item.target\">\r\n\t\t\t\t\t\t\t<i class=\"text-danger fa fa-{{item.icon}}\"></i> <span>{{item.title}}</span>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</template>\r\n\t\t\t\t<template [ngIf]=\"item.sublinks && !item.disabled\">\r\n\t\t\t\t\t<li class=\"treeview\">\r\n\t\t\t\t\t\t<a href=\"#\"> <i *ngIf=\"item.icon\" class=\"text-danger fa fa-{{item.icon}}\"></i> <span>{{item.title}}</span> <i class=\"fa fa-angle-left pull-right\"></i>\r\n\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t<ul class=\"treeview-menu\">\r\n\t\t\t\t\t\t\t<template ngFor let-subitem [ngForOf]=\"item.sublinks\">\r\n\t\t\t\t\t\t\t\t<li [class.active]=\"subitem.link[0] === current_url\">\r\n\t\t\t\t\t\t\t\t\t<a *ngIf=\"!subitem.external\" [routerLink]=\"subitem.link\"> <i *ngIf=\"subitem.icon\" class=\"text-danger fa fa-{{subitem.icon}}\"></i> <span>{{subitem.title}}</span>\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t\t<a *ngIf=\"subitem.external\" [href]=\"subitem.link\" [target]=\"subitem.target\"> <i *ngIf=\"subitem.icon\" class=\"fa fa-{{subitem.icon}}\"></i> <span>{{subitem.title}}</span>\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t</template>\r\n\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t</li>\r\n\t\t\t\t</template>\r\n\t\t\t</template>\r\n\t\t</ul>\r\n\t\t<!-- /.sidebar-menu -->\r\n\t</section>\r\n\t<!-- /.sidebar -->\r\n</aside>"
 
 /***/ }),
 
 /***/ 1138:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Menu Toggle Button -->\r\n<a href=\"javascript:void(0)\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"> <i\r\n\tclass=\"fa fa-flag-o\"></i> <span class=\"label label-danger\">9</span>\r\n</a>\r\n<ul class=\"dropdown-menu\">\r\n\t<li class=\"header\">{{ 'TASKBOX.COUNT' }}</li>\r\n\t<li>\r\n\t\t<!-- Inner menu: contains the tasks -->\r\n\t\t<ul class=\"menu\">\r\n\t\t\t<li>\r\n\t\t\t\t<!-- Task item --> <a href=\"javascript:void(0)\"> <!-- Task title and progress text -->\r\n\t\t\t\t\t<h3>\r\n\t\t\t\t\t\tDesign some buttons <small class=\"pull-right\">20%</small>\r\n\t\t\t\t\t</h3> <!-- The progress bar -->\r\n\t\t\t\t\t<div class=\"progress xs\">\r\n\t\t\t\t\t\t<!-- Change the css width attribute to simulate progress -->\r\n\t\t\t\t\t\t<div class=\"progress-bar progress-bar-aqua\" style=\"width: 20%\"\r\n\t\t\t\t\t\t\trole=\"progressbar\" aria-valuenow=\"20\" aria-valuemin=\"0\"\r\n\t\t\t\t\t\t\taria-valuemax=\"100\">\r\n\t\t\t\t\t\t\t<span class=\"sr-only\">20% Complete</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t</a>\r\n\t\t\t</li>\r\n\t\t\t<!-- end task item -->\r\n\t\t</ul>\r\n\t</li>\r\n\t<li class=\"footer\"><a href=\"javascript:void(0)\">{{ 'TASKBOX.FOOTER' }}</a></li>\r\n</ul>\r\n"
+module.exports = "<!-- Menu toggle button -->\r\n<a href=\"javascript:void(0)\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"> <i\r\n\tclass=\"fa fa-envelope-o\"></i> <span class=\"label label-success\"\r\n\t[innerHTML]=\"messages.length\"></span>\r\n</a>\r\n<ul class=\"dropdown-menu\">\r\n\t<li class=\"header\">{{ 'MSGBOX.COUNT' }}</li>\r\n\t<li>\r\n\t\t<!-- inner menu: contains the messages -->\r\n\t\t<ul class=\"menu\">\r\n\t\t\t<li *ngFor=\"let msg of messages; let i = index\">\r\n\t\t\t\t<!-- start message --> <a href=\"javascript:void(0)\">\r\n\t\t\t\t\t<div class=\"pull-left\">\r\n\t\t\t\t\t\t<!-- User Image -->\r\n\t\t\t\t\t\t<img src=\"{{msg.author.avatarUrl}}\" class=\"img-circle\"\r\n\t\t\t\t\t\t\talt=\"{{ msg.author.getName() }}\">\r\n\t\t\t\t\t</div> <!-- Message title and timestamp -->\r\n\t\t\t\t\t<h4>\r\n\t\t\t\t\t\t{{msg.title}} <small><i class=\"fa fa-clock-o\"></i>\r\n\t\t\t\t\t\t\t{{msg.date}}</small>\r\n\t\t\t\t\t</h4> <!-- The message -->\r\n\t\t\t\t\t<p>{{msg.content}}</p>\r\n\t\t\t</a>\r\n\t\t\t</li>\r\n\t\t\t<!-- end message -->\r\n\t\t</ul> <!-- /.menu -->\r\n\t</li>\r\n\t<li class=\"footer\"><a href=\"javascript:void(0)\">{{ 'MSGBOX.FOOTER' }}</a></li>\r\n</ul>\r\n"
 
 /***/ }),
 
 /***/ 1139:
 /***/ (function(module, exports) {
 
+module.exports = "<!-- Menu toggle button -->\r\n<a href=\"javascript:void(0)\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"> <i\r\n\tclass=\"fa fa-bell-o\"></i> <span class=\"label label-warning\">10</span>\r\n</a>\r\n<ul class=\"dropdown-menu\">\r\n\t<li class=\"header\">{{ 'NOTIFBOX.COUNT' }}</li>\r\n\t<li>\r\n\t\t<!-- Inner Menu: contains the notifications -->\r\n\t\t<ul class=\"menu\">\r\n\t\t\t<li>\r\n\t\t\t\t<!-- start notification --> <a href=\"javascript:void(0)\"> <i\r\n\t\t\t\t\tclass=\"fa fa-users text-aqua\"></i> 5 new members joined today\r\n\t\t\t</a>\r\n\t\t\t</li>\r\n\t\t\t<!-- end notification -->\r\n\t\t</ul>\r\n\t</li>\r\n\t<li class=\"footer\"><a href=\"javascript:void(0)\">{{ 'NOTIFBOX.FOOTER' }}</a></li>\r\n</ul>\r\n"
+
+/***/ }),
+
+/***/ 1140:
+/***/ (function(module, exports) {
+
+module.exports = "<!-- Menu Toggle Button -->\r\n<a href=\"javascript:void(0)\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"> <i\r\n\tclass=\"fa fa-flag-o\"></i> <span class=\"label label-danger\">9</span>\r\n</a>\r\n<ul class=\"dropdown-menu\">\r\n\t<li class=\"header\">{{ 'TASKBOX.COUNT' }}</li>\r\n\t<li>\r\n\t\t<!-- Inner menu: contains the tasks -->\r\n\t\t<ul class=\"menu\">\r\n\t\t\t<li>\r\n\t\t\t\t<!-- Task item --> <a href=\"javascript:void(0)\"> <!-- Task title and progress text -->\r\n\t\t\t\t\t<h3>\r\n\t\t\t\t\t\tDesign some buttons <small class=\"pull-right\">20%</small>\r\n\t\t\t\t\t</h3> <!-- The progress bar -->\r\n\t\t\t\t\t<div class=\"progress xs\">\r\n\t\t\t\t\t\t<!-- Change the css width attribute to simulate progress -->\r\n\t\t\t\t\t\t<div class=\"progress-bar progress-bar-aqua\" style=\"width: 20%\"\r\n\t\t\t\t\t\t\trole=\"progressbar\" aria-valuenow=\"20\" aria-valuemin=\"0\"\r\n\t\t\t\t\t\t\taria-valuemax=\"100\">\r\n\t\t\t\t\t\t\t<span class=\"sr-only\">20% Complete</span>\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\t\t\t</a>\r\n\t\t\t</li>\r\n\t\t\t<!-- end task item -->\r\n\t\t</ul>\r\n\t</li>\r\n\t<li class=\"footer\"><a href=\"javascript:void(0)\">{{ 'TASKBOX.FOOTER' }}</a></li>\r\n</ul>\r\n"
+
+/***/ }),
+
+/***/ 1141:
+/***/ (function(module, exports) {
+
 module.exports = "<!-- Menu Toggle Button -->\r\n<a href=\"javascript:void(0)\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"> <!-- The user image in the navbar-->\r\n\t<img [src]=\"currentUser.photo\" class=\"user-image\" alt=\"currentUser.UserName\"> <!-- hidden-xs hides the username on small devices so only the image appears. -->\r\n\t<span class=\"hidden-xs\">{{currentUser.UserName}}</span>\r\n</a>\r\n<ul class=\"dropdown-menu\">\r\n\t<!-- The user image in the menu -->\r\n\t<li class=\"user-header\"><img [src]=\"currentUser.photo\"\r\n\t\tclass=\"img-circle\" alt=\"currentUser.UserName\">\r\n\t\t<p>\r\n\t\t\t{{currentUser.UserName}} <small>{{currentUser.loginName}}</small>\r\n\t\t</p></li>\r\n\t<!-- Menu Body -->\r\n\t<li class=\"user-body\">\r\n\t\t<div class=\"col-xs-6 text-center\">\r\n\t\t\t<a class=\"label label-default\" href=\"javascript:void(0)\">Customers <span class=\"badge\">{{DestCount}}</span></a>\r\n\t\t</div>\r\n\t\t<div class=\"col-xs-6 text-center\">\r\n\t\t\t<a class=\"label label-default\" href=\"javascript:void(0)\">this Month Visits <span class=\"badge\">{{visCount}}</span></a>\r\n\t\t</div>\r\n\t\t<!--<div class=\"col-xs-4 text-center\">\r\n\t\t\t<a href=\"javascript:void(0)\">Friends</a>\r\n\t\t</div>-->\r\n\t</li>\r\n\t<!-- Menu Footer-->\r\n\t<li class=\"user-footer\">\r\n\t\t<div class=\"pull-left\">\r\n\t\t\t<a [routerLink]=\"['/home/pass']\" class=\"btn btn-default btn-flat\">Change Password</a>\r\n\t\t</div>\r\n\t\t<div class=\"pull-right\">\r\n\t\t\t<a [routerLink]=\"['/logout']\" class=\"btn btn-default btn-flat\">Sign out</a>\r\n\t\t</div>\r\n\t</li>\r\n</ul>\r\n"
 
 /***/ }),
 
-/***/ 1412:
+/***/ 1414:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(675);
 
-
-/***/ }),
-
-/***/ 142:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(22)(false);
-// imports
-
-
-// module
-exports.push([module.i, "@media print {\r\n    @page {\r\n        size: portrait;\r\n        margin: 1cm;\r\n    }\r\n\r\n    .PrintnewPage {\r\n        page-break-after: always;\r\n    }\r\n\r\n    .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,\r\n    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {\r\n        float: left;\r\n    }\r\n\r\n    .col-sm-12, .col-md-12 {\r\n        width: 100%;\r\n    }\r\n\r\n    .col-sm-11, .col-md-12 {\r\n        width: 91.66666666666666%;\r\n    }\r\n\r\n    .col-sm-10, .col-md-10 {\r\n        width: 83.33333333333334%;\r\n    }\r\n\r\n    .col-sm-9, .col-md-9 {\r\n        width: 75%;\r\n    }\r\n\r\n    .col-sm-8, .col-md-8 {\r\n        width: 66.66666666666666%;\r\n    }\r\n\r\n    .col-sm-7, .col-md-7 {\r\n        width: 58.333333333333336%;\r\n    }\r\n\r\n    .col-sm-6, .col-md-6 {\r\n        width: 50%;\r\n    }\r\n\r\n    .col-sm-5, .col-md-5 {\r\n        width: 41.66666666666667%;\r\n    }\r\n\r\n    .col-sm-4, .col-md-4 {\r\n        width: 33.33333333333333%;\r\n    }\r\n\r\n    .col-sm-3, .col-md-3 {\r\n        width: 25%;\r\n    }\r\n\r\n    .col-sm-2, .col-md-2 {\r\n        width: 16.666666666666664%;\r\n    }\r\n\r\n    .col-sm-1, .col-md-1 {\r\n        width: 8.333333333333332%;\r\n    }\r\n}\r\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
 
 /***/ }),
 
@@ -1046,7 +1035,7 @@ var AuthenticationService = (function () {
     return AuthenticationService;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/auth.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/auth.service.js.map
 
 /***/ }),
 
@@ -1056,7 +1045,7 @@ var AuthenticationService = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__array_pipe__ = __webpack_require__(867);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__array_pipe__ = __webpack_require__(868);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CustomPipesModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1088,7 +1077,7 @@ var CustomPipesModule = (function () {
     ], CustomPipesModule);
     return CustomPipesModule;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/pipe.module.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/pipe.module.js.map
 
 /***/ }),
 
@@ -1102,8 +1091,8 @@ var CustomPipesModule = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return VacTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return MessageTypes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return provinces; });
-var NodeUrl = '/api/';
-// export const NodeUrl = 'http://localhost:5500/api/'
+// export const NodeUrl = '/api/'
+var NodeUrl = 'http://localhost:5500/api/';
 var JobClass = [
     { class: 0, name: 'SysAdmin' },
     { class: 1, name: 'Line Manager' },
@@ -1247,7 +1236,7 @@ var provinces = [
         "code": "EG-HU"
     }
 ];
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/BasicObjects.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/BasicObjects.js.map
 
 /***/ }),
 
@@ -1255,50 +1244,67 @@ var provinces = [
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dashboard_dashboard_component__ = __webpack_require__(827);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dateSlider_dateSlider__ = __webpack_require__(834);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__dateSlider_dateSlider__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__planSlider_planSlider__ = __webpack_require__(836);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__planSlider_planSlider__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_module__ = __webpack_require__(835);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__helper_module__["a"]; });
+
+
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 272:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dashboard_dashboard_component__ = __webpack_require__(828);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__dashboard_dashboard_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dashboard_userSchedule_schedule__ = __webpack_require__(829);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dashboard_userSchedule_schedule__ = __webpack_require__(830);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_1__dashboard_userSchedule_schedule__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_userWorkRate_workRate__ = __webpack_require__(830);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_userWorkRate_workRate__ = __webpack_require__(831);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_2__dashboard_userWorkRate_workRate__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_userPlan_plan__ = __webpack_require__(828);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_userPlan_plan__ = __webpack_require__(829);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_3__dashboard_userPlan_plan__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_scoreCard_scoreCard__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_scoreCard_scoreCard__ = __webpack_require__(419);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_4__dashboard_scoreCard_scoreCard__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__destinations_destination_component__ = __webpack_require__(832);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__destinations_destination_component__ = __webpack_require__(833);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_5__destinations_destination_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__destinations_LineUsers_lineUsers__ = __webpack_require__(831);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__destinations_LineUsers_lineUsers__ = __webpack_require__(832);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_6__destinations_LineUsers_lineUsers__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home_component__ = __webpack_require__(420);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_7__home_home_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_sidebar_sidebar_component__ = __webpack_require__(837);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__home_sidebar_sidebar_component__ = __webpack_require__(838);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_8__home_sidebar_sidebar_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__home_topnav_topnav_component__ = __webpack_require__(838);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__home_topnav_topnav_component__ = __webpack_require__(839);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_9__home_topnav_topnav_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__regions_region_component__ = __webpack_require__(840);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__regions_region_component__ = __webpack_require__(841);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_10__regions_region_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__user_user_component__ = __webpack_require__(841);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__user_user_component__ = __webpack_require__(842);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_11__user_user_component__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__visits_visit_component__ = __webpack_require__(422);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "w", function() { return __WEBPACK_IMPORTED_MODULE_12__visits_visit_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__vacations_vac_component__ = __webpack_require__(842);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__vacations_vac_component__ = __webpack_require__(843);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_13__vacations_vac_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__contactUS_contact_component__ = __webpack_require__(826);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__contactUS_contact_component__ = __webpack_require__(827);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_14__contactUS_contact_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__plan_plan_component__ = __webpack_require__(839);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__plan_plan_component__ = __webpack_require__(840);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_15__plan_plan_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__chngpass_chngpass__ = __webpack_require__(825);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__chngpass_chngpass__ = __webpack_require__(826);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_16__chngpass_chngpass__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__login_login_component__ = __webpack_require__(421);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_17__login_login_component__["a"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "v", function() { return __WEBPACK_IMPORTED_MODULE_17__login_login_component__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__visits_visit_module__ = __webpack_require__(847);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__visits_visit_module__ = __webpack_require__(848);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_18__visits_visit_module__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__BasicData_basic_module__ = __webpack_require__(805);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_19__BasicData_basic_module__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__helpers__ = __webpack_require__(419);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__helpers__ = __webpack_require__(271);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_20__helpers__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__Reports_report_module__ = __webpack_require__(820);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__Reports_report_module__ = __webpack_require__(821);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_21__Reports_report_module__["a"]; });
 
 
@@ -1323,16 +1329,16 @@ var provinces = [
 // export * from './Charts/chart.module';
 
 
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
 
 /***/ }),
 
-/***/ 272:
+/***/ 273:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__ = __webpack_require__(317);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Rx__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessagesService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1386,11 +1392,11 @@ var MessagesService = (function () {
     ], MessagesService);
     return MessagesService;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/messages.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/messages.service.js.map
 
 /***/ }),
 
-/***/ 38:
+/***/ 36:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1420,11 +1426,11 @@ function pad(pad, str, padLeft) {
         return (str + pad).substring(0, pad.length);
     }
 }
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/helper.functions.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/helper.functions.js.map
 
 /***/ }),
 
-/***/ 415:
+/***/ 416:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1458,11 +1464,11 @@ var IMSData = (function () {
     }
     return IMSData;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/region.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/region.js.map
 
 /***/ }),
 
-/***/ 416:
+/***/ 417:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1490,25 +1496,25 @@ var IMSData = (function () {
 
 
 
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
 
 /***/ }),
 
-/***/ 417:
+/***/ 418:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__report_component__ = __webpack_require__(819);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__report_component__ = __webpack_require__(820);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__report_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__reportHome_rptHome_component__ = __webpack_require__(821);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__reportHome_rptHome_component__ = __webpack_require__(822);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__reportHome_rptHome_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visitCompare_visitCompare__ = __webpack_require__(823);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__visitCompare_visitCompare__ = __webpack_require__(824);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__visitCompare_visitCompare__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__visitDaily_visitDaily__ = __webpack_require__(824);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__visitDaily_visitDaily__ = __webpack_require__(825);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_3__visitDaily_visitDaily__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__specVisits_specVisits__ = __webpack_require__(822);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__specVisits_specVisits__ = __webpack_require__(823);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_4__specVisits_specVisits__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__promo_promo__ = __webpack_require__(818);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__promo_promo__ = __webpack_require__(819);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_5__promo_promo__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__MedRepRpt_medRepReport__ = __webpack_require__(813);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_6__MedRepRpt_medRepReport__["a"]; });
@@ -1520,7 +1526,9 @@ var IMSData = (function () {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_9__drugAnalysis_customers_drugCustomer__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__drugAnalysis_Specs_drugSpecs__ = __webpack_require__(814);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_10__drugAnalysis_Specs_drugSpecs__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__dashboard_scoreCard_scoreCard__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__drugAnalysis_promo_drugPromo__ = __webpack_require__(818);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_11__drugAnalysis_promo_drugPromo__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__dashboard_scoreCard_scoreCard__ = __webpack_require__(419);
 /* unused harmony namespace reexport */
 
 
@@ -1534,11 +1542,12 @@ var IMSData = (function () {
 
 
 
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
 
 /***/ }),
 
-/***/ 418:
+/***/ 419:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1577,31 +1586,14 @@ var ScoreCardComponent = (function () {
     ScoreCardComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'dash-score',
-            template: __webpack_require__(1112),
-            styles: [__webpack_require__(1047)]
+            template: __webpack_require__(1114),
+            styles: [__webpack_require__(1048)]
         }), 
         __metadata('design:paramtypes', [])
     ], ScoreCardComponent);
     return ScoreCardComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/scoreCard.js.map
-
-/***/ }),
-
-/***/ 419:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dateSlider_dateSlider__ = __webpack_require__(833);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__dateSlider_dateSlider__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__planSlider_planSlider__ = __webpack_require__(835);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__planSlider_planSlider__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__helper_module__ = __webpack_require__(834);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__helper_module__["a"]; });
-
-
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/scoreCard.js.map
 
 /***/ }),
 
@@ -1611,7 +1603,7 @@ var ScoreCardComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_auth_service__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_messages_service__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_messages_service__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_toaster_angular2_toaster__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_toaster_angular2_toaster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_toaster_angular2_toaster__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
@@ -1694,14 +1686,14 @@ var HomeComponent = (function () {
     HomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-home',
-            template: __webpack_require__(1119),
+            template: __webpack_require__(1121),
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_messages_service__["a" /* MessagesService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services_messages_service__["a" /* MessagesService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_toaster_angular2_toaster__["ToasterService"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3_angular2_toaster_angular2_toaster__["ToasterService"]) === 'function' && _c) || Object])
     ], HomeComponent);
     return HomeComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/home.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/home.component.js.map
 
 /***/ }),
 
@@ -1710,7 +1702,7 @@ var HomeComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LogOutComponent; });
@@ -1757,7 +1749,7 @@ var LoginComponent = (function () {
     LoginComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'login',
-            template: __webpack_require__(1122),
+            template: __webpack_require__(1124),
             styles: ["\n        h1 {\n            margin-top: 20px;\n            margin-bottom: 10px;\n            text-align: center;\n        }\n        login-page {\n            position: absolute;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            overflow: auto;\n            text-align: center;\n        }\n    "]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthenticationService */]) === 'function' && _b) || Object])
@@ -1785,7 +1777,7 @@ var LogOutComponent = (function () {
     return LogOutComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/login.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/login.component.js.map
 
 /***/ }),
 
@@ -1795,10 +1787,10 @@ var LogOutComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_validators__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_validators__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisitComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2121,14 +2113,14 @@ var VisitComponent = (function () {
     VisitComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-visit',
-            template: __webpack_require__(1130)
+            template: __webpack_require__(1132)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["u" /* VisitService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["u" /* VisitService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["r" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["r" /* GiftService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["f" /* DestinationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["f" /* DestinationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _f) || Object, (typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _g) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["u" /* VisitService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["u" /* VisitService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["q" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["q" /* GiftService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["f" /* DestinationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["f" /* DestinationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _f) || Object, (typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _g) || Object])
     ], VisitComponent);
     return VisitComponent;
     var _a, _b, _c, _d, _e, _f, _g;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/visit.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/visit.component.js.map
 
 /***/ }),
 
@@ -2137,7 +2129,7 @@ var VisitComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2170,7 +2162,7 @@ var AuthGuard = (function () {
     return AuthGuard;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/auth.guard.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/auth.guard.js.map
 
 /***/ }),
 
@@ -2182,7 +2174,7 @@ var AuthGuard = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegionService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2245,7 +2237,7 @@ var RegionService = (function () {
     return RegionService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/region.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/region.service.js.map
 
 /***/ }),
 
@@ -2267,7 +2259,96 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
+/***/ 49:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(22)(false);
+// imports
+
+
+// module
+exports.push([module.i, "@media print {\r\n    @page {\r\n        size: portrait;\r\n        margin: 1cm;\r\n    }\r\n\r\n    .print-chart{\r\n        max-height: 612px;\r\n        max-width: 700px;\r\n    }\r\n\r\n    .PrintnewPage {\r\n        page-break-after: always;\r\n    }\r\n\r\n    .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,\r\n    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {\r\n        float: left;\r\n    }\r\n\r\n    .col-sm-12, .col-md-12 {\r\n        width: 100%;\r\n    }\r\n\r\n    .col-sm-11, .col-md-12 {\r\n        width: 91.66666666666666%;\r\n    }\r\n\r\n    .col-sm-10, .col-md-10 {\r\n        width: 83.33333333333334%;\r\n    }\r\n\r\n    .col-sm-9, .col-md-9 {\r\n        width: 75%;\r\n    }\r\n\r\n    .col-sm-8, .col-md-8 {\r\n        width: 66.66666666666666%;\r\n    }\r\n\r\n    .col-sm-7, .col-md-7 {\r\n        width: 58.333333333333336%;\r\n    }\r\n\r\n    .col-sm-6, .col-md-6 {\r\n        width: 50%;\r\n    }\r\n\r\n    .col-sm-5, .col-md-5 {\r\n        width: 41.66666666666667%;\r\n    }\r\n\r\n    .col-sm-4, .col-md-4 {\r\n        width: 33.33333333333333%;\r\n    }\r\n\r\n    .col-sm-3, .col-md-3 {\r\n        width: 25%;\r\n    }\r\n\r\n    .col-sm-2, .col-md-2 {\r\n        width: 16.666666666666664%;\r\n    }\r\n\r\n    .col-sm-1, .col-md-1 {\r\n        width: 8.333333333333332%;\r\n    }\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
 /***/ 5:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__auth_service__ = __webpack_require__(17);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__auth_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth_guard__ = __webpack_require__(423);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__auth_guard__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__breadcrumb_service__ = __webpack_require__(869);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_2__breadcrumb_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__drug_service__ = __webpack_require__(873);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_3__drug_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gift_service__ = __webpack_require__(874);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_4__gift_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__importance_service__ = __webpack_require__(875);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_5__importance_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__line_service__ = __webpack_require__(877);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_6__line_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__medspec_service__ = __webpack_require__(878);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_7__medspec_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__region_service__ = __webpack_require__(424);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_8__region_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__user_service__ = __webpack_require__(882);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_9__user_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__userRegion_service__ = __webpack_require__(883);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_10__userRegion_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__destination_service__ = __webpack_require__(872);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_11__destination_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__visit_service__ = __webpack_require__(885);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_12__visit_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__dashboard_service__ = __webpack_require__(871);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_13__dashboard_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__promo_service__ = __webpack_require__(880);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_14__promo_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__plan_service__ = __webpack_require__(879);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_15__plan_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__messages_service__ = __webpack_require__(273);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_16__messages_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ims_service__ = __webpack_require__(876);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_17__ims_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__reports_service__ = __webpack_require__(881);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_18__reports_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__vacation_service__ = __webpack_require__(884);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_19__vacation_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__contactUs_service__ = __webpack_require__(870);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_20__contactUs_service__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2286,7 +2367,7 @@ module.exports = module.exports.toString();
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_1__BasicObjects__["e"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_1__BasicObjects__["b"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "w", function() { return __WEBPACK_IMPORTED_MODULE_1__BasicObjects__["f"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__region__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__region__ = __webpack_require__(416);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_2__region__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user__ = __webpack_require__(799);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__user__["a"]; });
@@ -2311,78 +2392,7 @@ module.exports = module.exports.toString();
 
 
 
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__auth_service__ = __webpack_require__(17);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__auth_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__auth_guard__ = __webpack_require__(423);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__auth_guard__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__breadcrumb_service__ = __webpack_require__(868);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_2__breadcrumb_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__drug_service__ = __webpack_require__(872);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_3__drug_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__gift_service__ = __webpack_require__(873);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_4__gift_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__importance_service__ = __webpack_require__(874);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_5__importance_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__line_service__ = __webpack_require__(876);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_6__line_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__medspec_service__ = __webpack_require__(877);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_7__medspec_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__region_service__ = __webpack_require__(424);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_8__region_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__user_service__ = __webpack_require__(881);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_9__user_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__userRegion_service__ = __webpack_require__(882);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_10__userRegion_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__destination_service__ = __webpack_require__(871);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_11__destination_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__visit_service__ = __webpack_require__(884);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_12__visit_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__dashboard_service__ = __webpack_require__(870);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_13__dashboard_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__promo_service__ = __webpack_require__(879);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_14__promo_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__plan_service__ = __webpack_require__(878);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_15__plan_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__messages_service__ = __webpack_require__(272);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_16__messages_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ims_service__ = __webpack_require__(875);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_17__ims_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__reports_service__ = __webpack_require__(880);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_18__reports_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__vacation_service__ = __webpack_require__(883);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_19__vacation_service__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__contactUs_service__ = __webpack_require__(869);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_20__contactUs_service__["a"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
 
 /***/ }),
 
@@ -2405,10 +2415,10 @@ webpackEmptyContext.id = 674;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(886);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(887);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(765);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(885);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(886);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_app_module__ = __webpack_require__(802);
 
 
@@ -2419,7 +2429,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/main.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/main.js.map
 
 /***/ }),
 
@@ -2469,7 +2479,7 @@ var ContactUs = (function () {
     }
     return ContactUs;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/basicData.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/basicData.js.map
 
 /***/ }),
 
@@ -2483,7 +2493,7 @@ var Destination = (function () {
     }
     return Destination;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/destinations.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/destinations.js.map
 
 /***/ }),
 
@@ -2515,7 +2525,7 @@ var PlanImps = (function () {
     }
     return PlanImps;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/plan.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/plan.js.map
 
 /***/ }),
 
@@ -2541,7 +2551,7 @@ var rptMedicalRep = (function () {
     }
     return rptMedicalRep;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/reports.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/reports.js.map
 
 /***/ }),
 
@@ -2579,7 +2589,7 @@ var Vacation = (function () {
     }
     return Vacation;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/user.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/user.js.map
 
 /***/ }),
 
@@ -2605,7 +2615,7 @@ var VisitGifts = (function () {
     }
     return VisitGifts;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/visits.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/visits.js.map
 
 /***/ }),
 
@@ -2633,13 +2643,13 @@ var AppComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
             template: '<router-outlet></router-outlet>',
-            styles: [__webpack_require__(1045)]
+            styles: [__webpack_require__(1046)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/app.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/app.component.js.map
 
 /***/ }),
 
@@ -2648,25 +2658,25 @@ var AppComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_pagination__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng_sidebar__ = __webpack_require__(1062);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng_sidebar__ = __webpack_require__(1063);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng_sidebar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng_sidebar__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_toaster_angular2_toaster__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_toaster_angular2_toaster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_toaster_angular2_toaster__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng2_bootstrap__ = __webpack_require__(1071);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_charts__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng2_bootstrap__ = __webpack_require__(1072);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_charts__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_component__ = __webpack_require__(801);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components__ = __webpack_require__(272);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_login_login_component__ = __webpack_require__(421);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pipes_pipe_module__ = __webpack_require__(189);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_routing__ = __webpack_require__(803);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_widgets__ = __webpack_require__(856);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_widgets__ = __webpack_require__(857);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2746,7 +2756,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/app.module.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/app.module.js.map
 
 /***/ }),
 
@@ -2754,9 +2764,9 @@ var AppModule = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_home_home_routing__ = __webpack_require__(836);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_home_home_routing__ = __webpack_require__(837);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Approuting; });
 
 
@@ -2770,7 +2780,7 @@ var routes = [
     { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ]);
 var Approuting = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes, { useHash: true });
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/app.routing.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/app.routing.js.map
 
 /***/ }),
 
@@ -2803,7 +2813,7 @@ var BasicDataComponent = (function () {
     ], BasicDataComponent);
     return BasicDataComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/basic.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/basic.component.js.map
 
 /***/ }),
 
@@ -2812,13 +2822,13 @@ var BasicDataComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_pagination__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6____ = __webpack_require__(416);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6____ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pipes_pipe_module__ = __webpack_require__(189);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasicDataModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2852,13 +2862,13 @@ var BasicDataModule = (function () {
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_6____["a" /* BasicDataComponent */], __WEBPACK_IMPORTED_MODULE_6____["b" /* SalesLineComponent */], __WEBPACK_IMPORTED_MODULE_6____["c" /* DrugComponent */],
                 __WEBPACK_IMPORTED_MODULE_6____["d" /* GiftComponent */], __WEBPACK_IMPORTED_MODULE_6____["e" /* ImportanceComponent */], __WEBPACK_IMPORTED_MODULE_6____["f" /* MedSpecComponent */], __WEBPACK_IMPORTED_MODULE_6____["g" /* PromoToolsComponent */], __WEBPACK_IMPORTED_MODULE_6____["h" /* ImsDataComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_7__services__["o" /* DrugService */], __WEBPACK_IMPORTED_MODULE_7__services__["r" /* GiftService */], __WEBPACK_IMPORTED_MODULE_7__services__["t" /* ImportanceService */], __WEBPACK_IMPORTED_MODULE_7__services__["q" /* LineService */], __WEBPACK_IMPORTED_MODULE_7__services__["p" /* MedSpecService */], __WEBPACK_IMPORTED_MODULE_7__services__["s" /* PromoToolsService */], __WEBPACK_IMPORTED_MODULE_7__services__["k" /* IMSService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_7__services__["o" /* DrugService */], __WEBPACK_IMPORTED_MODULE_7__services__["q" /* GiftService */], __WEBPACK_IMPORTED_MODULE_7__services__["t" /* ImportanceService */], __WEBPACK_IMPORTED_MODULE_7__services__["s" /* LineService */], __WEBPACK_IMPORTED_MODULE_7__services__["r" /* MedSpecService */], __WEBPACK_IMPORTED_MODULE_7__services__["p" /* PromoToolsService */], __WEBPACK_IMPORTED_MODULE_7__services__["k" /* IMSService */]],
         }), 
         __metadata('design:paramtypes', [])
     ], BasicDataModule);
     return BasicDataModule;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/basic.module.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/basic.module.js.map
 
 /***/ }),
 
@@ -2867,8 +2877,8 @@ var BasicDataModule = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrugComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2990,14 +3000,14 @@ var DrugComponent = (function () {
     DrugComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-drug',
-            template: __webpack_require__(1092)
+            template: __webpack_require__(1093)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["q" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["q" /* LineService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["s" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["s" /* LineService */]) === 'function' && _c) || Object])
     ], DrugComponent);
     return DrugComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/drug.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drug.component.js.map
 
 /***/ }),
 
@@ -3006,8 +3016,8 @@ var DrugComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GiftComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3122,14 +3132,14 @@ var GiftComponent = (function () {
     GiftComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-gift',
-            template: __webpack_require__(1093)
+            template: __webpack_require__(1094)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["r" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["r" /* GiftService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["q" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["q" /* GiftService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object])
     ], GiftComponent);
     return GiftComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/gift.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/gift.component.js.map
 
 /***/ }),
 
@@ -3138,8 +3148,8 @@ var GiftComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ImportanceComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3254,14 +3264,14 @@ var ImportanceComponent = (function () {
     ImportanceComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-importance',
-            template: __webpack_require__(1094)
+            template: __webpack_require__(1095)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["t" /* ImportanceService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["t" /* ImportanceService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object])
     ], ImportanceComponent);
     return ImportanceComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/importance.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/importance.component.js.map
 
 /***/ }),
 
@@ -3270,8 +3280,8 @@ var ImportanceComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ImsDataComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3386,14 +3396,14 @@ var ImsDataComponent = (function () {
     ImsDataComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'ims',
-            template: __webpack_require__(1095)
+            template: __webpack_require__(1096)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object])
     ], ImsDataComponent);
     return ImsDataComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/ims.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/ims.component.js.map
 
 /***/ }),
 
@@ -3402,8 +3412,8 @@ var ImsDataComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MedSpecComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3518,15 +3528,15 @@ var MedSpecComponent = (function () {
     MedSpecComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-spec',
-            template: __webpack_require__(1096),
-            providers: [__WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */]]
+            template: __webpack_require__(1097),
+            providers: [__WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */]]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object])
     ], MedSpecComponent);
     return MedSpecComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/medspec.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/medspec.component.js.map
 
 /***/ }),
 
@@ -3536,9 +3546,9 @@ var MedSpecComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pipes_validators__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pipes_validators__ = __webpack_require__(108);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PromoToolsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3707,14 +3717,14 @@ var PromoToolsComponent = (function () {
     PromoToolsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-promotools',
-            template: __webpack_require__(1097)
+            template: __webpack_require__(1098)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["s" /* PromoToolsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["s" /* PromoToolsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["r" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["r" /* GiftService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _e) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["p" /* PromoToolsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["p" /* PromoToolsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["q" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["q" /* GiftService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _e) || Object])
     ], PromoToolsComponent);
     return PromoToolsComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/promo.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/promo.component.js.map
 
 /***/ }),
 
@@ -3723,8 +3733,8 @@ var PromoToolsComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SalesLineComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3846,14 +3856,14 @@ var SalesLineComponent = (function () {
     SalesLineComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'salesline',
-            template: __webpack_require__(1098)
+            template: __webpack_require__(1099)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["q" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["q" /* LineService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["s" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["s" /* LineService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object])
     ], SalesLineComponent);
     return SalesLineComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/lines.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/lines.component.js.map
 
 /***/ }),
 
@@ -3862,10 +3872,10 @@ var SalesLineComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_charts__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MedicalRepReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3901,6 +3911,11 @@ var MedicalRepReportComponent = (function () {
         this.lineChartLabels = [];
         this.lineChartLegend = true;
         this.lineChartType = 'line';
+        this.lineChartOptions = {
+            responsive: true,
+            maintainAspectRatio: true
+        };
+        this.colorsEmpty = [];
     }
     MedicalRepReportComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -3960,14 +3975,15 @@ var MedicalRepReportComponent = (function () {
     MedicalRepReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-medRep',
-            template: __webpack_require__(1099)
+            template: __webpack_require__(1100),
+            styles: [__webpack_require__(49)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["q" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["q" /* LineService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _d) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["s" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["s" /* LineService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _d) || Object])
     ], MedicalRepReportComponent);
     return MedicalRepReportComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/medRepReport.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/medRepReport.js.map
 
 /***/ }),
 
@@ -3976,9 +3992,9 @@ var MedicalRepReportComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrugSpecsReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4052,15 +4068,15 @@ var DrugSpecsReportComponent = (function () {
     DrugSpecsReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-drugSpecs',
-            template: __webpack_require__(1100),
-            styles: [__webpack_require__(142)]
+            template: __webpack_require__(1101),
+            styles: [__webpack_require__(49)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _e) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _e) || Object])
     ], DrugSpecsReportComponent);
     return DrugSpecsReportComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/drugSpecs.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drugSpecs.js.map
 
 /***/ }),
 
@@ -4069,9 +4085,9 @@ var DrugSpecsReportComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrugCommentReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4143,15 +4159,15 @@ var DrugCommentReportComponent = (function () {
     DrugCommentReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-drugComment',
-            template: __webpack_require__(1101),
-            styles: [__webpack_require__(142)]
+            template: __webpack_require__(1102),
+            styles: [__webpack_require__(49)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _e) || Object])
     ], DrugCommentReportComponent);
     return DrugCommentReportComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/drugComment.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drugComment.js.map
 
 /***/ }),
 
@@ -4160,9 +4176,9 @@ var DrugCommentReportComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrugCustomerReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4253,15 +4269,15 @@ var DrugCustomerReportComponent = (function () {
     DrugCustomerReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-drugCustomer',
-            template: __webpack_require__(1102),
-            styles: [__webpack_require__(142)]
+            template: __webpack_require__(1103),
+            styles: [__webpack_require__(49)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["f" /* DestinationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["f" /* DestinationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["d" /* RegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["d" /* RegionService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _f) || Object])
     ], DrugCustomerReportComponent);
     return DrugCustomerReportComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/drugCustomer.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drugCustomer.js.map
 
 /***/ }),
 
@@ -4270,9 +4286,9 @@ var DrugCustomerReportComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrugPeriodReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4339,15 +4355,15 @@ var DrugPeriodReportComponent = (function () {
     DrugPeriodReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-drugPeriod',
-            template: __webpack_require__(1103),
-            styles: [__webpack_require__(142)]
+            template: __webpack_require__(1104),
+            styles: [__webpack_require__(49)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _d) || Object])
     ], DrugPeriodReportComponent);
     return DrugPeriodReportComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/drugPeriod.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drugPeriod.js.map
 
 /***/ }),
 
@@ -4356,9 +4372,102 @@ var DrugPeriodReportComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrugPromoReportComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DrugPromoReportComponent = (function () {
+    function DrugPromoReportComponent(srv, srvDrg, srvPromo, srvGft, auth, srvIms, location) {
+        this.srv = srv;
+        this.srvDrg = srvDrg;
+        this.srvPromo = srvPromo;
+        this.srvGft = srvGft;
+        this.auth = auth;
+        this.srvIms = srvIms;
+        this.location = location;
+        this.currentUser = this.auth.getUser();
+        this.drugList = [];
+        this.collection = [];
+        this.imsList = [];
+        this.today = new Date();
+        this.fromDate = __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](this.today);
+        this.toDate = __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](this.today);
+        this.drugID = null;
+        this.imsID = null;
+        this.orderbyString = "";
+        this.orderbyClass = "glyphicon glyphicon-sort";
+        this.reportHeader = "Product Analysis (Promo Tools In Period)";
+    }
+    DrugPromoReportComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.srvDrg.getDrug().subscribe(function (drg) {
+            _this.drugList = drg;
+            _this.srvIms.getUserIMS(_this.currentUser.userID).subscribe(function (ims) { return _this.imsList = ims; });
+        });
+    };
+    DrugPromoReportComponent.prototype.ViewReport = function () {
+        var _this = this;
+        this.srv.getpromoAnalysis(__WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](new Date(this.fromDate)), __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](new Date(this.toDate)), this.drugID, this.imsID == null ? null : this.imsID.toString())
+            .subscribe(function (ret) {
+            _this.collection = ret;
+        });
+    };
+    DrugPromoReportComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    DrugPromoReportComponent.prototype.printReport = function () {
+        window.print();
+    };
+    DrugPromoReportComponent.prototype.SortTable = function (column) {
+        if (this.orderbyString.indexOf(column) == -1) {
+            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
+            this.orderbyString = '+' + column;
+        }
+        else if (this.orderbyString.indexOf('-' + column) == -1) {
+            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
+            this.orderbyString = '-' + column;
+        }
+        else {
+            this.orderbyClass = 'glyphicon glyphicon-sort';
+            this.orderbyString = '';
+        }
+    };
+    DrugPromoReportComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'rpt-drugPromo',
+            template: __webpack_require__(1105),
+            styles: [__webpack_require__(49)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["o" /* DrugService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["p" /* PromoToolsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["p" /* PromoToolsService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["q" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["q" /* GiftService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _f) || Object, (typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _g) || Object])
+    ], DrugPromoReportComponent);
+    return DrugPromoReportComponent;
+    var _a, _b, _c, _d, _e, _f, _g;
+}());
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drugPromo.js.map
+
+/***/ }),
+
+/***/ 819:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PromoReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4424,19 +4533,19 @@ var PromoReportComponent = (function () {
     PromoReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-promo',
-            template: __webpack_require__(1104),
-            styles: [__webpack_require__(142), __webpack_require__(1046)]
+            template: __webpack_require__(1106),
+            styles: [__webpack_require__(49), __webpack_require__(1047)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["r" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["r" /* GiftService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["s" /* PromoToolsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["s" /* PromoToolsService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _f) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["q" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["q" /* GiftService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["p" /* PromoToolsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["p" /* PromoToolsService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _f) || Object])
     ], PromoReportComponent);
     return PromoReportComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/promo.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/promo.js.map
 
 /***/ }),
 
-/***/ 819:
+/***/ 820:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4465,25 +4574,26 @@ var ReportsComponent = (function () {
     ], ReportsComponent);
     return ReportsComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/report.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/report.component.js.map
 
 /***/ }),
 
-/***/ 820:
+/***/ 821:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_pagination__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_charts__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_charts__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7____ = __webpack_require__(417);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pipes_pipe_module__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8____ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pipes_pipe_module__ = __webpack_require__(189);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4504,6 +4614,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // import { reportRouting } from './report.routing';
 var ReportsModule = (function () {
     function ReportsModule() {
@@ -4512,26 +4623,27 @@ var ReportsModule = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["BrowserModule"], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* ReactiveFormsModule */], __WEBPACK_IMPORTED_MODULE_9__pipes_pipe_module__["a" /* CustomPipesModule */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */], __WEBPACK_IMPORTED_MODULE_5_ngx_pagination__["a" /* NgxPaginationModule */], __WEBPACK_IMPORTED_MODULE_6_ng2_charts__["ChartsModule"]
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* ReactiveFormsModule */], __WEBPACK_IMPORTED_MODULE_10__pipes_pipe_module__["a" /* CustomPipesModule */], __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* RouterModule */], __WEBPACK_IMPORTED_MODULE_5_ngx_pagination__["a" /* NgxPaginationModule */], __WEBPACK_IMPORTED_MODULE_6_ng2_charts__["ChartsModule"], __WEBPACK_IMPORTED_MODULE_7__helpers__["a" /* HelperModule */]
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_7____["a" /* ReportsComponent */], __WEBPACK_IMPORTED_MODULE_7____["b" /* ReportHomeComponent */], __WEBPACK_IMPORTED_MODULE_7____["c" /* VisCompareReportComponent */],
-                __WEBPACK_IMPORTED_MODULE_7____["d" /* SpecVisitsComponent */], __WEBPACK_IMPORTED_MODULE_7____["e" /* PromoReportComponent */], __WEBPACK_IMPORTED_MODULE_7____["f" /* VisDailyReportComponent */],
-                __WEBPACK_IMPORTED_MODULE_7____["g" /* MedicalRepReportComponent */],
-                __WEBPACK_IMPORTED_MODULE_7____["h" /* DrugCommentReportComponent */], __WEBPACK_IMPORTED_MODULE_7____["i" /* DrugPeriodReportComponent */],
-                __WEBPACK_IMPORTED_MODULE_7____["j" /* DrugCustomerReportComponent */], __WEBPACK_IMPORTED_MODULE_7____["k" /* DrugSpecsReportComponent */] /**/],
+            declarations: [__WEBPACK_IMPORTED_MODULE_8____["a" /* ReportsComponent */], __WEBPACK_IMPORTED_MODULE_8____["b" /* ReportHomeComponent */], __WEBPACK_IMPORTED_MODULE_8____["c" /* VisCompareReportComponent */],
+                __WEBPACK_IMPORTED_MODULE_8____["d" /* SpecVisitsComponent */], __WEBPACK_IMPORTED_MODULE_8____["e" /* PromoReportComponent */], __WEBPACK_IMPORTED_MODULE_8____["f" /* VisDailyReportComponent */],
+                __WEBPACK_IMPORTED_MODULE_8____["g" /* MedicalRepReportComponent */],
+                __WEBPACK_IMPORTED_MODULE_8____["h" /* DrugCommentReportComponent */], __WEBPACK_IMPORTED_MODULE_8____["i" /* DrugPeriodReportComponent */],
+                __WEBPACK_IMPORTED_MODULE_8____["j" /* DrugCustomerReportComponent */], __WEBPACK_IMPORTED_MODULE_8____["k" /* DrugSpecsReportComponent */],
+                __WEBPACK_IMPORTED_MODULE_8____["l" /* DrugPromoReportComponent */] /**/],
             schemas: [__WEBPACK_IMPORTED_MODULE_0__angular_core__["CUSTOM_ELEMENTS_SCHEMA"]],
-            providers: [__WEBPACK_IMPORTED_MODULE_8__services__["l" /* ReportsService */], __WEBPACK_IMPORTED_MODULE_8__services__["b" /* AuthenticationService */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_9__services__["l" /* ReportsService */], __WEBPACK_IMPORTED_MODULE_9__services__["b" /* AuthenticationService */]],
         }), 
         __metadata('design:paramtypes', [])
     ], ReportsModule);
     return ReportsModule;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/report.module.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/report.module.js.map
 
 /***/ }),
 
-/***/ 821:
+/***/ 822:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4600,7 +4712,7 @@ var ReportHomeComponent = (function () {
             },
             {
                 header: "Promotional Tools Analysis",
-                link: "/home/reports/promo"
+                link: "/home/reports/drgpromo"
             }
         ];
     }
@@ -4608,25 +4720,26 @@ var ReportHomeComponent = (function () {
     ReportHomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-home',
-            template: __webpack_require__(1105)
+            template: __webpack_require__(1107),
+            styles: [__webpack_require__(49)]
         }), 
         __metadata('design:paramtypes', [])
     ], ReportHomeComponent);
     return ReportHomeComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/rptHome.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/rptHome.component.js.map
 
 /***/ }),
 
-/***/ 822:
+/***/ 823:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_charts__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpecVisitsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4661,6 +4774,10 @@ var SpecVisitsComponent = (function () {
         this.pieChartData = [];
         this.pieChartType = 'pie';
         this.colorsEmpty = [];
+        this.pieChartOptions = {
+            responsive: true,
+            maintainAspectRatio: true
+        };
     }
     SpecVisitsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -4673,7 +4790,7 @@ var SpecVisitsComponent = (function () {
         var _this = this;
         this.srv.getSpecVisits(this.selectedSpec, __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](new Date(this.fromDate)), __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](new Date(this.toDate)), this.imsID).subscribe(function (ret) {
             if (ret.length > 0) {
-                _this.pieChartLabels = ret.map(function (dat) { return dat.SpecName == null ? 'N/A' : dat.SpecName; });
+                _this.pieChartLabels = ret.map(function (dat) { return dat.IMS == null ? 'N/A' : dat.IMS; });
                 _this.pieChartData = ret.map(function (dat) { return dat.VisCount == null ? 0 : dat.VisCount; });
             }
             else {
@@ -4702,26 +4819,27 @@ var SpecVisitsComponent = (function () {
     SpecVisitsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-spec',
-            template: __webpack_require__(1106)
+            template: __webpack_require__(1108),
+            styles: [__webpack_require__(49)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _e) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _e) || Object])
     ], SpecVisitsComponent);
     return SpecVisitsComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/specVisits.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/specVisits.js.map
 
 /***/ }),
 
-/***/ 823:
+/***/ 824:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_charts__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisCompareReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4752,6 +4870,10 @@ var VisCompareReportComponent = (function () {
         this.pieChartData = [];
         this.pieChartType = 'pie';
         this.colorsEmpty = [];
+        this.ChartOptions = {
+            responsive: true,
+            maintainAspectRatio: true
+        };
     }
     VisCompareReportComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -4760,8 +4882,9 @@ var VisCompareReportComponent = (function () {
     };
     VisCompareReportComponent.prototype.newSchedule = function (datevalue) {
         var _this = this;
-        this.selectedDate = datevalue ? new Date() : datevalue;
-        this.srv.getUserVisitCompare(this.selectedUser ? this.currentUser.userID : this.selectedUser, __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](datevalue)).subscribe(function (rat) {
+        this.selectedDate = datevalue ? datevalue : new Date();
+        var user = this.selectedUser ? this.selectedUser : this.currentUser.userID;
+        this.srv.getUserVisitCompare(user, __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__["a" /* handleDate */](this.selectedDate)).subscribe(function (rat) {
             _this.pieChartLabels = rat.map(function (data) { return data.VisType; });
             _this.pieChartData = rat.map(function (data) { return data.VisCount == null ? 0 : data.VisCount; });
             _this.forceChartRefresh();
@@ -4799,24 +4922,27 @@ var VisCompareReportComponent = (function () {
     VisCompareReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-visComp',
-            template: __webpack_require__(1107)
+            template: __webpack_require__(1109),
+            styles: [__webpack_require__(49)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _d) || Object])
     ], VisCompareReportComponent);
     return VisCompareReportComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/visitCompare.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/visitCompare.js.map
 
 /***/ }),
 
-/***/ 824:
+/***/ 825:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_charts__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_charts__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisDailyReportComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4827,6 +4953,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -4841,6 +4968,24 @@ var VisDailyReportComponent = (function () {
         this.userList = [];
         this.selectedDate = new Date();
         this.userRate = [];
+        this.chartData = [{ data: [], label: '' }];
+        this.lineChartLabels = [];
+        this.lineChartType = 'line';
+        this.lineChartLegend = true;
+        this.colorsEmpty = [];
+        this.lineChartOptions = {
+            responsive: true,
+            maintainAspectRatio: true
+        };
+        this.lineChartColors = [
+            {
+                backgroundColor: 'rgba(148,159,177,0.2)',
+                borderColor: 'rgba(148,159,177,1)',
+                pointBackgroundColor: 'rgba(148,159,177,1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+            }];
     }
     VisDailyReportComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -4852,12 +4997,24 @@ var VisDailyReportComponent = (function () {
         this.selectedDate = datevalue ? new Date() : datevalue;
         this.srv.getUserVisitRate(this.selectedUser ? this.currentUser.userID : this.selectedUser, this.selectedDate.getMonth() + 1).subscribe(function (rat) {
             _this.userRate = rat[0];
+            _this.chartData = [{
+                    data: rat[0].map(function (da) { return da.visCount == null ? 0 : da.visCount; }),
+                    label: 'Visit Count'
+                }];
+            _this.lineChartLabels = rat[0].map(function (data) { return data.DayDate.split('T')[0]; });
+            _this.forceChartRefresh();
         });
     };
     VisDailyReportComponent.prototype.newUser = function () {
         var _this = this;
         this.srv.getUserVisitRate(this.selectedUser, this.selectedDate.getMonth() + 1).subscribe(function (rat) {
             _this.userRate = rat[0];
+            _this.chartData = [{
+                    data: rat[0].map(function (da) { return da.visCount == null ? 0 : da.visCount; }),
+                    label: 'Visit Count'
+                }];
+            _this.lineChartLabels = rat[0].map(function (data) { return data.DayDate.split('T')[0]; });
+            _this.forceChartRefresh();
         });
     };
     VisDailyReportComponent.prototype.goBack = function () {
@@ -4866,30 +5023,41 @@ var VisDailyReportComponent = (function () {
     VisDailyReportComponent.prototype.printReport = function () {
         window.print();
     };
+    VisDailyReportComponent.prototype.forceChartRefresh = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this._chart.refresh();
+        }, 10);
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3_ng2_charts__["BaseChartDirective"]), 
+        __metadata('design:type', Object)
+    ], VisDailyReportComponent.prototype, "_chart", void 0);
     VisDailyReportComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'rpt-visDaily',
-            template: __webpack_require__(1108)
+            template: __webpack_require__(1110),
+            styles: [__webpack_require__(49)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["l" /* ReportsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_common__["Location"]) === 'function' && _d) || Object])
     ], VisDailyReportComponent);
     return VisDailyReportComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/visitDaily.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/visitDaily.js.map
 
 /***/ }),
 
-/***/ 825:
+/***/ 826:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pipes_validators__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pipes_validators__ = __webpack_require__(108);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChngPassComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4947,25 +5115,25 @@ var ChngPassComponent = (function () {
     ChngPassComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-changePass',
-            template: __webpack_require__(1109)
+            template: __webpack_require__(1111)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__services__["c" /* UserService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _d) || Object])
     ], ChngPassComponent);
     return ChngPassComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/chngpass.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/chngpass.js.map
 
 /***/ }),
 
-/***/ 826:
+/***/ 827:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactUsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5098,23 +5266,23 @@ var ContactUsComponent = (function () {
     ContactUsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-cntct',
-            template: __webpack_require__(1110)
+            template: __webpack_require__(1112)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["n" /* ContactUsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["n" /* ContactUsService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _c) || Object])
     ], ContactUsComponent);
     return ContactUsComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/contact.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/contact.component.js.map
 
 /***/ }),
 
-/***/ 827:
+/***/ 828:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5159,24 +5327,24 @@ var DashboardComponent = (function () {
     DashboardComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'dashboard',
-            template: __webpack_require__(1111)
+            template: __webpack_require__(1113)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["c" /* UserService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["g" /* DashboardService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["g" /* DashboardService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object])
     ], DashboardComponent);
     return DashboardComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/dashboard.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/dashboard.component.js.map
 
 /***/ }),
 
-/***/ 828:
+/***/ 829:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserPlanComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5218,25 +5386,25 @@ var UserPlanComponent = (function () {
     UserPlanComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'dash-plan',
-            template: __webpack_require__(1113)
+            template: __webpack_require__(1115)
         }), 
         __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */]) === 'function' && _b) || Object])
     ], UserPlanComponent);
     return UserPlanComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/plan.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/plan.js.map
 
 /***/ }),
 
-/***/ 829:
+/***/ 830:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserScheduleComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5303,25 +5471,25 @@ var UserScheduleComponent = (function () {
     UserScheduleComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'dash-schedule',
-            template: __webpack_require__(1114)
+            template: __webpack_require__(1116)
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["g" /* DashboardService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["g" /* DashboardService */]) === 'function' && _c) || Object])
     ], UserScheduleComponent);
     return UserScheduleComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/schedule.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/schedule.js.map
 
 /***/ }),
 
-/***/ 830:
+/***/ 831:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_charts__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_charts__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_charts__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserWorkRateComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -5352,7 +5520,8 @@ var UserWorkRateComponent = (function () {
         this.lineChartLegend = true;
         this.lineChartType = 'line';
         this.lineChartOptions = {
-            responsive: true
+            responsive: true,
+            maintainAspectRatio: true
         };
         // public chartData = [
         //             { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' } //,
@@ -5440,18 +5609,18 @@ var UserWorkRateComponent = (function () {
     UserWorkRateComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'dash-workRate',
-            template: __webpack_require__(1115)
+            template: __webpack_require__(1117)
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["g" /* DashboardService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["g" /* DashboardService */]) === 'function' && _c) || Object])
     ], UserWorkRateComponent);
     return UserWorkRateComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/workRate.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/workRate.js.map
 
 /***/ }),
 
-/***/ 831:
+/***/ 832:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5504,17 +5673,17 @@ var LineUsersComponent = (function () {
     ], LineUsersComponent);
     return LineUsersComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/lineUsers.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/lineUsers.js.map
 
 /***/ }),
 
-/***/ 832:
+/***/ 833:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DestinationComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5771,18 +5940,18 @@ var DestinationComponent = (function () {
     DestinationComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-dest',
-            template: __webpack_require__(1116)
+            template: __webpack_require__(1118)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["f" /* DestinationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["f" /* DestinationService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["d" /* RegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["d" /* RegionService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["p" /* MedSpecService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__services__["t" /* ImportanceService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["t" /* ImportanceService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _f) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["f" /* DestinationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["f" /* DestinationService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services__["d" /* RegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["d" /* RegionService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["k" /* IMSService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["r" /* MedSpecService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__services__["t" /* ImportanceService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["t" /* ImportanceService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AuthenticationService */]) === 'function' && _f) || Object])
     ], DestinationComponent);
     return DestinationComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/destination.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/destination.component.js.map
 
 /***/ }),
 
-/***/ 833:
+/***/ 834:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5844,24 +6013,24 @@ var DateSliderComponent = (function () {
     DateSliderComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'date-slider',
-            template: __webpack_require__(1117),
+            template: __webpack_require__(1119),
             styles: [" h2 { display: inline; }\n    "]
         }), 
         __metadata('design:paramtypes', [])
     ], DateSliderComponent);
     return DateSliderComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/dateSlider.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/dateSlider.js.map
 
 /***/ }),
 
-/***/ 834:
+/***/ 835:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2____ = __webpack_require__(419);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2____ = __webpack_require__(271);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HelperModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5889,18 +6058,18 @@ var HelperModule = (function () {
     ], HelperModule);
     return HelperModule;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/helper.module.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/helper.module.js.map
 
 /***/ }),
 
-/***/ 835:
+/***/ 836:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlanSliderComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -5956,7 +6125,7 @@ var PlanSliderComponent = (function () {
     PlanSliderComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'plan-slider',
-            template: __webpack_require__(1118),
+            template: __webpack_require__(1120),
             styles: [" h2 { display: inline; }\n    "]
         }), 
         __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */]) === 'function' && _b) || Object])
@@ -5964,19 +6133,19 @@ var PlanSliderComponent = (function () {
     return PlanSliderComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/planSlider.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/planSlider.js.map
 
 /***/ }),
 
-/***/ 836:
+/***/ 837:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_auth_guard__ = __webpack_require__(423);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_component__ = __webpack_require__(420);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2____ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__BasicData__ = __webpack_require__(416);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Reports__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2____ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__BasicData__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Reports__ = __webpack_require__(418);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return homeRoutes; });
 
 
@@ -6023,17 +6192,18 @@ var homeRoutes = [
                     { path: 'drgcomment', component: __WEBPACK_IMPORTED_MODULE_4__Reports__["h" /* DrugCommentReportComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__services_auth_guard__["a" /* AuthGuard */]] },
                     { path: 'drgcust', component: __WEBPACK_IMPORTED_MODULE_4__Reports__["j" /* DrugCustomerReportComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__services_auth_guard__["a" /* AuthGuard */]] },
                     { path: 'drgspec', component: __WEBPACK_IMPORTED_MODULE_4__Reports__["k" /* DrugSpecsReportComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__services_auth_guard__["a" /* AuthGuard */]] },
+                    { path: 'drgpromo', component: __WEBPACK_IMPORTED_MODULE_4__Reports__["l" /* DrugPromoReportComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__services_auth_guard__["a" /* AuthGuard */]] },
                 ]
             },
             { path: 'plan', component: __WEBPACK_IMPORTED_MODULE_2____["p" /* PlanComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_0__services_auth_guard__["a" /* AuthGuard */]] }
         ]
     }
 ];
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/home.routing.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/home.routing.js.map
 
 /***/ }),
 
-/***/ 837:
+/***/ 838:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6072,7 +6242,7 @@ var SidebarComponent = (function () {
     SidebarComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'sidebar',
-            template: __webpack_require__(1120),
+            template: __webpack_require__(1122),
             styles: [__webpack_require__(466)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */]) === 'function' && _a) || Object])
@@ -6080,11 +6250,11 @@ var SidebarComponent = (function () {
     return SidebarComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/sidebar.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/sidebar.component.js.map
 
 /***/ }),
 
-/***/ 838:
+/***/ 839:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6118,27 +6288,27 @@ var TopNavComponent = (function () {
     TopNavComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'top-nav',
-            template: __webpack_require__(1121),
+            template: __webpack_require__(1123),
             styles: [__webpack_require__(466)]
         }), 
         __metadata('design:paramtypes', [])
     ], TopNavComponent);
     return TopNavComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/topnav.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/topnav.component.js.map
 
 /***/ }),
 
-/***/ 839:
+/***/ 840:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_validators__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_helper_functions__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_validators__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__helpers_helper_functions__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlanComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -6374,24 +6544,24 @@ var PlanComponent = (function () {
     PlanComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-plan',
-            template: __webpack_require__(1123)
+            template: __webpack_require__(1125)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["t" /* ImportanceService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["t" /* ImportanceService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["p" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["p" /* MedSpecService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services__["q" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["q" /* LineService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _f) || Object, (typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _g) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["h" /* PlanService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["t" /* ImportanceService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["t" /* ImportanceService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["r" /* MedSpecService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["r" /* MedSpecService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services__["s" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["s" /* LineService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _f) || Object, (typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _g) || Object])
     ], PlanComponent);
     return PlanComponent;
     var _a, _b, _c, _d, _e, _f, _g;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/plan.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/plan.component.js.map
 
 /***/ }),
 
-/***/ 840:
+/***/ 841:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_region_service__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models_region__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Models_region__ = __webpack_require__(416);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models_BasicObjects__ = __webpack_require__(270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegionComponent; });
@@ -6527,26 +6697,26 @@ var RegionComponent = (function () {
     RegionComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-region',
-            template: __webpack_require__(1124)
+            template: __webpack_require__(1126)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_region_service__["a" /* RegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_region_service__["a" /* RegionService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__services_auth_service__["a" /* AuthenticationService */]) === 'function' && _b) || Object])
     ], RegionComponent);
     return RegionComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/region.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/region.component.js.map
 
 /***/ }),
 
-/***/ 841:
+/***/ 842:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_validators__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_validators__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -6795,27 +6965,27 @@ var UserComponent = (function () {
     UserComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-user',
-            template: __webpack_require__(1125)
+            template: __webpack_require__(1127)
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["d" /* RegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["d" /* RegionService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["q" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["q" /* LineService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _f) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["d" /* RegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["d" /* RegionService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["s" /* LineService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["s" /* LineService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _d) || Object, (typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["e" /* UserRegionService */]) === 'function' && _e) || Object, (typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _f) || Object])
     ], UserComponent);
     return UserComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/user.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/user.component.js.map
 
 /***/ }),
 
-/***/ 842:
+/***/ 843:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pipes_validators__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_helper_functions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pipes_validators__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__helpers_helper_functions__ = __webpack_require__(36);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VacationComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7001,25 +7171,25 @@ var VacationComponent = (function () {
     VacationComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-vac',
-            template: __webpack_require__(1126)
+            template: __webpack_require__(1128)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["m" /* VacationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["m" /* VacationService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _d) || Object])
     ], VacationComponent);
     return VacationComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/vac.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/vac.component.js.map
 
 /***/ }),
 
-/***/ 843:
+/***/ 844:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisitDrugsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7085,25 +7255,25 @@ var VisitDrugsComponent = (function () {
     VisitDrugsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'visit-drugs',
-            template: __webpack_require__(1127)
+            template: __webpack_require__(1129)
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["o" /* DrugService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _d) || Object])
     ], VisitDrugsComponent);
     return VisitDrugsComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/drugs.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drugs.component.js.map
 
 /***/ }),
 
-/***/ 844:
+/***/ 845:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisitGiftsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7189,34 +7359,14 @@ var VisitGiftsComponent = (function () {
     VisitGiftsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'visit-gifts',
-            template: __webpack_require__(1128)
+            template: __webpack_require__(1130)
         }), 
-        __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["r" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["r" /* GiftService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["s" /* PromoToolsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["s" /* PromoToolsService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _d) || Object])
+        __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services__["q" /* GiftService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["q" /* GiftService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["p" /* PromoToolsService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["p" /* PromoToolsService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormBuilder */]) === 'function' && _d) || Object])
     ], VisitGiftsComponent);
     return VisitGiftsComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/gifts.component.js.map
-
-/***/ }),
-
-/***/ 845:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__visit_component__ = __webpack_require__(422);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__visit_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userVisit_uservisit_component__ = __webpack_require__(846);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__userVisit_uservisit_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__drugs_drugs_component__ = __webpack_require__(843);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__drugs_drugs_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gifts_gifts_component__ = __webpack_require__(844);
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__gifts_gifts_component__["a"]; });
-
-
-
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/gifts.component.js.map
 
 /***/ }),
 
@@ -7224,8 +7374,28 @@ var VisitGiftsComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__visit_component__ = __webpack_require__(422);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__visit_component__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__userVisit_uservisit_component__ = __webpack_require__(847);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__userVisit_uservisit_component__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__drugs_drugs_component__ = __webpack_require__(844);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__drugs_drugs_component__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__gifts_gifts_component__ = __webpack_require__(845);
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__gifts_gifts_component__["a"]; });
+
+
+
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 847:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserVisitsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7314,7 +7484,7 @@ var UserVisitsComponent = (function () {
     UserVisitsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'visit-uservisits',
-            template: __webpack_require__(1129),
+            template: __webpack_require__(1131),
             styles: ["\n        .card-title a {\n            text-decoration: none;\n        }\n    "]
         }), 
         __metadata('design:paramtypes', [])
@@ -7322,22 +7492,22 @@ var UserVisitsComponent = (function () {
     return UserVisitsComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/uservisit.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/uservisit.component.js.map
 
 /***/ }),
 
-/***/ 847:
+/***/ 848:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_pagination__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6____ = __webpack_require__(845);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6____ = __webpack_require__(846);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pipes_pipe_module__ = __webpack_require__(189);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisitModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -7377,11 +7547,11 @@ var VisitModule = (function () {
     ], VisitModule);
     return VisitModule;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/visit.module.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/visit.module.js.map
 
 /***/ }),
 
-/***/ 848:
+/***/ 849:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7407,30 +7577,30 @@ var AppFooterComponent = (function () {
     AppFooterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-footer',
-            styles: [__webpack_require__(1048)],
-            template: __webpack_require__(1131)
+            styles: [__webpack_require__(1049)],
+            template: __webpack_require__(1133)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */]) === 'function' && _a) || Object])
     ], AppFooterComponent);
     return AppFooterComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/app-footer.component.js.map
-
-/***/ }),
-
-/***/ 849:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_footer_component__ = __webpack_require__(848);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__app_footer_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/app-footer.component.js.map
 
 /***/ }),
 
 /***/ 850:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_footer_component__ = __webpack_require__(849);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__app_footer_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 851:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7457,26 +7627,15 @@ var AppHeaderComponent = (function () {
     AppHeaderComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-header',
-            styles: [__webpack_require__(1049)],
-            template: __webpack_require__(1132)
+            styles: [__webpack_require__(1050)],
+            template: __webpack_require__(1134)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */]) === 'function' && _a) || Object])
     ], AppHeaderComponent);
     return AppHeaderComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/app-header.component.js.map
-
-/***/ }),
-
-/***/ 851:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_header_component__ = __webpack_require__(850);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__app_header_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/app-header.component.js.map
 
 /***/ }),
 
@@ -7484,8 +7643,19 @@ var AppHeaderComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_header_component__ = __webpack_require__(851);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__app_header_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 853:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BreadcrumbComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7517,29 +7687,29 @@ var BreadcrumbComponent = (function () {
     BreadcrumbComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-breadcrumb',
-            template: __webpack_require__(1133)
+            template: __webpack_require__(1135)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services__["i" /* BreadcrumbService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services__["i" /* BreadcrumbService */]) === 'function' && _a) || Object])
     ], BreadcrumbComponent);
     return BreadcrumbComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/breadcrumb.component.js.map
-
-/***/ }),
-
-/***/ 853:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__breadcrumb_component__ = __webpack_require__(852);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__breadcrumb_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/breadcrumb.component.js.map
 
 /***/ }),
 
 /***/ 854:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__breadcrumb_component__ = __webpack_require__(853);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__breadcrumb_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 855:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7565,26 +7735,15 @@ var ControlSidebarComponent = (function () {
     ControlSidebarComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-aside',
-            styles: [__webpack_require__(1050)],
-            template: __webpack_require__(1134)
+            styles: [__webpack_require__(1051)],
+            template: __webpack_require__(1136)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_auth_service__["a" /* AuthenticationService */]) === 'function' && _a) || Object])
     ], ControlSidebarComponent);
     return ControlSidebarComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/control-sidebar.component.js.map
-
-/***/ }),
-
-/***/ 855:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_sidebar_component__ = __webpack_require__(854);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__control_sidebar_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/control-sidebar.component.js.map
 
 /***/ }),
 
@@ -7592,23 +7751,34 @@ var ControlSidebarComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_header__ = __webpack_require__(851);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_sidebar_component__ = __webpack_require__(855);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__control_sidebar_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 857:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_header__ = __webpack_require__(852);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__app_header__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(849);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(850);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__app_footer__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__menu_aside__ = __webpack_require__(857);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__menu_aside__ = __webpack_require__(858);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__menu_aside__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_sidebar__ = __webpack_require__(855);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_sidebar__ = __webpack_require__(856);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_3__control_sidebar__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__messages_box__ = __webpack_require__(859);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__messages_box__ = __webpack_require__(860);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_4__messages_box__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__notification_box__ = __webpack_require__(861);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__notification_box__ = __webpack_require__(862);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_5__notification_box__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tasks_box__ = __webpack_require__(863);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tasks_box__ = __webpack_require__(864);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_6__tasks_box__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_box__ = __webpack_require__(865);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_box__ = __webpack_require__(866);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_7__user_box__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__breadcrumb__ = __webpack_require__(853);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__breadcrumb__ = __webpack_require__(854);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_8__breadcrumb__["a"]; });
 
 
@@ -7619,18 +7789,7 @@ var ControlSidebarComponent = (function () {
 
 
 
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
-
-/***/ }),
-
-/***/ 857:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__menu_aside_component__ = __webpack_require__(858);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__menu_aside_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
 
 /***/ }),
 
@@ -7638,9 +7797,20 @@ var ControlSidebarComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__menu_aside_component__ = __webpack_require__(859);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__menu_aside_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 859:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MenuAsideComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7754,26 +7924,15 @@ var MenuAsideComponent = (function () {
     MenuAsideComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-menu-aside',
-            styles: [__webpack_require__(1051)],
-            template: __webpack_require__(1135)
+            styles: [__webpack_require__(1052)],
+            template: __webpack_require__(1137)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["c" /* UserService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _c) || Object])
     ], MenuAsideComponent);
     return MenuAsideComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/menu-aside.component.js.map
-
-/***/ }),
-
-/***/ 859:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__messages_box_component__ = __webpack_require__(860);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__messages_box_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/menu-aside.component.js.map
 
 /***/ }),
 
@@ -7781,8 +7940,19 @@ var MenuAsideComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__messages_box_component__ = __webpack_require__(861);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__messages_box_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 861:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_messages_service__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_messages_service__ = __webpack_require__(273);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessagesBoxComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7814,30 +7984,30 @@ var MessagesBoxComponent = (function () {
             /* tslint:disable */
             selector: '.messagesBox',
             /* tslint:enable */
-            styles: [__webpack_require__(1052)],
-            template: __webpack_require__(1136)
+            styles: [__webpack_require__(1053)],
+            template: __webpack_require__(1138)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_messages_service__["a" /* MessagesService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__services_messages_service__["a" /* MessagesService */]) === 'function' && _a) || Object])
     ], MessagesBoxComponent);
     return MessagesBoxComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/messages-box.component.js.map
-
-/***/ }),
-
-/***/ 861:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__notification_box_component__ = __webpack_require__(862);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__notification_box_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/messages-box.component.js.map
 
 /***/ }),
 
 /***/ 862:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__notification_box_component__ = __webpack_require__(863);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__notification_box_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 863:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7866,29 +8036,29 @@ var NotificationBoxComponent = (function () {
             /* tslint:disable */
             selector: '.notificationsBox',
             /* tslint:enable */
-            styles: [__webpack_require__(1053)],
-            template: __webpack_require__(1137)
+            styles: [__webpack_require__(1054)],
+            template: __webpack_require__(1139)
         }), 
         __metadata('design:paramtypes', [])
     ], NotificationBoxComponent);
     return NotificationBoxComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/notification-box.component.js.map
-
-/***/ }),
-
-/***/ 863:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tasks_box_component__ = __webpack_require__(864);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__tasks_box_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/notification-box.component.js.map
 
 /***/ }),
 
 /***/ 864:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tasks_box_component__ = __webpack_require__(865);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__tasks_box_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 865:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7921,25 +8091,14 @@ var TasksBoxComponent = (function () {
             /* tslint:disable */
             selector: '.tasksBox',
             /* tslint:enable */
-            styles: [__webpack_require__(1054)],
-            template: __webpack_require__(1138)
+            styles: [__webpack_require__(1055)],
+            template: __webpack_require__(1140)
         }), 
         __metadata('design:paramtypes', [])
     ], TasksBoxComponent);
     return TasksBoxComponent;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/tasks-box.component.js.map
-
-/***/ }),
-
-/***/ 865:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_box_component__ = __webpack_require__(866);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__user_box_component__["a"]; });
-
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/index.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/tasks-box.component.js.map
 
 /***/ }),
 
@@ -7947,9 +8106,20 @@ var TasksBoxComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__user_box_component__ = __webpack_require__(867);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__user_box_component__["a"]; });
+
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/index.js.map
+
+/***/ }),
+
+/***/ 867:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserBoxComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7992,19 +8162,19 @@ var UserBoxComponent = (function () {
             /* tslint:disable */
             selector: '.userBox',
             /* tslint:enable */
-            styles: [__webpack_require__(1055)],
-            template: __webpack_require__(1139)
+            styles: [__webpack_require__(1056)],
+            template: __webpack_require__(1141)
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["b" /* AuthenticationService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services__["f" /* DestinationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["f" /* DestinationService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services__["u" /* VisitService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services__["u" /* VisitService */]) === 'function' && _d) || Object])
     ], UserBoxComponent);
     return UserBoxComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/user-box.component.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/user-box.component.js.map
 
 /***/ }),
 
-/***/ 867:
+/***/ 868:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8093,16 +8263,16 @@ var ArrayOrderByPipe = (function () {
     ], ArrayOrderByPipe);
     return ArrayOrderByPipe;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/array.pipe.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/array.pipe.js.map
 
 /***/ }),
 
-/***/ 868:
+/***/ 869:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__(317);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BreadcrumbService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8145,11 +8315,11 @@ var BreadcrumbService = (function () {
     ], BreadcrumbService);
     return BreadcrumbService;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/breadcrumb.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/breadcrumb.service.js.map
 
 /***/ }),
 
-/***/ 869:
+/***/ 870:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8157,7 +8327,7 @@ var BreadcrumbService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactUsService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8214,11 +8384,11 @@ var ContactUsService = (function () {
     return ContactUsService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/contactUs.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/contactUs.service.js.map
 
 /***/ }),
 
-/***/ 870:
+/***/ 871:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8226,7 +8396,7 @@ var ContactUsService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8276,11 +8446,11 @@ var DashboardService = (function () {
     return DashboardService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/dashboard.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/dashboard.service.js.map
 
 /***/ }),
 
-/***/ 871:
+/***/ 872:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8288,7 +8458,7 @@ var DashboardService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DestinationService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8367,11 +8537,11 @@ var DestinationService = (function () {
     return DestinationService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/destination.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/destination.service.js.map
 
 /***/ }),
 
-/***/ 872:
+/***/ 873:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8379,7 +8549,7 @@ var DestinationService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DrugService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8430,11 +8600,11 @@ var DrugService = (function () {
     return DrugService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/drug.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/drug.service.js.map
 
 /***/ }),
 
-/***/ 873:
+/***/ 874:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8442,7 +8612,7 @@ var DrugService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GiftService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8490,11 +8660,11 @@ var GiftService = (function () {
     return GiftService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/gift.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/gift.service.js.map
 
 /***/ }),
 
-/***/ 874:
+/***/ 875:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8502,7 +8672,7 @@ var GiftService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ImportanceService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8550,11 +8720,11 @@ var ImportanceService = (function () {
     return ImportanceService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/importance.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/importance.service.js.map
 
 /***/ }),
 
-/***/ 875:
+/***/ 876:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8562,7 +8732,7 @@ var ImportanceService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IMSService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8608,11 +8778,11 @@ var IMSService = (function () {
     return IMSService;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/ims.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/ims.service.js.map
 
 /***/ }),
 
-/***/ 876:
+/***/ 877:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8620,7 +8790,7 @@ var IMSService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LineService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8666,11 +8836,11 @@ var LineService = (function () {
     return LineService;
     var _a;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/line.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/line.service.js.map
 
 /***/ }),
 
-/***/ 877:
+/***/ 878:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8678,7 +8848,7 @@ var LineService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MedSpecService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8726,11 +8896,11 @@ var MedSpecService = (function () {
     return MedSpecService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/medspec.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/medspec.service.js.map
 
 /***/ }),
 
-/***/ 878:
+/***/ 879:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8738,7 +8908,7 @@ var MedSpecService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlanService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8797,11 +8967,11 @@ var PlanService = (function () {
     return PlanService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/plan.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/plan.service.js.map
 
 /***/ }),
 
-/***/ 879:
+/***/ 880:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8809,7 +8979,7 @@ var PlanService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PromoToolsService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -8857,11 +9027,11 @@ var PromoToolsService = (function () {
     return PromoToolsService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/promo.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/promo.service.js.map
 
 /***/ }),
 
-/***/ 880:
+/***/ 881:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8870,7 +9040,7 @@ var PromoToolsService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__auth_service__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportsService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -8906,8 +9076,8 @@ var ReportsService = (function () {
     ReportsService.prototype.getdrugAnalysis = function (from, to, drugId, type, crt) {
         return this.http.get(this.url + 'drugAnalysis/' + from + '.' + to + '.' + drugId + '.' + type + '.' + crt, this.options).map(function (res) { return res.json(); });
     };
-    ReportsService.prototype.getpromoAnalysis = function (from, to, drugId) {
-        return this.http.get(this.url + 'drugPromoAnalysis/' + from + '.' + to + '.' + drugId, this.options).map(function (res) { return res.json(); });
+    ReportsService.prototype.getpromoAnalysis = function (from, to, drugId, crt) {
+        return this.http.get(this.url + 'drugPromoAnalysis/' + from + '.' + to + '.' + drugId + '.' + crt, this.options).map(function (res) { return res.json(); });
     };
     ReportsService.prototype.getUserVisitRate = function (id, month) {
         return this.http.get(this.url + 'UserVisitRate/' + id + '/' + month, this.options).map(function (res) { return res.json(); });
@@ -8925,11 +9095,11 @@ var ReportsService = (function () {
     return ReportsService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/reports.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/reports.service.js.map
 
 /***/ }),
 
-/***/ 881:
+/***/ 882:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8937,7 +9107,7 @@ var ReportsService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -9005,11 +9175,11 @@ var UserService = (function () {
     return UserService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/user.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/user.service.js.map
 
 /***/ }),
 
-/***/ 882:
+/***/ 883:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9017,13 +9187,13 @@ var UserService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__(317);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_forkJoin__ = __webpack_require__(317);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_forkJoin__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_forkJoin__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserRegionService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -9085,11 +9255,11 @@ var UserRegionService = (function () {
     return UserRegionService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/userRegion.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/userRegion.service.js.map
 
 /***/ }),
 
-/***/ 883:
+/***/ 884:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9097,7 +9267,7 @@ var UserRegionService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VacationService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -9148,11 +9318,11 @@ var VacationService = (function () {
     return VacationService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/vacation.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/vacation.service.js.map
 
 /***/ }),
 
-/***/ 884:
+/***/ 885:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9160,11 +9330,11 @@ var VacationService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_forkJoin__ = __webpack_require__(317);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_forkJoin__ = __webpack_require__(318);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_forkJoin___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_forkJoin__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Models__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Models__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__auth_service__ = __webpack_require__(17);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisitService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -9259,11 +9429,11 @@ var VisitService = (function () {
     return VisitService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/visit.service.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/visit.service.js.map
 
 /***/ }),
 
-/***/ 885:
+/***/ 886:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9275,45 +9445,45 @@ var VisitService = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/environment.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/environment.js.map
 
 /***/ }),
 
-/***/ 886:
+/***/ 887:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(901);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(902);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(894);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(895);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(890);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(891);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(896);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(897);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(895);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(896);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(893);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(894);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(892);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(893);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(900);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(901);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(889);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(890);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(888);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(889);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(898);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(899);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(891);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(892);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(899);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(900);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(897);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(898);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(902);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(903);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(1410);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(1412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 
 
@@ -9331,9 +9501,9 @@ var environment = {
 
 
 
-//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSales/public/src/polyfills.js.map
+//# sourceMappingURL=E:/NEW-ADES/Ahmed-Files/Developing/Web/CairoSalesNodeJS/public/src/polyfills.js.map
 
 /***/ })
 
-},[1412]);
+},[1414]);
 //# sourceMappingURL=main.bundle.js.map

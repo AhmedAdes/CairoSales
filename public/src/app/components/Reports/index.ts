@@ -10,6 +10,7 @@ export * from './drugAnalysis/period/drugPeriod'
 export * from './drugAnalysis/comments/drugComment'
 export * from './drugAnalysis/customers/drugCustomer'
 export * from './drugAnalysis/Specs/drugSpecs'
+export * from './drugAnalysis/promo/drugPromo'
 
 
 export * from '../dashboard/scoreCard/scoreCard';
