@@ -4667,6 +4667,10 @@ var ReportHomeComponent = (function () {
                 heading: true
             },
             {
+                header: "Medical Rep Summary",
+                link: "/home/reports/medrep"
+            },
+            {
                 header: "User Daily Visits",
                 link: "/home/reports/visDaily"
             },
@@ -4675,21 +4679,17 @@ var ReportHomeComponent = (function () {
                 link: "/home/reports/visComp"
             },
             {
-                header: "Specification Visits",
+                header: "Specs / IMS Visits",
                 link: "/home/reports/spec"
             },
-            {
-                header: "Promotional Tools",
-                link: "/home/reports/promo"
-            },
-            {
-                header: "IMS Visits",
-                link: "/home/reports/visIMS"
-            },
-            {
-                header: "Medical Rep Summary",
-                link: "/home/reports/medrep"
-            },
+            // {
+            //     header: "Promotional Tools",
+            //     link: "/home/reports/promo"
+            // }, 
+            // {
+            //     header: "IMS Visits",
+            //     link: "/home/reports/visIMS"
+            // }, 
             {
                 header: "Products Analysis",
                 heading: true
