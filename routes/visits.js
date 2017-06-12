@@ -37,8 +37,10 @@ router.get('/UserVisitsCount/:id', function (req, res, next) {
 router.get('/UserVisitsDate/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT v.*, d.Destination, d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, d.SpecName, d.ImpName, d.VisitsNo, u.UserName
-                    FROM dbo.Visits v JOIN dbo.vwDestinations d ON v.DestID = d.DestID JOIN dbo.Users u ON v.UserID = u.UserID
+    request.query(`SELECT v.*, d.Destination, d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, d.SpecName, d.ImpName
+                    , d.VisitsNo, u.UserName, s.LineName
+                    FROM dbo.Visits v JOIN dbo.vwDestinations d ON v.DestID = d.DestID JOIN dbo.Users u ON v.UserID = u.UserID 
+					JOIN dbo.SalesLines s ON u.SalesLineID = s.SalesLineID
                     WHERE FORMAT(VisitDate, 'MM-yyyy') = FORMAT(GETDATE(), 'MM-yyyy') 
                     And v.UserID IN (SELECT ${req.params.id} UNION SELECT UserID FROM dbo.fncUserChain(${req.params.id})) 
                     ORDER BY VisitID DESC`)

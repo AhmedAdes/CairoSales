@@ -11,7 +11,7 @@ import { DestinationUser } from '../../../Models';
                 <option *ngFor="let i of dispUsers" [ngValue]="i.UserID">{{i.UserName}}</option>
             </select>
             <div class='error' *ngIf="usr.touched && !usr.valid">
-                <div class="alert alert-danger" *ngIf="usr.errors.required">A Rep. is required.</div>
+                <div class="alert alert-danger" *ngIf="usr.hasError('required')">A Rep. is required.</div>
             </div>
         </div>
     </div>

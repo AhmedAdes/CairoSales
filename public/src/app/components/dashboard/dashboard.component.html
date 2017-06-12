@@ -30,12 +30,12 @@
         </select>
         </div>
     </div>
-    <dash-schedule *ngIf="seluser" [currentUser]="currentUser" [user]="seluser" [chain]="true"></dash-schedule>
-    <dash-workRate *ngIf="seluser" [currentUser]="currentUser" [user]="seluser" [chain]="true"></dash-workRate>
+    <dash-schedule *ngIf="seluser" [currentUser]="currentUser" [user]="seluser" [chain]="chaintrue"></dash-schedule>
+    <dash-workRate *ngIf="seluser" [currentUser]="currentUser" [user]="seluser" [chain]="chaintrue"></dash-workRate>
 </div>
 
 <div class="userchain" *ngIf="currentUser.jobClass == 3">
     <dash-plan [currentUser]="currentUser"></dash-plan>
-    <dash-schedule [currentUser]="currentUser"></dash-schedule>
-    <dash-workRate [currentUser]="currentUser"></dash-workRate>
+    <dash-schedule [currentUser]="currentUser" [user]="seluser" [chain]="chainfalse"></dash-schedule>
+    <dash-workRate [currentUser]="currentUser" [user]="seluser" [chain]="chainfalse"></dash-workRate>
 </div>

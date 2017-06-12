@@ -17,6 +17,7 @@ export class Visits {
   AccompanyID: number;
   GeneralComment: string;
   UserName: string;
+  LineName: string;
 }
 
 export class VisitDrugs {

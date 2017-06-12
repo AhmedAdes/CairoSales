@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Visits, CurrentUser } from '../../../Models';
 
 @Component({
@@ -30,7 +30,7 @@ export class UserVisitsComponent implements OnInit, OnChanges {
         this.userVisits = this.collection.filter(obj => obj.UserID == this.UserID)
         if (this.userVisits) { this.userName = this.userVisits[0].UserName; }
     }
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
         this.ngOnInit()
     }
     changeArrowClass() {

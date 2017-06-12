@@ -37,7 +37,7 @@ export class MedicalRepReportComponent implements OnInit {
         maintainAspectRatio: true
     };
     colorsEmpty: Array<Color> = []
-    @ViewChild(BaseChartDirective) private _chart;
+    @ViewChild(BaseChartDirective) _chart;
 
     ngOnInit() {
         this.srvln.getLine().subscribe(spc => {

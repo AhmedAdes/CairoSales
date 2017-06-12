@@ -14,13 +14,13 @@
             <div class="col-md-9">
                 <select class="form-control" name="userID" (change)="UserChanged($event)">
                     <option value="null">Select a User...</option>
-                    <option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName}}</option>
+                    <option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName + " @ "+ user.LineName}}</option>
                 </select>
             </div>
         </div>
         <div *ngIf="selUser">
             <visit-uservisits [UserID]="selUser.UserID" [currentUser]="currentUser" [collection]="collection" (DeleteEvent)="Delete($event)" (DetailEvent)="ShowDetails($event)"
-                (EditEvent)="EditThis($event)">
+                (EditEvent)="EditThis($event)" (DetailEvent)="ShowDetails($event)">
             </visit-uservisits>
         </div>
     </div>

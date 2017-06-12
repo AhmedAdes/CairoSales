@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Schedule, CurrentUser, User } from '../../../Models';
 import { DashboardService } from '../../../services';
 import * as hf from '../../helpers/helper.functions'
@@ -11,8 +11,8 @@ export class UserScheduleComponent implements OnInit, OnChanges {
     constructor(private srvSchd : DashboardService) { }
 
     @Input() currentUser: CurrentUser;
-    @Input() user: User;
-    @Input() chain: boolean;
+    @Input() user?: User;
+    @Input() chain?: boolean;
     userSched: Schedule[] = [];
     appliedClass: boolean = true
     dispUser: any
@@ -36,7 +36,7 @@ export class UserScheduleComponent implements OnInit, OnChanges {
         }
     }
 
-    ngOnChanges(){
+    ngOnChanges(changes: SimpleChanges){
         this.viewBulk()
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { WorkRate, CurrentUser, User } from '../../../Models';
 import { DashboardService, AuthenticationService } from '../../../services';
 import { BaseChartDirective } from 'ng2-charts';
@@ -14,12 +14,12 @@ export class UserWorkRateComponent implements OnInit, OnChanges {
 
     userRate: WorkRate[] = [];
     @Input() currentUser: CurrentUser;
-    @Input() user: User;
-    @Input() chain: boolean;
+    @Input() user?: User;
+    @Input() chain?: boolean;
     selectedMonth: number = new Date().getMonth() + 1;
     appliedClass: boolean = true
-    // private areaChartConfig: Array<AreaChartConfig>;
-    @ViewChild(BaseChartDirective) private _chart;
+    
+    @ViewChild(BaseChartDirective) _chart;
 
     options;
     chartData = [{data: [], label: ''}];
@@ -45,7 +45,7 @@ export class UserWorkRateComponent implements OnInit, OnChanges {
             }
         }
     }
-    ngOnChanges() {
+    ngOnChanges(changes: SimpleChanges) {
         this.viewBulk()
     }
     newSchedule(datevalue: Date) {

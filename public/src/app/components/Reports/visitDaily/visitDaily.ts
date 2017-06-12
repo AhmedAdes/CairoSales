@@ -27,16 +27,7 @@ export class VisDailyReportComponent implements OnInit {
         responsive: true,
         maintainAspectRatio: true
     };
-    lineChartColors: Array<any> = [
-        { // grey
-            backgroundColor: 'rgba(148,159,177,0.2)',
-            borderColor: 'rgba(148,159,177,1)',
-            pointBackgroundColor: 'rgba(148,159,177,1)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-        }];
-    @ViewChild(BaseChartDirective) private _chart;
+    @ViewChild(BaseChartDirective) _chart;
 
     /* Constructor, needed to get @Injectables */
     constructor(private srv: ReportsService, private srvUser: UserService,
@@ -48,8 +39,8 @@ export class VisDailyReportComponent implements OnInit {
         this.srvUser.getUserChain(this.currentUser.userID).subscribe(usrs => this.userList = usrs)
     }
     newSchedule(datevalue: Date) {
-        this.selectedDate = datevalue ? new Date() : datevalue
-        this.srv.getUserVisitRate(this.selectedUser ? this.currentUser.userID : this.selectedUser, this.selectedDate.getMonth() + 1).subscribe(rat => {
+        this.selectedDate = datevalue == null ? new Date() : datevalue
+        this.srv.getUserVisitRate(this.selectedUser == null ? this.currentUser.userID : this.selectedUser, this.selectedDate.getMonth() + 1).subscribe(rat => {
             this.userRate = rat[0];
             this.chartData = [{
                 data: rat[0].map(da => { return da.visCount == null ? 0 : da.visCount }),

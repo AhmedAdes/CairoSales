@@ -12,7 +12,7 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster
 })
 export class HomeComponent implements OnInit {
     currentUser: CurrentUser = this.auth.getUser();
-    private toastrConfig: ToasterConfig;
+    toastrConfig: ToasterConfig;
 
     constructor(private auth: AuthenticationService, private msgServ: MessagesService,
         private toastr: ToasterService) {

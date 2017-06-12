@@ -158,9 +158,9 @@
                 <div class="form-group">
                     <label for="Destination" class="control-label col-md-2 col-sm-2">{{srchObj.DestType}} Name</label>
                     <div class="col-md-10 col-sm-10">
-                        <input class="form-control" type="text" name="Destination" [(ngModel)]="model.Destination" #destination="ngModel" required>
-                        <div class='error' *ngIf="destination.touched && !destination.valid">
-                            <div class="alert alert-danger" *ngIf="destination.errors.required">Customer Name is required.</div>
+                        <input class="form-control" type="text" name="Destination" [(ngModel)]="model.Destination" #destin="ngModel" required>
+                        <div class='error' *ngIf="destin.touched && !destin.valid">
+                            <div class="alert alert-danger" *ngIf="destin.hasError('required')">Customer Name is required.</div>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
 							<option *ngFor="let i of ProvinceList" [ngValue]="i.name">{{i.name}}</option>
 						</select>
                         <div class='error' *ngIf="provinceID.touched && !provinceID.valid">
-                            <div class="alert alert-danger" *ngIf="provinceID.errors.required">Province is required.</div>
+                            <div class="alert alert-danger" *ngIf="provinceID.hasError('required')">Province is required.</div>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
 							<option *ngFor="let i of RegionList" [ngValue]="i.RegionID">{{i.RegionName}}</option>
 						</select>
                         <div class='error' *ngIf="regionID.touched && !regionID.valid">
-                            <div class="alert alert-danger" *ngIf="regionID.errors.required">Region Name is required.</div>
+                            <div class="alert alert-danger" *ngIf="regionID.hasError('required')">Region Name is required.</div>
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
 							<option *ngFor="let i of allIMSList" [ngValue]="i.IMSID">{{i.IMS}}</option>
 						</select>
                         <div class='error' *ngIf="imsID.touched && !imsID.valid">
-                            <div class="alert alert-danger" *ngIf="imsID.errors.required">IMS Region is required.</div>
+                            <div class="alert alert-danger" *ngIf="imsID.hasError('required')">IMS Region is required.</div>
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
 							<option *ngFor="let i of MedSpecList" [ngValue]="i.SpecID">{{i.SpecName}}</option>
 						</select>
                         <div class='error' *ngIf="specID.touched && !specID.valid">
-                            <div class="alert alert-danger" *ngIf="specID.errors.required">Speciality is required.</div>
+                            <div class="alert alert-danger" *ngIf="specID.hasError('required')">Speciality is required.</div>
                         </div>
                     </div>
                 </div>
@@ -226,7 +226,7 @@
 							<option *ngFor="let i of VisImpList" [ngValue]="i.ImpID">{{i.ImpName}} - {{i.VisitsNo}} Visits</option>
 						</select>
                         <div class='error' *ngIf="impID.touched && !impID.valid">
-                            <div class="alert alert-danger" *ngIf="impID.errors.required">Importance is required.</div>
+                            <div class="alert alert-danger" *ngIf="impID.hasError('required')">Importance is required.</div>
                         </div>
                     </div>
                 </div>

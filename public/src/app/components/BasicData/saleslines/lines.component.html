@@ -65,9 +65,9 @@
 				<div class="form-group">
 					<label for="LineName" class="control-label col-md-2 col-sm-2">Line Name</label>
 					<div class="col-md-10 col-sm-10">
-						<input class="form-control" type="text" name="LineName" [(ngModel)]="model.LineName" #LineName="ngModel" required>
-						<div class='error' *ngIf="LineName.touched && !LineName.valid">
-							<div class="alert alert-danger" *ngIf="LineName.errors.required">Line Name is required.</div>
+						<input class="form-control" type="text" name="LineName" [(ngModel)]="model.LineName" #lineName="ngModel" required>
+						<div class='error' *ngIf="lineName.touched && !lineName.valid">
+							<div class="alert alert-danger" *ngIf="lineName.hasError('required')">Line Name is required.</div>
 						</div>
 					</div>
 				</div>
@@ -79,7 +79,7 @@
 							<option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName}}</option>
 						</select>
 						<div class='error' *ngIf="Manager.touched && !Manager.valid">
-							<div class="alert alert-danger" *ngIf="Manager.errors.required">Manager is required.</div>
+							<div class="alert alert-danger" *ngIf="Manager.hasError('required')">Manager is required.</div>
 						</div>
 					</div>
 				</div>

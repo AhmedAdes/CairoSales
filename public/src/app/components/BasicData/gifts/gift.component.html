@@ -53,11 +53,11 @@
 				<div class="form-group hidden">
 					<input class="form-control" type="text" name="GiftID" [(ngModel)]="model.GiftID">
 				</div>				
-				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !giftName.valid }">
+				<div class="form-group" [ngClass]="{ 'has-error': giftName.touched && !giftName.valid }">
 					<label for="giftName" class="control-label col-md-2 col-sm-2">Promotional Tool Type</label>
 					<div class="col-md-10 col-sm-10">
 						<input class="form-control" type="text" name="GiftName" [(ngModel)]="model.GiftName" #giftName="ngModel" required>
-						<div *ngIf="f.submitted && !giftName.valid" class="help-block">Promotional Tool Type is required</div>
+						<div *ngIf="giftName.touched && !giftName.valid" class="help-block">Promotional Tool Type is required</div>
 					</div>
 				</div>
 				<div class="form-group no-print col-md-offset-2 col-sm-offset-2 col-md-10 col-sm-10">

@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
     collection: User[] = [];
     users: any[] = [];
     seluser: User 
+    chaintrue: boolean = true
+    chainfalse: boolean = false
     planned
     committed
     today

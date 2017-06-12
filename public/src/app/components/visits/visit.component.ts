@@ -71,7 +71,7 @@ export class VisitComponent implements OnInit {
     ngOnInit() {
         this.serv.getUserVisitsByDate(this.currentUser.userID).subscribe(cols => {
             this.collection = cols;
-            var unique = this.collection.map(function (obj) { return { UserID: obj.UserID, UserName: obj.UserName } });
+            var unique = this.collection.map(function (obj) { return { UserID: obj.UserID, UserName: obj.UserName, LineName: obj.LineName } });
             this.users = unique.filter((x, i, a) => a.findIndex(U => U.UserID == x.UserID) == i)
             if (this.currentUser.jobClass == 3) { this.selUser = this.users[0] }
             this.srvUreg.getUserChainRegions(this.currentUser.userID).subscribe(rgs => {
@@ -98,11 +98,8 @@ export class VisitComponent implements OnInit {
         this.showTable = false;
         this.Formstate = 'Create';
         this.headerText = 'Create New Visit';
-        if (new Date() > new Date(this.cnvVisitDate + 'T' + '01:00:00')) {
-            this.inFrm.controls['visDate'].disable();
-        } else {
-            this.inFrm.controls['visDate'].enable()
-        }
+        this.disableDateField()
+
     }
 
     EditThis(id: number) {
@@ -121,11 +118,8 @@ export class VisitComponent implements OnInit {
             this.yesterday = hf.handleDate(new Date(new Date(this.cnvVisitDate).setDate(new Date(this.cnvVisitDate).getDate() - 1)));
             this.thisday = this.cnvVisitDate;
             this.inFrm.controls['visDate'].setValidators(Validators.compose([Validators.required, maxDate(new Date(this.cnvVisitDate)), minDate(new Date(this.yesterday))]));
-            if (new Date() > new Date(this.cnvVisitDate + 'T' + '01:00:00')) {
-                this.inFrm.controls['visDate'].disable();
-            } else {
-                this.inFrm.controls['visDate'].enable()
-            }
+            this.disableDateField()
+
             this.cnvVisitTime = hf.handleTime(this.model.VisitTime);
             this.visDrugModel = new VisitDrugs();
             this.visGiftModel = new VisitGifts();
@@ -231,6 +225,13 @@ export class VisitComponent implements OnInit {
             this.orderbyString = '';
         }
     }
+    disableDateField() {
+        if (new Date() > new Date(this.cnvVisitDate + 'T' + '06:00:00')) {
+            this.inFrm.controls['visDate'].disable();
+        } else {
+            this.inFrm.controls['visDate'].enable()
+        }
+    }
     onRegChange(newobj) {
         if (newobj.target.value) {
             var region = newobj.target.value.split(':')[1].trim();
@@ -301,7 +302,7 @@ export class VisitComponent implements OnInit {
         this.drgsChanged = this.VisDrugs.length;
     }
     UserChanged($user) {
-        this.selUser = this.users.filter(u => u.UserName == $user.target.value)[0]
+        this.selUser = this.users.filter(u => u.UserName == $user.target.value.split('@')[0].trim())[0]
     }
     DeleteGift(index) {
         this.VisGifts.splice(index, 1);

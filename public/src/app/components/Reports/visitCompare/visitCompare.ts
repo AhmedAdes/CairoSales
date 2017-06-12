@@ -25,7 +25,7 @@ export class VisCompareReportComponent implements OnInit {
         responsive: true,
         maintainAspectRatio: true
     };
-    @ViewChild(BaseChartDirective) private _chart;
+    @ViewChild(BaseChartDirective) _chart;
 
     /* Constructor, needed to get @Injectables */
     constructor(private srv: ReportsService, private srvUser: UserService,

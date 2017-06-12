@@ -7,7 +7,7 @@
                     <option value="">Select a Product...</option>
                     <option *ngFor="let item of drugs | orderby:'+DrugName'" [ngValue]="item.DrugID">{{item.DrugName}}</option>
                 </select>
-                <div class="alert alert-danger" *ngIf="(drgform.submitted || drgform.controls['drugID'].touched)  && !drgform.controls['drugID'].valid">
+                <div class="alert alert-danger" *ngIf="(drgform.controls['drugID'].touched) && !drgform.controls['drugID'].valid">
                     <span *ngIf="drgform.controls['drugID'].hasError('required')">Product is Required</span>
                 </div>
             </div>

@@ -30,7 +30,7 @@ export class SpecVisitsComponent implements OnInit {
         responsive: true,
         maintainAspectRatio: true
     };
-    @ViewChild(BaseChartDirective) private _chart;
+    @ViewChild(BaseChartDirective) _chart;
 
     ngOnInit() {
         this.srvSpec.getSpec().subscribe(spc => {

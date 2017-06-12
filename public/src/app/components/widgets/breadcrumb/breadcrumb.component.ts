@@ -7,7 +7,7 @@ import { BreadcrumbService }        from '../../../services';
   templateUrl: './breadcrumb.component.html'
 })
 export class BreadcrumbComponent {
-  private display: boolean = false;
+  display: boolean = false;
   private header: string = '';
   private description: string = '';
   private levels: Array<any> = [];
