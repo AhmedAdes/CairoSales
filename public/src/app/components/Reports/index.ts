@@ -5,6 +5,7 @@ export * from './visitDaily/visitDaily'
 export * from './specVisits/specVisits'
 export * from './promo/promo'
 export * from './MedRepRpt/medRepReport'
+export * from './MedRepWeeklyRpt/medRepWeekly'
 
 export * from './drugAnalysis/period/drugPeriod'
 export * from './drugAnalysis/comments/drugComment'

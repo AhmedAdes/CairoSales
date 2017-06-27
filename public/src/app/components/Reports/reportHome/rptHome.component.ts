@@ -17,6 +17,10 @@ export class ReportHomeComponent implements OnInit {
             link: "/home/reports/medrep"
         }, 
         {
+            header: "Medical Rep Weekly",
+            link: "/home/reports/medrepWeek"
+        }, 
+        {
             header: "User Daily Visits",
             link: "/home/reports/visDaily"
         },

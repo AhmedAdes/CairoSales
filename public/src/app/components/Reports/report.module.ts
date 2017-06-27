@@ -11,7 +11,7 @@ import {
     ReportsComponent, ReportHomeComponent, VisCompareReportComponent, SpecVisitsComponent, PromoReportComponent,
     DrugCommentReportComponent, DrugPeriodReportComponent, DrugCustomerReportComponent, DrugSpecsReportComponent,
     DrugPromoReportComponent,
-    ScoreCardComponent, VisDailyReportComponent, MedicalRepReportComponent
+    ScoreCardComponent, VisDailyReportComponent, MedicalRepReportComponent, MedRepWeeklyReportComponent
 } from './';
 import { VisitService, AuthenticationService, ReportsService } from "../../services";
 import { CustomPipesModule } from "../../pipes/pipe.module";
@@ -25,7 +25,7 @@ import { CustomPipesModule } from "../../pipes/pipe.module";
     ],
     declarations: [ReportsComponent, ReportHomeComponent, VisCompareReportComponent,
         SpecVisitsComponent, PromoReportComponent, VisDailyReportComponent, 
-        MedicalRepReportComponent, 
+        MedicalRepReportComponent, MedRepWeeklyReportComponent,
         DrugCommentReportComponent, DrugPeriodReportComponent,
         DrugCustomerReportComponent, DrugSpecsReportComponent, 
         DrugPromoReportComponent/**/],

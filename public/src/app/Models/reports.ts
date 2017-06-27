@@ -41,3 +41,17 @@ export class rptMedicalRep {
     Customers: number;
     Logins: number;
 }
+
+export class rptMedRepWeekly {
+    // UserID INT, UserName NVARCHAR(500), JobClass NVARCHAR(50), Day1 INT, Day2 INT, Day3 INT, Day4 INT, Day5 INT, Day6 INT, Day7 INT
+    UserID: number;
+    UserName: string;
+    JobClass: string;
+    Day1: number;
+    Day2: number;
+    Day3: number;
+    Day4: number;
+    Day5: number;
+    Day6: number;
+    Day7: number;
+}

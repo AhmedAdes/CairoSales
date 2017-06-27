@@ -215,6 +215,20 @@ router.put('/ChangePass/:id', function (req, res, next) {
     });
 })
 
+router.put('/Replace/:id1', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    var data = req.body;
+    request.input("UserID1", req.params.id1);
+    request.input("UserID2", data.id2);
+    request.execute("RotateUserDestination", function (err, recordset, returnValue, affected) {
+        if (err) { res.json({ error: err }); console.log(err); }
+        else {
+            res.json({ returnValue: returnValue, affected: affected });
+        }
+    });
+})
+
 router.delete('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);

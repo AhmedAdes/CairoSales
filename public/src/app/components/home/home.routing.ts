@@ -5,8 +5,8 @@ import { AuthGuard } from '../../services/auth.guard';
 import { HomeComponent } from './home.component';
 
 import {
-    UserComponent, DashboardComponent, RegionComponent, 
-    DestinationComponent, VisitComponent, PlanComponent, 
+    UserComponent, DashboardComponent, RegionComponent,
+    DestinationComponent, VisitComponent, PlanComponent,
     ChngPassComponent, VacationComponent, ContactUsComponent
 } from '../';
 import * as bas from '../BasicData'
@@ -46,6 +46,7 @@ export const homeRoutes: Route[] = [
                     { path: 'visComp', component: rpt.VisCompareReportComponent, canActivate: [AuthGuard] },
                     { path: 'visDaily', component: rpt.VisDailyReportComponent, canActivate: [AuthGuard] },
                     { path: 'medrep', component: rpt.MedicalRepReportComponent, canActivate: [AuthGuard] },
+                    { path: 'medrepWeek', component: rpt.MedRepWeeklyReportComponent, canActivate: [AuthGuard] },
                     { path: 'spec', component: rpt.SpecVisitsComponent, canActivate: [AuthGuard] },
                     { path: 'promo', component: rpt.PromoReportComponent, canActivate: [AuthGuard] },
                     { path: 'drgperiod', component: rpt.DrugPeriodReportComponent, canActivate: [AuthGuard] },
