@@ -60,6 +60,7 @@ var ims = require('./routes/ims.js');
 var rprt = require('./routes/Reports.js');
 var vac = require('./routes/vacation.js');
 var cntct = require('./routes/contactUs.js')
+var wkplan = require('./routes/weekplan.js')
 
 app.use('/', index);
 app.use('/api/user', user);
@@ -82,6 +83,7 @@ app.use('/api/ims', ims);
 app.use('/api/rprt', rprt);
 app.use('/api/vac', vac);
 app.use('/api/cntct', cntct)
+app.use('/api/wkplan', wkplan)
 
 connection.connect(err => {
     if (err) {

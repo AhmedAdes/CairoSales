@@ -86,6 +86,12 @@ export class MenuAsideComponent implements OnInit {
       'disabled': this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99 ? true : null
     },
     {
+      'title': 'Week Plan',
+      'icon': 'dashboard',
+      'link': ['/home/wkplan'],
+      // 'disabled': this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99 ? true : null
+    },
+    {
       'title': 'Reports',
       'icon': 'dashboard',
       'link': ['/home/reports/home']

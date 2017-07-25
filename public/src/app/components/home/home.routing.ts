@@ -6,7 +6,7 @@ import { HomeComponent } from './home.component';
 
 import {
     UserComponent, DashboardComponent, RegionComponent,
-    DestinationComponent, VisitComponent, PlanComponent,
+    DestinationComponent, VisitComponent, PlanComponent, WeekPlanComponent, 
     ChngPassComponent, VacationComponent, ContactUsComponent
 } from '../';
 import * as bas from '../BasicData'
@@ -56,7 +56,8 @@ export const homeRoutes: Route[] = [
                     { path: 'drgpromo', component: rpt.DrugPromoReportComponent, canActivate: [AuthGuard] },/**/
                 ]
             },
-            { path: 'plan', component: PlanComponent, canActivate: [AuthGuard] }
+            { path: 'plan', component: PlanComponent, canActivate: [AuthGuard] },
+            { path: 'wkplan', component: WeekPlanComponent, canActivate: [AuthGuard] }
         ]
     }
 ];

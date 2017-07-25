@@ -14,6 +14,7 @@ export * from './visits/visit.component';
 export * from './vacations/vac.component';
 export * from './contactUS/contact.component';
 export * from './plan/plan.component';
+export * from './weekPlan/weekPlan.component';
 export * from './chngpass/chngpass';
 
 export * from './login/login.component'

@@ -19,3 +19,4 @@ export * from './ims.service';
 export * from './reports.service';
 export * from './vacation.service';
 export * from './contactUs.service';
+export * from './weekplan.service';

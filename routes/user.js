@@ -10,7 +10,8 @@ var Promise = require('bluebird');
 router.get('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query("SELECT u.*,(SELECT  dbo.fncUserIMS(u.UserID)) AS IMS FROM dbo.Users u Where JobClass != 'SysAdmin'")
+    request.query(`SELECT u.*, LineName,(SELECT  dbo.fncUserIMS(u.UserID)) AS IMS FROM dbo.Users u 
+                    JOIN dbo.SalesLines s ON u.SalesLineID = s.SalesLineID Where JobClass != 'SysAdmin'`)
         .then(function (recordset) {
             res.status(200);
             res.json(recordset);
@@ -47,7 +48,8 @@ router.get('/managerChain/:id', function(req,res, next){
 router.get('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query("SELECT * FROM dbo.Users Where UserID=" + req.params.id)
+    request.query(`SELECT u.*, LineName,(SELECT  dbo.fncUserIMS(u.UserID)) AS IMS FROM dbo.Users u JOIN dbo.SalesLines s ON u.SalesLineID = 
+                    s.SalesLineID Where JobClass != 'SysAdmin' And UserID=${req.params.id}`)
         .then(function (recordset) {
             res.status(200);
             res.json(recordset);

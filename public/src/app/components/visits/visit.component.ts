@@ -226,11 +226,11 @@ export class VisitComponent implements OnInit {
         }
     }
     disableDateField() {
-        if (new Date() > new Date(this.cnvVisitDate + 'T' + '06:00:00')) {
-            this.inFrm.controls['visDate'].disable();
-        } else {
+        // if (new Date() > new Date(this.cnvVisitDate + 'T' + '06:00:00')) {
+        //     this.inFrm.controls['visDate'].disable();
+        // } else {
             this.inFrm.controls['visDate'].enable()
-        }
+        // }
     }
     onRegChange(newobj) {
         if (newobj.target.value) {

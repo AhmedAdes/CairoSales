@@ -35,3 +35,22 @@ export class PlanImps {
     ImpName: string;
     Checked: boolean;
 }
+
+export class WeekPlan {
+    WplanID: number;
+    WeekNo: number;
+    MonthNo: number;
+    StartDate: Date;
+    UserID: number;
+    UserName: string;
+}
+
+export class WeekPlanDest {
+    WplanID: number;
+    DestID: number;
+    Destination: string;
+    SpecName: string;
+    ImpName: string;
+    RegionProvince: string;
+    Selected: boolean;
+}

@@ -15,14 +15,14 @@ import {
   HomeComponent, DashboardComponent, UserComponent, RegionComponent,
   SidebarComponent, TopNavComponent, DestinationComponent, VisitModule,
   UserScheduleComponent, UserWorkRateComponent, UserPlanComponent, BasicDataModule,
-  PlanComponent, ReportsModule, HelperModule, LineUsersComponent, ChngPassComponent, 
-  ScoreCardComponent, VacationComponent, ContactUsComponent
+  PlanComponent, ReportsModule, HelperModule, LineUsersComponent, ChngPassComponent,
+  ScoreCardComponent, VacationComponent, ContactUsComponent, WeekPlanComponent
 } from './components';
 import { LoginComponent, LogOutComponent } from './components/login/login.component';
 import {
   AuthenticationService, AuthGuard, RegionService, UserService, UserRegionService,
   DestinationService, DashboardService, PlanService, BreadcrumbService, MessagesService,
-  IMSService, ReportsService, VacationService, ContactUsService
+  IMSService, ReportsService, VacationService, ContactUsService, WeekPlanService
 } from './services';
 import { CustomPipesModule } from "./pipes/pipe.module";
 import { Approuting } from './app.routing';
@@ -52,15 +52,16 @@ let widgets = [
     UserComponent, RegionComponent, DashboardComponent,
     SidebarComponent, TopNavComponent, DestinationComponent,
     UserScheduleComponent, UserWorkRateComponent, UserPlanComponent, ScoreCardComponent,
-    PlanComponent, LineUsersComponent, ChngPassComponent, 
-    VacationComponent, ContactUsComponent
+    PlanComponent, LineUsersComponent, ChngPassComponent,
+    VacationComponent, ContactUsComponent, WeekPlanComponent
   ],
   providers: [
     AuthGuard, AuthenticationService,
     UserService, RegionService, UserRegionService,
     DestinationService, DashboardService, PlanService,
-    BreadcrumbService, MessagesService, IMSService, 
-    ReportsService, VacationService, ContactUsService 
+    BreadcrumbService, MessagesService, IMSService,
+    ReportsService, VacationService, ContactUsService,
+    WeekPlanService
   ],
   bootstrap: [AppComponent]
 })
