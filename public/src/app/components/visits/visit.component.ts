@@ -90,7 +90,7 @@ export class VisitComponent implements OnInit {
         var today = new Date();
         this.cnvVisitDate = hf.handleDate(today);
         this.cnvVisitTime = hf.handleTime(today);
-        this.yesterday = hf.handleDate(new Date(today.setDate(today.getDate() - 1)));
+        this.yesterday = hf.handleDate(new Date(today.setDate(today.getDate() - 7)));
         this.thisday = this.cnvVisitDate;
         this.inFrm.controls['visDate'].setValidators(Validators.compose([Validators.required, maxDate(new Date(this.cnvVisitDate)), minDate(new Date(this.yesterday))]));
         this.VisDrugs = [];
@@ -115,7 +115,7 @@ export class VisitComponent implements OnInit {
         this.serv.getVisit(id).subscribe(ret => {
             this.model = ret[0];
             this.cnvVisitDate = this.model.VisitDate.toString().split('T')[0];
-            this.yesterday = hf.handleDate(new Date(new Date(this.cnvVisitDate).setDate(new Date(this.cnvVisitDate).getDate() - 1)));
+            this.yesterday = hf.handleDate(new Date(new Date(this.cnvVisitDate).setDate(new Date(this.cnvVisitDate).getDate() - 7)));
             this.thisday = this.cnvVisitDate;
             this.inFrm.controls['visDate'].setValidators(Validators.compose([Validators.required, maxDate(new Date(this.cnvVisitDate)), minDate(new Date(this.yesterday))]));
             this.disableDateField()
