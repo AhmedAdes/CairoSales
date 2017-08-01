@@ -7,8 +7,9 @@ var Promise = require('bluebird');
 router.get('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT  WplanID ,WeekNo ,MonthNo ,StartDate ,w.UserID, u.UserName 
-                    FROM dbo.WeekPlan w JOIN dbo.Users u ON w.UserID = u.UserID ORDER BY StartDate DESC`)
+    request.query(`SELECT  WplanID ,WeekNo ,MonthNo, CONVERT(NVARCHAR(10), WeekNo) + ' -of- ' + DATENAME(MONTH, StartDate) AS WeekMonthName,StartDate ,w.UserID, 
+                (SELECT COUNT(DestID) FROM dbo.WeekPlanDestinations WHERE WplanID = w.WplanID) CustomerCount, u.UserName  
+                FROM dbo.WeekPlan w JOIN dbo.Users u ON w.UserID = u.UserID ORDER BY StartDate DESC`)
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
@@ -16,7 +17,8 @@ router.get('/', function (req, res, next) {
 router.get('/:id(\\d+)', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT  WplanID ,WeekNo ,MonthNo ,StartDate ,w.UserID, u.UserName 
+    request.query(`SELECT  WplanID ,WeekNo ,MonthNo, CONVERT(NVARCHAR(10), WeekNo) + ' -of- ' + DATENAME(MONTH, StartDate) AS WeekMonthName,StartDate ,w.UserID, 
+                (SELECT COUNT(DestID) FROM dbo.WeekPlanDestinations WHERE WplanID = w.WplanID) CustomerCount, u.UserName  
                     FROM dbo.WeekPlan w JOIN dbo.Users u ON w.UserID = u.UserID WHERE WplanID = ${req.params.id}`)
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
@@ -25,8 +27,40 @@ router.get('/:id(\\d+)', function (req, res, next) {
 router.get('/userPlan/:id(\\d+)', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT  WplanID ,WeekNo ,MonthNo ,StartDate ,w.UserID, u.UserName FROM dbo.WeekPlan w 
-                    JOIN dbo.Users u ON w.UserID = u.UserID WHERE w.UserID = ${req.params.id}`)
+    request.query(`SELECT  WplanID ,WeekNo ,MonthNo, CONVERT(NVARCHAR(10), WeekNo) + ' -of- ' + DATENAME(MONTH, StartDate) AS WeekMonthName,StartDate ,w.UserID, 
+                (SELECT COUNT(DestID) FROM dbo.WeekPlanDestinations WHERE WplanID = w.WplanID) CustomerCount, u.UserName 
+                FROM dbo.WeekPlan w JOIN dbo.Users u ON w.UserID = u.UserID WHERE w.UserID = ${req.params.id}`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+
+router.get('/planDetails/:id(\\d+).:userId(\\d+).:weekno(\\d+).:strtdate', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input('WplanID', req.params.id)
+    request.input('UserID', req.params.userId)
+    request.input('WeekNo', req.params.weekno)
+    request.input('StartDate', req.params.strtdate)
+    request.execute(`GetWeekPlanDetails`)
+        .then(function (recordset) { res.json(recordset[0]); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+
+router.get('/weekplanDest/:id(\\d+).:weekno(\\d+).:strtdate', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input('UserID', req.params.id)
+    request.input('WeekNo', req.params.weekno)
+    request.input('StartDate', req.params.strtdate)
+    request.execute(`GetWeekPlanDestination`)
+        .then(function (recordset) { res.json(recordset[0]); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+
+router.get('/lastWkPlanDate/:id(\\d+)', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query(`SELECT DATEADD(DAY,1,ISNULL(MAX(StartDate), GETDATE())) lastDate FROM dbo.WeekPlan WHERE UserID = ${req.params.id}`)
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
@@ -59,7 +93,7 @@ router.post('/', function (req, res, next) {
                             var request = trans.request();
                             request.input("WplanID", WplanID);
                             request.input("DestID", dst.DestID);
-                            return request.execute("WeekPlanDestInsert")
+                            return request.execute("WeekPlanDestinationInsert")
                         }));
 
                         Promise.all(promises)
@@ -112,13 +146,13 @@ router.put('/:id', function (req, res, next) {
                         console.log('Plan Updated');
                         var request = trans.request();
                         request.input("WplanID", req.params.id);
-                        promises.push(request.execute("WeekPlanDestDelete"));
+                        promises.push(request.execute("WeekPlanDestinationDelete"));
 
                         promises.push(Promise.map(dsts, function (dst) {
                             var request = trans.request();
                             request.input("WplanID", req.params.id);
                             request.input("DestID", dst.DestID);
-                            return request.execute("WeekPlanDestInsert")
+                            return request.execute("WeekPlanDestinationInsert")
                         }));
 
                         Promise.all(promises)

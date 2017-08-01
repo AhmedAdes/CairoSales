@@ -22,7 +22,8 @@ export class PlanSliderComponent implements OnInit {
         this.srvPlan.getUserPlan(this.currentUser.userID).subscribe(pln => {
             this.userPlan = pln;
             if (!this.userPlan) return;
-            this.selectedPlan = this.userPlan.findIndex(p => new Date() >= new Date(p.FromDate) && new Date() <= new Date(p.ToDate))
+            this.selectedPlan = this.userPlan.findIndex(p => new Date() >= new Date(p.FromDate) && 
+                                                            new Date() < new Date(new Date(p.ToDate).setDate(new Date(p.ToDate).getDate()+1)))
             this.changeView()
         });
     }

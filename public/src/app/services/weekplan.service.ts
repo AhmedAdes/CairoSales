@@ -22,17 +22,17 @@ export class WeekPlanService {
         return this.http.get(geturl, this.options).map(res => res.json());
     }
 
-    getUserPlan(userID: number){
+    getUserPlan(userID: number) {
         return this.http.get(this.url + 'userPlan/' + userID, this.options).map(res => res.json());
     }
 
     InsertPlan(Plan: WeekPlan, plnDst: WeekPlanDest[]) {
-        return this.http.post(this.url, { basic: Plan, dests: plnDst }, this.options)
+        return this.http.post(this.url, { basic: Plan, dsts: plnDst }, this.options)
             .map(res => res.json());
     }
 
     UpdatePlan(id: number, Plan: WeekPlan, plnDst: WeekPlanDest[]) {
-        return this.http.put(this.url + id, { basic: Plan, dests: plnDst }, this.options)
+        return this.http.put(this.url + id, { basic: Plan, dsts: plnDst }, this.options)
             .map(res => res.json());
     }
 
@@ -40,10 +40,14 @@ export class WeekPlanService {
         return this.http.delete(this.url + id, this.options).map(res => res.json());
     }
 
-    // getDetails() {
-    //     return this.http.get(this.url + 'planDetails/', this.options).map(res => res.json());
-    // }
-    // getPlanDetails(id: number) {
-    //     return this.http.get(this.url + 'planDetails/' + id, this.options).map(res => res.json());
-    // }
+    getWeekPlanDest(userID: number, weekNo: number, strtDate: Date) {
+        return this.http.get(this.url + 'weekplanDest/' + userID + '.' + weekNo + '.' + strtDate, this.options).map(res => res.json());
+    }
+    getLastWeekPlanDate(userID: number) {
+        return this.http.get(this.url + 'lastWkPlanDate/' + userID, this.options).map(res => res.json());
+    }
+    getPlanDetails(id: number, userid: number, weekNo: number, strtDate: string) {
+        return this.http.get(this.url + 'planDetails/' + id + '.' + userid + '.' + weekNo + '.' + strtDate, this.options).map(res => res.json());
+    }
+    
 }

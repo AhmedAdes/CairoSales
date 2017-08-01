@@ -43,6 +43,8 @@ export class WeekPlan {
     StartDate: Date;
     UserID: number;
     UserName: string;
+    WeekMonthName: string;
+    CustomerCount: number;
 }
 
 export class WeekPlanDest {
