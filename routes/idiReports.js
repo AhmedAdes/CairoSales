@@ -3,7 +3,7 @@ var router = express.Router();
 var sql = require('mssql');
 
 var con = require('../SQLConfig');
-var sqlConn = new sql.Connection(`mssql://sa:ITD@reY0u2@105.199.10.121:33333/IDIData?encrypt=true`);
+var sqlConn = new sql.Connection(`mssql://sa:ITD@reY0u2@105.198.224.91:33333/IDIData?encrypt=true`);
 sqlConn.connect();
 
 sqlConn.on('error', function (err) {
