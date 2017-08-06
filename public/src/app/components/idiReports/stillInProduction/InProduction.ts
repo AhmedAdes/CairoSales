@@ -26,6 +26,7 @@ export class IDIStillInProductionComponent implements OnInit {
     orderbyClass: string = "glyphicon glyphicon-sort"
 
     ngOnInit() {
+        this.today = new Date()
         this.ViewReport()
     }
 

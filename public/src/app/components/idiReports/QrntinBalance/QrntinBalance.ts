@@ -25,6 +25,7 @@ export class IDIQuarantineBalanceComponent implements OnInit {
     orderbyString: string = ""
     orderbyClass: string = "glyphicon glyphicon-sort"
     ngOnInit() {
+        this.today = new Date()
         this.ViewReport()
     }
     ViewReport() {
