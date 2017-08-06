@@ -1,0 +1,67 @@
+<div class="well no-print">
+    <form #f="ngForm" novalidate *ngIf="currentUser.jobClass != 3" (submit)="f.valid && ViewReport()">
+        <div class="form-horizontal">            
+            <div class="form-group">
+                <label for="CompanyCode" class="control-label col-md-2 col-sm-2">Company</label>
+                <div class="col-md-10 col-sm-10">
+                    <select class="form-control" name="CompanyCode" [(ngModel)]="compID" #compId="ngModel">
+                        <option ngValue="null">Select a Company...</option>
+                        <option *ngFor="let i of companies" [ngValue]="i.CompanyCode">{{i.Company}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="submit" class="btn btn-primary btn-block">View</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-info btn-block" (click)="printReport()">Print</button>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <button type="button" class="btn btn-danger btn-block" (click)="goBack()">Back</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="text-center">{{reportHeader}}</h3>
+    </div>
+    <div class="panel-body">
+        <table id="tblReps" class="table table-hover table-striped table-responsive table-bordered">
+            <colgroup>
+                <col width="10%" />
+                <col width="15%" />
+                <col width="30%" />
+                <col width="15%" />
+                <col width="15%" />
+                <col width="15%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th> SemiCode <i (click)="SortTable('SemiCode')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('SemiCode') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Company <i (click)="SortTable('Company')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('Company') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> ProductName <i (click)="SortTable('ProductName')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('ProductName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> BatchNo <i (click)="SortTable('BatchNo')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('BatchNo') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Required Box <i (click)="SortTable('RequiredBox')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('RequiredBox') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                    <th> Required Tab <i (click)="SortTable('RequiredTab')" class="btn btn-default no-print" [ngClass]="(orderbyString.indexOf('RequiredTab') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of prodRpt | orderby:orderbyString">
+                    <td>{{item.SemiCode}}</td>
+                    <td>{{item.Company}}</td>
+                    <td>{{item.ProductName}}</td>
+                    <td>{{item.BatchNo}}</td>
+                    <td>{{item.RequiredBox}}</td>
+                    <td>{{item.RequiredTab}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        <!--<pagination-controls class="no-print" (pageChange)="p = $event" maxSize="10"></pagination-controls>-->
+    </div>
+    
+</div>

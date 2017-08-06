@@ -97,6 +97,12 @@ export class MenuAsideComponent implements OnInit {
       'link': ['/home/reports/home']
     },
     {
+      'title': 'IDI Plant Reports',
+      'icon': 'dashboard',
+      'link': ['/home/idiReports/home'],
+      'disabled': this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99 ? true : null
+    },
+    {
       'title': 'Contact Us',
       'icon': 'dashboard',
       'link': ['/home/cntct']

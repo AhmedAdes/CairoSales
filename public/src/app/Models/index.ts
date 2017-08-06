@@ -6,3 +6,4 @@ export * from './destinations';
 export * from './visits';
 export * from './plan';
 export * from './reports';
+export * from './idiReports';

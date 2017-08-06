@@ -6,11 +6,12 @@ import { HomeComponent } from './home.component';
 
 import {
     UserComponent, DashboardComponent, RegionComponent,
-    DestinationComponent, VisitComponent, PlanComponent, WeekPlanComponent, 
+    DestinationComponent, VisitComponent, PlanComponent, WeekPlanComponent,
     ChngPassComponent, VacationComponent, ContactUsComponent
 } from '../';
 import * as bas from '../BasicData'
 import * as rpt from '../Reports'
+import * as idi from '../idiReports'
 
 export const homeRoutes: Route[] = [
     {
@@ -54,6 +55,15 @@ export const homeRoutes: Route[] = [
                     { path: 'drgcust', component: rpt.DrugCustomerReportComponent, canActivate: [AuthGuard] },
                     { path: 'drgspec', component: rpt.DrugSpecsReportComponent, canActivate: [AuthGuard] },
                     { path: 'drgpromo', component: rpt.DrugPromoReportComponent, canActivate: [AuthGuard] },/**/
+                ]
+            },
+            /**/{
+                path: 'idiReports', component: idi.IDIReportsComponent,
+                children: [
+                    { path: 'home', component: idi.IDIReportHomeComponent, canActivate: [AuthGuard] },
+                    { path: 'inProdctn', component: idi.IDIStillInProductionComponent, canActivate: [AuthGuard] },
+                    { path: 'finBlnc', component: idi.IDIFinishedBalanceComponent, canActivate: [AuthGuard] },
+                    { path: 'QBlnc', component: idi.IDIQuarantineBalanceComponent, canActivate: [AuthGuard] },
                 ]
             },
             { path: 'plan', component: PlanComponent, canActivate: [AuthGuard] },

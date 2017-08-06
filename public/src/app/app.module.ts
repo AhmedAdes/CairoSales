@@ -15,7 +15,7 @@ import {
   HomeComponent, DashboardComponent, UserComponent, RegionComponent,
   SidebarComponent, TopNavComponent, DestinationComponent, VisitModule,
   UserScheduleComponent, UserWorkRateComponent, UserPlanComponent, BasicDataModule,
-  PlanComponent, ReportsModule, HelperModule, LineUsersComponent, ChngPassComponent,
+  PlanComponent, ReportsModule, IDIReportsModule, HelperModule, LineUsersComponent, ChngPassComponent,
   ScoreCardComponent, VacationComponent, ContactUsComponent, WeekPlanComponent
 } from './components';
 import { LoginComponent, LogOutComponent } from './components/login/login.component';
@@ -45,7 +45,8 @@ let widgets = [
     ReactiveFormsModule, HttpModule, ToasterModule,
     RouterModule, Approuting, CustomPipesModule, NgxPaginationModule,
     AlertModule.forRoot(), DatepickerModule.forRoot(),
-    VisitModule, BasicDataModule, HelperModule, ChartsModule, ReportsModule/**/
+    VisitModule, BasicDataModule, HelperModule, ChartsModule, 
+    ReportsModule, IDIReportsModule/**/
   ],
   declarations: [
     AppComponent, ...widgets, LoginComponent, LogOutComponent, HomeComponent,

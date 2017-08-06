@@ -24,3 +24,4 @@ export * from './BasicData/basic.module';
 // export * from './Charts/chart.module';
 export * from './helpers'
 export * from './Reports/report.module'
+export * from './idiReports/idiReports.module'

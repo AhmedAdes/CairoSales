@@ -1,0 +1,6 @@
+export * from './idiReports.routing'
+export * from './idiReports.component'
+export * from './reportHome/idirptHome.component'
+export * from './stillInProduction/InProduction'
+export * from './QrntinBalance/QrntinBalance'
+export * from './finishedBalance/finishedBalance'
