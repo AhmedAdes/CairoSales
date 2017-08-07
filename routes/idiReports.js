@@ -17,7 +17,7 @@ router.get('/stillInProduction/', function (req, res, next) {
         var request = new sql.Request(sqlConn);
         request.query(`SELECT SemiCode,CompanyCode,Company,ProductName,BatchNo,RequiredBox,RequiredTab FROM PL.FncProductstillInProduction(GETDATE()) WHERE CompanyCode IN ('01','02','03','12')`)
             .then(function (recordset) { res.json(recordset);})
-            .catch(function (err) { res.json({ connection: sqlConn, error: err }); console.log(err); })
+            .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
 router.get('/stillInProduction/:compID', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
