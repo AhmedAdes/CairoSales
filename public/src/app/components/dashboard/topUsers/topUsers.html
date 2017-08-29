@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Top Medical Reps For {{lineName}} Line in Current Month</h2>
+  <div class="card-group">
+    <div class="col-xs-12 col-md-6 col-lg-4 no-padding text-center" *ngFor="let rep of medReps">
+      <div class="card-block">
+        <img class="card-img-top" class="img-circle" width="100px" src={{rep.photo}} alt="user photo">
+        <h2 class="card-title">{{rep.UserName}}</h2>
+        <h4 class="card-text">{{rep.Visits}}
+          <span class="badge"> {{rep.ComVisitPrcnt | percent:'2.2-3' }}</span></h4>
+      </div>
+    </div>
+  </div>
+</div>

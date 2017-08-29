@@ -108,10 +108,12 @@ export class MenuAsideComponent implements OnInit {
       'link': ['/home/cntct']
     },
   ];
-
+  photo: string
   constructor(private userServ: UserService, public router: Router, private auth: AuthenticationService) {
     // getting the current url
     this.router.events.subscribe((evt) => this.currentUrl = evt.url);
+
+    this.photo = this.currentUser.photo ? "data:image/PNG;base64," + this.currentUser.photo : './assets/img/avatar5.png'
   }
   public ngOnInit() {
     // TODO

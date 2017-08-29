@@ -7,10 +7,26 @@ var sql = require('mssql');
 var sqlConn = sql.globalConnection;
 var Promise = require('bluebird');
 
+var multer = require('multer');
+var storage = multer.memoryStorage({ //multers disk storage settings
+    // destination: function (req, file, cb) {
+    //     cb(null, './uploads/');
+    // },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+    }
+});
+
+var upload = multer({ //multer settings
+    storage: storage
+}).single('photo');
+
+
 router.get('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT u.*, LineName,(SELECT  dbo.fncUserIMS(u.UserID)) AS IMS FROM dbo.Users u 
+    request.query(`SELECT u.*, LineName,(SELECT  dbo.fncUserIMS(u.UserID)) AS IMS FROM dbo.Users u
                     JOIN dbo.SalesLines s ON u.SalesLineID = s.SalesLineID Where JobClass != 'SysAdmin'`)
         .then(function (recordset) {
             res.status(200);
@@ -32,7 +48,7 @@ router.get('/chain/:id', function (req, res, next) {
             if (err) { res.json({ error: err }); console.log(err); }
         })
 });
-router.get('/managerChain/:id', function(req,res, next){
+router.get('/managerChain/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
     request.input("UserID", req.params.id)
@@ -48,7 +64,7 @@ router.get('/managerChain/:id', function(req,res, next){
 router.get('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT u.*, LineName,(SELECT  dbo.fncUserIMS(u.UserID)) AS IMS FROM dbo.Users u JOIN dbo.SalesLines s ON u.SalesLineID = 
+    request.query(`SELECT u.*, LineName,(SELECT  dbo.fncUserIMS(u.UserID)) AS IMS FROM dbo.Users u JOIN dbo.SalesLines s ON u.SalesLineID =
                     s.SalesLineID Where JobClass != 'SysAdmin' And u.UserID=${req.params.id}`)
         .then(function (recordset) {
             res.status(200);
@@ -243,5 +259,35 @@ router.delete('/:id', function (req, res, next) {
         }
     });
 });
+
+
+router.post('/uploadPhoto/:id', function (req, res, next) {
+    var path = '';
+    var userid = req.params.id
+    upload(req, res, function (err) {
+        if (err) {
+            // An error occurred when uploading
+            console.log(err);
+            return res.status(422).send("an Error occured")
+        }
+        // No error occured.
+        path = req.file.path;
+        // console.log(req.file.buffer.toString('base64'))
+        // console.log(req.file.buffer)
+        var buffer = req.file.buffer;
+        res.setHeader('Content-Type', 'application/json');
+        var request = new sql.Request(sqlConn);
+        var data = req.body;
+        request.input("UserID", userid);
+        request.input("UserPhoto", buffer);
+        request.execute("UserUploadPhoto", function (err, recordset, returnValue, affected) {
+            if (err) { res.json({ error: err }); console.log(err); }
+            else {
+                // console.log(buffer);
+                res.send("Upload Completed for " + path);
+            }
+        });
+    });
+})
 
 module.exports = router;

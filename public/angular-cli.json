@@ -18,11 +18,12 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "bower_components/bootstrap/dist/css/bootstrap.css",
-        "styles.less"
+        "styles.less",
+        "bower_components/bootstrap/dist/css/bootstrap.css"
       ],
       "scripts": [
         "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/tether/dist/js/tether.min.js",
         "bower_components/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/admin-lte/dist/js/app.js",
         "../node_modules/chart.js/dist/Chart.bundle.min.js"

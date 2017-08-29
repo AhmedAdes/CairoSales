@@ -20,6 +20,9 @@
         <dash-score [heading]="headings[3]" [score]="promo" [icon]="'fa fa-gift fa-4x'" [alertColor]="'alert alert-success'"></dash-score>
     </div>
 </div>
+<div class="row" *ngIf="currentUser.jobClass > 0">
+  <dash-topusers [currentUser]="currentUser"></dash-topusers>
+</div>
 <div class="userchain" *ngIf="currentUser.jobClass != 3">
     <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;">
         <label for="userID" class="control-lable col-md-3 text-right">Select a User</label>

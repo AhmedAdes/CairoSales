@@ -3,6 +3,7 @@ export * from './dashboard/userSchedule/schedule';
 export * from './dashboard/userWorkRate/workRate';
 export * from './dashboard/userPlan/plan';
 export * from './dashboard/scoreCard/scoreCard';
+export * from './dashboard/topUsers/topUsers';
 export * from './destinations/destination.component';
 export * from './destinations/LineUsers/lineUsers';
 export * from './home/home.component';

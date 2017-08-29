@@ -34,4 +34,8 @@ export class DashboardService {
     getUserChainCounts(id: number) {
         return this.http.get(this.url + 'userVisitCounts/' + id, this.options).map(res => res.json());
     }
+    getTopUsers(from: string, to: string, lineID: number) {
+        return this.http.get(this.url + 'TopUsers/' + from + '/' + to + '/' + lineID, this.options).map(res => res.json());
+    }
+
 }

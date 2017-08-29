@@ -4,7 +4,7 @@
   "license": "MIT",
   "keywords": [
     "IDI",
-    "Angular2",
+    "Angular4",
     "Node.js",
     "Express",
     "SQL-Server"
@@ -43,14 +43,15 @@
     "ionicons": "^3.0.0",
     "moment": "^2.17.1",
     "ng-sidebar": "^3.2.1",
-    "ng2-bootstrap": "^1.1.16",
     "ng2-charts": "^1.5.0",
+    "ng2-file-upload": "^1.2.1",
     "ng2-nvd3": "^1.1.3",
+    "ngx-bootstrap": "^1.9.0",
     "ngx-pagination": "3.0.0",
     "nvd3": "^1.8.5",
-    "rxjs": "^5.0.1",
+    "rxjs": "^5.4.0",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.7.2"
+    "zone.js": "0.8.4"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",

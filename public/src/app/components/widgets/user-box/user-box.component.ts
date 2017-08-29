@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService, VisitService, DestinationService } from '../../../services';
-import { User, CurrentUser } from '../../../Models';
+import { AuthenticationService, VisitService, DestinationService, UserService } from '../../../services';
+import { User, CurrentUser, NodeUrl } from '../../../Models';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 @Component({
   /* tslint:disable */
@@ -14,18 +15,30 @@ export class UserBoxComponent implements OnInit {
   currentUser: CurrentUser = this.auth.getUser();
   visCount: number;
   DestCount: number;
+  public uploader: FileUploader = new FileUploader({ url: NodeUrl + `User/uploadPhoto/${this.currentUser.userID}`, itemAlias: 'photo' });
+
+  photo: string
 
   constructor(private auth: AuthenticationService, private router: Router,
     private srvDest: DestinationService, private srvVis: VisitService) {
-    // TODO
+      // this.photo = this.currentUser.photo ? "data:image/PNG;base64," + this.currentUser.photo : './assets/img/avatar5.png'
   }
 
   public ngOnInit() {
-    // TODO
     this.srvDest.getUserChainCount(this.currentUser.userID).subscribe(cont => {
       this.srvVis.getUserVisitsCount(this.currentUser.userID).subscribe(vis => {
         this.DestCount = cont[0].DestCount
         this.visCount = vis[0].visCount
+
+        //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
+        this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+        //overide the onCompleteItem property of the uploader so we are
+        //able to deal with the server response.
+        this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+          console.log("ImageUpload:uploaded:", item, status, response);
+          // this.currentUser.photo = item.file
+          this.uploader.clearQueue()
+        };
       })
     })
   }

@@ -1,34 +1,62 @@
 <!-- Menu Toggle Button -->
-<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"> <!-- The user image in the navbar-->
-	<img [src]="currentUser.photo" class="user-image" alt="currentUser.UserName"> <!-- hidden-xs hides the username on small devices so only the image appears. -->
-	<span class="hidden-xs">{{currentUser.UserName}}</span>
+<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+  <!-- The user image in the navbar-->
+  <img [src]="currentUser.photo" class="user-image" alt="currentUser.UserName">
+  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+  <span class="hidden-xs">{{currentUser.UserName}}</span>
 </a>
 <ul class="dropdown-menu">
-	<!-- The user image in the menu -->
-	<li class="user-header"><img [src]="currentUser.photo"
-		class="img-circle" alt="currentUser.UserName">
-		<p>
-			{{currentUser.UserName}} <small>{{currentUser.loginName}}</small>
-		</p></li>
-	<!-- Menu Body -->
-	<li class="user-body">
-		<div class="col-xs-6 text-center">
-			<a class="label label-default" href="javascript:void(0)">Customers <span class="badge">{{DestCount}}</span></a>
-		</div>
-		<div class="col-xs-6 text-center">
-			<a class="label label-default" href="javascript:void(0)">this Month Visits <span class="badge">{{visCount}}</span></a>
-		</div>
-		<!--<div class="col-xs-4 text-center">
+  <!-- The user image in the menu -->
+  <li class="user-header"><img [src]="currentUser.photo" class="img-circle" alt="currentUser.UserName">
+    <p>
+      <a data-toggle="modal" data-target="#myModal" class="btn btn-default">Change Photo</a>
+    </p>
+    <p>
+      {{currentUser.UserName}} <small>{{currentUser.loginName}}</small>
+    </p>
+  </li>
+  <!-- Menu Body -->
+  <li class="user-body">
+    <div class="col-xs-6 text-center">
+      <a class="label label-default" href="javascript:void(0)">Customers <span class="badge">{{DestCount}}</span></a>
+    </div>
+    <div class="col-xs-6 text-center">
+      <a class="label label-default" href="javascript:void(0)">this Month Visits <span class="badge">{{visCount}}</span></a>
+    </div>
+    <!--<div class="col-xs-4 text-center">
 			<a href="javascript:void(0)">Friends</a>
 		</div>-->
-	</li>
-	<!-- Menu Footer-->
-	<li class="user-footer">
-		<div class="pull-left">
-			<a [routerLink]="['/home/pass']" class="btn btn-default btn-flat">Change Password</a>
-		</div>
-		<div class="pull-right">
-			<a [routerLink]="['/logout']" class="btn btn-default btn-flat">Sign out</a>
-		</div>
-	</li>
+  </li>
+  <!-- Menu Footer-->
+  <li class="user-footer">
+    <div class="pull-left">
+      <a [routerLink]="['/home/pass']" class="btn btn-default btn-flat">Change Password</a>
+    </div>
+    <div class="pull-right">
+      <a [routerLink]="['/logout']" class="btn btn-default btn-flat">Sign out</a>
+    </div>
+  </li>
 </ul>
+
+
+<div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Change User Photo</h4>
+      </div>
+      <div class="modal-body">
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" class="form-control" accept="image/*" name="photo" ng2FileSelect [uploader]="uploader" />
+        </form>
+        <!-- File input for the file-upload plugin, with special ng2-file-upload directive called ng2FileSelect -->
+        <!-- -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

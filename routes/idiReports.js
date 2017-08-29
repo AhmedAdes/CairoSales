@@ -26,7 +26,6 @@ router.get('/stillInProduction/:compID', function (req, res, next) {
             .then(function (recordset) { res.json(recordset); })
             .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
-
 router.get('/finishBalance/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
         var request = new sql.Request(sqlConn);

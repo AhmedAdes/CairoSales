@@ -6,8 +6,9 @@ import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SidebarModule } from 'ng-sidebar';
 import { ToasterModule } from 'angular2-toaster/angular2-toaster';
-import { AlertModule, DatepickerModule } from 'ng2-bootstrap';
+import { AlertModule, DatepickerModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts';
+import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 
 
 import { AppComponent } from './app.component';
@@ -16,7 +17,7 @@ import {
   SidebarComponent, TopNavComponent, DestinationComponent, VisitModule,
   UserScheduleComponent, UserWorkRateComponent, UserPlanComponent, BasicDataModule,
   PlanComponent, ReportsModule, IDIReportsModule, HelperModule, LineUsersComponent, ChngPassComponent,
-  ScoreCardComponent, VacationComponent, ContactUsComponent, WeekPlanComponent
+  ScoreCardComponent, VacationComponent, ContactUsComponent, WeekPlanComponent, TopUsersComponent
 } from './components';
 import { LoginComponent, LogOutComponent } from './components/login/login.component';
 import {
@@ -45,8 +46,8 @@ let widgets = [
     ReactiveFormsModule, HttpModule, ToasterModule,
     RouterModule, Approuting, CustomPipesModule, NgxPaginationModule,
     AlertModule.forRoot(), DatepickerModule.forRoot(),
-    VisitModule, BasicDataModule, HelperModule, ChartsModule, 
-    ReportsModule, IDIReportsModule/**/
+    VisitModule, BasicDataModule, HelperModule, ChartsModule,
+    ReportsModule, IDIReportsModule, FileUploadModule/**/
   ],
   declarations: [
     AppComponent, ...widgets, LoginComponent, LogOutComponent, HomeComponent,
@@ -54,7 +55,7 @@ let widgets = [
     SidebarComponent, TopNavComponent, DestinationComponent,
     UserScheduleComponent, UserWorkRateComponent, UserPlanComponent, ScoreCardComponent,
     PlanComponent, LineUsersComponent, ChngPassComponent,
-    VacationComponent, ContactUsComponent, WeekPlanComponent
+    VacationComponent, ContactUsComponent, WeekPlanComponent, TopUsersComponent
   ],
   providers: [
     AuthGuard, AuthenticationService,

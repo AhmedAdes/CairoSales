@@ -14,6 +14,7 @@ export class User {
   LineName: string;
   DirectManagerName: string;
   IMS: string;
+  photo: string;
 }
 
 export class CurrentUser {
@@ -51,4 +52,16 @@ export class Vacation {
   VacType: string;
   Notes: string;
   IMS: string;
+}
+export class topUsers {
+  // UserID INT, UserName NVARCHAR(500), JobClass NVARCHAR(50), Planned INT, CommittedVisits INT, ComVisitPrcnt FLOAT, Customers INT, Logins INT
+  UserID: number;
+  UserName: string;
+  JobClass: string;
+  Planned: number;
+  CommittedVisits: number;
+  ComVisitPrcnt: number;
+  Customers: number;
+  Logins: number;
+  photo: string;
 }
