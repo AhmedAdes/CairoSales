@@ -19,8 +19,8 @@ export class TopUsersComponent implements OnInit {
 
   ngOnInit() {
     this.today  = new Date()
-    var firstDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 1)
-    var secondDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 2, 1)
+    var firstDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() , 1)
+    var secondDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 1)
     var secDate: Date = new Date(secondDate.setDate(secondDate.getDate() - 1))
     this.srvUsr.getuser(this.currentUser.userID).subscribe(usr => {
       var selUsr: User = usr[0]
