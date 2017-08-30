@@ -16,7 +16,7 @@ import { CustomPipesModule } from "../../pipes/pipe.module";
         ReactiveFormsModule, CustomPipesModule, HttpModule,
         RouterModule, NgxPaginationModule
     ],
-    declarations: [BasicDataComponent, SalesLineComponent, DrugComponent, 
+    declarations: [BasicDataComponent, SalesLineComponent, DrugComponent,
         GiftComponent, ImportanceComponent, MedSpecComponent, PromoToolsComponent, ImsDataComponent],
     providers: [DrugService, GiftService, ImportanceService, LineService, MedSpecService, PromoToolsService, IMSService],
 })

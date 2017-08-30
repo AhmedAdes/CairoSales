@@ -26,6 +26,8 @@ export class TopUsersComponent implements OnInit {
       var selUsr: User = usr[0]
       this.lineID = selUsr.SalesLineID
       this.lineName = selUsr.LineName
+      console.log(firstDate)
+      console.log(secDate)
       this.srvDash.getTopUsers(hf.handleDate(firstDate), hf.handleDate(secDate), this.lineID).subscribe(
         cols => this.medReps = cols.map(col =>  {return {UserID: col.UserID,
                                                       UserName: col.UserName,
