@@ -4,8 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { SidebarModule } from 'ng-sidebar';
-import { ToasterModule } from 'angular2-toaster/angular2-toaster';
+import { ToastrModule, ToastContainerModule  } from 'ngx-toastr';
 import { AlertModule, DatepickerModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
@@ -42,8 +41,14 @@ let widgets = [
 
 @NgModule({
   imports: [
-    BrowserModule, FormsModule, SidebarModule,
-    ReactiveFormsModule, HttpModule, ToasterModule,
+    BrowserModule, FormsModule,
+    ReactiveFormsModule, HttpModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      newestOnTop: true,
+      closeButton: true,
+      tapToDismiss: false
+    }), ToastContainerModule.forRoot(),
     RouterModule, Approuting, CustomPipesModule, NgxPaginationModule,
     AlertModule.forRoot(), DatepickerModule.forRoot(),
     VisitModule, BasicDataModule, HelperModule, ChartsModule,

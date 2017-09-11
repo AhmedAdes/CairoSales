@@ -3,7 +3,7 @@ import { CurrentUser } from '../../Models';
 import { Message } from '../../Models/message';
 import { AuthenticationService } from '../../services/auth.service';
 import { MessagesService } from '../../services/messages.service';
-import { ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-home',
@@ -12,15 +12,9 @@ import { ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster
 })
 export class HomeComponent implements OnInit {
     currentUser: CurrentUser = this.auth.getUser();
-    toastrConfig: ToasterConfig;
 
     constructor(private auth: AuthenticationService, private msgServ: MessagesService,
-        private toastr: ToasterService) {
-        this.toastrConfig = new ToasterConfig({
-            newestOnTop: true,
-            showCloseButton: true,
-            tapToDismiss: false
-        });
+        private toastr: ToastrService) {
     }
     // private _opened: boolean = true;
     // private _animate: boolean = true;

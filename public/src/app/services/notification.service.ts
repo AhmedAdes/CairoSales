@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ToasterService, Toast } from 'angular2-toaster/angular2-toaster';
+import { ToastrService, Toast } from 'ngx-toastr';
 
 @Injectable()
 export class NotificationService {
-  constructor(private toastr: ToasterService) { }
+  constructor(private toastr: ToastrService) { }
 
   public success = (body: string, title = 'Operation successful'): void => {
-    this.toastr.pop({ body: body, title: title, type: 'success' });
+    this.toastr.success( body, title );
   }
 
   public error = (body: string, title = 'An error occured'): void => {
-    this.toastr.pop({ body: body, title: title, type: 'error' });
+    this.toastr.error( body, title );
   }
 
   public warning = (body: string, title = 'Something went wrong'): void => {
-    this.toastr.pop({ body: body, title: title, type: 'warning' });
+    this.toastr.warning( body, title );
   }
 }

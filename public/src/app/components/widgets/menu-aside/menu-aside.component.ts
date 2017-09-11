@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { UserService, AuthenticationService } from '../../../services';
 import { User, CurrentUser } from '../../../Models';
 
@@ -111,7 +111,7 @@ export class MenuAsideComponent implements OnInit {
   photo: string
   constructor(private userServ: UserService, public router: Router, private auth: AuthenticationService) {
     // getting the current url
-    this.router.events.subscribe((evt) => this.currentUrl = evt.url);
+    this.router.events.filter(event => event instanceof NavigationStart).subscribe((e: NavigationStart) => this.currentUrl = e.url);
 
     this.photo = this.currentUser.photo ? "data:image/PNG;base64," + this.currentUser.photo : './assets/img/avatar5.png'
   }
