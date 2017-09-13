@@ -1,0 +1,13 @@
+<form [formGroup]="ansform" (submit)="ansform.valid && AddAnswer($event)">
+  <div class="form-horizontal">
+      <div class="form-group">
+          <label for="AnswerText" class="control-label col-md-2 col-sm-2">Answer</label>
+          <div class="col-md-10 col-sm-10">
+              <input class="form-control" type="text" name="AnswerText" [(ngModel)]="ansModel.AnswerText" [formControl]="ansform.controls['ansText']" />
+          </div>
+      </div>
+      <button class="btn btn-primary" type="submit" *ngIf="!EditForm" [disabled]="!ansform.valid">Add Answer</button>
+      <button value="Edit" (click)="EditDetail()" class="btn btn-success" *ngIf="EditForm" [disabled]="!ansform.valid">Edit Answer</button>
+      <button value="Cancel" (click)="CancelEdit()" class="btn btn-danger" *ngIf="EditForm">Cancel</button>
+  </div>
+</form>

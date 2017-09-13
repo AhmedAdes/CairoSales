@@ -49,6 +49,10 @@ export class MenuAsideComponent implements OnInit {
         {
           'title': 'IMS Regions',
           'link': ['/home/basic/ims'],
+        },
+        {
+          'title': 'Survey Questions',
+          'link': ['/home/basic/srvQ'],
         }
       ]
     },

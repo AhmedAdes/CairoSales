@@ -62,6 +62,7 @@ var vac = require('./routes/vacation.js');
 var cntct = require('./routes/contactUs.js')
 var wkplan = require('./routes/weekplan.js')
 var idiRpt = require('./routes/idiReports.js')
+var srvQ = require('./routes/survey.js')
 
 app.use('/', index);
 app.use('/api/user', user);
@@ -86,6 +87,7 @@ app.use('/api/vac', vac);
 app.use('/api/cntct', cntct)
 app.use('/api/wkplan', wkplan)
 app.use('/api/idiRpt', idiRpt)
+app.use('/api/survQ', srvQ)
 
 connection.connect(err => {
     if (err) {

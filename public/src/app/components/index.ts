@@ -24,5 +24,6 @@ export * from './visits/visit.module';
 export * from './BasicData/basic.module';
 
 export * from './helpers'
+export * from './helpers/helper.module'
 export * from './Reports/report.module'
 export * from './idiReports/idiReports.module'

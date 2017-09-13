@@ -21,3 +21,4 @@ export * from './vacation.service';
 export * from './contactUs.service';
 export * from './weekplan.service';
 export * from './idiReports.service';
+export * from './surveyQ.service';

@@ -5,4 +5,6 @@ export * from './ims/ims.component';
 export * from './medSpecs/medspec.component';
 export * from './promoTools/promo.component';
 export * from './saleslines/lines.component';
+export * from './surveyQuestions/surveyAnswers/surveyA.component';
+export * from './surveyQuestions/surveyQ.component';
 export * from './basic.component';
