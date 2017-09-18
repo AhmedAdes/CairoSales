@@ -13,7 +13,7 @@ export class IDIReportsService {
   options = new RequestOptions({ headers: this.headers });
 
   getStillInProduction(id?: string) {
-    var geturl = this.url + 'stillInProduction/';
+    let geturl = this.url + 'stillInProduction/';
     if (id != null) {
       geturl = this.url + 'stillInProduction/' + id;
     }

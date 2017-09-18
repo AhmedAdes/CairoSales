@@ -8,6 +8,7 @@ import { ToastrModule, ToastContainerModule  } from 'ngx-toastr';
 import { AlertModule, DatepickerModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
+import { CustomMaterialModule } from './components/material.module'
 
 
 import { AppComponent } from './app.component';
@@ -22,7 +23,8 @@ import { LoginComponent, LogOutComponent } from './components/login/login.compon
 import {
   AuthenticationService, AuthGuard, RegionService, UserService, UserRegionService,
   DestinationService, DashboardService, PlanService, BreadcrumbService, MessagesService,
-  IMSService, ReportsService, VacationService, ContactUsService, WeekPlanService
+  IMSService, ReportsService, VacationService, ContactUsService, WeekPlanService,
+  MedSpecService, DrugService, ImportanceService, LineService
 } from './services';
 import { CustomPipesModule } from "./pipes/pipe.module";
 import { Approuting } from './app.routing';
@@ -67,8 +69,8 @@ let widgets = [
     UserService, RegionService, UserRegionService,
     DestinationService, DashboardService, PlanService,
     BreadcrumbService, MessagesService, IMSService,
-    ReportsService, VacationService, ContactUsService,
-    WeekPlanService
+    ReportsService, VacationService, ContactUsService, LineService,
+    WeekPlanService, MedSpecService, DrugService, ImportanceService
   ],
   bootstrap: [AppComponent]
 })

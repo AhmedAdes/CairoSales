@@ -14,7 +14,7 @@ export class ContactUsService {
     options = new RequestOptions({ headers: this.headers });
 
     getContactUs(id?: number) {
-        var geturl = this.url;
+        let geturl = this.url;
         if (id != null) {
             geturl = this.url + id;
         }

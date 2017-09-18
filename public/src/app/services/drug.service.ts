@@ -14,7 +14,7 @@ export class DrugService {
   options = new RequestOptions({ headers: this.headers });
 
   getDrug(id?: number) {
-    var geturl = this.url;
+    let geturl = this.url;
     if (id != null) {
       geturl = this.url + id;
     }

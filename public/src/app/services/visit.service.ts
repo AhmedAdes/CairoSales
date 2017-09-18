@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/forkJoin';
 import { Observable } from 'rxjs/Observable';
-import { Visits, VisitDrugs, VisitGifts, Drugs, Gifts, NodeUrl } from '../Models';
+import { Visits, VisitDrugs, VisitGifts, VisitAnswers, NodeUrl } from '../Models';
 import { AuthenticationService } from './auth.service';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class VisitService {
     options = new RequestOptions({ headers: this.headers });
 
     getVisit(id?: number) {
-        var geturl = this.url;
+        let geturl = this.url;
         if (id != null) {
             geturl = this.url + id;
         }
@@ -35,13 +35,13 @@ export class VisitService {
         return this.http.get(this.url + 'UserVisitsDate/' + userID, this.options).map(res => res.json());
     }
 
-    InsertVisit(visit: Visits, visDrugs: VisitDrugs[], visGifts: VisitGifts[]) {
-        return this.http.post(this.url, { basic: visit, drugs: visDrugs, gifts: visGifts }, this.options)
+    InsertVisit(visit: Visits, visDrugs: VisitDrugs[], visGifts: VisitGifts[], visAns: VisitAnswers[]) {
+        return this.http.post(this.url, { basic: visit, drugs: visDrugs, gifts: visGifts, ansr: visAns }, this.options)
             .map(res => res.json());
     }
 
-    UpdateVisit(id: number, visit: Visits, visDrugs: VisitDrugs[], visGifts: VisitGifts[]) {
-        return this.http.put(this.url + id, { basic: visit, drugs: visDrugs, gifts: visGifts }, this.options)
+    UpdateVisit(id: number, visit: Visits, visDrugs: VisitDrugs[], visGifts: VisitGifts[], visAns: VisitAnswers[]) {
+        return this.http.put(this.url + id, { basic: visit, drugs: visDrugs, gifts: visGifts, ans: visAns }, this.options)
             .map(res => res.json());
     }
 

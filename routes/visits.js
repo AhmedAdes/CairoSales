@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
     request.query(`SELECT v.*, d.Destination, d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, d.SpecName, d.ImpName, d.VisitsNo, u.UserName
-                    FROM dbo.Visits v JOIN dbo.vwDestinations d ON v.DestID = d.DestID JOIN dbo.Users u ON v.UserID = u.UserID ORDER BY VisitID DESC`) 
+                    FROM dbo.Visits v JOIN dbo.vwDestinations d ON v.DestID = d.DestID JOIN dbo.Users u ON v.UserID = u.UserID ORDER BY VisitID DESC`)
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
@@ -71,11 +71,12 @@ router.post('/', function (req, res, next) {
     var vis = req.body.basic;
     var drugs = req.body.drugs;
     var gifts = req.body.gifts;
+    var ansrs = req.body.ansr;
     var visID;
-    if(vis.VisitDate > new Date()){
+    if (vis.VisitDate > new Date()) {
         res.json({ error: "Visit Date is after today's Date" }); console.log(err);
         return
-    } else if (vis.VisitDate < new Date().setDate(new Date().getDate() -1)){
+    } else if (vis.VisitDate < new Date().setDate(new Date().getDate() - 1)) {
         res.json({ error: "Visit Date is before yesterday's Date" }); console.log(err);
         return
     }
@@ -86,7 +87,7 @@ router.post('/', function (req, res, next) {
         trans.begin()
             .then(function () {
                 var promises = [];
-                var request = trans.request(); 
+                var request = trans.request();
                 request.input("VisitDate", vis.VisitDate);
                 request.input("VisitTime", vis.VisitTime);
                 request.input("DestID", vis.DestID);
@@ -115,6 +116,15 @@ router.post('/', function (req, res, next) {
                                 request.input("ToolID", gift.ToolID);
                                 request.input("Quant", gift.Qty);
                                 return request.execute("VisitGiftInsert")
+                            }));
+                        }
+                        if (ansrs.length > 0) { //VisitID, DrugID, AnswerID
+                            promises.push(Promise.map(ansrs, function (ans) {
+                                var request = trans.request();
+                                request.input("VisitID", visID);
+                                request.input("DrugID", ans.DrugID);
+                                request.input("AnswerID", ans.AnswerID);
+                                return request.execute("SurveyVisitAnswersInsert")
                             }));
                         }
 
@@ -175,6 +185,9 @@ router.put('/:id', function (req, res, next) {
                         var request = trans.request();
                         request.input("VisitID", req.params.id);
                         promises.push(request.execute("VisitGiftDelete"));
+                        var request = trans.request();
+                        request.input("VisitID", req.params.id);
+                        promises.push(request.execute("SurveyVisitAnswersDelete"));
 
                         promises.push(Promise.map(drugs, function (drug) {
                             var request = trans.request();
@@ -192,6 +205,15 @@ router.put('/:id', function (req, res, next) {
                                 request.input("ToolID", gift.ToolID);
                                 request.input("Quant", gift.Qty);
                                 return request.execute("VisitGiftInsert")
+                            }));
+                        }
+                        if (ansrs.length > 0) {
+                            promises.push(Promise.map(ansrs, function (ans) {
+                                var request = trans.request();
+                                request.input("VisitID", req.params.id);
+                                request.input("DrugID", ans.DrugID);
+                                request.input("AnswerID", ans.AnswerID);
+                                return request.execute("SurveyVisitAnswersInsert")
                             }));
                         }
                         Promise.all(promises)

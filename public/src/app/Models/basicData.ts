@@ -58,13 +58,19 @@ export class SurveyQuestion {
 
 export class SurveyAnswer {
   AnswerID: number;
-  QID: number;
   AnswerText: string;
+  QID: number;
   QText: string;
+  Keyword: string;
 }
 
 export class VisitAnswers {
   VisitID: number;
   DrugID: number;
+  DrugName: string;
   AnswerID: number;
+  AnswerText: string;
+  QID: number;
+  QText: string;
+  Keyword: string;
 }

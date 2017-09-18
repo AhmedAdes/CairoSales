@@ -15,7 +15,7 @@ export class WeekPlanService {
     options = new RequestOptions({ headers: this.headers });
 
     getPlan(id?: number) {
-        var geturl = this.url;
+        let geturl = this.url;
         if (id != null) {
             geturl = this.url + id;
         }

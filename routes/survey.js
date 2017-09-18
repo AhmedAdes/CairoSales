@@ -22,11 +22,29 @@ router.get('/:id', function (req, res, next) {
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
 
-router.get('/answers/:qID', function (req, res, next) {
+router.get('/answers/:all', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.query(`SELECT AnswerID, AnswerText, a.QID, Keyword, QText FROM dbo.SurveyAnswers a JOIN dbo.SurveyQuestions q ON a.QID=q.QID`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.get('/answers/:qID(\\d+)', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
     request.input("QID", req.params.qID);
     request.query(`SELECT AnswerID, AnswerText, a.QID, Keyword, QText FROM dbo.SurveyAnswers a JOIN dbo.SurveyQuestions q ON a.QID=q.QID Where a.QID=@QID`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.get('/visDrgAns/:visID(\\d+)', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("VisitID", req.params.visID);
+    request.query(`SELECT sva.VisitID, sva.DrugID, d.DrugName, sva.AnswerID, a.AnswerText, q.QID, q.QText, q.Keyword 
+                FROM dbo.SurveyVisitAnswers sva JOIN dbo.Drugs d ON sva.DrugID = d.DrugID	
+                JOIN dbo.SurveyAnswers a ON sva.AnswerID = a.AnswerID JOIN dbo.SurveyQuestions q ON a.QID = q.QID
+                WHERE VisitID = @VisitID`)
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });

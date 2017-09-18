@@ -1,76 +1,76 @@
 <div class="card">
-    <div class="card-header">
+  <div class="card-header">
 
-        <h2> {{headerText}} </h2>
-        <button *ngIf="!Formstate" class="btn btn-primary" (click)="CreateNew()">Create New</button>
-        <br *ngIf="!Formstate">
-        <div class="alert alert-danger" *ngIf="errorMessage">
-            <p>{{errorMessage}}</p>
-        </div>
+    <h2> {{headerText}} </h2>
+    <button *ngIf="!Formstate" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+    <br *ngIf="!Formstate">
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      <p>{{errorMessage}}</p>
     </div>
-    <div class="card-block" *ngIf="showTable">
-        <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;" *ngIf="currentUser.jobClass != 3">
-            <label for="userID" class="control-lable col-md-3 text-right">Select a User</label>
-            <div class="col-md-9">
-                <select class="form-control" name="userID" (change)="UserChanged($event)">
+  </div>
+  <div class="card-block" *ngIf="showTable">
+    <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;" *ngIf="currentUser.jobClass != 3">
+      <label for="userID" class="control-lable col-md-3 text-right">Select a User</label>
+      <div class="col-md-9">
+        <select class="form-control" name="userID" (change)="UserChanged($event)">
                     <option value="null">Select a User...</option>
                     <option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName + " @ "+ user.LineName}}</option>
                 </select>
-            </div>
-        </div>
-        <div *ngIf="selUser">
-            <visit-uservisits [UserID]="selUser.UserID" [currentUser]="currentUser" [collection]="collection" (DeleteEvent)="Delete($event)" (DetailEvent)="ShowDetails($event)"
-                (EditEvent)="EditThis($event)" (DetailEvent)="ShowDetails($event)">
-            </visit-uservisits>
-        </div>
+      </div>
     </div>
+    <div *ngIf="selUser">
+      <visit-uservisits [UserID]="selUser.UserID" [currentUser]="currentUser" [collection]="collection" (DeleteEvent)="Delete($event)"
+        (DetailEvent)="ShowDetails($event)" (EditEvent)="EditThis($event)" (DetailEvent)="ShowDetails($event)">
+      </visit-uservisits>
+    </div>
+  </div>
 
-    <div class="card-block" *ngIf="Formstate">
-        <form [formGroup]="inFrm" (submit)="inFrm.valid && HandleForm($event)" novalidate>
-            <div class="form-horizontal">
+  <div class="card-block" *ngIf="Formstate">
+    <form [formGroup]="inFrm" (submit)="inFrm.valid && HandleForm($event)" novalidate>
+      <div class="form-horizontal">
 
-                <h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this visit ?</h2>
-                <br>
-                <div class="card">
-                    <h3 class="card-header alert alert-info" style="margin: 10px 5px; padding: 5px;">Basic Data</h3>
-                    <div class="card-block">
-                        <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visType'].valid }">
-                            <label for="VisitType" class="control-label col-md-2 col-sm-2">Visit Type</label>
-                            <div class="col-md-10 col-sm-10">
-                                <select class="form-control" name="VisitType" [(ngModel)]="model.VisitType" [formControl]="inFrm.controls['visType']">
+        <h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this visit ?</h2>
+        <br>
+        <div class="card">
+          <h3 class="card-header alert alert-info" style="margin: 10px 5px; padding: 5px;">Basic Data</h3>
+          <div class="card-block">
+            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visType'].valid }">
+              <label for="VisitType" class="control-label col-md-2 col-sm-2">Visit Type</label>
+              <div class="col-md-10 col-sm-10">
+                <select class="form-control" name="VisitType" [(ngModel)]="model.VisitType" [formControl]="inFrm.controls['visType']">
                                     <option value="">Select a Visit Type...</option>
                                     <option *ngFor="let i of visTypes" [ngValue]="i.name">{{i.name}}</option>
                                 </select>
-                                <div class='error' *ngIf="inFrm.controls['visType'].touched && !inFrm.controls['visType'].valid">
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['visType'].hasError('required')">Visit Type is required.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" *ngIf="model.VisitType == 'Coaching Visit-With Manager'" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['accompanyID'].valid }">
-                            <label for="AccompanyID" class="control-label col-md-2 col-sm-2">Accompanied By</label>
-                            <div class="col-md-10 col-sm-10">
-                                <select class="form-control" name="AccompanyID" [(ngModel)]="model.AccompanyID" [formControl]="inFrm.controls['accompanyID']">
+                <div class='error' *ngIf="inFrm.controls['visType'].touched && !inFrm.controls['visType'].valid">
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['visType'].hasError('required')">Visit Type is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="model.VisitType == 'Coaching Visit-With Manager'" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['accompanyID'].valid }">
+              <label for="AccompanyID" class="control-label col-md-2 col-sm-2">Accompanied By</label>
+              <div class="col-md-10 col-sm-10">
+                <select class="form-control" name="AccompanyID" [(ngModel)]="model.AccompanyID" [formControl]="inFrm.controls['accompanyID']">
                                     <option value="">Select a Manger...</option>
                                     <option *ngFor="let i of managers" [ngValue]="i.UserID">{{i.UserName}} - {{i.JobClass}}</option>
                                 </select>
-                                <div class='error' *ngIf="inFrm.controls['accompanyID'].touched && !inFrm.controls['accompanyID'].valid">
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['accompanyID'].hasError('mngrRequired')">Accompanied By field is required.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visDate'].valid }">
-                            <label for="VisitDate" class="control-label col-md-2 col-sm-2">Visit Date</label>
-                            <div class="col-md-10 col-sm-10">
-                                <input id="VisitDate" class="form-control" type="date" name="VisitDate" [(ngModel)]="cnvVisitDate" [formControl]="inFrm.controls['visDate']"
-                                    [min]="yesterday" [max]="thisday">
-                                <div class='error' *ngIf="(inFrm.controls['visDate'].touched && !inFrm.controls['visDate'].valid) || (inFrm.get('submitted') && !inFrm.controls['visDate'].valid)">
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('required')">Visit Date is required.</div>
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('minDate')">Visit Date must be within two days old.</div>
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('maxDate')">Visit Date must be within two days old.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--<div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visTime'].valid }">
+                <div class='error' *ngIf="inFrm.controls['accompanyID'].touched && !inFrm.controls['accompanyID'].valid">
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['accompanyID'].hasError('mngrRequired')">Accompanied By field is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visDate'].valid }">
+              <label for="VisitDate" class="control-label col-md-2 col-sm-2">Visit Date</label>
+              <div class="col-md-10 col-sm-10">
+                <input id="VisitDate" class="form-control" type="date" name="VisitDate" [(ngModel)]="cnvVisitDate" [formControl]="inFrm.controls['visDate']"
+                  [min]="yesterday" [max]="thisday">
+                <div class='error' *ngIf="(inFrm.controls['visDate'].touched && !inFrm.controls['visDate'].valid) || (inFrm.get('submitted') && !inFrm.controls['visDate'].valid)">
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('required')">Visit Date is required.</div>
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('minDate')">Visit Date must be within two days old.</div>
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('maxDate')">Visit Date must be within two days old.</div>
+                </div>
+              </div>
+            </div>
+            <!--<div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visTime'].valid }">
                             <label for="VisitTime" class="control-label col-md-2 col-sm-2">Visit Time</label>
                             <div class="col-md-10 col-sm-10">
                                 <input class="form-control" type="time" name="VisitTime" [(ngModel)]="cnvVisitTime" [formControl]="inFrm.controls['visTime']">
@@ -80,106 +80,136 @@
                                 </div>
                             </div>
                         </div>-->
-                        <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['region'].valid }">
-                            <label for="RegionID" class="control-label col-md-2 col-sm-2">Regions</label>
-                            <div class="col-md-10 col-sm-10">
-                                <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" [formControl]="inFrm.controls['region']" (change)="onRegChange($event)">
+            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['region'].valid }">
+              <label for="RegionID" class="control-label col-md-2 col-sm-2">Regions</label>
+              <div class="col-md-10 col-sm-10">
+                <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" [formControl]="inFrm.controls['region']" (change)="onRegChange($event)">
                                     <option value="">Select a Province...</option>
                                     <option *ngFor="let i of regions" [ngValue]="i.RegionID">{{i.RegionName}} - {{i.ProvinceID}}</option>
                                 </select>
-                                <div class='error' *ngIf="inFrm.controls['region'].touched && !inFrm.controls['region'].valid">
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['region'].hasError('required')">Province is required.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-sm-offset-2">
-                                <label class="radio-inline control-label col-md-5 col-sm-5">
+                <div class='error' *ngIf="inFrm.controls['region'].touched && !inFrm.controls['region'].valid">
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['region'].hasError('required')">Province is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-offset-2 col-sm-offset-2">
+                <label class="radio-inline control-label col-md-5 col-sm-5">
                                     <input type="radio" name="DestType" (change)="onDestTypeChange($event, 'Clinic (Doctor)')" [checked]="model.DestType == 'Clinic (Doctor)'">Clinic (Doctor)
                                 </label>
-                                <label class="radio-inline control-label col-md-5 col-sm-5">
+                <label class="radio-inline control-label col-md-5 col-sm-5">
                                     <input type="radio" name="DestType" (change)="onDestTypeChange($event, 'Pharmacy')" [checked]="model.DestType == 'Pharmacy'">Pharmacy
                                 </label>
-                            </div>
-                        </div>
-                        <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['destination'].valid }">
-                            <label for="DestID" class="control-label col-md-2 col-sm-2">Customer</label>
-                            <div class="col-md-10 col-sm-10">
-                                <select class="form-control" name="DestID" [(ngModel)]="model.DestID" [formControl]="inFrm.controls['destination']" (change)="onDestChange($event)">
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['destination'].valid }">
+              <label for="DestID" class="control-label col-md-2 col-sm-2">Customer</label>
+              <div class="col-md-10 col-sm-10">
+                <select class="form-control" name="DestID" [(ngModel)]="model.DestID" [formControl]="inFrm.controls['destination']" (change)="onDestChange($event)">
                                     <option value="">Select a Customer...</option>
                                     <option *ngFor="let i of ViewDests" [ngValue]="i.DestID">{{i.Destination}}</option>
                                 </select>
-                                <div class='error' *ngIf="(inFrm.controls['destination'].touched && !inFrm.controls['destination'].valid) || (inFrm.get('submitted') && !inFrm.controls['destination'].valid)">
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['destination'].hasError('required')">Customer is required.</div>
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['destination'].hasError('maxVisit')">this Customer has been visited the max numbers of visits allowed this month.</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="GeneralComment" class="control-label col-md-2 col-sm-2">Overall Comments</label>
-                            <div class="col-md-10 col-sm-10">
-                                <textarea rows="4" cols="10" class="form-control" type="text" name="GeneralComment" [(ngModel)]="model.GeneralComment" [formControl]="inFrm.controls['generalComment']"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                <div class='error' *ngIf="(inFrm.controls['destination'].touched && !inFrm.controls['destination'].valid) || (inFrm.get('submitted') && !inFrm.controls['destination'].valid)">
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['destination'].hasError('required')">Customer is required.</div>
+                  <div class="alert alert-danger" *ngIf="inFrm.controls['destination'].hasError('maxVisit')">this Customer has been visited the max numbers of visits allowed this month.</div>
                 </div>
-                <div class="card">
-                    <h3 class="card-header alert alert-success" style="margin: 10px 5px; padding: 5px;">Products</h3>
-                    <div class="card-block">
-                        <visit-drugs *ngIf="Formstate!='Details' && Formstate!='Delete'" [currentUser]="currentUser" [visDrugs]="VisDrugs" [drugmodel]="visDrugModel"
-                            (drugChanged)="drugChangeEvent($event)"></visit-drugs>
-                    </div>
-                    <table id="tblProducts" class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Comment</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of VisDrugs; let i = index">
-                                <td>{{item.DrugName}}</td>
-                                <td>{{item.Comment}}</td>
-                                <td><button type="button" class="btn btn-default" (click)="DeleteDrug(i)">Delete</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card">
-                    <h3 class="card-header alert alert-warning" style="margin: 10px 5px; padding: 5px;">Promotional Tools</h3>
-                    <div class="card-block">
-                        <visit-gifts *ngIf="Formstate!='Details' && Formstate!='Delete'" [visGifts]="VisGifts" [visDrugs]="VisDrugs" [giftmodel]="visGiftModel"
-                            [drgsChanged]="drgsChanged"></visit-gifts>
-                    </div>
-                    <table id="tblGifts" class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>Promo Type</th>
-                                <th>Promo Tool</th>
-                                <th>Quantity</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of VisGifts; let i = index">
-                                <td>{{item.GiftName}}</td>
-                                <td>{{item.ToolName}}</td>
-                                <td>{{item.Qty}}</td>
-                                <td><button type="button" class="btn btn-default" (click)="DeleteGift(i)">Delete</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
-                    <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'" [disabled]='!inFrm.valid || inFrm.get("submitted")'>Save</button>                    |
-                    <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button>                    |
-                    <button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
-                </div>
+              </div>
             </div>
-        </form>
-        <div class="alert alert-danger" *ngIf="errorMessage">
-            <p>{{errorMessage}}</p>
+            <div class="form-group">
+              <label for="GeneralComment" class="control-label col-md-2 col-sm-2">Overall Comments</label>
+              <div class="col-md-10 col-sm-10">
+                <textarea rows="4" cols="10" class="form-control" type="text" name="GeneralComment" [(ngModel)]="model.GeneralComment" [formControl]="inFrm.controls['generalComment']"></textarea>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="card">
+          <h3 class="card-header alert alert-success" style="margin: 10px 5px; padding: 5px;">Products</h3>
+          <div class="card-block">
+            <visit-drugs *ngIf="Formstate!='Details' && Formstate!='Delete'" [currentUser]="currentUser" [visDrugs]="VisDrugs" [visAnsrs]="visAnsrs"
+              [drugmodel]="visDrugModel" [allAnswers]="allAns" (drugChanged)="drugChangeEvent($event)" (ansChanged)="ansChangeEvent($event)"></visit-drugs>
+          </div>
+          <table id="tblProducts" class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Comment</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of VisDrugs; let i = index">
+                <td>{{item.DrugName}}</td>
+                <td>{{item.Comment}}</td>
+                <td>
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#surveyModal" (click)="prepareDrgAnsrs(i)"><i class="fa fa-comment"></i> Survey</button>
+                  <button type="button" class="btn btn-default" *ngIf="Formstate!='Details' && Formstate!='Delete'" (click)="DeleteDrug(i)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3 class="card-header alert alert-warning" style="margin: 10px 5px; padding: 5px;">Promotional Tools</h3>
+          <div class="card-block">
+            <visit-gifts *ngIf="Formstate!='Details' && Formstate!='Delete'" [visGifts]="VisGifts" [visDrugs]="VisDrugs" [giftmodel]="visGiftModel"
+              [drgsChanged]="drgsChanged"></visit-gifts>
+          </div>
+          <table id="tblGifts" class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Promo Type</th>
+                <th>Promo Tool</th>
+                <th>Quantity</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of VisGifts; let i = index">
+                <td>{{item.GiftName}}</td>
+                <td>{{item.ToolName}}</td>
+                <td>{{item.Qty}}</td>
+                <td><button type="button" class="btn btn-default" (click)="DeleteGift(i)">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
+          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'" [disabled]='!inFrm.valid || inFrm.get("submitted")'>Save</button>          |
+          <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
+          <button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      <p>{{errorMessage}}</p>
     </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Survey of Product: {{selDrugName}}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let qst of drgAnsrs; let i = index" class="col-lg-offset-2 col-md-offset-2 col-lg-10 col-md-10 col-sm-12 text-left">
+          <label class="control-label">{{i+1}}- {{qst.QText}} ?</label><br>
+          <md-radio-group class="x-radio-group">
+            <div *ngFor="let ans of qst.Answers">
+              <md-radio-button class="x-radio-button" [value]="ans.AnswerID" [checked]="ans.checked" style="font-weight: normal!important">{{ans.AnswerText}}</md-radio-button>
+            </div>
+          </md-radio-group>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

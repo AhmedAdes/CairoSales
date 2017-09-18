@@ -1,49 +1,93 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { DrugService } from '../../../services';
-import { Drugs, VisitDrugs, CurrentUser } from '../../../Models';
+import { DrugService, SurveyQuestionService } from '../../../services';
+import { Drugs, VisitDrugs, SurveyAnswer, CurrentUser, VisitAnswers } from '../../../Models';
+import { CustomMaterialModule } from '../../material.module';
+import 'rxjs/add/operator/map';
 
 @Component({
-    selector: 'visit-drugs',
-    templateUrl: './visitdrugs.html'
+  selector: 'visit-drugs',
+  templateUrl: './visitdrugs.html',
+  styles: [`.x-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }`,
+    `.x-radio-button {
+    margin: 1px;
+    font-weight: normal!important;
+  }`, `.survey{
+    background-color: #B6B6B6;
+  }`]
 })
 export class VisitDrugsComponent implements OnInit {
-    @Input() visDrugs: VisitDrugs[];
-    @Input() drugmodel: VisitDrugs;
-    @Input() currentUser: CurrentUser;
-    @Output() drugChanged = new EventEmitter();
-    drugs: Drugs[] = [];
-    drgform: FormGroup;
+  @Input() visDrugs: VisitDrugs[];
+  @Input() visAnsrs: VisitAnswers[];
+  @Input() drugmodel: VisitDrugs;
+  @Input() currentUser: CurrentUser;
+  @Input() allAnswers: SurveyAnswer[];
+  @Output() drugChanged = new EventEmitter();
+  @Output() ansChanged = new EventEmitter();
+  drugs: Drugs[] = [];
+  surveyAns: any[] = []
+  quests: any[]
+  drgform: FormGroup;
 
-    constructor(private srvDrg: DrugService, fb: FormBuilder) {
-        this.drgform = fb.group({
-            drugID: ['', Validators.required],
-            comment: [''],
-            gift: ['']
-        })
+  constructor(private srvDrg: DrugService, fb: FormBuilder, private srvQ: SurveyQuestionService) {
+    this.drgform = fb.group({
+      drugID: ['', Validators.required],
+      comment: [''],
+      gift: ['']
+    })
 
-        // this.drgform.controls['drugID'].valueChanges.subscribe(val => this.drugChange(val));
-    }
+    // this.drgform.controls['drugID'].valueChanges.subscribe(val => this.drugChange(val));
+  }
+  ngOnInit() {
+    this.srvDrg.getPlanDrugs(this.currentUser.userID).subscribe(drg => {
+      this.drugs = drg[0]
+      this.srvQ.getAllAnswers().subscribe(ans => {
+        this.allAnswers = ans
+        const unique = ans.map(function (obj) { return obj.QID; });
+        this.quests = unique.filter((x, i, a) => a.indexOf(x) === i)
+        this.CreateQuestAnswers()
+      })
+    });
+  }
+  CreateQuestAnswers() {
+    this.surveyAns = this.quests.map(q => {
+      return {
+        QID: q, QText: this.allAnswers.filter(a => a.QID === q)[0].QText, SelAns: null,
+        Answers: this.allAnswers.filter(a => a.QID === q)
+      }
+    })
+    this.surveyAns.forEach(sr => sr.Answers.forEach(a => a['checked'] = false))
+  }
 
-    ngOnInit() {
-        this.srvDrg.getPlanDrugs(this.currentUser.userID).subscribe(drg => {
-            this.drugs = drg[0]
-        });
-    }
+  // drugChange(value) {
+  //     if (!value) { return }
 
-    // drugChange(value) {
-    //     if (!value) { return }
+  // }
 
-    // }
-
-    AddDrug(event) {
-        event.preventDefault();
-        if (this.visDrugs.findIndex(x => x.DrugID == this.drugmodel.DrugID) == -1) {
-            this.drugmodel.DrugName = this.drugs.filter(obj => obj.DrugID == this.drugmodel.DrugID)[0].DrugName;
-            this.visDrugs.push(this.drugmodel);
-            this.drugmodel = new VisitDrugs();
-            this.drugChanged.emit(this.visDrugs.length);
-            this.drgform.reset();
+  AddDrug(event) {
+    event.preventDefault();
+    if (this.visDrugs.findIndex(x => x.DrugID === this.drugmodel.DrugID) === -1) {
+      this.drugmodel.DrugName = this.drugs.filter(obj => obj.DrugID === this.drugmodel.DrugID)[0].DrugName;
+      this.visAnsrs.push.apply(this.visAnsrs, this.surveyAns.map(a => {
+        return {
+          VisitID: null, DrugID: this.drugmodel.DrugID, DrugName: this.drugmodel.DrugName,
+          AnswerID: a.Answers.filter(b => b.checked === true)[0].AnswerID,
+          AnswerText: a.Answers.filter(b => b.checked === true)[0].AnswerText,
+          QID: a.QID, QText: a.QText, Keyword: a.Keyword
         }
+      }))
+      this.visDrugs.push(this.drugmodel);
+      this.drugmodel = new VisitDrugs();
+      this.drugChanged.emit(this.visDrugs.length);
+      this.ansChanged.emit(this.visAnsrs.length);
+      this.drgform.reset();
+      this.CreateQuestAnswers()
     }
+  }
+  CheckAnswer(ansID, i) {
+    this.surveyAns[i].Answers.filter(a => a.AnswerID === ansID)[0].checked = true
+  }
 }

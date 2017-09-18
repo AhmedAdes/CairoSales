@@ -7,14 +7,14 @@ import { AuthenticationService } from './auth.service';
 @Injectable()
 export class SurveyQuestionService {
 
-  constructor(private http: Http, private authService: AuthenticationService) { }
-
   url = NodeUrl + 'survQ/';
   headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
   options = new RequestOptions({ headers: this.headers });
 
+  constructor(private http: Http, private authService: AuthenticationService) { }
+
   getQuestion(id?: number) {
-    var geturl = this.url;
+    let geturl = this.url;
     if (id != null) {
       geturl = this.url + id;
     }
@@ -22,7 +22,7 @@ export class SurveyQuestionService {
   }
 
   InsertQuestion(qst: SurveyQuestion, ansrs: SurveyAnswer[]) {
-    return this.http.post(this.url , { quest: qst, answers: ansrs }, this.options).map(res => res.json());
+    return this.http.post(this.url, { quest: qst, answers: ansrs }, this.options).map(res => res.json());
   }
 
   UpdateQuestion(id: number, qst: SurveyQuestion, ansrs: SurveyAnswer[]) {
@@ -33,8 +33,13 @@ export class SurveyQuestionService {
     return this.http.delete(this.url + id, this.options).map(res => res.json());
   }
 
-  getAnswer(id: number){
-    return this.http.get(this.url + 'answers/'+ id, this.options).map(res => res.json());
+  getAnswer(id: number) {
+    return this.http.get(this.url + 'answers/' + id, this.options).map(res => res.json());
   }
-
+  getAllAnswers() {
+    return this.http.get(this.url + 'answers/' + 'all', this.options).map(res => res.json());
+  }
+  getVisitDrugAnswers(visID: number) {
+    return this.http.get(this.url + 'visDrgAns/' + visID, this.options).map(res => res.json());
+  }
 }

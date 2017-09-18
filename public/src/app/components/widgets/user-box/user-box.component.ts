@@ -21,7 +21,7 @@ export class UserBoxComponent implements OnInit {
 
   constructor(private auth: AuthenticationService, private router: Router,
     private srvDest: DestinationService, private srvVis: VisitService) {
-      // this.photo = this.currentUser.photo ? "data:image/PNG;base64," + this.currentUser.photo : './assets/img/avatar5.png'
+      // this.photo = this.currentUser.photo ? 'data:image/PNG;base64,' + this.currentUser.photo : './assets/img/avatar5.png'
   }
 
   public ngOnInit() {
@@ -30,12 +30,12 @@ export class UserBoxComponent implements OnInit {
         this.DestCount = cont[0].DestCount
         this.visCount = vis[0].visCount
 
-        //override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
+        // override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
         this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-        //overide the onCompleteItem property of the uploader so we are
-        //able to deal with the server response.
+        // overide the onCompleteItem property of the uploader so we are
+        // able to deal with the server response.
         this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-          console.log("ImageUpload:uploaded:", item, status, response);
+          console.log('ImageUpload:uploaded:', item, status, response);
           // this.currentUser.photo = item.file
           this.uploader.clearQueue()
         };
