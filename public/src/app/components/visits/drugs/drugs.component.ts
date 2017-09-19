@@ -31,6 +31,7 @@ export class VisitDrugsComponent implements OnInit {
   surveyAns: any[] = []
   quests: any[]
   drgform: FormGroup;
+  surveyErrorMsg = ''
 
   constructor(private srvDrg: DrugService, fb: FormBuilder, private srvQ: SurveyQuestionService) {
     this.drgform = fb.group({
@@ -66,10 +67,20 @@ export class VisitDrugsComponent implements OnInit {
   //     if (!value) { return }
 
   // }
-
+  checkforAnswer(Arr) {
+    return !(Arr.filter(b => b.checked == true).length >= 1)
+  }
   AddDrug(event) {
     event.preventDefault();
+    let chkbool: boolean
+    this.surveyAns.forEach(q => chkbool = this.checkforAnswer(q.Answers))
     if (this.visDrugs.findIndex(x => x.DrugID === this.drugmodel.DrugID) === -1) {
+      if (chkbool) {
+        this.surveyErrorMsg = 'Please Answer All the Survey Questions'
+        return;
+      } else {
+        this.surveyErrorMsg = ''
+      }
       this.drugmodel.DrugName = this.drugs.filter(obj => obj.DrugID === this.drugmodel.DrugID)[0].DrugName;
       this.visAnsrs.push.apply(this.visAnsrs, this.surveyAns.map(a => {
         return {
