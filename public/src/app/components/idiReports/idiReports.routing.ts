@@ -9,7 +9,7 @@ import {
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
-    path: 'idiReports',
+    path: '',
     component: IDIReportsComponent,
     children: [
       { path: 'home', component: IDIReportHomeComponent, canActivate: [AuthGuard] },

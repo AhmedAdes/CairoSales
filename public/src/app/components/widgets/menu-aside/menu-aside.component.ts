@@ -117,7 +117,7 @@ export class MenuAsideComponent implements OnInit {
     // getting the current url
     this.router.events.filter(event => event instanceof NavigationStart).subscribe((e: NavigationStart) => this.currentUrl = e.url);
 
-    this.photo = this.currentUser.photo ? "data:image/PNG;base64," + this.currentUser.photo : './assets/img/avatar5.png'
+    this.photo = this.currentUser.photo ? 'data:image/PNG;base64,' + this.currentUser.photo : './assets/img/avatar5.png'
   }
   public ngOnInit() {
     // TODO

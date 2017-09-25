@@ -4,11 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ToastrModule, ToastContainerModule  } from 'ngx-toastr';
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { AlertModule, DatepickerModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { CustomMaterialModule } from './components/material.module'
+import { NguiMapModule } from '@ngui/map';
 
 
 import { AppComponent } from './app.component';
@@ -26,7 +27,7 @@ import {
   IMSService, ReportsService, VacationService, ContactUsService, WeekPlanService,
   MedSpecService, DrugService, ImportanceService, LineService
 } from './services';
-import { CustomPipesModule } from "./pipes/pipe.module";
+import { CustomPipesModule } from './pipes/pipe.module';
 import { Approuting } from './app.routing';
 
 import {
@@ -54,7 +55,11 @@ let widgets = [
     RouterModule, Approuting, CustomPipesModule, NgxPaginationModule,
     AlertModule.forRoot(), DatepickerModule.forRoot(),
     VisitModule, HelperModule, ChartsModule,
-    FileUploadModule/**/
+    FileUploadModule,
+    NguiMapModule.forRoot({
+      apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCbMGRUwcqKjlYX4h4-P6t-xcDryRYLmCM' +
+      '&libraries=visualization,places,drawing',
+    })/**/
   ],
   declarations: [
     AppComponent, ...widgets, LoginComponent, LogOutComponent, HomeComponent,
