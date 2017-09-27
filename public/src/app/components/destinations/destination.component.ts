@@ -32,11 +32,8 @@ export class DestinationComponent implements OnInit {
   curMonth = new Date().getMonth();
   selIMS: any
   ClassColumn: string = 'Approved'
-  mapOptions = {
-    center: { lat: 31.1245397, lng: 32.321974 },
-    zoom: 16,
-    mapTypeId: 'satellite'
-  };
+  locPos: any
+  zoom = 8
 
   constructor(public serv: DestinationService, private srvReg: RegionService, private srvIms: IMSService,
     private srvMed: MedSpecService, private srvImp: ImportanceService,
@@ -65,6 +62,10 @@ export class DestinationComponent implements OnInit {
               })
             }
             this.srchObj.DestType = 'Clinic (Doctor)';
+            this.locPos = {
+              lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.7891,
+              lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.6011
+            }
           })
         })
       })
@@ -110,6 +111,11 @@ export class DestinationComponent implements OnInit {
           this.showTable = false;
           this.Formstate = state;
           this.headerText = state == 'Details' ? 'Customer ' + state : state + ' Customer';
+          this.locPos = {
+            lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.7891,
+            lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.6011
+          }
+          this.zoom = 12
         })
       })
     }, err => this.errorMessage = err.message);
@@ -119,6 +125,7 @@ export class DestinationComponent implements OnInit {
     this.Formstate = null;
     this.headerText = 'Customers';
     this.errorMessage = null;
+    this.zoom = 8
   }
   TabClicked(option) {
     this.srchObj.DestType = option
@@ -127,7 +134,8 @@ export class DestinationComponent implements OnInit {
   }
   onProvinceChanged(newobj) {
     if (newobj.target.value) {
-      let province = newobj.target.value.split(':')[1].trim().replace("'", "''")
+      let province = newobj.target.value.split(':')[1].trim().replace("'", "''").toString()
+      this.generateCity()
       this.srvReg.getApprovedProvinceRegions(province).subscribe(reg => this.RegionList = reg)
     }
   }
@@ -146,6 +154,8 @@ export class DestinationComponent implements OnInit {
     newDestination.IMS = this.allIMSList.filter(sp => sp.IMSID == this.model.IMSID)[0].IMS
     newDestination.ImpName = this.VisImpList.filter(sp => sp.ImpID == this.model.VisitImpID)[0].ImpName
     newDestination.VisitsNo = this.VisImpList.filter(sp => sp.ImpID == this.model.VisitImpID)[0].VisitsNo
+    newDestination.GPSLoclat = parseFloat((<number>this.locPos.lat).toPrecision(12))
+    newDestination.GPSLoclng = parseFloat((<number>this.locPos.lng).toPrecision(12))
     let dest = this.lines.map(l => {
       let d = this.DestUsers.filter(du => du.LineID == l)
       if (d.length > 0) { return d[0] } else { return null }
@@ -240,5 +250,25 @@ export class DestinationComponent implements OnInit {
     } else {
       this.filteredDest = this.collection
     }
+  }
+  log({ target: marker }, str) {
+    this.locPos = {
+      lat: marker.getPosition().lat(),
+      lng: marker.getPosition().lng()
+    }
+    // console.log('new position .... >', this.locPos, str);
+  }
+  ChangePosition() {
+    this.locPos = { lat: 30.680577909715115, lng: 31.590195153125023 }
+  }
+  generateCity() {
+    if (this.model.RegionID) { this.model.RegionName = this.RegionList.filter(sp => sp.RegionID == this.model.RegionID)[0].RegionName }
+    this.model.City = `${this.model.ProvinceID ? this.model.ProvinceID : ''}, ${this.model.RegionName ? this.model.RegionName : ''}`
+  }
+  generateAddress() {
+    this.model.Address = `${this.model.City ? this.model.City : ''}; ` +
+      `${this.model.Street ? this.model.Street : ''}; ` +
+      `${this.model.Building ? 'Building: ' + this.model.Building : ''}; ` +
+      `${this.model.Floor ? 'Floor: ' + this.model.Floor : ''};` + `${this.model.Flat ? 'Flat: ' + this.model.Flat : ''}`
   }
 }

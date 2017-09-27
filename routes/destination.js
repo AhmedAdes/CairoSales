@@ -97,6 +97,7 @@ router.get('/AlldestUsers', function (req, res, next) {
 router.post('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var dest = req.body.dst;
+    console.log(dest)
     var users = req.body.users;
     var conf = require('../SQLConfig');
     var connection = new sql.Connection(conf.config);
@@ -114,11 +115,23 @@ router.post('/', function (req, res, next) {
                 request.input("VisitImpID", dest.VisitImpID);
                 request.input("CreateUser", dest.CreateUser);
                 request.input("IMSID", dest.IMSID);
+                request.input("Email", dest.Email);
+                request.input("Mobile", dest.Mobile);
+                request.input("WhatsAppNo", dest.WhatsAppNo);
+                request.input("ClinicTel", dest.ClinicTel);
+                request.input("ClinicTimes", dest.ClinicTimes);
+                request.input("TeachingUniv", dest.TeachingUniv);
+                request.input("ProfTitle", dest.ProfTitle);
+                request.input("City", dest.City);
+                request.input("Street", dest.Street);
+                request.input("Building", dest.Building);
+                request.input("Floor", dest.Floor);
+                request.input("Flat", dest.Flat);
+                request.input("GPSLoclat", sql.Decimal(12,9), dest.GPSLoclat);
+                request.input("GPSLoclng", sql.Decimal(12,9), dest.GPSLoclng);
                 request.execute("DestinationInsert")
                     .then(function (recordset) {
-                        console.log(recordset)
                         destID = recordset[0][0].DestID;
-                        console.log(destID)
                         promises.push(Promise.map(users, function (user) {
                             var request = trans.request();
                             request.input("DestID", destID);
@@ -156,6 +169,7 @@ router.post('/', function (req, res, next) {
 router.put('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var dest = req.body.dst;
+    console.log(dest)
     var users = req.body.users;
     var conf = require('../SQLConfig');
     var connection = new sql.Connection(conf.config);
@@ -174,6 +188,20 @@ router.put('/:id', function (req, res, next) {
                 request.input("VisitImpID", dest.VisitImpID);
                 request.input("CreateUser", dest.CreateUser);
                 request.input("IMSID", dest.IMSID);
+                request.input("Email", dest.Email);
+                request.input("Mobile", dest.Mobile);
+                request.input("WhatsAppNo", dest.WhatsAppNo);
+                request.input("ClinicTel", dest.ClinicTel);
+                request.input("ClinicTimes", dest.ClinicTimes);
+                request.input("TeachingUniv", dest.TeachingUniv);
+                request.input("ProfTitle", dest.ProfTitle);
+                request.input("City", dest.City);
+                request.input("Street", dest.Street);
+                request.input("Building", dest.Building);
+                request.input("Floor", dest.Floor);
+                request.input("Flat", dest.Flat);
+                request.input("GPSLoclat", sql.Decimal(12,9), dest.GPSLoclat);
+                request.input("GPSLoclng", sql.Decimal(12,9), dest.GPSLoclng);
                 request.execute("DestinationUpdate")
                     .then(function (recordset) {
 
