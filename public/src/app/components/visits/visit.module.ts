@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CustomMaterialModule } from '../material.module';
+import { NguiMapModule } from '@ngui/map'
+import { ModalModule, BsModalService } from 'ngx-bootstrap'
 
 import { VisitComponent, UserVisitsComponent, VisitDrugsComponent, VisitGiftsComponent } from './';
 import {
@@ -19,12 +21,12 @@ import { CustomPipesModule } from '../../pipes/pipe.module';
     BrowserModule, FormsModule,
     ReactiveFormsModule, CustomPipesModule, HttpModule,
     RouterModule, NgxPaginationModule,
-    BrowserAnimationsModule, CustomMaterialModule
+    BrowserAnimationsModule, CustomMaterialModule, NguiMapModule, ModalModule.forRoot()
   ],
   declarations: [
     VisitComponent, UserVisitsComponent, VisitDrugsComponent, VisitGiftsComponent
   ],
   providers: [VisitService, GiftService, SurveyQuestionService, DrugService, DestinationService,
-    UserRegionService, AuthenticationService, PromoToolsService],
+    UserRegionService, AuthenticationService, PromoToolsService, BsModalService],
 })
 export class VisitModule { }

@@ -28,8 +28,8 @@
 		<!-- Sidebar Menu -->
 		<ul class="sidebar-menu">
 			<li class="header">NAVIGATION</li>
-			<template ngFor let-item [ngForOf]="links">
-				<template [ngIf]="!item.sublinks && !item.disabled">
+			<ng-template ngFor let-item [ngForOf]="links">
+				<ng-template [ngIf]="!item.sublinks && !item.disabled">
 					<li [class.active]="item.link[0] === current_url">
 						<a *ngIf="!item.external" [routerLink]="item.link"> <i class="text-danger fa fa-{{item.icon}}"></i> <span>{{item.title}}</span>
 						</a>
@@ -37,24 +37,24 @@
 							<i class="text-danger fa fa-{{item.icon}}"></i> <span>{{item.title}}</span>
 						</a>
 					</li>
-				</template>
-				<template [ngIf]="item.sublinks && !item.disabled">
+				</ng-template>
+				<ng-template [ngIf]="item.sublinks && !item.disabled">
 					<li class="treeview">
 						<a href="#"> <i *ngIf="item.icon" class="text-danger fa fa-{{item.icon}}"></i> <span>{{item.title}}</span> <i class="fa fa-angle-left pull-right"></i>
 						</a>
 						<ul class="treeview-menu">
-							<template ngFor let-subitem [ngForOf]="item.sublinks">
+							<ng-template ngFor let-subitem [ngForOf]="item.sublinks">
 								<li [class.active]="subitem.link[0] === current_url">
 									<a *ngIf="!subitem.external" [routerLink]="subitem.link"> <i *ngIf="subitem.icon" class="text-danger fa fa-{{subitem.icon}}"></i> <span>{{subitem.title}}</span>
 									</a>
 									<a *ngIf="subitem.external" [href]="subitem.link" [target]="subitem.target"> <i *ngIf="subitem.icon" class="fa fa-{{subitem.icon}}"></i> <span>{{subitem.title}}</span>
 									</a>
 								</li>
-							</template>
+							</ng-template>
 						</ul>
 					</li>
-				</template>
-			</template>
+				</ng-template>
+			</ng-template>
 		</ul>
 		<!-- /.sidebar-menu -->
 	</section>

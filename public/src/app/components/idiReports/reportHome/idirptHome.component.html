@@ -1,5 +1,5 @@
 <div class="row">
-    <template ngFor let-rpt [ngForOf]="reports">
+    <ng-template ngFor let-rpt [ngForOf]="reports">
         <div class="col-xs-12 col-md-12" *ngIf="rpt.heading">
             <h2>{{rpt.header}}</h2>
         </div>
@@ -11,5 +11,5 @@
                 </div>
             </a>
         </div>
-    </template>
+    </ng-template>
 </div>

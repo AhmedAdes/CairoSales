@@ -24,6 +24,7 @@ export class CurrentUser {
   jobClass: number;
   token: string;
   photo: string;
+  lineID: number;
 }
 
 export class DestinationUser {

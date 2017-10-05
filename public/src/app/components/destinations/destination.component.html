@@ -4,6 +4,7 @@
     <h2> {{headerText}} </h2>
     <h3> {{srchObj.DestType}} </h3>
     <button *ngIf="!Formstate && currentUser.jobClass < 1 " class="btn btn-primary" (click)="CreateNew()">Create New</button>
+    <button *ngIf="!Formstate && currentUser.jobClass == 3 " class="btn btn-primary" (click)="CreateNew()">Request Adding New Customer</button>
     <!--<br><br>&& (curMonth==6 || curMonth==12)-->
     <div class="alert alert-danger" *ngIf="errorMessage">
       <p>{{errorMessage}}</p>
@@ -119,9 +120,11 @@
           <td>
             <button *ngIf="currentUser.jobClass < 1" [disabled]="item.Approved" (click)='ApproveDestination(item.DestID)' class="btn btn-success"
               title="Approve Customer"><i class="glyphicon glyphicon-ok"></i></button>
-            <button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.DestID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+            <button *ngIf="currentUser.jobClass < 1 || currentUser.jobClass == 3" (click)='EditThis(item.DestID)' class="btn btn-info"
+              title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
             <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
             <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+            <button *ngIf="currentUser.jobClass == 3" (click)="RequestDelete(item.DestID)" class="btn btn-danger" title="Request a Delete"><i class="glyphicon glyphicon-trash"></i></button>
           </td>
         </tr>
       </tbody>
@@ -157,10 +160,10 @@
         <div class="card">
           <h3 class="card-header">Basic Data</h3>
           <div class="card-block">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !destin.valid }">
               <label for="Destination" class="control-label col-md-2 col-sm-2">{{srchObj.DestType}} Name</label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="Destination" [(ngModel)]="model.Destination" #destin="ngModel" required>
+                <input class="form-control" type="text" name="Destination" [(ngModel)]="model.Destination" #destin="ngModel" required [readOnly]="Formstate == 'Complete Data'">
                 <div class='error' *ngIf="destin.touched && !destin.valid">
                   <div class="alert alert-danger" *ngIf="destin.hasError('required')">Customer Name is required.</div>
                 </div>
@@ -169,10 +172,11 @@
             <div class="form-group">
               <label for="ProvinceID" class="control-label col-md-2 col-sm-2">Province</label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="ProvinceID" [(ngModel)]="model.ProvinceID" #provinceID="ngModel" required (change)="onProvinceChanged($event)">
-							<option value="">Select a Province...</option>
-							<option *ngFor="let i of ProvinceList" [ngValue]="i.name">{{i.name}}</option>
-						</select>
+                <select class="form-control" name="ProvinceID" [(ngModel)]="model.ProvinceID" #provinceID="ngModel" required (change)="onProvinceChanged($event)"
+                  [disabled]="Formstate == 'Complete Data'">
+                  <option value="">Select a Province...</option>
+                  <option *ngFor="let i of ProvinceList" [ngValue]="i.name">{{i.name}}</option>
+                </select>
                 <div class='error' *ngIf="provinceID.touched && !provinceID.valid">
                   <div class="alert alert-danger" *ngIf="provinceID.hasError('required')">Province is required.</div>
                 </div>
@@ -181,7 +185,8 @@
             <div class="form-group">
               <label for="RegionID" class="control-label col-md-2 col-sm-2">Region</label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" (change)="generateCity()" #regionID="ngModel" required>
+                <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" (change)="generateCity()" #regionID="ngModel" required
+                  [disabled]="Formstate == 'Complete Data'">
                   <option value="">Select a Region...</option>
                   <option *ngFor="let i of RegionList" [ngValue]="i.RegionID">{{i.RegionName}}</option>
                 </select>
@@ -193,10 +198,10 @@
             <div class="form-group">
               <label for="IMSID" class="control-label col-md-2 col-sm-2">IMS Region</label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="IMSID" [(ngModel)]="model.IMSID" #imsID="ngModel" required>
-							<option value="">Select an IMS...</option>
-							<option *ngFor="let i of allIMSList" [ngValue]="i.IMSID">{{i.IMS}}</option>
-						</select>
+                <select class="form-control" name="IMSID" [(ngModel)]="model.IMSID" #imsID="ngModel" required [disabled]="Formstate == 'Complete Data'">
+                  <option value="">Select an IMS...</option>
+                  <option *ngFor="let i of allIMSList" [ngValue]="i.IMSID">{{i.IMS}}</option>
+                </select>
                 <div class='error' *ngIf="imsID.touched && !imsID.valid">
                   <div class="alert alert-danger" *ngIf="imsID.hasError('required')">IMS Region is required.</div>
                 </div>
@@ -205,22 +210,27 @@
             <div class="form-group">
               <label for="Address" class="control-label col-md-2 col-sm-2">Address 1</label>
               <div class="col-md-5 col-sm-5">
-                <input class="form-control" type="text" name="City" placeholder="City" [(ngModel)]="model.City" (change)="generateAddress()" required>
+                <input class="form-control" type="text" name="City" placeholder="City" [(ngModel)]="model.City" (change)="generateAddress()"
+                  required>
               </div>
               <div class="col-md-5 col-sm-5">
-                <input class="form-control" type="text" name="Street" placeholder="Street" [(ngModel)]="model.Street" (change)="generateAddress()" required>
+                <input class="form-control" type="text" name="Street" placeholder="Street" [(ngModel)]="model.Street" (change)="generateAddress()"
+                  required>
               </div>
             </div>
             <div class="form-group">
               <label for="Address" class="control-label col-md-2 col-sm-2">Address 2</label>
               <div class="col-md-4 col-sm-4">
-                <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="model.Building" (change)="generateAddress()" required>
+                <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="model.Building" (change)="generateAddress()"
+                  required>
               </div>
               <div class="col-md-3 col-sm-3">
-                <input class="form-control" type="text" name="Floor" placeholder="Floor No." [(ngModel)]="model.Floor" (change)="generateAddress()" required>
+                <input class="form-control" type="text" name="Floor" placeholder="Floor No." [(ngModel)]="model.Floor" (change)="generateAddress()"
+                  required>
               </div>
               <div class="col-md-3 col-sm-3">
-                <input class="form-control" type="text" name="Flat" placeholder="Flat No." [(ngModel)]="model.Flat" (change)="generateAddress()" required>
+                <input class="form-control" type="text" name="Flat" placeholder="Flat No." [(ngModel)]="model.Flat" (change)="generateAddress()"
+                  required>
               </div>
             </div>
             <div class="form-group">
@@ -232,10 +242,10 @@
             <div class="form-group">
               <label for="MedSpecID" class="control-label col-md-2 col-sm-2">Speciality</label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="MedSpecID" [(ngModel)]="model.MedSpecID" #specID="ngModel" required>
-							<option value="">Select a Speciality...</option>
-							<option *ngFor="let i of MedSpecList" [ngValue]="i.SpecID">{{i.SpecName}}</option>
-						</select>
+                <select class="form-control" name="MedSpecID" [(ngModel)]="model.MedSpecID" #specID="ngModel" required [disabled]="Formstate == 'Complete Data'">
+                  <option value="">Select a Speciality...</option>
+                  <option *ngFor="let i of MedSpecList" [ngValue]="i.SpecID">{{i.SpecName}}</option>
+                </select>
                 <div class='error' *ngIf="specID.touched && !specID.valid">
                   <div class="alert alert-danger" *ngIf="specID.hasError('required')">Speciality is required.</div>
                 </div>
@@ -244,7 +254,7 @@
             <div class="form-group">
               <label for="VisitImpID" class="control-label col-md-2 col-sm-2">Importance</label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="VisitImpID" [(ngModel)]="model.VisitImpID" #impID="ngModel" required>
+                <select class="form-control" name="VisitImpID" [(ngModel)]="model.VisitImpID" #impID="ngModel" required [disabled]="Formstate == 'Complete Data'">
 							<option value="">Select an Importance...</option>
 							<option *ngFor="let i of VisImpList" [ngValue]="i.ImpID">{{i.ImpName}} - {{i.VisitsNo}} Visits</option>
 						</select>
@@ -255,7 +265,7 @@
             </div>
           </div>
         </div>
-        <div class="card">
+        <div class="card" *ngIf="Formstate != 'Complete Data' && Formstate != 'CreateRequest'">
           <h3 class="card-header">the Customer will be visited by:</h3>
           <div class="card-block">
             <div *ngFor="let line of lines">
@@ -267,13 +277,15 @@
         <div class="card">
           <h3 class="card-header">Location on map</h3>
           <div class="card-block">
-            <ngui-map [center]="locPos" [zoom]="zoom">
-              <marker [position]="locPos" [geoFallbackPosition]="[30.082824203107098, 31.34755614624021]" [draggable]="true" (dragend)="log($event, 'dragend')">
+            <button type="button" (click)="ChangePosition()">Focus on City</button>
+            <!-- <button type="button" (click)="getCurrentPosition()">Focus on Current Position</button> -->
+            <br><br>
+            <ngui-map #map [center]="locPos" [zoom]="zoom" geoFallbackCenter="" (idle)="onIdle($event)">
+              <marker [position]="locPos" [draggable]="true" (dragend)="log($event, 'dragend')">
               </marker>
             </ngui-map>
           </div>
-        </div>
-        <button type="button" (click)="ChangePosition()">Change Marker Position</button><br><br>
+        </div><br>
 
         <div class="card">
           <h3 class="card-header">Complementary Data</h3>
@@ -284,10 +296,10 @@
                 <input class="form-control" type="text" name="Email" [(ngModel)]="model.Email">
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mobile.valid }">
               <label for="Mobile" class="control-label col-md-2 col-sm-2">Mobile</label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="Mobile" [(ngModel)]="model.Mobile">
+                <input class="form-control" type="text" name="Mobile" [(ngModel)]="model.Mobile" #mobile="ngModel" required>
               </div>
             </div>
             <div class="form-group">
@@ -323,8 +335,9 @@
           </div>
         </div>
         <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
-          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'" [disabled]='!f.valid'>Save</button>          |
+          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete' && Formstate!='RemoveRequest'" [disabled]='!f.valid'>Save</button>          |
           <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
+          <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'RemoveRequest'">Request to Remove</button>          |
           <button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
         </div>
         <div class="form-group alert alert-danger" *ngIf="errorMessage">

@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query("SELECT s.*,u.UserName FROM dbo.SalesLines s LEFT JOIN dbo.Users u ON s.UserID = u.UserID WHERE SalesLineID =" + req.params.id)
+    request.query("SELECT s.*,u.UserName FROM dbo.SalesLines s LEFT JOIN dbo.Users u ON s.UserID = u.UserID WHERE s.SalesLineID =" + req.params.id)
         .then(function (recordset) {
             res.json(recordset);
         }).catch(function (err) {

@@ -10,19 +10,19 @@ export class AuthenticationService {
   public token: string;
   public currentUser: CurrentUser;
 
+  headers = new Headers({ 'Access-Control-Allow-Origin': '*' });
+  options = new RequestOptions({ headers: this.headers });
+
   constructor(private http: Http) {
     // set token if saved in local storage
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = this.currentUser && this.currentUser.token;
   }
-  headers = new Headers({ 'Access-Control-Allow-Origin': '*' });
-  options = new RequestOptions({ headers: this.headers });
-
   login(user: any) {
     return this.http.post(NodeUrl + 'authenticate', user, this.options)
       .map((response: Response) => {
 
-        var arrRet = response.json()[0];
+        let arrRet = response.json()[0];
         if (arrRet[0].error) {
           return { login: false, error: arrRet[0].error }
         } else if (arrRet[0].Approved == false) {
@@ -37,15 +37,16 @@ export class AuthenticationService {
           // var tt = new Buffer(arrRet[0].UserPhoto, 'base64')
           let base64String
           let photo
-          if(arrRet[0].UserPhoto != null){
-            base64String = btoa([].reduce.call(new Uint8Array(arrRet[0].UserPhoto.data),function(p,c){return p+String.fromCharCode(c)},''))
-            photo = "data:image/PNG;base64," + base64String
-          }else {
+          if (arrRet[0].UserPhoto != null) {
+            base64String = btoa([].reduce.call(new Uint8Array(arrRet[0].UserPhoto.data),
+              function (p, c) { return p + String.fromCharCode(c) }, ''))
+            photo = 'data:image/PNG;base64,' + base64String
+          } else {
             photo = './assets/img/avatar5.png'
           }
           this.currentUser = {
             userID: arrRet[0].UserID, UserName: arrRet[0].UserName, loginName: user.LoginName,
-            jobClass: this.getClass(arrRet[0].JobClass), token: token, photo: photo
+            jobClass: this.getClass(arrRet[0].JobClass), token: token, photo: photo, lineID: arrRet[0].SalesLineID
           }
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
@@ -67,7 +68,7 @@ export class AuthenticationService {
   }
 
   getClass(job: string): number {
-    var ret = JobClass.filter(obj => obj.name == job)[0].class;
+    let ret = JobClass.filter(obj => obj.name == job)[0].class;
     return ret;
   }
 

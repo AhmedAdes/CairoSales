@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DestinationService, RegionService, AuthenticationService, MedSpecService, ImportanceService, IMSService } from '../../services';
 import { Destination, provinces, Region, CurrentUser, MedSpec, VisitImportance, DestinationUser, IMSData } from '../../Models';
-import { Ng2MapModule } from 'ng2-map';
+import { NguiMapModule, NguiMapComponent } from '@ngui/map';
 
 @Component({
   selector: 'app-dest',
@@ -18,7 +18,7 @@ export class DestinationComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  ProvinceList: any[] = provinces;
+  ProvinceList = provinces;
   RegionList: Region[] = [];
   MedSpecList: MedSpec[] = [];
   VisImpList: VisitImportance[] = [];
@@ -27,20 +27,23 @@ export class DestinationComponent implements OnInit {
   DestUsers: any[] = [];
   IMSList: IMSData[] = []
   allIMSList: IMSData[] = []
-  orderbyString: string = '-Assigned;-PlanExist;';
-  orderbyClass: string = 'glyphicon glyphicon-sort';
+  orderbyString = '-Assigned;-PlanExist;';
+  orderbyClass = 'glyphicon glyphicon-sort';
   curMonth = new Date().getMonth();
   selIMS: any
-  ClassColumn: string = 'Approved'
+  ClassColumn = 'Approved'
   locPos: any
+  mrkPos: any
+  fallback: '[30.082824203107098, 31.34755614624021]'
   zoom = 8
+
+  @ViewChild('map') curMap: NguiMapComponent
 
   constructor(public serv: DestinationService, private srvReg: RegionService, private srvIms: IMSService,
     private srvMed: MedSpecService, private srvImp: ImportanceService,
     private auth: AuthenticationService) { }
 
   ngOnInit() {
-
     this.srvMed.getSpec().subscribe(spec => {
       this.MedSpecList = spec;
       this.srvImp.getImp().subscribe(imp => {
@@ -66,6 +69,7 @@ export class DestinationComponent implements OnInit {
               lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.7891,
               lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.6011
             }
+            this.mrkPos = this.locPos
           })
         })
       })
@@ -84,17 +88,28 @@ export class DestinationComponent implements OnInit {
       })
     })
     this.showTable = false;
-    this.Formstate = 'Create';
+    if (this.currentUser.jobClass < 1) {
+      this.Formstate = 'Create';
+    } else if (this.currentUser.jobClass == 3) {
+      this.Formstate = 'CreateRequest';
+    }
     this.headerText = 'Create New Customer';
   }
   EditThis(id: number) {
-    this.loadDetails(id, 'Edit');
+    if (this.currentUser.jobClass < 1) {
+      this.loadDetails(id, 'Edit');
+    } else if (this.currentUser.jobClass == 3) {
+      this.loadDetails(id, 'Complete Data');
+    }
   }
   ShowDetails(id: number) {
     this.loadDetails(id, 'Details');
   }
   Delete(id: number) {
     this.loadDetails(id, 'Delete');
+  }
+  RequestDelete(id: number) {
+    this.loadDetails(id, 'RemoveRequest');
   }
   loadDetails(id, state) {
     this.serv.getDestination(id).subscribe(ret => {
@@ -134,34 +149,40 @@ export class DestinationComponent implements OnInit {
   }
   onProvinceChanged(newobj) {
     if (newobj.target.value) {
-      let province = newobj.target.value.split(':')[1].trim().replace("'", "''").toString()
+      let prov = newobj.target.value.split(':')[1].trim().replace("'", "''").toString()
       this.generateCity()
-      this.srvReg.getApprovedProvinceRegions(province).subscribe(reg => this.RegionList = reg)
+      this.srvReg.getApprovedProvinceRegions(prov).subscribe(reg => {
+        this.RegionList = reg;
+        this.model.RegionID = null
+      })
     }
   }
   HandleForm(event) {
     event.preventDefault();
-
+    if (this.currentUser.jobClass === 3 && this.Formstate === 'CreateRequest') {
+      this.DestUsers.push({ DestID: this.model.DestID, UserID: this.currentUser.userID, LineID: this.currentUser.lineID })
+    }
     if (this.DestUsers.length <= 0) {
       this.errorMessage = 'Please, Select a Medical Rep. for each Sales Line'
       return
     }
     let newDestination: Destination = this.model;
     newDestination.CreateUser = this.currentUser.userID;
-    newDestination.SpecName = this.MedSpecList.filter(sp => sp.SpecID == this.model.MedSpecID)[0].SpecName
-    newDestination.RegionName = this.RegionList.filter(sp => sp.RegionID == this.model.RegionID)[0].RegionName
+    newDestination.SpecName = this.MedSpecList.find(sp => sp.SpecID == this.model.MedSpecID).SpecName
+    newDestination.RegionName = this.RegionList.find(sp => sp.RegionID == this.model.RegionID).RegionName
     newDestination.RegionProvince = newDestination.RegionName + ' - ' + newDestination.ProvinceID
-    newDestination.IMS = this.allIMSList.filter(sp => sp.IMSID == this.model.IMSID)[0].IMS
-    newDestination.ImpName = this.VisImpList.filter(sp => sp.ImpID == this.model.VisitImpID)[0].ImpName
-    newDestination.VisitsNo = this.VisImpList.filter(sp => sp.ImpID == this.model.VisitImpID)[0].VisitsNo
-    newDestination.GPSLoclat = parseFloat((<number>this.locPos.lat).toPrecision(12))
-    newDestination.GPSLoclng = parseFloat((<number>this.locPos.lng).toPrecision(12))
+    newDestination.IMS = this.allIMSList.find(sp => sp.IMSID == this.model.IMSID).IMS
+    newDestination.ImpName = this.VisImpList.find(sp => sp.ImpID == this.model.VisitImpID).ImpName
+    newDestination.VisitsNo = this.VisImpList.find(sp => sp.ImpID == this.model.VisitImpID).VisitsNo
+    newDestination.GPSLoclat = parseFloat((<number>this.mrkPos.lat).toPrecision(12))
+    newDestination.GPSLoclng = parseFloat((<number>this.mrkPos.lng).toPrecision(12))
     let dest = this.lines.map(l => {
       let d = this.DestUsers.filter(du => du.LineID == l)
       if (d.length > 0) { return d[0] } else { return null }
     }).filter(du => du != null)
     switch (this.Formstate) {
       case 'Create':
+      case 'CreateRequest':
         this.serv.InsertDestination(newDestination, dest).subscribe(ret => {
           if (ret.error) {
             this.errorMessage = ret.error.message;
@@ -175,6 +196,7 @@ export class DestinationComponent implements OnInit {
         }, err => this.errorMessage = err.message);
         break;
       case 'Edit':
+      case 'Complete Data':
         this.serv.UpdateDestination(newDestination.DestID, newDestination, dest).subscribe(ret => {
           if (ret.error) {
             this.errorMessage = ret.error.message;
@@ -256,14 +278,34 @@ export class DestinationComponent implements OnInit {
       lat: marker.getPosition().lat(),
       lng: marker.getPosition().lng()
     }
-    // console.log('new position .... >', this.locPos, str);
+    this.mrkPos = {
+      lat: marker.getPosition().lat(),
+      lng: marker.getPosition().lng()
+    }
+    console.log('new position .... >', this.locPos, str);
+  }
+  onIdle({ target: map }) {
+    if (map.markers) {
+      this.mrkPos = {
+        lat: map.markers[0].getPosition().lat(),
+        lng: map.markers[0].getPosition().lng()
+      }
+      console.log(this.mrkPos.lat, this.mrkPos.lng, 'idle')
+    }
   }
   ChangePosition() {
-    this.locPos = { lat: 30.680577909715115, lng: 31.590195153125023 }
+    if (!this.model.City) { this.generateCity() }
+    // this.locPos = this.ProvinceList.find(p => p.name === this.model.ProvinceID).engName + ', Egypt'
+    this.locPos = this.model.City.replace(',', '') + ', Egypt'
+  }
+  getCurrentPosition() {
+    // this.curMap.center = ''
+    // this.locPos = '[]'
   }
   generateCity() {
-    if (this.model.RegionID) { this.model.RegionName = this.RegionList.filter(sp => sp.RegionID == this.model.RegionID)[0].RegionName }
+    if (this.model.RegionID) { this.model.RegionName = this.RegionList.find(sp => sp.RegionID === this.model.RegionID).RegionName }
     this.model.City = `${this.model.ProvinceID ? this.model.ProvinceID : ''}, ${this.model.RegionName ? this.model.RegionName : ''}`
+    this.generateAddress()
   }
   generateAddress() {
     this.model.Address = `${this.model.City ? this.model.City : ''}; ` +

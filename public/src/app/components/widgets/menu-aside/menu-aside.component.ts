@@ -10,8 +10,8 @@ import { User, CurrentUser } from '../../../Models';
 })
 export class MenuAsideComponent implements OnInit {
   currentUser: CurrentUser = this.auth.getUser();
-  private currentUrl: string;
-  private links: Array<any> = [
+  currentUrl: string;
+  links: Array<any> = [
     {
       'title': 'Dashboard',
       'icon': 'dashboard',

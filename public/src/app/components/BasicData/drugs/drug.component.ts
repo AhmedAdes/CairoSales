@@ -8,8 +8,6 @@ import { Drugs, CurrentUser, SalesLine } from '../../../Models';
 })
 export class DrugComponent implements OnInit {
 
-  constructor(public serv: DrugService, private auth: AuthenticationService, private srvlne: LineService) { }
-
   currentUser: CurrentUser = this.auth.getUser();
   collection: Drugs[] = [];
   searchDrug: Drugs = new Drugs();
@@ -18,15 +16,17 @@ export class DrugComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  orderbyString: string = "";
-  orderbyClass: string = "glyphicon glyphicon-sort";
+  orderbyString = '';
+  orderbyClass = 'glyphicon glyphicon-sort';
   lines: SalesLine[] = []
+
+  constructor(public serv: DrugService, private auth: AuthenticationService, private srvlne: LineService) { }
 
   ngOnInit() {
     this.serv.getDrug().subscribe(cols => {
-    this.collection = cols;
+      this.collection = cols;
       this.srvlne.getLine().subscribe(ln => {
-      this.lines = ln;
+        this.lines = ln;
         this.TableBack();
       })
     });
@@ -65,7 +65,7 @@ export class DrugComponent implements OnInit {
   }
   HandleForm(event) {
     event.preventDefault();
-    var newObject: Drugs = this.model;
+    let newObject: Drugs = this.model;
     switch (this.Formstate) {
       case 'Create':
         this.serv.InsertDrug(newObject).subscribe(ret => {
@@ -100,10 +100,10 @@ export class DrugComponent implements OnInit {
   }
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
       this.orderbyString = '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
       this.orderbyString = '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';

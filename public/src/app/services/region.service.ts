@@ -7,11 +7,11 @@ import { AuthenticationService } from './auth.service';
 @Injectable()
 export class RegionService {
 
-  constructor(private http: Http, private authService: AuthenticationService) { }
-
   url = NodeUrl + 'region/';
   headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
   options = new RequestOptions({ headers: this.headers });
+
+  constructor(private http: Http, private authService: AuthenticationService) { }
 
   getRegion(id?: number) {
     let geturl = this.url;
@@ -42,8 +42,8 @@ export class RegionService {
   }
 
   ApproveRegion(id: number, ApproveUser: number) {
-    if (!this.headers.has("Content-type")) {
-      this.options.headers.append("Content-type", "application/json");
+    if (!this.headers.has('Content-type')) {
+      this.options.headers.append('Content-type', 'application/json');
     }
     return this.http.put(this.url + 'Approve/' + id, JSON.stringify({ id: id, appuser: ApproveUser }), this.options).map(res => res.json());
   }

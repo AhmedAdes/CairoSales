@@ -6,84 +6,92 @@ import * as hf from '../../helpers/helper.functions'
 import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
-    selector: 'rpt-medRepWeekly',
-    templateUrl: './medRepWeekly.html',
-    styleUrls: ['../../../Styles/PrintPortrait.css']
+  selector: 'rpt-medrep-weekly',
+  templateUrl: './medRepWeekly.html',
+  styleUrls: ['../../../Styles/PrintPortrait.css']
 })
 export class MedRepWeeklyReportComponent implements OnInit {
-    constructor(private srv: ReportsService, private srvln: LineService,
-        private auth: AuthenticationService, private location: Location) { }
-    currentUser: CurrentUser = this.auth.getUser()
-    medicalRep: rptMedRepWeekly[] = []
-    salesLines: SalesLine[] = []
-    today = new Date()
-    fromDate: string = hf.handleDate(this.today);
-    toDate: string = hf.handleDate(this.today);
-    lineID: number = null
-    sumD1; sumD2; sumD3; sumD4; sumD5; sumD6; sumD7
-    reportHeader: string
-    orderbyString: string = ""
-    orderbyClass: string = "glyphicon glyphicon-sort"
+  currentUser: CurrentUser = this.auth.getUser()
+  medicalRep: rptMedRepWeekly[] = []
+  salesLines: SalesLine[] = []
+  today = new Date()
+  fromDate: string = hf.handleDate(this.today);
+  toDate: string = hf.handleDate(this.today);
+  lineID: number = null
+  sumD1; sumD2; sumD3; sumD4; sumD5; sumD6; sumD7
+  reportHeader: string
+  orderbyString = ''
+  orderbyClass = 'glyphicon glyphicon-sort'
+  errorMessage: string;
 
-    chartData = [{ data: [], label: '' }];
-    lineChartLabels: Array<any> = [];
-    public lineChartLegend: boolean = true;
-    public lineChartType: string = 'line';
-    lineChartOptions: any = {
-        responsive: true,
-        maintainAspectRatio: true
-    };
-    colorsEmpty: Array<Color> = []
-    @ViewChild(BaseChartDirective) _chart;
+  chartData = [{ data: [], label: '' }];
+  lineChartLabels: Array<any> = [];
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  lineChartOptions: any = {
+    responsive: true,
+    maintainAspectRatio: true
+  };
+  colorsEmpty: Array<Color> = []
+  @ViewChild(BaseChartDirective) _chart;
 
-    ngOnInit() {
-        this.srvln.getLine().subscribe(spc => {
-            this.salesLines = spc;
-        })
-    }
+  constructor(private srv: ReportsService, private srvln: LineService,
+    private auth: AuthenticationService, private location: Location) { }
+  ngOnInit() {
+    this.srvln.getLine().subscribe(spc => {
+      this.salesLines = spc;
+    }, err => this.errorMessage = err.message)
+  }
 
-    ViewReport() {
-        this.srv.getMedicalRepWeeklyReport(hf.handleDate(new Date(this.fromDate)), hf.handleDate(new Date(this.toDate)), this.lineID).subscribe(ret => {
-            this.medicalRep = ret
-            this.reportHeader = `Medical Rep. Weekly Summary Report From ${this.fromDate} To ${this.toDate}`
-            this.sumD1 = this.medicalRep.reduce((a, b) => a + b.Day1, 0)
-            this.sumD2 = this.medicalRep.reduce((a, b) => a + b.Day2, 0)
-            this.sumD3 = this.medicalRep.reduce((a, b) => a + b.Day3, 0)
-            this.sumD4 = this.medicalRep.reduce((a, b) => a + b.Day4, 0)
-            this.sumD5 = this.medicalRep.reduce((a, b) => a + b.Day5, 0)
-            this.sumD6 = this.medicalRep.reduce((a, b) => a + b.Day6, 0)
-            this.sumD7 = this.medicalRep.reduce((a, b) => a + b.Day7, 0)
-            this.srv.getSalesLineVisitRate(hf.handleDate(new Date(this.fromDate)), hf.handleDate(new Date(this.toDate)), this.lineID).subscribe(vis => {
-                this.chartData = [{
-                    data: vis[0].map(da => { return da.visCount == null ? 0 : da.visCount }),
-                    label: 'Visit Count'
-                }]
-                this.lineChartLabels = vis[0].map(data => { return data.DayDate.split('T')[0] })
-                this.forceChartRefresh()
-            })
-        })
+  ViewReport() {
+    this.srv.getMedicalRepWeeklyReport(hf.handleDate(new Date(this.fromDate)),
+      hf.handleDate(new Date(this.toDate)),
+      this.lineID).subscribe(ret => {
+        if (ret.error) { this.errorMessage = ret.error.message; return; }
+        this.medicalRep = ret
+        this.reportHeader = `Medical Rep. Weekly Summary Report From ${this.fromDate} To ${this.toDate}`
+        this.sumD1 = this.medicalRep.reduce((a, b) => a + b.Day1, 0)
+        this.sumD2 = this.medicalRep.reduce((a, b) => a + b.Day2, 0)
+        this.sumD3 = this.medicalRep.reduce((a, b) => a + b.Day3, 0)
+        this.sumD4 = this.medicalRep.reduce((a, b) => a + b.Day4, 0)
+        this.sumD5 = this.medicalRep.reduce((a, b) => a + b.Day5, 0)
+        this.sumD6 = this.medicalRep.reduce((a, b) => a + b.Day6, 0)
+        this.sumD7 = this.medicalRep.reduce((a, b) => a + b.Day7, 0)
+        this.srv.getSalesLineVisitRate(hf.handleDate(new Date(this.fromDate)),
+          hf.handleDate(new Date(this.toDate)),
+          this.lineID).subscribe(vis => {
+            if (vis.error) { this.errorMessage = vis.error.message; return; }
+            this.chartData = [{
+              data: vis[0].map(da => { return da.visCount == null ? 0 : da.visCount }),
+              label: 'Visit Count'
+            }]
+            this.lineChartLabels = vis[0].map(data => { return data.DayDate.split('T')[0] })
+            this.forceChartRefresh()
+            this.errorMessage = null
+          }, err => this.errorMessage = err.message)
+      }, err => this.errorMessage = err.message)
+  }
+  goBack() {
+    this.location.back()
+  }
+  printReport() {
+    window.print()
+  }
+  forceChartRefresh() {
+    setTimeout(() => {
+      this._chart.refresh();
+    }, 10);
+  }
+  SortTable(column: string) {
+    if (this.orderbyString.indexOf(column) == -1) {
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+      this.orderbyString = '+' + column;
+    } else if (this.orderbyString.indexOf('-' + column) == -1) {
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+      this.orderbyString = '-' + column;
+    } else {
+      this.orderbyClass = 'glyphicon glyphicon-sort';
+      this.orderbyString = '';
     }
-    goBack() {
-        this.location.back()
-    }
-    printReport() {
-        window.print()
-    }
-    forceChartRefresh() {
-        setTimeout(() => {
-            this._chart.refresh();
-        }, 10);
-    }
-    SortTable(column: string) {
-        if (this.orderbyString.indexOf(column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-            this.orderbyString = '+' + column;
-        } else if (this.orderbyString.indexOf('-' + column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-            this.orderbyString = '-' + column;
-        } else {
-            this.orderbyClass = 'glyphicon glyphicon-sort';
-            this.orderbyString = '';
-        }
-    }
+  }
 }

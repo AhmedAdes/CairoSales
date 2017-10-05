@@ -5,20 +5,18 @@ import { SalesLine, NodeUrl } from '../Models';
 
 @Injectable()
 export class LineService {
-
+  url = NodeUrl + 'lines/';
   constructor(private http: Http) { }
 
-  url = NodeUrl + 'lines/';
-
   getLine(id?: number) {
-    let geturl = this.url ;
+    let geturl = this.url;
     if (id != null) {
       geturl = this.url + id;
     }
     return this.http.get(geturl).map(res => res.json());
   }
-  getLineUsers(id: number){
-    return this.http.get(this.url + 'lineUsers/'+ id).map(res => res.json());
+  getLineUsers(id: number) {
+    return this.http.get(this.url + 'lineUsers/' + id).map(res => res.json());
   }
 
   InsertLine(line: SalesLine) {

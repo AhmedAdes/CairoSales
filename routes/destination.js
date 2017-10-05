@@ -127,8 +127,8 @@ router.post('/', function (req, res, next) {
                 request.input("Building", dest.Building);
                 request.input("Floor", dest.Floor);
                 request.input("Flat", dest.Flat);
-                request.input("GPSLoclat", sql.Decimal(12,9), dest.GPSLoclat);
-                request.input("GPSLoclng", sql.Decimal(12,9), dest.GPSLoclng);
+                request.input("GPSLoclat", sql.Decimal(12, 9), dest.GPSLoclat);
+                request.input("GPSLoclng", sql.Decimal(12, 9), dest.GPSLoclng);
                 request.execute("DestinationInsert")
                     .then(function (recordset) {
                         destID = recordset[0][0].DestID;
@@ -200,8 +200,8 @@ router.put('/:id', function (req, res, next) {
                 request.input("Building", dest.Building);
                 request.input("Floor", dest.Floor);
                 request.input("Flat", dest.Flat);
-                request.input("GPSLoclat", sql.Decimal(12,9), dest.GPSLoclat);
-                request.input("GPSLoclng", sql.Decimal(12,9), dest.GPSLoclng);
+                request.input("GPSLoclat", sql.Decimal(12, 9), dest.GPSLoclat);
+                request.input("GPSLoclng", sql.Decimal(12, 9), dest.GPSLoclng);
                 request.execute("DestinationUpdate")
                     .then(function (recordset) {
 
@@ -241,7 +241,37 @@ router.put('/:id', function (req, res, next) {
         res.json({ error: err }); console.log(err); connection.close();
     })
 });
-
+router.put('/DestOnly/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var dest = req.body.dst;
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", req.params.id);
+    request.input("Destination", dest.Destination);
+    request.input("DestType", dest.DestType);
+    request.input("Address", dest.Address);
+    request.input("RegionID", dest.RegionID);
+    request.input("MedSpecID", dest.MedSpecID);
+    request.input("VisitImpID", dest.VisitImpID);
+    request.input("CreateUser", dest.CreateUser);
+    request.input("IMSID", dest.IMSID);
+    request.input("Email", dest.Email);
+    request.input("Mobile", dest.Mobile);
+    request.input("WhatsAppNo", dest.WhatsAppNo);
+    request.input("ClinicTel", dest.ClinicTel);
+    request.input("ClinicTimes", dest.ClinicTimes);
+    request.input("TeachingUniv", dest.TeachingUniv);
+    request.input("ProfTitle", dest.ProfTitle);
+    request.input("City", dest.City);
+    request.input("Street", dest.Street);
+    request.input("Building", dest.Building);
+    request.input("Floor", dest.Floor);
+    request.input("Flat", dest.Flat);
+    request.input("GPSLoclat", sql.Decimal(12, 9), dest.GPSLoclat);
+    request.input("GPSLoclng", sql.Decimal(12, 9), dest.GPSLoclng);
+    request.execute("DestinationUpdate")
+        .then(function () { res.json({ returnValue: 1, affected: 1 }); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
 router.delete('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var conf = require('../SQLConfig');

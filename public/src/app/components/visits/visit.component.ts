@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import {
   VisitService, GiftService, DrugService, DestinationService,
   UserRegionService, AuthenticationService, SurveyQuestionService
@@ -25,6 +27,7 @@ export class VisitComponent implements OnInit {
   collection: Visits[] = [];
   srchObj: Visits = new Visits();
   model: Visits;
+  destModel: Destination = new Destination();
   showTable: boolean;
   Formstate: string;
   headerText: string;
@@ -50,9 +53,16 @@ export class VisitComponent implements OnInit {
   selUser: any
   selDrugName: any
   stillSaving: boolean
+  locPos: any
+  mrkPos: any
+  fallback: '[30.082824203107098, 31.34755614624021]'
+  zoom = 8
+  public modalRef: BsModalRef;
+  showCustModal: boolean
+  @ViewChild('template') custTemp: TemplateRef<any>
 
   constructor(private serv: VisitService, private srvGift: GiftService, private srvDrug: DrugService,
-    private srvDest: DestinationService, private srvUreg: UserRegionService,
+    private srvDest: DestinationService, private srvUreg: UserRegionService, private modalService: BsModalService,
     private auth: AuthenticationService, fb: FormBuilder, private srvQ: SurveyQuestionService) {
     this.inFrm = fb.group({
       'visType': [null, Validators.required],
@@ -93,6 +103,7 @@ export class VisitComponent implements OnInit {
   }
   CreateNew() {
     this.model = new Visits();
+    this.destModel = new Destination();
     this.model.DestType = 'Clinic (Doctor)';
     this.model.VisitType = 'Single';
     this.visDrugModel = new VisitDrugs();
@@ -148,6 +159,8 @@ export class VisitComponent implements OnInit {
                 } else {
                   this.destinations = dst;
                   this.ViewDests = this.destinations.filter(obj => obj.DestType === this.model.DestType);
+                  this.destModel = this.destinations.find(obj => obj.DestID === this.model.DestID)
+                  // this.showCustModal = this.checkCustomerFinished()
                   this.showTable = false;
                   this.Formstate = state;
                   this.headerText = state === 'Details' ? 'Visit ' + state : state + ' Visit';
@@ -161,6 +174,8 @@ export class VisitComponent implements OnInit {
                   } else {
                     this.destinations = dst[0];
                     this.ViewDests = this.destinations.filter(obj => obj.DestType === this.model.DestType);
+                    this.destModel = this.destinations.find(obj => obj.DestID === this.model.DestID)
+                    // this.showCustModal = this.checkCustomerFinished()
                     this.showTable = false;
                     this.Formstate = state;
                     this.headerText = state === 'Details' ? 'Visit ' + state : state + ' Visit';
@@ -180,9 +195,15 @@ export class VisitComponent implements OnInit {
     this.stillSaving = false
     this.inFrm.reset();
   }
-  HandleForm(event) {
+  HandleForm(event?) {
     event.preventDefault();
     if (this.stillSaving) { return }
+    if (this.VisDrugs.length <= 0 && this.Formstate !== 'Delete') {
+      this.errorMessage = 'Please Add Some Products';
+      this.stillSaving = false
+      return;
+    }
+    // if (!this.checkCustomerFinished() && this.Formstate !== 'Delete') { this.OpenModal(this.custTemp); return; }
     this.stillSaving = true
     this.model.UserID = this.Formstate === 'Create' ? this.currentUser.userID : this.model.UserID;
     this.model.VisitDate = new Date(this.cnvVisitDate);
@@ -190,10 +211,6 @@ export class VisitComponent implements OnInit {
     this.model.VisitTime.setHours(this.model.VisitTime.getHours() - 2)
     // if (this.model.VisitTime.getHours() > new Date().getHours()) {
     // }
-    if (this.VisDrugs.length <= 0 && this.Formstate !== 'Delete') {
-      this.errorMessage = 'Please Add Some Products';
-      return;
-    }
     switch (this.Formstate) {
       case 'Create':
         this.serv.InsertVisit(this.model, this.VisDrugs, this.VisGifts, this.visAnsrs).subscribe(ret => {
@@ -290,6 +307,8 @@ export class VisitComponent implements OnInit {
         } else {
           if (ret.length <= 0) { return }
           if (ret[0].Allowed) {
+            // this.destModel = this.destinations.find(d => d.DestID == Dest)
+            // this.showCustModal = this.checkCustomerFinished()
           } else {
             this.inFrm.controls['destination'].setErrors({ 'maxVisit': true });
           }
@@ -331,18 +350,6 @@ export class VisitComponent implements OnInit {
       this.VisGifts.splice(this.VisGifts.findIndex(i => i.GiftID == c.GiftID && i.DrugID == drg), 1);
     }
 
-    // this.VisGifts.every(((v, i, a) => { if (v.DrugID === drg) { a.splice(i, 1); return true; } }))
-    // this.visAnsrs.every(((v, i, a) => { if (v.DrugID === drg) { a.splice(i, 1); return true; } }))
-    // for (let i = this.VisGifts.length - 1; i >= 0; i--) {
-    //   if (this.VisGifts[i].DrugID === drg) {
-    //     this.VisGifts.splice(i, 0)
-    //   }
-    // }
-    // for (let i = this.visAnsrs.length - 1; i >= 0; i--) {
-    //   if (this.visAnsrs[i].DrugID === drg) {
-    //     this.visAnsrs.splice(i, 0)
-    //   }
-    // }
     this.VisDrugs.splice(index, 1);
     this.drgsChanged = this.VisDrugs.length;
   }
@@ -370,5 +377,73 @@ export class VisitComponent implements OnInit {
       }
     })
     this.drgAnsrs.forEach(sr => sr.Answers.forEach(a => a['checked'] = Ansrs.findIndex(i => i.AnswerID == a.AnswerID) >= 0))
+  }
+
+  log({ target: marker }, str) {
+    this.locPos = {
+      lat: marker.getPosition().lat(),
+      lng: marker.getPosition().lng()
+    }
+    this.mrkPos = {
+      lat: marker.getPosition().lat(),
+      lng: marker.getPosition().lng()
+    }
+    console.log('new position .... >', this.locPos, str);
+  }
+  onIdle({ target: map }) {
+    if (map.markers) {
+      this.mrkPos = {
+        lat: map.markers[0].getPosition().lat(),
+        lng: map.markers[0].getPosition().lng()
+      }
+      console.log(this.mrkPos.lat, this.mrkPos.lng, 'idle')
+    }
+  }
+  ChangePosition() {
+    if (!this.destModel.City) {
+      this.destModel.City = `${this.destModel.ProvinceID ?
+        this.destModel.ProvinceID : ''}, ${this.destModel.RegionName ? this.destModel.RegionName : ''}`
+    }
+    // this.locPos = this.ProvinceList.find(p => p.name === this.destModel.ProvinceID).engName + ', Egypt'
+    this.locPos = this.destModel.City.replace(',', '') + ', Egypt'
+  }
+  generateAddress() {
+    this.destModel.Address = `${this.destModel.City ? this.destModel.City : ''}; ` +
+      `${this.destModel.Street ? this.destModel.Street : ''}; ` +
+      `${this.destModel.Building ? 'Building: ' + this.destModel.Building : ''}; ` +
+      `${this.destModel.Floor ? 'Floor: ' + this.destModel.Floor : ''};` + `${this.destModel.Flat ? 'Flat: ' + this.destModel.Flat : ''}`
+  }
+  saveCustomer(event) {
+    event.preventDefault();
+    this.destModel.GPSLoclat = this.mrkPos.lat
+    this.destModel.GPSLoclng = this.mrkPos.lng
+    this.srvDest.UpdateDestinationOnly(this.destModel.DestID, this.destModel).subscribe(ret => {
+      if (ret.error) {
+        this.errorMessage = ret.error.message;
+      } else if (ret.affected > 0) {
+        // this.ngOnInit();
+        this.HandleForm(event)
+        this.modalRef.hide()
+      }
+    }, err => this.errorMessage = err.message);
+  }
+  checkCustomerFinished() {
+    return this.destModel.GPSLoclat ?
+      this.destModel.GPSLoclng ?
+        this.destModel.City ?
+          this.destModel.Building ?
+            this.destModel.Flat ?
+              this.destModel.Floor ?
+                this.destModel.Mobile ? true : false :
+                false :
+              false :
+            false :
+          false :
+        false :
+      false
+  }
+  OpenModal(template: TemplateRef<any>) {
+    // this.ChangePosition()
+    // this.modalRef = this.modalService.show(template);
   }
 }

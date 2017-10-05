@@ -71,22 +71,22 @@
               </div>
             </div>
             <!--<div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visTime'].valid }">
-                            <label for="VisitTime" class="control-label col-md-2 col-sm-2">Visit Time</label>
-                            <div class="col-md-10 col-sm-10">
-                                <input class="form-control" type="time" name="VisitTime" [(ngModel)]="cnvVisitTime" [formControl]="inFrm.controls['visTime']">
-                                <div class='error' *ngIf="(inFrm.controls['visTime'].touched && !inFrm.controls['visTime'].valid) || (inFrm.submitted && !inFrm.controls['visTime'].valid)">
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['visTime'].hasError('required')">Visit Time is required.</div>
-                                    <div class="alert alert-danger" *ngIf="inFrm.controls['visTime'].hasError('maxTime')">Visit Time is Invalid.</div>
-                                </div>
-                            </div>
-                        </div>-->
+                <label for="VisitTime" class="control-label col-md-2 col-sm-2">Visit Time</label>
+                <div class="col-md-10 col-sm-10">
+                    <input class="form-control" type="time" name="VisitTime" [(ngModel)]="cnvVisitTime" [formControl]="inFrm.controls['visTime']">
+                    <div class='error' *ngIf="(inFrm.controls['visTime'].touched && !inFrm.controls['visTime'].valid) || (inFrm.submitted && !inFrm.controls['visTime'].valid)">
+                        <div class="alert alert-danger" *ngIf="inFrm.controls['visTime'].hasError('required')">Visit Time is required.</div>
+                        <div class="alert alert-danger" *ngIf="inFrm.controls['visTime'].hasError('maxTime')">Visit Time is Invalid.</div>
+                    </div>
+                </div>
+            </div>-->
             <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['region'].valid }">
               <label for="RegionID" class="control-label col-md-2 col-sm-2">Regions</label>
               <div class="col-md-10 col-sm-10">
                 <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" [formControl]="inFrm.controls['region']" (change)="onRegChange($event)">
-                                    <option value="">Select a Province...</option>
-                                    <option *ngFor="let i of regions" [ngValue]="i.RegionID">{{i.RegionName}} - {{i.ProvinceID}}</option>
-                                </select>
+                    <option value="">Select a Province...</option>
+                    <option *ngFor="let i of regions" [ngValue]="i.RegionID">{{i.RegionName}} - {{i.ProvinceID}}</option>
+                </select>
                 <div class='error' *ngIf="inFrm.controls['region'].touched && !inFrm.controls['region'].valid">
                   <div class="alert alert-danger" *ngIf="inFrm.controls['region'].hasError('required')">Province is required.</div>
                 </div>
@@ -187,7 +187,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Answers-->
 <div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -213,3 +213,113 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Customer Data-->
+<!-- <div class="modal fade" #customerModal tabindex="-1" role="dialog" aria-labelledby="customerModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"> -->
+<ng-template #template>
+  <div class="modal-header">
+    <h3 class="modal-title" id="customerModalLabel">Please Complete The Customer Data</h3>
+    <button type="button" class="close" (click)="modalRef.hide()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (submit)="f.valid && saveCustomer($event)">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label for="Address" class="control-label col-md-2 col-sm-2">Address 1</label>
+          <div class="col-md-5 col-sm-5" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
+            <input class="form-control" type="text" name="City" placeholder="City" [(ngModel)]="destModel.City" (change)="generateAddress()"
+              required #city="ngModel">
+          </div>
+          <div class="col-md-5 col-sm-5" [ngClass]="{ 'has-error': f.submitted && !street.valid }">
+            <input class="form-control" type="text" name="Street" placeholder="Street" [(ngModel)]="destModel.Street" (change)="generateAddress()"
+              required #street="ngModel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Address" class="control-label col-md-2 col-sm-2">Address 2</label>
+          <div class="col-md-4 col-sm-4" [ngClass]="{ 'has-error': f.submitted && !build.valid }">
+            <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="destModel.Building" (change)="generateAddress()"
+              required #build="ngModel">
+          </div>
+          <div class="col-md-3 col-sm-3" [ngClass]="{ 'has-error': f.submitted && !flr.valid }">
+            <input class="form-control" type="text" name="Floor" placeholder="Floor No." [(ngModel)]="destModel.Floor" (change)="generateAddress()"
+              required #flr="ngModel">
+          </div>
+          <div class="col-md-3 col-sm-3" [ngClass]="{ 'has-error': f.submitted && !flt.valid }">
+            <input class="form-control" type="text" name="Flat" placeholder="Flat No." [(ngModel)]="destModel.Flat" (change)="generateAddress()"
+              required #flt="ngModel">
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-header">Location on map</h3>
+          <div class="card-block">
+            <button type="button" (click)="ChangePosition()">Focus on Province</button><br><br>
+            <ngui-map #map [center]="locPos" [zoom]="zoom" geoFallbackCenter="" (idle)="onIdle($event)">
+              <marker [position]="locPos" [draggable]="true" (dragend)="log($event, 'dragend')">
+              </marker>
+            </ngui-map>
+          </div>
+        </div><br>
+
+        <div class="card">
+          <h3 class="card-header">Complementary Data</h3>
+          <div class="card-block">
+            <div class="form-group">
+              <label for="Email" class="control-label col-md-2 col-sm-2">Email</label>
+              <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="text" name="Email" [(ngModel)]="destModel.Email">
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mobile.valid }">
+              <label for="Mobile" class="control-label col-md-2 col-sm-2">Mobile</label>
+              <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="text" name="Mobile" [(ngModel)]="destModel.Mobile" #mobile="ngModel" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="WhatsAppNo" class="control-label col-md-2 col-sm-2">WhatsApp No</label>
+              <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="text" name="WhatsAppNo" [(ngModel)]="destModel.WhatsAppNo">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ClinicTel" class="control-label col-md-2 col-sm-2">Clinic Tel</label>
+              <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="text" name="ClinicTel" [(ngModel)]="destModel.ClinicTel">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ClinicTimes" class="control-label col-md-2 col-sm-2">Clinic Times</label>
+              <div class="col-md-10 col-sm-10">
+                <textarea rows="2" cols="10" class="form-control" name="ClinicTimes" [(ngModel)]="destModel.ClinicTimes"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="TeachingUniv" class="control-label col-md-2 col-sm-2">Teaching University</label>
+              <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="text" name="TeachingUniv" [(ngModel)]="destModel.TeachingUniv">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="ProfTitle" class="control-label col-md-2 col-sm-2">Profissional Title</label>
+              <div class="col-md-10 col-sm-10">
+                <input class="form-control" type="text" name="ProfTitle" [(ngModel)]="destModel.ProfTitle">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Close</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<!-- </div>
+  </div>
+  </div> -->

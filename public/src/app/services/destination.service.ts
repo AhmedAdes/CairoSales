@@ -47,6 +47,9 @@ export class DestinationService {
   UpdateDestination(id: number, dest: Destination, destUsers: DestinationUser[]) {
     return this.http.put(this.url + id, {dst: dest, users: destUsers}, this.options).map(res => res.json());
   }
+  UpdateDestinationOnly(id: number, dest: Destination) {
+    return this.http.put(this.url + 'DestOnly/' + id, {dst: dest}, this.options).map(res => res.json());
+  }
   DeleteDestination(id: number) {
     return this.http.delete(this.url + id, this.options).map(res => res.json());
   }
