@@ -33,4 +33,10 @@ export class Destination {
   Building: string;
   Floor: string;
   Flat: string;
+  RemoveRequest: boolean;
+  RemoveUser: number;
+  RemoveUserName: string;
+  AssignRequest: boolean;
+  AssignUser: number;
+  AssignUserName: string;
 }

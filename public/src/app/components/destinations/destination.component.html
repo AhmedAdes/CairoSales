@@ -13,146 +13,395 @@
   <div class="panel-body table-responsive" *ngIf="showTable">
     <ul class="nav nav-tabs nav-justified">
       <!--<li id="tab1" role="presentation" class="tabs active"><a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Hospital')">Hospital</a></li> -->
-      <li id="tab2" role="presentation" class="tabs active"><a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Clinic (Doctor)')">Clinic (Doctor)</a></li>
-      <li id="tab3" role="presentation" class="tabs"><a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Pharmacy')">Pharmacy</a></li>
+      <li id="tab2" role="presentation" class="tabs active">
+        <a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Clinic (Doctor)')">Clinic (Doctor)</a>
+      </li>
+      <li id="tab3" role="presentation" class="tabs">
+        <a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Pharmacy')">Pharmacy</a>
+      </li>
     </ul>
     <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;">
       <label for="IMSID" class="control-label col-md-2 col-sm-2 text-right">IMS Region</label>
       <div class="col-md-10 col-sm-10">
         <select class="form-control" name="IMSID" [(ngModel)]="selIMS" (change)="IMSSelected()" required>
-                    <option value="">Select an IMS...</option>
-                    <option *ngFor="let i of IMSList" [ngValue]="i.IMSID">{{i.IMS}}</option>
-                </select>
+          <option value="">Select an IMS...</option>
+          <option *ngFor="let i of IMSList" [ngValue]="i.IMSID">{{i.IMS}}</option>
+        </select>
       </div>
     </div>
-    <table id="tblCustomers" class="table table-hover table-striped">
-      <colgroup>
-        <col width="15%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col *ngIf="currentUser.jobClass < 1" width="20%" />
-        <col *ngIf="currentUser.jobClass > 1" width="20%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col *ngIf="currentUser.jobClass < 1" width="10%" />
-        <col width="15%" />
-      </colgroup>
-      <thead>
-        <tr>
-          <th> {{srchObj.DestType}} Name <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-          <th> IMS <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-          <th> Region - Province <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-          <th> Address <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-          <th> Med. Speciality <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-          <th> Importance <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-          <th> Visits # <i (click)="SortTable('VisitsNo')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitsNo') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
-          <th>
-            <select [(ngModel)]="ClassColumn">
-                            <option value="Approved">Approved</option>
-                            <option value="Assigned">Assigned</option>
-                            <option value="PlanExist">In Plan</option>
-                        </select>
-            <i (click)="SortTable('ClassColumn')" class="btn btn-default" [ngClass]="(orderbyString.indexOf(ClassColumn) == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-          </th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-              <input type="text" class="form-control" id="srchDestination" name="Destination" [(ngModel)]="srchObj.Destination">
-            </div>
-          </th>
-          <th>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-              <input type="text" class="form-control" id="srchIMS" name="IMS" [(ngModel)]="srchObj.IMS">
-            </div>
-          </th>
-          <th>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-              <input type="text" class="form-control" id="srchRegionProvince" name="RegionProvince" [(ngModel)]="srchObj.RegionProvince">
-            </div>
-          </th>
-          <th>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-              <input type="text" class="form-control" id="srchAddress" name="Address" [(ngModel)]="srchObj.Address">
-            </div>
-          </th>
-          <th>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-              <input type="text" class="form-control" id="srchSpecName" name="SpecName" [(ngModel)]="srchObj.SpecName">
-            </div>
-          </th>
-          <th>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-              <input type="text" class="form-control" id="srchImpName" name="ImpName" [(ngModel)]="srchObj.ImpName">
-            </div>
-          </th>
-          <th>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
-              <input type="text" class="form-control" id="srchVisitsNo" name="VisitsNo" [(ngModel)]="srchObj.VisitsNo">
-            </div>
-          </th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }"
-          [ngStyle]="{'background-color': !item.Approved? '#ffff80': !item.Assigned? '#66ffc2' : !item.PlanExist? '#ff9999' : '#fff'}">
-          <td class="text-bold">{{item.Destination}}</td>
-          <td>{{item.IMS}}</td>
-          <td>{{item.RegionProvince}}</td>
-          <td>{{item.Address}}</td>
-          <td>{{item.SpecName}}</td>
-          <td>{{item.ImpName}}</td>
-          <td>{{item.VisitsNo}}</td>
-          <td *ngIf="ClassColumn == 'Approved'">{{item.Approved}}</td>
-          <td *ngIf="ClassColumn == 'Assigned'">{{item.Assigned}}</td>
-          <td *ngIf="ClassColumn == 'PlanExist'">{{item.PlanExist}}</td>
-          <td>
-            <button *ngIf="currentUser.jobClass < 1" [disabled]="item.Approved" (click)='ApproveDestination(item.DestID)' class="btn btn-success"
-              title="Approve Customer"><i class="glyphicon glyphicon-ok"></i></button>
-            <button *ngIf="currentUser.jobClass < 1 || currentUser.jobClass == 3" (click)='EditThis(item.DestID)' class="btn btn-info"
-              title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
-            <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
-            <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
-            <button *ngIf="currentUser.jobClass == 3" (click)="RequestDelete(item.DestID)" class="btn btn-danger" title="Request a Delete"><i class="glyphicon glyphicon-trash"></i></button>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3">
-            <div style="display:inline-block; width:40px; height:20px; background-color: #ff9999; border: 2px; border-color: black">
-            </div>
-            <label>Customers not in Current Month Plan</label>
-          </td>
-          <td colspan="2">
-            <div style="display:inline-block; width:40px; height:20px; background-color: #ffff80; border: 2px; border-color: black">
-            </div>
-            <label>Customers not Approved</label>
-          </td>
-          <td colspan="3">
-            <div style="display:inline-block; width:40px; height:20px; background-color: #66ffc2; border: 2px; border-color: black">
-            </div>
-            <label>Customers not Assigned to Sales Lines</label>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-    <pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+    <div class="form-group" style="margin: 10px 5px; padding: 5px; background-color: #D6D6D6">
+      <ul class="nav nav-pills nav-justified" id="myTab" role="tablist" style="font-weight: bold">
+        <li class="nav-item active">
+          <a class="nav-link active" id="active-tab" data-toggle="pill" href="#tblActive" role="tab" aria-controls="tblActive" aria-expanded="true">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="approve-tab" data-toggle="pill" href="#tblApprove" role="tab" aria-controls="tblApprove">To be Approved</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="remove-tab" data-toggle="pill" href="#tblRemove" role="tab" aria-controls="tblRemove">To be Removed</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="assign-tab" data-toggle="pill" href="#tblAssign" role="tab" aria-controls="tblAssign">Not Assigned</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane  active" id="tblActive" role="tabpanel" aria-labelledby="active-tab">
+        <table class="table table-hover table-striped">
+          <colgroup>
+            <col width="15%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col *ngIf="currentUser.jobClass < 1" width="20%" />
+            <col *ngIf="currentUser.jobClass > 1" width="20%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col *ngIf="currentUser.jobClass < 1" width="10%" />
+            <col width="15%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th> {{srchObj.DestType}} Name
+                <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> IMS
+                <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Region - Province
+                <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Address
+                <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Med. Speciality
+                <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Importance
+                <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Visits #
+                <i (click)="SortTable('VisitsNo')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('VisitsNo') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th>
+                <select [(ngModel)]="ClassColumn">
+                  <option value="Approved">Approved</option>
+                  <option value="Assigned">Assigned</option>
+                  <option value="PlanExist">In Plan</option>
+                </select>
+                <i (click)="SortTable('ClassColumn')" class="btn btn-default" [ngClass]="(orderbyString.indexOf(ClassColumn) == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th></th>
+            </tr>
+            <tr>
+              <th>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" id="srchDestination" name="Destination" [(ngModel)]="srchObj.Destination">
+                </div>
+              </th>
+              <th>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" id="srchIMS" name="IMS" [(ngModel)]="srchObj.IMS">
+                </div>
+              </th>
+              <th>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" id="srchRegionProvince" name="RegionProvince" [(ngModel)]="srchObj.RegionProvince">
+                </div>
+              </th>
+              <th>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" id="srchAddress" name="Address" [(ngModel)]="srchObj.Address">
+                </div>
+              </th>
+              <th>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" id="srchSpecName" name="SpecName" [(ngModel)]="srchObj.SpecName">
+                </div>
+              </th>
+              <th>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" id="srchImpName" name="ImpName" [(ngModel)]="srchObj.ImpName">
+                </div>
+              </th>
+              <th>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" id="srchVisitsNo" name="VisitsNo" [(ngModel)]="srchObj.VisitsNo">
+                </div>
+              </th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: a }"
+              [ngStyle]="{'background-color': !item.Approved? '#ffff80': !item.Assigned? '#66ffc2' : !item.PlanExist? '#ff9999' : '#fff'}">
+              <td class="text-bold">{{item.Destination}}</td>
+              <td>{{item.IMS}}</td>
+              <td>{{item.RegionProvince}}</td>
+              <td>{{item.Address}}</td>
+              <td>{{item.SpecName}}</td>
+              <td>{{item.ImpName}}</td>
+              <td>{{item.VisitsNo}}</td>
+              <td *ngIf="ClassColumn == 'Approved'">{{item.Approved}}</td>
+              <td *ngIf="ClassColumn == 'Assigned'">{{item.Assigned}}</td>
+              <td *ngIf="ClassColumn == 'PlanExist'">{{item.PlanExist}}</td>
+              <td>
+                <!-- <button *ngIf="currentUser.jobClass < 1" [disabled]="item.Approved" (click)='ApproveDestination(item.DestID)' class="btn btn-success"
+                  title="Approve Customer"><i class="glyphicon glyphicon-ok"></i></button> -->
+                <button *ngIf="currentUser.jobClass < 1 || currentUser.jobClass == 3" (click)='EditThis(item.DestID)' class="btn btn-info"
+                  title="Edit">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+                <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                </button>
+                <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+                <button *ngIf="currentUser.jobClass == 3" (click)="RequestRemove(item.DestID)" class="btn btn-danger" title="Request to Remove">
+                  <i class="fa fa-reply"></i>
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">
+                <div style="display:inline-block; width:40px; height:20px; background-color: #ff9999; border: 2px; border-color: black">
+                </div>
+                <label>Customers not in Current Month Plan</label>
+              </td>
+              <td colspan="2">
+                <div style="display:inline-block; width:40px; height:20px; background-color: #ffff80; border: 2px; border-color: black">
+                </div>
+                <label>Customers not Approved</label>
+              </td>
+              <td colspan="3">
+                <div style="display:inline-block; width:40px; height:20px; background-color: #66ffc2; border: 2px; border-color: black">
+                </div>
+                <label>Customers not Assigned to Sales Lines</label>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+        <pagination-controls (pageChange)="a = $event" maxSize="10"></pagination-controls>
+      </div>
+      <div class="tab-pane fade" id="tblApprove" role="tabpanel" aria-labelledby="approve-tab">
+        <table class="table table-hover table-striped">
+          <colgroup>
+            <col width="15%">
+            <col width="15%">
+            <col width="15%">
+            <col width="20%">
+            <col width="10%">
+            <col width="10%">
+            <col width="15%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th> {{srchObj.DestType}} Name
+                <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> IMS
+                <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Region - Province
+                <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Address
+                <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Med. Speciality
+                <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Importance
+                <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of (toApproveList | filter:srchAprv | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: b }">
+              <td class="text-bold">{{item.Destination}}</td>
+              <td>{{item.IMS}}</td>
+              <td>{{item.RegionProvince}}</td>
+              <td>{{item.Address}}</td>
+              <td>{{item.SpecName}}</td>
+              <td>{{item.ImpName}}</td>
+              <td>
+                <button *ngIf="currentUser.jobClass < 1" [disabled]="item.Approved" (click)='ApproveDestination(item.DestID)' class="btn btn-success"
+                  title="Approve Customer">
+                  <i class="glyphicon glyphicon-ok"></i>
+                </button>
+                <button *ngIf="currentUser.jobClass < 1 || currentUser.jobClass == 3" (click)='EditThis(item.DestID)' class="btn btn-info"
+                  title="Edit">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+                <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                </button>
+                <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="b = $event" maxSize="10"></pagination-controls>
+      </div>
+      <div class="tab-pane fade" id="tblRemove" role="tabpanel" aria-labelledby="remove-tab">
+        <table class="table table-hover table-striped">
+          <colgroup>
+            <col width="15%">
+            <col width="20%">
+            <col width="15%">
+            <col width="15%">
+            <col width="10%">
+            <col width="10%">
+            <col width="15%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th> Med. Rep. Name
+                <i (click)="SortTable('RemoveUserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RemoveUserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> {{srchObj.DestType}} Name
+                <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> IMS
+                <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Region - Province
+                <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Med. Speciality
+                <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Importance
+                <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of (toRemoveList | filter:srchRmv | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: c }">
+              <td>{{item.RemoveUserName}}</td>
+              <td class="text-bold">{{item.Destination}}</td>
+              <td>{{item.IMS}}</td>
+              <td>{{item.RegionProvince}}</td>
+              <td>{{item.SpecName}}</td>
+              <td>{{item.ImpName}}</td>
+              <td>
+                <button *ngIf="currentUser.jobClass < 1" (click)='RemoveDestination(item.DestID)' class="btn btn-success" title="Remove Customer">
+                  <i class="glyphicon glyphicon-remove-circle"></i>
+                </button>
+                <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                </button>
+                <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete">
+                  <i class="glyphicon glyphicon-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="c = $event" maxSize="10"></pagination-controls>
+      </div>
+      <div class="tab-pane fade" id="tblAssign" role="tabpanel" aria-labelledby="assign-tab">
+        <table class="table table-hover table-striped">
+          <colgroup>
+            <col width="15%" *ngIf="currentUser.jobClass < 1">
+            <col width="20%">
+            <col width="15%">
+            <col width="15%">
+            <col width="15%" *ngIf="currentUser.jobClass >= 1">
+            <col width="10%">
+            <col width="10%">
+            <col width="15%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th *ngIf="currentUser.jobClass < 1"> Med. Rep. Name
+                <i (click)="SortTable('RemoveUserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RemoveUserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> {{srchObj.DestType}} Name
+                <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> IMS
+                <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Region - Province
+                <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th *ngIf="currentUser.jobClass >= 1"> Address
+                <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Med. Speciality
+                <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th> Importance
+                <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of toAssignList | paginate: { itemsPerPage: 25, currentPage: d }">
+              <td *ngIf="currentUser.jobClass < 1">{{item.AssignUserName}}</td>
+              <td class="text-bold">{{item.Destination}}</td>
+              <td>{{item.IMS}}</td>
+              <td>{{item.RegionProvince}}</td>
+              <td *ngIf="currentUser.jobClass >= 1">{{item.Address}}</td>
+              <td>{{item.SpecName}}</td>
+              <td>{{item.ImpName}}</td>
+              <td>
+                <button *ngIf="currentUser.jobClass == 3 && !item.AssignRequest" (click)="RequestAssign(item.DestID)" class="btn btn-success"
+                  title="Request to Assign">
+                  <i class="fa fa-link"></i>
+                </button>
+                <button *ngIf="currentUser.jobClass < 1" (click)="AssignDestination(item.DestID)" class="btn btn-success" title="Grant Assign">
+                  <i class="fa fa-link"></i>
+                </button>
+                <button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.DestID)' class="btn btn-info" title="Edit">
+                  <i class="glyphicon glyphicon-pencil"></i>
+                </button>
+                <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="d = $event" maxSize="10"></pagination-controls>
+      </div>
+    </div>
   </div>
 
   <div class="panel-body" *ngIf="Formstate">
-    <form #f="ngForm" (submit)="HandleForm($event)">
+    <form #f="ngForm" (submit)="HandleForm(f.valid)">
       <div class="form-horizontal">
 
         <h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this customer ?</h2>
@@ -161,19 +410,23 @@
           <h3 class="card-header">Basic Data</h3>
           <div class="card-block">
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !destin.valid }">
-              <label for="Destination" class="control-label col-md-2 col-sm-2">{{srchObj.DestType}} Name</label>
+              <label for="Destination" class="control-label col-md-2 col-sm-2">{{srchObj.DestType}} Name
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="Destination" [(ngModel)]="model.Destination" #destin="ngModel" required [readOnly]="Formstate == 'Complete Data'">
+                <input class="form-control" type="text" name="Destination" [(ngModel)]="model.Destination" #destin="ngModel" required [readOnly]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                 <div class='error' *ngIf="destin.touched && !destin.valid">
                   <div class="alert alert-danger" *ngIf="destin.hasError('required')">Customer Name is required.</div>
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="ProvinceID" class="control-label col-md-2 col-sm-2">Province</label>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !provinceID.valid }">
+              <label for="ProvinceID" class="control-label col-md-2 col-sm-2">Province
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-10 col-sm-10">
                 <select class="form-control" name="ProvinceID" [(ngModel)]="model.ProvinceID" #provinceID="ngModel" required (change)="onProvinceChanged($event)"
-                  [disabled]="Formstate == 'Complete Data'">
+                  [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                   <option value="">Select a Province...</option>
                   <option *ngFor="let i of ProvinceList" [ngValue]="i.name">{{i.name}}</option>
                 </select>
@@ -182,11 +435,13 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="RegionID" class="control-label col-md-2 col-sm-2">Region</label>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !regionID.valid }">
+              <label for="RegionID" class="control-label col-md-2 col-sm-2">Region
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-10 col-sm-10">
                 <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" (change)="generateCity()" #regionID="ngModel" required
-                  [disabled]="Formstate == 'Complete Data'">
+                  [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                   <option value="">Select a Region...</option>
                   <option *ngFor="let i of RegionList" [ngValue]="i.RegionID">{{i.RegionName}}</option>
                 </select>
@@ -195,10 +450,12 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="IMSID" class="control-label col-md-2 col-sm-2">IMS Region</label>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !imsID.valid }">
+              <label for="IMSID" class="control-label col-md-2 col-sm-2">IMS Region
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="IMSID" [(ngModel)]="model.IMSID" #imsID="ngModel" required [disabled]="Formstate == 'Complete Data'">
+                <select class="form-control" name="IMSID" [(ngModel)]="model.IMSID" #imsID="ngModel" required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                   <option value="">Select an IMS...</option>
                   <option *ngFor="let i of allIMSList" [ngValue]="i.IMSID">{{i.IMS}}</option>
                 </select>
@@ -207,30 +464,34 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="Address" class="control-label col-md-2 col-sm-2">Address 1</label>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && (!city.valid || !street.valid ) }">
+              <label for="Address" class="control-label col-md-2 col-sm-2">Address 1
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-5 col-sm-5">
-                <input class="form-control" type="text" name="City" placeholder="City" [(ngModel)]="model.City" (change)="generateAddress()"
-                  required>
+                <input class="form-control" type="text" name="City" placeholder="City" [(ngModel)]="model.City" #city="ngModel" (change)="generateAddress()"
+                  required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
               <div class="col-md-5 col-sm-5">
-                <input class="form-control" type="text" name="Street" placeholder="Street" [(ngModel)]="model.Street" (change)="generateAddress()"
-                  required>
+                <input class="form-control" type="text" name="Street" placeholder="Street" [(ngModel)]="model.Street" #street="ngModel" (change)="generateAddress()"
+                  required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
-            <div class="form-group">
-              <label for="Address" class="control-label col-md-2 col-sm-2">Address 2</label>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && (!build.valid || !flor.valid || !flat.valid ) }">
+              <label for="Address" class="control-label col-md-2 col-sm-2">Address 2
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-4 col-sm-4">
-                <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="model.Building" (change)="generateAddress()"
-                  required>
+                <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="model.Building" #build="ngModel" (change)="generateAddress()"
+                  required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
               <div class="col-md-3 col-sm-3">
-                <input class="form-control" type="text" name="Floor" placeholder="Floor No." [(ngModel)]="model.Floor" (change)="generateAddress()"
-                  required>
+                <input class="form-control" type="text" name="Floor" placeholder="Floor No." [(ngModel)]="model.Floor" #flor="ngModel" (change)="generateAddress()"
+                  required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
               <div class="col-md-3 col-sm-3">
-                <input class="form-control" type="text" name="Flat" placeholder="Flat No." [(ngModel)]="model.Flat" (change)="generateAddress()"
-                  required>
+                <input class="form-control" type="text" name="Flat" placeholder="Flat No." [(ngModel)]="model.Flat" #flat="ngModel" (change)="generateAddress()"
+                  required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
             <div class="form-group">
@@ -239,10 +500,12 @@
                 <textarea rows="2" cols="10" class="form-control" name="Address" [(ngModel)]="model.Address" #address="ngModel" readonly></textarea>
               </div>
             </div>
-            <div class="form-group">
-              <label for="MedSpecID" class="control-label col-md-2 col-sm-2">Speciality</label>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !specID.valid }">
+              <label for="MedSpecID" class="control-label col-md-2 col-sm-2">Speciality
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="MedSpecID" [(ngModel)]="model.MedSpecID" #specID="ngModel" required [disabled]="Formstate == 'Complete Data'">
+                <select class="form-control" name="MedSpecID" [(ngModel)]="model.MedSpecID" #specID="ngModel" required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                   <option value="">Select a Speciality...</option>
                   <option *ngFor="let i of MedSpecList" [ngValue]="i.SpecID">{{i.SpecName}}</option>
                 </select>
@@ -251,13 +514,15 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="VisitImpID" class="control-label col-md-2 col-sm-2">Importance</label>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !impID.valid }">
+              <label for="VisitImpID" class="control-label col-md-2 col-sm-2">Importance
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="VisitImpID" [(ngModel)]="model.VisitImpID" #impID="ngModel" required [disabled]="Formstate == 'Complete Data'">
-							<option value="">Select an Importance...</option>
-							<option *ngFor="let i of VisImpList" [ngValue]="i.ImpID">{{i.ImpName}} - {{i.VisitsNo}} Visits</option>
-						</select>
+                <select class="form-control" name="VisitImpID" [(ngModel)]="model.VisitImpID" #impID="ngModel" required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
+                  <option value="">Select an Importance...</option>
+                  <option *ngFor="let i of VisImpList" [ngValue]="i.ImpID">{{i.ImpName}} - {{i.VisitsNo}} Visits</option>
+                </select>
                 <div class='error' *ngIf="impID.touched && !impID.valid">
                   <div class="alert alert-danger" *ngIf="impID.hasError('required')">Importance is required.</div>
                 </div>
@@ -265,11 +530,11 @@
             </div>
           </div>
         </div>
-        <div class="card" *ngIf="Formstate != 'Complete Data' && Formstate != 'CreateRequest'">
+        <div class="card">
           <h3 class="card-header">the Customer will be visited by:</h3>
           <div class="card-block">
             <div *ngFor="let line of lines">
-              <dest-lineusers [UserList]="UserList" [line]="line" (userSelected)="userSelected($event)"></dest-lineusers>
+              <dest-lineusers [UserList]="UserList" [line]="line" (userSelected)="userSelected($event)" [disable]="!(Formstate =='Create' || Formstate =='Edit')"></dest-lineusers>
             </div>
           </div>
         </div>
@@ -279,13 +544,15 @@
           <div class="card-block">
             <button type="button" (click)="ChangePosition()">Focus on City</button>
             <!-- <button type="button" (click)="getCurrentPosition()">Focus on Current Position</button> -->
-            <br><br>
+            <br>
+            <br>
             <ngui-map #map [center]="locPos" [zoom]="zoom" geoFallbackCenter="" (idle)="onIdle($event)">
-              <marker [position]="locPos" [draggable]="true" (dragend)="log($event, 'dragend')">
+              <marker [position]="locPos" [draggable]="Formstate != 'RemoveRequest'" (dragend)="log($event, 'dragend')">
               </marker>
             </ngui-map>
           </div>
-        </div><br>
+        </div>
+        <br>
 
         <div class="card">
           <h3 class="card-header">Complementary Data</h3>
@@ -293,55 +560,62 @@
             <div class="form-group">
               <label for="Email" class="control-label col-md-2 col-sm-2">Email</label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="Email" [(ngModel)]="model.Email">
+                <input class="form-control" type="text" name="Email" [(ngModel)]="model.Email" [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mobile.valid }">
-              <label for="Mobile" class="control-label col-md-2 col-sm-2">Mobile</label>
+              <label for="Mobile" class="control-label col-md-2 col-sm-2">Mobile
+                <span class="require-red">*</span>
+              </label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="Mobile" [(ngModel)]="model.Mobile" #mobile="ngModel" required>
+                <input class="form-control" type="text" name="Mobile" [(ngModel)]="model.Mobile" #mobile="ngModel" required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
             <div class="form-group">
               <label for="WhatsAppNo" class="control-label col-md-2 col-sm-2">WhatsApp No</label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="WhatsAppNo" [(ngModel)]="model.WhatsAppNo">
+                <input class="form-control" type="text" name="WhatsAppNo" [(ngModel)]="model.WhatsAppNo" [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
             <div class="form-group">
               <label for="ClinicTel" class="control-label col-md-2 col-sm-2">Clinic Tel</label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="ClinicTel" [(ngModel)]="model.ClinicTel">
+                <input class="form-control" type="text" name="ClinicTel" [(ngModel)]="model.ClinicTel" [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
             <div class="form-group">
               <label for="ClinicTimes" class="control-label col-md-2 col-sm-2">Clinic Times</label>
               <div class="col-md-10 col-sm-10">
-                <textarea rows="2" cols="10" class="form-control" name="ClinicTimes" [(ngModel)]="model.ClinicTimes"></textarea>
+                <textarea rows="2" cols="10" class="form-control" name="ClinicTimes" [(ngModel)]="model.ClinicTimes" [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'"></textarea>
               </div>
             </div>
             <div class="form-group">
               <label for="TeachingUniv" class="control-label col-md-2 col-sm-2">Teaching University</label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="TeachingUniv" [(ngModel)]="model.TeachingUniv">
+                <input class="form-control" type="text" name="TeachingUniv" [(ngModel)]="model.TeachingUniv" [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
             <div class="form-group">
               <label for="ProfTitle" class="control-label col-md-2 col-sm-2">Profissional Title</label>
               <div class="col-md-10 col-sm-10">
-                <input class="form-control" type="text" name="ProfTitle" [(ngModel)]="model.ProfTitle">
+                <input class="form-control" type="text" name="ProfTitle" [(ngModel)]="model.ProfTitle" [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
             </div>
           </div>
+          <div class="form-group alert alert-danger" *ngIf="errorMessage">
+            <p>{{errorMessage}}</p>
+          </div>
         </div>
         <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
-          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete' && Formstate!='RemoveRequest'" [disabled]='!f.valid'>Save</button>          |
-          <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
-          <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'RemoveRequest'">Request to Remove</button>          |
+          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit'">Save</button>
+          <span *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit'"> | </span>
+          <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button>
+          <span *ngIf="Formstate == 'Delete'"> | </span>
+          <button type="submit" value="Remove" class="btn btn-info" *ngIf="Formstate == 'RemoveRequest'">Request to Remove</button>
+          <span *ngIf="Formstate == 'RemoveRequest'"> | </span>
+          <button type="submit" value="Assign" class="btn btn-info" *ngIf="Formstate == 'AssignRequest'">Request to Assign</button>
+          <span *ngIf="Formstate == 'AssignRequest'"> | </span>
           <button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
-        </div>
-        <div class="form-group alert alert-danger" *ngIf="errorMessage">
-          <p>{{errorMessage}}</p>
         </div>
       </div>
     </form>

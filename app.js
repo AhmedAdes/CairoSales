@@ -1,6 +1,7 @@
 ﻿var express = require('express');
 var http = require('http');
 var path = require('path');
+var compression = require('compression')
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -22,7 +23,7 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.use(cors());
-
+app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

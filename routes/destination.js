@@ -49,6 +49,16 @@ router.get('/userChainCount/:id', function (req, res, next) {
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
+router.get('/userNotAssigned/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    // request.input("UserID", req.params.id);
+    request.query(`SELECT * FROM dbo.vwDestinations ds 
+                WHERE IMSID IN (SELECT DISTINCT IMSID FROM dbo.UserDestinations ud JOIN dbo.Destinations d ON ud.DestID = d.DestID WHERE UserID = ${req.params.id})
+                AND ds.DestID NOT IN (SELECT DestID FROM dbo.UserDestinations ud WHERE UserID = ${req.params.id})`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
 
 router.get('/aprvregion/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
@@ -272,6 +282,24 @@ router.put('/DestOnly/:id', function (req, res, next) {
         .then(function () { res.json({ returnValue: 1, affected: 1 }); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
+router.put('/RemoveRequest/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", req.params.id);
+    request.input("UserID", req.body.userID);
+    request.execute("DestinationRemoveRequest")
+        .then(function () { res.json({ returnValue: 1, affected: 1 }); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+router.put('/AssignRequest/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", req.params.id);
+    request.input("UserID", req.body.userID);
+    request.execute("DestinationAssignRequest")
+        .then(function () { res.json({ returnValue: 1, affected: 1 }); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
 router.delete('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var conf = require('../SQLConfig');
@@ -304,7 +332,6 @@ router.delete('/:id', function (req, res, next) {
         res.json({ error: err }); console.log(err); connection.close();
     })
 });
-
 router.put('/Approve/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var data = req.body;
@@ -318,5 +345,28 @@ router.put('/Approve/:id', function (req, res, next) {
             if (err) { res.json({ error: err }); console.log(err); }
         });
 });
-
+router.put('/GrantRemove/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", req.params.id);
+    request.input("UserID", req.body.userID);
+    request.execute("DestinationGrantRemove")
+        .then(function (recset) {
+            res.json({ recordset: recset, returnValue: recset.returnValue, affected: recset.returnValue + 1 })
+        }).catch(function (err) {
+            if (err) { res.json({ error: err }); console.log(err); }
+        });
+});
+router.put('/GrantAssign/:id', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", req.params.id);
+    request.input("UserID", req.body.userID);
+    request.execute("DestinationGrantAssign")
+        .then(function (recset) {
+            res.json({ recordset: recset, returnValue: recset.returnValue, affected: recset.returnValue + 1 })
+        }).catch(function (err) {
+            if (err) { res.json({ error: err }); console.log(err); }
+        });
+});
 module.exports = router;

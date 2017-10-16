@@ -6,7 +6,8 @@ import { DestinationUser } from '../../../Models';
     <div class="row form-group">
         <label for="SelectUser" class="control-label col-md-4 col-sm-4">{{line}} Sales Line</label>
          <div class="col-md-8 col-sm-8">
-            <select class="form-control" name="SelectUser" [(ngModel)]="SelectedUser" (change)="SelectChanged()" #usr="ngModel">
+            <select class="form-control" name="SelectUser" [(ngModel)]="SelectedUser"
+                (change)="SelectChanged()" #usr="ngModel" [disabled]="disable">
                 <option value="">Select a Medical Rep.</option>
                 <option *ngFor="let i of dispUsers" [ngValue]="i.UserID">{{i.UserName}}</option>
             </select>
@@ -20,6 +21,7 @@ import { DestinationUser } from '../../../Models';
 export class LineUsersComponent implements OnInit {
     @Input() UserList: DestinationUser[]
     @Input() line: string
+    @Input() disable: boolean
     @Output() userSelected = new EventEmitter()
     dispUsers: DestinationUser[] = []
     SelectedUser: number

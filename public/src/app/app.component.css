@@ -15,3 +15,7 @@ label {
 .modal-backdrop.in {
   z-index: 1020!important;
 }
+
+.require-red {
+  color: red;
+}

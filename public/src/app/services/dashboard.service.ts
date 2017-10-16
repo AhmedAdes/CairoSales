@@ -6,11 +6,11 @@ import { AuthenticationService } from './auth.service';
 
 @Injectable()
 export class DashboardService {
-    constructor(private http: Http, private authService: AuthenticationService) { }
-
     url = NodeUrl + 'dash/';
     headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
     options = new RequestOptions({ headers: this.headers });
+
+    constructor(private http: Http, private authService: AuthenticationService) { }
 
     getUserSchedule(id: number) {
         return this.http.get(this.url + 'UserSchedule/' + id, this.options).map(res => res.json());

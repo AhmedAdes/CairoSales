@@ -26,7 +26,7 @@
                 <thead>
                     <tr>
                         <td>Customer</td>
-                        <td>Type</td>
+                        <td>Speciality</td>
                         <td>Class</td>
                         <td>Region</td>
                         <td>Planned Visits</td>
@@ -37,9 +37,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of userSched | orderby: '+RegionName; +ProvinceID; +DestType; +Destination'">
+                    <tr *ngFor="let item of userSched | orderby: '+RegionName; +ProvinceID; +SpecName; +Destination'">
                         <td>{{item.Destination}}</td>
-                        <td>{{item.DestType}}</td>
+                        <td>{{item.SpecName}}</td>
                         <td>{{item.ImpName}}</td>
                         <td>{{item.RegionName}} - {{item.ProvinceID}}</td>
                         <td>{{item.VisitsNo}}</td>

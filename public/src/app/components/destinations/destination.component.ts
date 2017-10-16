@@ -12,7 +12,12 @@ export class DestinationComponent implements OnInit {
   currentUser: CurrentUser = this.auth.getUser();
   collection: Destination[] = [];
   filteredDest: Destination[] = [];
+  toApproveList: Destination[] = [];
+  toRemoveList: Destination[] = [];
+  toAssignList: Destination[] = [];
   srchObj: Destination = new Destination();
+  srchAprv: Destination = new Destination();
+  srchRmv: Destination = new Destination();
   model: Destination = new Destination();
   showTable: boolean;
   Formstate: string;
@@ -34,7 +39,7 @@ export class DestinationComponent implements OnInit {
   ClassColumn = 'Approved'
   locPos: any
   mrkPos: any
-  fallback: '[30.082824203107098, 31.34755614624021]'
+  fallback: '[30.14400328, 31.33193496]'
   zoom = 8
 
   @ViewChild('map') curMap: NguiMapComponent
@@ -52,22 +57,33 @@ export class DestinationComponent implements OnInit {
           this.IMSList = ims
           this.srvIms.getIMS().subscribe(i => {
             this.allIMSList = i
-            if (this.currentUser.jobClass < 1 || this.currentUser.jobClass == 99) {
+            if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
               this.serv.getDestination().subscribe(cols => {
                 this.collection = cols;
-                this.filteredDest = this.collection
+                this.filteredDest = this.collection.filter(d => d.Approved === true)
+                this.toApproveList = this.collection.filter(d => d.Approved === false || d.Approved == null)
+                this.toRemoveList = this.collection.filter(d => d.RemoveRequest === true)
+                this.toAssignList = this.collection.filter(d => d.AssignRequest === true)
                 this.TableBack();
               })
             } else {
               this.serv.getUserChainDestination(this.currentUser.userID).subscribe(cols => {
                 this.collection = cols;
+                this.filteredDest = this.collection.filter(d => d.Approved === true)
+                this.toApproveList = this.collection.filter(d => d.Approved === false || d.Approved == null)
+                this.toRemoveList = this.collection.filter(d => d.RemoveRequest === true)
+                this.serv.getUserNotAssignedDestination(this.currentUser.userID).subscribe(asgn => {
+                  this.toAssignList = asgn
+                })
                 this.TableBack();
               })
             }
             this.srchObj.DestType = 'Clinic (Doctor)';
+            this.srchAprv.DestType = 'Clinic (Doctor)';
+            this.srchRmv.DestType = 'Clinic (Doctor)';
             this.locPos = {
-              lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.7891,
-              lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.6011
+              lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.14400328,
+              lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.33193496
             }
             this.mrkPos = this.locPos
           })
@@ -98,7 +114,7 @@ export class DestinationComponent implements OnInit {
   EditThis(id: number) {
     if (this.currentUser.jobClass < 1) {
       this.loadDetails(id, 'Edit');
-    } else if (this.currentUser.jobClass == 3) {
+    } else if (this.currentUser.jobClass === 3) {
       this.loadDetails(id, 'Complete Data');
     }
   }
@@ -108,8 +124,11 @@ export class DestinationComponent implements OnInit {
   Delete(id: number) {
     this.loadDetails(id, 'Delete');
   }
-  RequestDelete(id: number) {
+  RequestRemove(id: number) {
     this.loadDetails(id, 'RemoveRequest');
+  }
+  RequestAssign(id: number) {
+    this.loadDetails(id, 'AssignRequest');
   }
   loadDetails(id, state) {
     this.serv.getDestination(id).subscribe(ret => {
@@ -125,10 +144,10 @@ export class DestinationComponent implements OnInit {
           })
           this.showTable = false;
           this.Formstate = state;
-          this.headerText = state == 'Details' ? 'Customer ' + state : state + ' Customer';
+          this.headerText = state == 'Details' ? 'Customer ' + state : state + ' a Customer';
           this.locPos = {
-            lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.7891,
-            lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.6011
+            lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.14400328,
+            lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.33193496
           }
           this.zoom = 12
         })
@@ -144,6 +163,8 @@ export class DestinationComponent implements OnInit {
   }
   TabClicked(option) {
     this.srchObj.DestType = option
+    this.srchAprv.DestType = option
+    this.srchRmv.DestType = option
     this.model.DestType = option
     this.IMSSelected()
   }
@@ -157,8 +178,13 @@ export class DestinationComponent implements OnInit {
       })
     }
   }
-  HandleForm(event) {
-    event.preventDefault();
+  HandleForm(formvalid) {
+    // event.preventDefault();
+    if (!formvalid && (this.Formstate === 'Create' || this.Formstate === 'CreateRequest' ||
+      this.Formstate === 'Edit' || this.Formstate === 'Complete Data')) {
+      this.errorMessage = 'Please, Complete the Required Fields'
+      return
+    }
     if (this.currentUser.jobClass === 3 && this.Formstate === 'CreateRequest') {
       this.DestUsers.push({ DestID: this.model.DestID, UserID: this.currentUser.userID, LineID: this.currentUser.lineID })
     }
@@ -222,6 +248,38 @@ export class DestinationComponent implements OnInit {
           }
         }, err => this.errorMessage = err.message);
         break;
+      case 'RemoveRequest':
+        this.serv.RemoveDestination(newDestination.DestID, this.currentUser.userID).subscribe(ret => {
+          if (ret.error) {
+            this.errorMessage = ret.error.message;
+          } else if (ret.affected > 0) {
+            // this.ngOnInit();
+            newDestination.RemoveRequest = true
+            newDestination.RemoveUser = this.currentUser.userID
+            newDestination.RemoveUserName = this.currentUser.UserName
+            let indx = this.collection.findIndex(dst => dst.DestID == newDestination.DestID)
+            this.collection.fill(newDestination, indx, indx + 1)
+            this.IMSSelected()
+            this.TableBack()
+          }
+        }, err => this.errorMessage = err.message);
+        break;
+      case 'AssignRequest':
+        this.serv.DestinationAssignRequest(newDestination.DestID, this.currentUser.userID).subscribe(ret => {
+          if (ret.error) {
+            this.errorMessage = ret.error.message;
+          } else if (ret.affected > 0) {
+            // this.ngOnInit();
+            newDestination.AssignRequest = true
+            newDestination.AssignUser = this.currentUser.userID
+            newDestination.AssignUserName = this.currentUser.UserName
+            let indx = this.toAssignList.findIndex(dst => dst.DestID == newDestination.DestID)
+            this.toAssignList.fill(newDestination, indx, indx + 1)
+            this.IMSSelected()
+            this.TableBack()
+          }
+        }, err => this.errorMessage = err.message);
+        break;
       default:
         break;
     }
@@ -240,12 +298,42 @@ export class DestinationComponent implements OnInit {
       }
     }, err => this.errorMessage = err.message);
   }
+  RemoveDestination(id: number) {
+    const userID = this.toRemoveList.find(r => r.DestID === id).RemoveUser
+    this.serv.GrantRemoveDestination(id, userID).subscribe(ret => {
+      if (ret.error) {
+        this.errorMessage = ret.error.message;
+      } else if (ret.affected > 0) {
+        let tabs = document.getElementsByClassName('tabs');
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].className = 'tabs';
+        }
+        document.getElementById('tab2').className = 'active';
+        this.ngOnInit();
+      }
+    }, err => this.errorMessage = err.message);
+  }
+  AssignDestination(id: number) {
+    const userID = this.toAssignList.find(r => r.DestID === id).AssignUser
+    this.serv.GrantAssignDestination(id, userID).subscribe(ret => {
+      if (ret.error) {
+        this.errorMessage = ret.error.message;
+      } else if (ret.affected > 0) {
+        let tabs = document.getElementsByClassName('tabs');
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].className = 'tabs';
+        }
+        document.getElementById('tab2').className = 'active';
+        this.ngOnInit();
+      }
+    }, err => this.errorMessage = err.message);
+  }
   SortTable(column: string) {
-    let sortCol = column == 'ClassColumn' ? this.ClassColumn : column
-    if (this.orderbyString.indexOf(sortCol) == -1) {
+    const sortCol = column === 'ClassColumn' ? this.ClassColumn : column
+    if (this.orderbyString.indexOf(sortCol) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
       this.orderbyString = '+' + sortCol;
-    } else if (this.orderbyString.indexOf('-' + sortCol) == -1) {
+    } else if (this.orderbyString.indexOf('-' + sortCol) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
       this.orderbyString = '-' + sortCol;
     } else {
@@ -268,9 +356,19 @@ export class DestinationComponent implements OnInit {
   }
   IMSSelected() {
     if (this.selIMS) {
-      this.filteredDest = this.collection.filter(d => d.IMSID == this.selIMS)
+      this.filteredDest = this.collection.filter(d => d.IMSID == this.selIMS && d.Approved === true)
+      this.toApproveList = this.collection.filter(d => d.IMSID == this.selIMS && (d.Approved === false || d.Approved == null))
+      this.toRemoveList = this.collection.filter(d => d.IMSID == this.selIMS && d.RemoveRequest === true)
+      if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
+        this.toAssignList = this.collection.filter(d => d.IMSID == this.selIMS && d.AssignRequest === true)
+      }
     } else {
-      this.filteredDest = this.collection
+      this.filteredDest = this.collection.filter(d => d.Approved === true)
+      this.toApproveList = this.collection.filter(d => d.Approved === false || d.Approved == null)
+      this.toRemoveList = this.collection.filter(d => d.RemoveRequest === true)
+      if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
+        this.toRemoveList = this.collection.filter(d => d.AssignRequest === true)
+      }
     }
   }
   log({ target: marker }, str) {
