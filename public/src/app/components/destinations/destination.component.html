@@ -155,7 +155,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: {  id: 'pageA', totalItems: filteredDest.length, itemsPerPage: 25, currentPage: a }"
+            <tr *ngFor="let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: { id: 'pageA', itemsPerPage: 25, currentPage: a }"
               [ngStyle]="{'background-color': !item.Approved? '#ffff80': !item.Assigned? '#66ffc2' : !item.PlanExist? '#ff9999' : '#fff'}">
               <td class="text-bold">{{item.Destination}}</td>
               <td>{{item.IMS}}</td>
@@ -244,7 +244,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of (toApproveList | filter:srchAprv | orderby:orderbyString) | paginate: {  id: 'pageB', totalItems: toApproveList.length, itemsPerPage: 25, currentPage: b }">
+            <tr *ngFor="let item of (toApproveList | filter:srchAprv | orderby:orderbyString) | paginate: {  id: 'pageB', itemsPerPage: 25, currentPage: b }">
               <td class="text-bold">{{item.Destination}}</td>
               <td>{{item.IMS}}</td>
               <td>{{item.RegionProvince}}</td>
@@ -307,7 +307,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of (toRemoveList | filter:srchRmv | orderby:orderbyString) | paginate: { id: 'pageC', totalItems: toRemoveList.length, itemsPerPage: 25, currentPage: c }">
+            <tr *ngFor="let item of (toRemoveList | filter:srchRmv | orderby:orderbyString) | paginate: { id: 'pageC', itemsPerPage: 25, currentPage: c }">
               <td>{{item.RemoveUserName}}</td>
               <td class="text-bold">{{item.Destination}}</td>
               <td>{{item.IMS}}</td>
