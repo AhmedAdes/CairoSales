@@ -41,6 +41,10 @@ export class DestinationComponent implements OnInit {
   mrkPos: any
   fallback: '[30.14400328, 31.33193496]'
   zoom = 8
+  a = 1
+  b = 1
+  c = 1
+  d = 1
 
   @ViewChild('map') curMap: NguiMapComponent
 

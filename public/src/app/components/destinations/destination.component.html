@@ -155,7 +155,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: a }"
+            <tr *ngFor="let item of (filteredDest | filter:srchObj | orderby:orderbyString) | paginate: {  id: 'pageA', totalItems: filteredDest.length, itemsPerPage: 25, currentPage: a }"
               [ngStyle]="{'background-color': !item.Approved? '#ffff80': !item.Assigned? '#66ffc2' : !item.PlanExist? '#ff9999' : '#fff'}">
               <td class="text-bold">{{item.Destination}}</td>
               <td>{{item.IMS}}</td>
@@ -207,7 +207,7 @@
             </tr>
           </tfoot>
         </table>
-        <pagination-controls (pageChange)="a = $event" maxSize="10"></pagination-controls>
+        <pagination-controls id="pageA" (pageChange)="a = $event" maxSize="10"></pagination-controls>
       </div>
       <div class="tab-pane fade" id="tblApprove" role="tabpanel" aria-labelledby="approve-tab">
         <table class="table table-hover table-striped">
@@ -244,7 +244,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of (toApproveList | filter:srchAprv | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: b }">
+            <tr *ngFor="let item of (toApproveList | filter:srchAprv | orderby:orderbyString) | paginate: {  id: 'pageB', totalItems: toApproveList.length, itemsPerPage: 25, currentPage: b }">
               <td class="text-bold">{{item.Destination}}</td>
               <td>{{item.IMS}}</td>
               <td>{{item.RegionProvince}}</td>
@@ -270,7 +270,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls (pageChange)="b = $event" maxSize="10"></pagination-controls>
+        <pagination-controls id="pageB" (pageChange)="b = $event" maxSize="10"></pagination-controls>
       </div>
       <div class="tab-pane fade" id="tblRemove" role="tabpanel" aria-labelledby="remove-tab">
         <table class="table table-hover table-striped">
@@ -307,7 +307,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of (toRemoveList | filter:srchRmv | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: c }">
+            <tr *ngFor="let item of (toRemoveList | filter:srchRmv | orderby:orderbyString) | paginate: { id: 'pageC', totalItems: toRemoveList.length, itemsPerPage: 25, currentPage: c }">
               <td>{{item.RemoveUserName}}</td>
               <td class="text-bold">{{item.Destination}}</td>
               <td>{{item.IMS}}</td>
@@ -328,7 +328,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls (pageChange)="c = $event" maxSize="10"></pagination-controls>
+        <pagination-controls id="pageC" (pageChange)="c = $event" maxSize="10"></pagination-controls>
       </div>
       <div class="tab-pane fade" id="tblAssign" role="tabpanel" aria-labelledby="assign-tab">
         <table class="table table-hover table-striped">
@@ -369,7 +369,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of toAssignList | paginate: { itemsPerPage: 25, currentPage: d }">
+            <tr *ngFor="let item of toAssignList | paginate: { id: 'pageD', totalItems: toAssignList.length, itemsPerPage: 25, currentPage: d }">
               <td *ngIf="currentUser.jobClass < 1">{{item.AssignUserName}}</td>
               <td class="text-bold">{{item.Destination}}</td>
               <td>{{item.IMS}}</td>
@@ -395,7 +395,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls (pageChange)="d = $event" maxSize="10"></pagination-controls>
+        <pagination-controls id="pageD" (pageChange)="d = $event" maxSize="10"></pagination-controls>
       </div>
     </div>
   </div>
