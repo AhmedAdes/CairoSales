@@ -210,192 +210,16 @@
         <pagination-controls id="pageA" (pageChange)="a = $event" maxSize="10"></pagination-controls>
       </div>
       <div class="tab-pane fade" id="tblApprove" role="tabpanel" aria-labelledby="approve-tab">
-        <table class="table table-hover table-striped">
-          <colgroup>
-            <col width="15%">
-            <col width="15%">
-            <col width="15%">
-            <col width="20%">
-            <col width="10%">
-            <col width="10%">
-            <col width="15%">
-          </colgroup>
-          <thead>
-            <tr>
-              <th> {{srchObj.DestType}} Name
-                <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> IMS
-                <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Region - Province
-                <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Address
-                <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Med. Speciality
-                <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Importance
-                <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of (toApproveList | filter:srchAprv | orderby:orderbyString) | paginate: {  id: 'pageB', itemsPerPage: 25, currentPage: b }">
-              <td class="text-bold">{{item.Destination}}</td>
-              <td>{{item.IMS}}</td>
-              <td>{{item.RegionProvince}}</td>
-              <td>{{item.Address}}</td>
-              <td>{{item.SpecName}}</td>
-              <td>{{item.ImpName}}</td>
-              <td>
-                <button *ngIf="currentUser.jobClass < 1" [disabled]="item.Approved" (click)='ApproveDestination(item.DestID)' class="btn btn-success"
-                  title="Approve Customer">
-                  <i class="glyphicon glyphicon-ok"></i>
-                </button>
-                <button *ngIf="currentUser.jobClass < 1 || currentUser.jobClass == 3" (click)='EditThis(item.DestID)' class="btn btn-info"
-                  title="Edit">
-                  <i class="glyphicon glyphicon-pencil"></i>
-                </button>
-                <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
-                  <i class="glyphicon glyphicon-eye-open"></i>
-                </button>
-                <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete">
-                  <i class="glyphicon glyphicon-trash"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls id="pageB" (pageChange)="b = $event" maxSize="10"></pagination-controls>
+        <app-dest-approve [currentUser]="currentUser" [toApproveList]="toApproveList" [srchAprv]="srchAprv" (DestApprove)="ApproveDestination($event)"
+          (DestEdit)="EditThis($event)" (DestDetail)="ShowDetails($event)" (DestDelete)="Delete($event)"></app-dest-approve>
       </div>
       <div class="tab-pane fade" id="tblRemove" role="tabpanel" aria-labelledby="remove-tab">
-        <table class="table table-hover table-striped">
-          <colgroup>
-            <col width="15%">
-            <col width="20%">
-            <col width="15%">
-            <col width="15%">
-            <col width="10%">
-            <col width="10%">
-            <col width="15%">
-          </colgroup>
-          <thead>
-            <tr>
-              <th> Med. Rep. Name
-                <i (click)="SortTable('RemoveUserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RemoveUserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> {{srchObj.DestType}} Name
-                <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> IMS
-                <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Region - Province
-                <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Med. Speciality
-                <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Importance
-                <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of (toRemoveList | filter:srchRmv | orderby:orderbyString) | paginate: { id: 'pageC', itemsPerPage: 25, currentPage: c }">
-              <td>{{item.RemoveUserName}}</td>
-              <td class="text-bold">{{item.Destination}}</td>
-              <td>{{item.IMS}}</td>
-              <td>{{item.RegionProvince}}</td>
-              <td>{{item.SpecName}}</td>
-              <td>{{item.ImpName}}</td>
-              <td>
-                <button *ngIf="currentUser.jobClass < 1" (click)='RemoveDestination(item.DestID)' class="btn btn-success" title="Remove Customer">
-                  <i class="glyphicon glyphicon-remove-circle"></i>
-                </button>
-                <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
-                  <i class="glyphicon glyphicon-eye-open"></i>
-                </button>
-                <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete">
-                  <i class="glyphicon glyphicon-trash"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls id="pageC" (pageChange)="c = $event" maxSize="10"></pagination-controls>
+        <app-dest-remove [currentUser]="currentUser" [toRemoveList]="toRemoveList" [srchRmv]="srchRmv" (DestRemove)="ApproveDestination($event)"
+          (DestDetail)="ShowDetails($event)" (DestDelete)="Delete($event)"></app-dest-remove>
       </div>
       <div class="tab-pane fade" id="tblAssign" role="tabpanel" aria-labelledby="assign-tab">
-        <table class="table table-hover table-striped">
-          <colgroup>
-            <col width="15%" *ngIf="currentUser.jobClass < 1">
-            <col width="20%">
-            <col width="15%">
-            <col width="15%">
-            <col width="15%" *ngIf="currentUser.jobClass >= 1">
-            <col width="10%">
-            <col width="10%">
-            <col width="15%">
-          </colgroup>
-          <thead>
-            <tr>
-              <th *ngIf="currentUser.jobClass < 1"> Med. Rep. Name
-                <i (click)="SortTable('RemoveUserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RemoveUserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> {{srchObj.DestType}} Name
-                <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> IMS
-                <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Region - Province
-                <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th *ngIf="currentUser.jobClass >= 1"> Address
-                <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Med. Speciality
-                <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th> Importance
-                <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
-              </th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of toAssignList | paginate: { id: 'pageD', totalItems: toAssignList.length, itemsPerPage: 25, currentPage: d }">
-              <td *ngIf="currentUser.jobClass < 1">{{item.AssignUserName}}</td>
-              <td class="text-bold">{{item.Destination}}</td>
-              <td>{{item.IMS}}</td>
-              <td>{{item.RegionProvince}}</td>
-              <td *ngIf="currentUser.jobClass >= 1">{{item.Address}}</td>
-              <td>{{item.SpecName}}</td>
-              <td>{{item.ImpName}}</td>
-              <td>
-                <button *ngIf="currentUser.jobClass == 3 && !item.AssignRequest" (click)="RequestAssign(item.DestID)" class="btn btn-success"
-                  title="Request to Assign">
-                  <i class="fa fa-link"></i>
-                </button>
-                <button *ngIf="currentUser.jobClass < 1" (click)="AssignDestination(item.DestID)" class="btn btn-success" title="Grant Assign">
-                  <i class="fa fa-link"></i>
-                </button>
-                <button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.DestID)' class="btn btn-info" title="Edit">
-                  <i class="glyphicon glyphicon-pencil"></i>
-                </button>
-                <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
-                  <i class="glyphicon glyphicon-eye-open"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <pagination-controls id="pageD" (pageChange)="d = $event" maxSize="10"></pagination-controls>
+        <app-dest-assign [currentUser]="currentUser" [toAssignList]="toAssignList" [srchAsgn]="srchAsgn" (DestReqAssign)="RequestAssign($event)"
+          (DestEdit)="EditThis($event)" (DestDetail)="ShowDetails($event)" (DestAssign)="AssignDestination($event)"></app-dest-assign>
       </div>
     </div>
   </div>
@@ -482,8 +306,8 @@
                 <span class="require-red">*</span>
               </label>
               <div class="col-md-4 col-sm-4">
-                <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="model.Building" #build="ngModel" (change)="generateAddress()"
-                  required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
+                <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="model.Building" #build="ngModel"
+                  (change)="generateAddress()" required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
               </div>
               <div class="col-md-3 col-sm-3">
                 <input class="form-control" type="text" name="Floor" placeholder="Floor No." [(ngModel)]="model.Floor" #flor="ngModel" (change)="generateAddress()"
@@ -534,7 +358,7 @@
           <h3 class="card-header">the Customer will be visited by:</h3>
           <div class="card-block">
             <div *ngFor="let line of lines">
-              <dest-lineusers [UserList]="UserList" [line]="line" (userSelected)="userSelected($event)" [disable]="!(Formstate =='Create' || Formstate =='Edit')"></dest-lineusers>
+              <dest-lineusers [UserList]="UserList" [line]="line" (userSelected)="userSelected($event)" [disable]="!(Formstate =='Create' || Formstate =='Edit' || Formstate =='Complete Data')"></dest-lineusers>
             </div>
           </div>
         </div>
@@ -607,8 +431,8 @@
           </div>
         </div>
         <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
-          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit'">Save</button>
-          <span *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit'"> | </span>
+          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit' || Formstate =='Complete Data'">Save</button>
+          <span *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit' || Formstate =='Complete Data'"> | </span>
           <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button>
           <span *ngIf="Formstate == 'Delete'"> | </span>
           <button type="submit" value="Remove" class="btn btn-info" *ngIf="Formstate == 'RemoveRequest'">Request to Remove</button>

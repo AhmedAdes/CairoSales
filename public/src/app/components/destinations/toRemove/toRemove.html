@@ -1,0 +1,107 @@
+<table class="table table-hover table-striped">
+  <colgroup>
+    <col width="15%">
+    <col width="20%">
+    <col width="15%">
+    <col width="15%">
+    <col width="10%">
+    <col width="10%">
+    <col width="15%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th> Med. Rep. Name
+        <i (click)="SortTable('RemoveUserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RemoveUserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> {{srchRmv.DestType}} Name
+        <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> IMS
+        <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> Region - Province
+        <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> Med. Speciality
+        <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> Importance
+        <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchRemoveUserName" name="RemoveUserName" [(ngModel)]="srchRmv.RemoveUserName">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchDestination" name="Destination" [(ngModel)]="srchRmv.Destination">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchIMS" name="IMS" [(ngModel)]="srchRmv.IMS">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchRegionProvince" name="RegionProvince" [(ngModel)]="srchRmv.RegionProvince">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchSpecName" name="SpecName" [(ngModel)]="srchRmv.SpecName">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchImpName" name="ImpName" [(ngModel)]="srchRmv.ImpName">
+        </div>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of (toRemoveList | filter:srchRmv | orderby:orderbyString) | paginate: { id: 'pageC', itemsPerPage: 25, currentPage: p }">
+      <td>{{item.RemoveUserName}}</td>
+      <td class="text-bold">{{item.Destination}}</td>
+      <td>{{item.IMS}}</td>
+      <td>{{item.RegionProvince}}</td>
+      <td>{{item.SpecName}}</td>
+      <td>{{item.ImpName}}</td>
+      <td>
+        <button *ngIf="currentUser.jobClass < 1" (click)='RemoveDestination(item.DestID)' class="btn btn-success" title="Remove Customer">
+          <i class="glyphicon glyphicon-remove-circle"></i>
+        </button>
+        <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
+          <i class="glyphicon glyphicon-eye-open"></i>
+        </button>
+        <button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.DestID)" class="btn btn-danger" title="Delete">
+          <i class="glyphicon glyphicon-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls id="pageC" (pageChange)="p = $event" maxSize="10"></pagination-controls>

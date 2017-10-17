@@ -4,8 +4,13 @@ export * from './dashboard/userWorkRate/workRate';
 export * from './dashboard/userPlan/plan';
 export * from './dashboard/scoreCard/scoreCard';
 export * from './dashboard/topUsers/topUsers';
+
 export * from './destinations/destination.component';
 export * from './destinations/LineUsers/lineUsers';
+export * from './destinations/toApprove/toApprove';
+export * from './destinations/toAssign/toAssign';
+export * from './destinations/toRemove/toRemove';
+
 export * from './home/home.component';
 export * from './home/sidebar/sidebar.component';
 export * from './home/topnav/topnav.component';

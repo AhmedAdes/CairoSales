@@ -1,0 +1,124 @@
+<table class="table table-hover table-striped">
+  <colgroup>
+    <col width="15%" *ngIf="currentUser.jobClass < 1">
+    <col width="20%">
+    <col width="15%">
+    <col width="15%">
+    <col width="15%" *ngIf="currentUser.jobClass >= 1">
+    <col width="10%">
+    <col width="10%">
+    <col width="15%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th *ngIf="currentUser.jobClass < 1"> Med. Rep. Name
+        <i (click)="SortTable('AssignUserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('AssignUserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> {{srchAsgn.DestType}} Name
+        <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> IMS
+        <i (click)="SortTable('IMS')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('IMS') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> Region - Province
+        <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th *ngIf="currentUser.jobClass >= 1"> Address
+        <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> Med. Speciality
+        <i (click)="SortTable('SpecName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('SpecName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th> Importance
+        <i (click)="SortTable('ImpName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('ImpName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
+      <th></th>
+    </tr>
+    <tr>
+      <th *ngIf="currentUser.jobClass < 1">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchAssignUserName" name="AssignUserName" [(ngModel)]="srchAsgn.AssignUserName">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchDestination" name="Destination" [(ngModel)]="srchAsgn.Destination">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchIMS" name="IMS" [(ngModel)]="srchAsgn.IMS">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchRegionProvince" name="RegionProvince" [(ngModel)]="srchAsgn.RegionProvince">
+        </div>
+      </th>
+      <th *ngIf="currentUser.jobClass >= 1">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchAddress" name="Address" [(ngModel)]="srchAsgn.Address">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchSpecName" name="SpecName" [(ngModel)]="srchAsgn.SpecName">
+        </div>
+      </th>
+      <th>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchImpName" name="ImpName" [(ngModel)]="srchAsgn.ImpName">
+        </div>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of (toAssignList | filter:srchAsgn | orderby:orderbyString) | paginate: { id: 'pageD', totalItems: toAssignList.length, itemsPerPage: 25, currentPage: p }">
+      <td *ngIf="currentUser.jobClass < 1">{{item.AssignUserName}}</td>
+      <td class="text-bold">{{item.Destination}}</td>
+      <td>{{item.IMS}}</td>
+      <td>{{item.RegionProvince}}</td>
+      <td *ngIf="currentUser.jobClass >= 1">{{item.Address}}</td>
+      <td>{{item.SpecName}}</td>
+      <td>{{item.ImpName}}</td>
+      <td>
+        <button *ngIf="currentUser.jobClass == 3 && !item.AssignRequest" (click)="RequestAssign(item.DestID)" class="btn btn-success"
+          title="Request to Assign">
+          <i class="fa fa-link"></i>
+        </button>
+        <button *ngIf="currentUser.jobClass < 1" (click)="AssignDestination(item.DestID)" class="btn btn-success" title="Grant Assign">
+          <i class="fa fa-link"></i>
+        </button>
+        <button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.DestID)' class="btn btn-info" title="Edit">
+          <i class="glyphicon glyphicon-pencil"></i>
+        </button>
+        <button (click)="ShowDetails(item.DestID)" class="btn btn-warning" title="Details">
+          <i class="glyphicon glyphicon-eye-open"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls id="pageD" (pageChange)="p = $event" maxSize="10"></pagination-controls>

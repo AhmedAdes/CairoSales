@@ -18,7 +18,9 @@ import {
   SidebarComponent, TopNavComponent, DestinationComponent, VisitModule,
   UserScheduleComponent, UserWorkRateComponent, UserPlanComponent,
   PlanComponent, HelperModule, LineUsersComponent, ChngPassComponent,
-  ScoreCardComponent, VacationComponent, ContactUsComponent, WeekPlanComponent, TopUsersComponent
+  ScoreCardComponent, VacationComponent, ContactUsComponent,
+  WeekPlanComponent, TopUsersComponent, DestinationApproveComponent,
+  DestinationAssignComponent, DestinationRemoveComponent
 } from './components';
 import { LoginComponent, LogOutComponent } from './components/login/login.component';
 import {
@@ -67,7 +69,8 @@ let widgets = [
     SidebarComponent, TopNavComponent, DestinationComponent,
     UserScheduleComponent, UserWorkRateComponent, UserPlanComponent, ScoreCardComponent,
     PlanComponent, LineUsersComponent, ChngPassComponent,
-    VacationComponent, ContactUsComponent, WeekPlanComponent, TopUsersComponent
+    VacationComponent, ContactUsComponent, WeekPlanComponent, TopUsersComponent,
+    DestinationApproveComponent, DestinationAssignComponent, DestinationRemoveComponent
   ],
   providers: [
     AuthGuard, AuthenticationService,

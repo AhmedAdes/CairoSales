@@ -1,7 +1,7 @@
-import { Injectable, Pipe, PipeTransform } from "@angular/core";
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: "filter",
+  name: 'filter',
   pure: false
 })
 @Injectable()
@@ -16,8 +16,8 @@ export class ArrayFilterPipe implements PipeTransform {
           (item[field].toLowerCase().indexOf(conditions[field].toLowerCase()) == -1)) {
           return false;
         }
-        if (conditions[field] === null || conditions[field] === '') { break; }
-        if (item[field] === null || item[field] === '') { return false; }
+        // if (conditions[field] === null || conditions[field] === '') { break; }
+        // if (item[field] === null || item[field] === '') { return false; }
       }
       return true;
     });
@@ -26,7 +26,7 @@ export class ArrayFilterPipe implements PipeTransform {
 
 
 @Pipe({
-  name: "orderby",
+  name: 'orderby',
   pure: false
 })
 @Injectable()
@@ -45,12 +45,12 @@ export class ArrayOrderByPipe implements PipeTransform {
 
       items.sort(function (a, b) {
         if (orderType === 'ASC') {
-          if (a[currentField] < b[currentField]) return -1;
-          if (a[currentField] > b[currentField]) return 1;
+          if (a[currentField] < b[currentField]) { return -1 };
+          if (a[currentField] > b[currentField]) { return 1 };
           return 0;
         } else {
-          if (a[currentField] < b[currentField]) return 1;
-          if (a[currentField] > b[currentField]) return -1;
+          if (a[currentField] < b[currentField]) { return 1 };
+          if (a[currentField] > b[currentField]) { return -1 };
           return 0;
         }
       });

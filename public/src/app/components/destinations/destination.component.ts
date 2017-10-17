@@ -18,6 +18,7 @@ export class DestinationComponent implements OnInit {
   srchObj: Destination = new Destination();
   srchAprv: Destination = new Destination();
   srchRmv: Destination = new Destination();
+  srchAsgn: Destination = new Destination();
   model: Destination = new Destination();
   showTable: boolean;
   Formstate: string;
@@ -81,6 +82,7 @@ export class DestinationComponent implements OnInit {
             this.srchObj.DestType = 'Clinic (Doctor)';
             this.srchAprv.DestType = 'Clinic (Doctor)';
             this.srchRmv.DestType = 'Clinic (Doctor)';
+            this.srchAsgn.DestType = 'Clinic (Doctor)';
             this.locPos = {
               lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.14400328,
               lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.33193496
@@ -165,6 +167,7 @@ export class DestinationComponent implements OnInit {
     this.srchObj.DestType = option
     this.srchAprv.DestType = option
     this.srchRmv.DestType = option
+    this.srchAsgn.DestType = option
     this.model.DestType = option
     this.IMSSelected()
   }
