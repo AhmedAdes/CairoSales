@@ -99,7 +99,7 @@ export class DestinationComponent implements OnInit {
     this.model.DestType = this.srchObj.DestType;
     this.serv.getAllDestUsers().subscribe(usr => {
       this.UserList = usr;
-      let unique = this.UserList.map(function (obj) { return obj.LineName; });
+      let unique = this.UserList.map(function (obj) { return obj.LineName });
       this.lines = unique.filter((x, i, a) => a.indexOf(x) == i)
       this.DestUsers = this.UserList.filter(u => u.selected == true).map(ud => {
         return { DestID: this.model.DestID, UserID: ud.UserID, LineID: ud.LineName }
@@ -139,7 +139,7 @@ export class DestinationComponent implements OnInit {
         this.RegionList = reg;
         this.serv.getDestUsers(id).subscribe(usr => {
           this.UserList = usr[0];
-          let unique = this.UserList.map(function (obj) { return obj.LineName; });
+          let unique = this.UserList.map(function (obj) { return obj.LineName });
           this.lines = unique.filter((x, i, a) => a.indexOf(x) == i)
           this.DestUsers = this.UserList.filter(u => u.selected == true).map(ud => {
             return { DestID: this.model.DestID, UserID: ud.UserID, LineID: ud.LineName }
@@ -189,20 +189,23 @@ export class DestinationComponent implements OnInit {
       return
     }
     if (this.currentUser.jobClass === 3 && this.Formstate === 'CreateRequest') {
-      this.DestUsers.push({ DestID: this.model.DestID, UserID: this.currentUser.userID, LineID: this.currentUser.lineID })
+      this.DestUsers.push({
+        DestID: this.model.DestID, UserID: this.currentUser.userID,
+        LineID: this.UserList.find(ul => ul.SalesLineID === this.currentUser.lineID).LineName
+      })
     }
-    if (this.DestUsers.length <= 0) {
+    if (this.DestUsers.length <= 0 && this.Formstate !== 'Delete') {
       this.errorMessage = 'Please, Select a Medical Rep. for each Sales Line'
       return
     }
     let newDestination: Destination = this.model;
     newDestination.CreateUser = this.currentUser.userID;
-    newDestination.SpecName = this.MedSpecList.find(sp => sp.SpecID == this.model.MedSpecID).SpecName
-    newDestination.RegionName = this.RegionList.find(sp => sp.RegionID == this.model.RegionID).RegionName
+    newDestination.SpecName = this.MedSpecList.find(sp => sp.SpecID === this.model.MedSpecID).SpecName
+    newDestination.RegionName = this.RegionList.find(sp => sp.RegionID === this.model.RegionID).RegionName
     newDestination.RegionProvince = newDestination.RegionName + ' - ' + newDestination.ProvinceID
-    newDestination.IMS = this.allIMSList.find(sp => sp.IMSID == this.model.IMSID).IMS
-    newDestination.ImpName = this.VisImpList.find(sp => sp.ImpID == this.model.VisitImpID).ImpName
-    newDestination.VisitsNo = this.VisImpList.find(sp => sp.ImpID == this.model.VisitImpID).VisitsNo
+    newDestination.IMS = this.allIMSList.find(sp => sp.IMSID === this.model.IMSID).IMS
+    newDestination.ImpName = this.VisImpList.find(sp => sp.ImpID === this.model.VisitImpID).ImpName
+    newDestination.VisitsNo = this.VisImpList.find(sp => sp.ImpID === this.model.VisitImpID).VisitsNo
     newDestination.GPSLoclat = parseFloat((<number>this.mrkPos.lat).toPrecision(12))
     newDestination.GPSLoclng = parseFloat((<number>this.mrkPos.lng).toPrecision(12))
     let dest = this.lines.map(l => {

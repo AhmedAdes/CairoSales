@@ -358,7 +358,7 @@
           <h3 class="card-header">the Customer will be visited by:</h3>
           <div class="card-block">
             <div *ngFor="let line of lines">
-              <dest-lineusers [UserList]="UserList" [line]="line" (userSelected)="userSelected($event)" [disable]="!(Formstate =='Create' || Formstate =='Edit' || Formstate =='Complete Data')"></dest-lineusers>
+              <dest-lineusers [UserList]="UserList" [line]="line" (userSelected)="userSelected($event)" [disable]="!(Formstate =='Create' || Formstate =='Edit')"></dest-lineusers>
             </div>
           </div>
         </div>

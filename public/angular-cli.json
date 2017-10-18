@@ -17,9 +17,10 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "mobile": false,
+      "serviceWorker": "true",
       "styles": [
         "styles.less",
-        "bower_components/bootstrap/dist/css/bootstrap.css"
+        "bower_components/bootstrap/dist/css/bootstrap.min.css"
       ],
       "scripts": [
         "bower_components/jquery/dist/jquery.min.js",

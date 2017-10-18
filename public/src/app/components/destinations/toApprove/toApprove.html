@@ -10,6 +10,9 @@
   </colgroup>
   <thead>
     <tr>
+      <th *ngIf="currentUser.jobClass < 1"> Med. Rep. Name
+        <i (click)="SortTable('CreateUserName')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('CreateUserName') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
+      </th>
       <th> {{srchAprv.DestType}} Name
         <i (click)="SortTable('Destination')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Destination') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
       </th>
@@ -19,7 +22,7 @@
       <th> Region - Province
         <i (click)="SortTable('RegionProvince')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('RegionProvince') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
       </th>
-      <th> Address
+      <th *ngIf="currentUser.jobClass >= 1"> Address
         <i (click)="SortTable('Address')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('Address') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i>
       </th>
       <th> Med. Speciality
@@ -31,6 +34,14 @@
       <th></th>
     </tr>
     <tr>
+      <th *ngIf="currentUser.jobClass < 1">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" id="srchCreateUserName" name="CreateUserName" [(ngModel)]="srchAprv.CreateUserName">
+        </div>
+      </th>
       <th>
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">
@@ -55,7 +66,7 @@
           <input type="text" class="form-control" id="srchRegionProvince" name="RegionProvince" [(ngModel)]="srchAprv.RegionProvince">
         </div>
       </th>
-      <th>
+      <th *ngIf="currentUser.jobClass >= 1">
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">
             <i class="glyphicon glyphicon-search"></i>
@@ -84,10 +95,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of (toApproveList | filter:srchAprv | orderby:orderbyString) | paginate: { id: 'pageB', itemsPerPage: 25, currentPage: p }">
+      <td *ngIf="currentUser.jobClass < 1">{{item.CreateUserName}}</td>
       <td class="text-bold">{{item.Destination}}</td>
       <td>{{item.IMS}}</td>
       <td>{{item.RegionProvince}}</td>
-      <td>{{item.Address}}</td>
+      <td *ngIf="currentUser.jobClass >= 1">{{item.Address}}</td>
       <td>{{item.SpecName}}</td>
       <td>{{item.ImpName}}</td>
       <td>

@@ -39,4 +39,5 @@ export class Destination {
   AssignRequest: boolean;
   AssignUser: number;
   AssignUserName: string;
+  CreateUserName: string;
 }

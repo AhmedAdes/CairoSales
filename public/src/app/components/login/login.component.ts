@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
 @Component({
     selector: 'logout',
-    template: ""
+    template: ''
 })
 export class LogOutComponent implements OnInit {
     constructor(private router: Router,
