@@ -107,7 +107,7 @@ router.get('/AlldestUsers', function (req, res, next) {
 router.post('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var dest = req.body.dst;
-    console.log(dest)
+    // console.log(dest)
     var users = req.body.users;
     var conf = require('../SQLConfig');
     var connection = new sql.Connection(conf.config);
