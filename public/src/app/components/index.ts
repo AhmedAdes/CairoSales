@@ -22,6 +22,7 @@ export * from './contactUS/contact.component';
 export * from './plan/plan.component';
 export * from './weekPlan/weekPlan.component';
 export * from './chngpass/chngpass';
+export * from './messages/messages.component';
 
 export * from './login/login.component'
 

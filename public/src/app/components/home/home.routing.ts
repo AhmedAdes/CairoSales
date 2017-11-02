@@ -7,7 +7,7 @@ import { HomeComponent } from './home.component';
 import {
     UserComponent, DashboardComponent, RegionComponent,
     DestinationComponent, VisitComponent, PlanComponent, WeekPlanComponent,
-    ChngPassComponent, VacationComponent, ContactUsComponent
+    ChngPassComponent, VacationComponent, ContactUsComponent, MessageComponent
 } from '../';
 import * as bas from '../BasicData'
 import * as rpt from '../Reports'
@@ -32,7 +32,8 @@ export const homeRoutes: Route[] = [
             { path: 'idiReports', loadChildren : 'app/components/idiReports/idiReports.module#IDIReportsModule'},
 
             { path: 'plan', component: PlanComponent, canActivate: [AuthGuard] },
-            { path: 'wkplan', component: WeekPlanComponent, canActivate: [AuthGuard] }
+            { path: 'wkplan', component: WeekPlanComponent, canActivate: [AuthGuard] },
+            { path: 'msg', component: MessageComponent, canActivate: [AuthGuard] },
         ]
     }
 ];

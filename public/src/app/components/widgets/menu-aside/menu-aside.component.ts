@@ -111,6 +111,12 @@ export class MenuAsideComponent implements OnInit {
       'icon': 'dashboard',
       'link': ['/home/cntct']
     },
+    {
+      'title': 'Messages',
+      'icon': 'dashboard',
+      'link': ['/home/msg'],
+      'disabled': this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99 ? true : null
+    },
   ];
   photo: string
   constructor(private userServ: UserService, public router: Router, private auth: AuthenticationService) {

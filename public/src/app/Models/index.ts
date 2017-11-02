@@ -7,3 +7,4 @@ export * from './visits';
 export * from './plan';
 export * from './reports';
 export * from './idiReports';
+export * from './message';

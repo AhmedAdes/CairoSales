@@ -2,6 +2,7 @@ export class Region {
   RegionID: number;
   RegionName: string;
   ProvinceID: string;
+  Approved: boolean;
 }
 
 export class UserRegion {
@@ -39,5 +40,5 @@ export class WorkRate{
 
 export class IMSData {
   IMSID: number;
-  IMS: string; 
+  IMS: string;
 }

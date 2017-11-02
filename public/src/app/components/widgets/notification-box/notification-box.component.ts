@@ -15,7 +15,7 @@ export class NotificationBoxComponent implements OnInit {
     private notifLength: {} = {0: '10'};
 
     constructor() {
-        // TODO 
+        // TODO
     }
 
     public ngOnInit() {

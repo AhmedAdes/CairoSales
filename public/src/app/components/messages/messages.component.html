@@ -1,0 +1,104 @@
+<div class="panel panel-default zz">
+	<div class="panel-heading">
+
+		<h2> {{headerText}} </h2>
+		<button *ngIf="!Formstate && currentUser.jobClass < 1" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+		<br><br>
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<p>{{errorMessage}}</p>
+		</div>
+	</div>
+	<div class="panel-body table-responsive" *ngIf="showTable">
+		<table id="tblSpecs" class="table table-hover table-striped">
+			<colgroup>
+				<col width="20%" />
+				<col width="30%" />
+				<col width="30%" />
+				<col width="20%" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th> Title <i (click)="SortTable('title')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('title') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+          <th> Create Date <i (click)="SortTable('createDate')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('createDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th> Expire Date <i (click)="SortTable('expireDate')" class="btn btn-default" [ngClass]="(orderbyString.indexOf('expireDate') == 1) ? orderbyClass : 'glyphicon glyphicon-sort'"></i></th>
+					<th></th>
+				</tr>
+				<tr>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchtitle" name="title" [(ngModel)]="srchObj.title">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchcreateDate" name="createDate" [(ngModel)]="srchObj.createDate">
+						</div>
+					</th>
+					<th>
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-search"></i></span>
+							<input type="text" class="form-control" id="srchexpireDate" name="expireDate" [(ngModel)]="srchObj.expireDate">
+						</div>
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of (collection | filter:srchObj | orderby:orderbyString) | paginate: { itemsPerPage: 25, currentPage: p }">
+					<td>{{item.title}}</td>
+					<td>{{item.createDate | date : 'mediumDate'}}</td>
+					<td>{{item.expireDate | date : 'mediumDate'}}</td>
+					<td>
+						<button *ngIf="currentUser.jobClass < 1" (click)='EditThis(item.ID)' class="btn btn-info" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>
+						<button (click)="ShowDetails(item.ID)" class="btn btn-warning" title="Details"><i class="glyphicon glyphicon-eye-open"></i></button>
+						<button *ngIf="currentUser.jobClass < 1" (click)="Delete(item.ID)" class="btn btn-danger" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+        <pagination-controls (pageChange)="p = $event" maxSize="10"></pagination-controls>
+	</div>
+
+	<div class="panel-body" *ngIf="Formstate">
+		<form (submit)="HandleForm($event)" #f="ngForm" novalidate>
+			<div class="form-horizontal">
+
+				<h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this Message ?</h2>
+				<br>
+
+				<div class="form-group hidden">
+					<input class="form-control" type="text" name="ID" [(ngModel)]="model.ID">
+				</div>
+				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ttl.valid }">
+					<label for="title" class="control-label col-md-2 col-sm-2">Title</label>
+					<div class="col-md-10 col-sm-10">
+						<input class="form-control" type="text" name="title" [(ngModel)]="model.title" #ttl="ngModel" required>
+						<div *ngIf="f.submitted && !ttl.valid" class="help-block">Title is required</div>
+					</div>
+				</div>
+				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !cntnt.valid }">
+					<label for="content" class="control-label col-md-2 col-sm-2">Message</label>
+					<div class="col-md-10 col-sm-10">
+            <textarea class="form-control" rows="3" cols="10" name="content" [(ngModel)]="model.content" #cntnt="ngModel" required></textarea>
+						<div *ngIf="f.submitted && !cntnt.valid" class="help-block">Message is required</div>
+					</div>
+				</div>
+				<div class="form-group" [ngClass]="{ 'has-error': f.submitted && !expr.valid }">
+					<label for="expireDate" class="control-label col-md-2 col-sm-2">Expire Date</label>
+					<div class="col-md-10 col-sm-10">
+						<input class="form-control" type="date" name="expireDate" [(ngModel)]="expire" #expr="ngModel" required>
+						<div *ngIf="f.submitted && !expr.valid" class="help-block">Expire Date is required</div>
+					</div>
+				</div>
+				<div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
+					<button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'">Save</button> |
+					<button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
+					<button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

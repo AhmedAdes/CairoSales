@@ -8,79 +8,187 @@ import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { AlertModule, DatepickerModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
-import { CustomMaterialModule } from './components/material.module'
+import { CustomMaterialModule } from './components/material.module';
 import { NguiMapModule } from '@ngui/map';
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import {
-  HomeComponent, DashboardComponent, UserComponent, RegionComponent,
-  SidebarComponent, TopNavComponent, DestinationComponent, VisitModule,
-  UserScheduleComponent, UserWorkRateComponent, UserPlanComponent,
-  PlanComponent, HelperModule, LineUsersComponent, ChngPassComponent,
-  ScoreCardComponent, VacationComponent, ContactUsComponent,
-  WeekPlanComponent, TopUsersComponent, DestinationApproveComponent,
-  DestinationAssignComponent, DestinationRemoveComponent
+  HomeComponent,
+  DashboardComponent,
+  UserComponent,
+  RegionComponent,
+  SidebarComponent,
+  TopNavComponent,
+  DestinationComponent,
+  VisitModule,
+  UserScheduleComponent,
+  UserWorkRateComponent,
+  UserPlanComponent,
+  PlanComponent,
+  HelperModule,
+  LineUsersComponent,
+  ChngPassComponent,
+  ScoreCardComponent,
+  VacationComponent,
+  ContactUsComponent,
+  WeekPlanComponent,
+  TopUsersComponent,
+  DestinationApproveComponent,
+  DestinationAssignComponent,
+  DestinationRemoveComponent,
+  MessageComponent
 } from './components';
-import { LoginComponent, LogOutComponent } from './components/login/login.component';
 import {
-  AuthenticationService, AuthGuard, RegionService, UserService, UserRegionService,
-  DestinationService, DashboardService, PlanService, BreadcrumbService, MessagesService,
-  IMSService, ReportsService, VacationService, ContactUsService, WeekPlanService,
-  MedSpecService, DrugService, ImportanceService, LineService
+  LoginComponent,
+  LogOutComponent
+} from './components/login/login.component';
+import {
+  AuthenticationService,
+  AuthGuard,
+  RegionService,
+  UserService,
+  UserRegionService,
+  DestinationService,
+  DashboardService,
+  PlanService,
+  BreadcrumbService,
+  MessagesService,
+  MessageService,
+  IMSService,
+  ReportsService,
+  VacationService,
+  ContactUsService,
+  WeekPlanService,
+  MedSpecService,
+  DrugService,
+  ImportanceService,
+  LineService
 } from './services';
 import { CustomPipesModule } from './pipes/pipe.module';
 import { Approuting } from './app.routing';
 
 import {
-  BreadcrumbComponent, AppHeaderComponent, AppFooterComponent, MenuAsideComponent,
-  ControlSidebarComponent, MessagesBoxComponent, NotificationBoxComponent,
-  TasksBoxComponent, UserBoxComponent
+  BreadcrumbComponent,
+  AppHeaderComponent,
+  AppFooterComponent,
+  MenuAsideComponent,
+  ControlSidebarComponent,
+  MessagesBoxComponent,
+  NotificationBoxComponent,
+  TasksBoxComponent,
+  UserBoxComponent
 } from './components/widgets';
 
 let widgets = [
-  BreadcrumbComponent, AppHeaderComponent, AppFooterComponent, MenuAsideComponent,
-  ControlSidebarComponent, MessagesBoxComponent, NotificationBoxComponent,
-  TasksBoxComponent, UserBoxComponent
+  BreadcrumbComponent,
+  AppHeaderComponent,
+  AppFooterComponent,
+  MenuAsideComponent,
+  ControlSidebarComponent,
+  MessagesBoxComponent,
+  NotificationBoxComponent,
+  TasksBoxComponent,
+  UserBoxComponent
 ];
+let services = [
+  AuthenticationService,
+  AuthGuard,
+  RegionService,
+  UserService,
+  UserRegionService,
+  DestinationService,
+  DashboardService,
+  PlanService,
+  BreadcrumbService,
+  MessagesService,
+  MessageService,
+  IMSService,
+  ReportsService,
+  VacationService,
+  ContactUsService,
+  WeekPlanService,
+  MedSpecService,
+  DrugService,
+  ImportanceService,
+  LineService
+];
+let allcomponents = [
+  HomeComponent,
+  DashboardComponent,
+  UserComponent,
+  RegionComponent,
+  SidebarComponent,
+  TopNavComponent,
+  DestinationComponent,
+  UserScheduleComponent,
+  UserWorkRateComponent,
+  UserPlanComponent,
+  PlanComponent,
+  LineUsersComponent,
+  ChngPassComponent,
+  ScoreCardComponent,
+  VacationComponent,
+  ContactUsComponent,
+  WeekPlanComponent,
+  TopUsersComponent,
+  DestinationApproveComponent,
+  DestinationAssignComponent,
+  DestinationRemoveComponent,
+  MessageComponent
+];
+export const firebaseConfig = {
+  apiKey: 'AIzaSyBKLexkyWvx0ipl3kGZ4gNRHAp9ddwfkUo',
+  authDomain: 'cairosales-aa702.firebaseapp.com',
+  databaseURL: 'https://cairosales-aa702.firebaseio.com',
+  projectId: 'cairosales-aa702',
+  storageBucket: 'cairosales-aa702.appspot.com',
+  messagingSenderId: '908456895386'
+};
+const toastrConfig = {
+  timeOut: 10000,
+  newestOnTop: true,
+  closeButton: true,
+  tapToDismiss: false
+};
 
 @NgModule({
   imports: [
-    BrowserModule, FormsModule,
-    ReactiveFormsModule, HttpModule,
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      newestOnTop: true,
-      closeButton: true,
-      tapToDismiss: false
-    }), ToastContainerModule.forRoot(),
-    RouterModule, Approuting, CustomPipesModule, NgxPaginationModule,
-    AlertModule.forRoot(), DatepickerModule.forRoot(),
-    VisitModule, HelperModule, ChartsModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    ToastrModule.forRoot(toastrConfig),
+    ToastContainerModule.forRoot(),
+    RouterModule,
+    Approuting,
+    CustomPipesModule,
+    NgxPaginationModule,
+    AlertModule.forRoot(),
+    DatepickerModule.forRoot(),
+    VisitModule,
+    HelperModule,
+    ChartsModule,
     FileUploadModule,
     NguiMapModule.forRoot({
-      apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCbMGRUwcqKjlYX4h4-P6t-xcDryRYLmCM' +
-      '&libraries=visualization,places,drawing',
-    })/**/
+      apiUrl:
+        'https://maps.google.com/maps/api/js?key=AIzaSyCbMGRUwcqKjlYX4h4-P6t-xcDryRYLmCM' +
+        '&libraries=visualization,places,drawing'
+    }),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule /**/
   ],
   declarations: [
-    AppComponent, ...widgets, LoginComponent, LogOutComponent, HomeComponent,
-    UserComponent, RegionComponent, DashboardComponent,
-    SidebarComponent, TopNavComponent, DestinationComponent,
-    UserScheduleComponent, UserWorkRateComponent, UserPlanComponent, ScoreCardComponent,
-    PlanComponent, LineUsersComponent, ChngPassComponent,
-    VacationComponent, ContactUsComponent, WeekPlanComponent, TopUsersComponent,
-    DestinationApproveComponent, DestinationAssignComponent, DestinationRemoveComponent
+    AppComponent,
+    ...widgets,
+    LoginComponent,
+    LogOutComponent,
+    ...allcomponents
   ],
-  providers: [
-    AuthGuard, AuthenticationService,
-    UserService, RegionService, UserRegionService,
-    DestinationService, DashboardService, PlanService,
-    BreadcrumbService, MessagesService, IMSService,
-    ReportsService, VacationService, ContactUsService, LineService,
-    WeekPlanService, MedSpecService, DrugService, ImportanceService
-  ],
+  providers: [...services],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
-
+export class AppModule {}
