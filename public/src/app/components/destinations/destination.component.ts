@@ -497,7 +497,7 @@ export class DestinationComponent implements OnInit {
       );
       this.toRemoveList = this.collection.filter(d => d.RemoveRequest === true);
       if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
-        this.toRemoveList = this.collection.filter(
+        this.toAssignList = this.collection.filter(
           d => d.AssignRequest === true
         );
       }

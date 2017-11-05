@@ -1,6 +1,6 @@
-CREATE DATABASE CairoSales COLLATE Arabic_CI_AI
+CREATE DATABASE CairoSales_test COLLATE Arabic_CI_AI
 GO
-USE CairoSales
+USE CairoSales_test
 GO
 
 CREATE TABLE Users
@@ -1206,4 +1206,32 @@ SELECT DayDate, ISNULL(qry.visCount, 0) visCount
 from DayRecursive d
 LEFT JOIN (SELECT VisitDate, CONVERT(NVARCHAR(12), VisitDate, 103) cnvVisitDate, COUNT(VisitID) visCount 
 FROM dbo.Visits v JOIN dbo.Users u ON v.UserID = u.UserID WHERE SalesLineID = @LineID GROUP BY VisitDate) qry ON d.DayDate = qry.VisitDate;
+GO
+
+
+CREATE TABLE UserMessages 
+(
+	ID INT NOT NULL IDENTITY(1,1),
+	content  NVARCHAR(MAX),
+	title NVARCHAR(200),
+	authorID INT,
+	createDate DATE,
+	expireDate DATE,
+	CONSTRAINT PK_Messages PRIMARY KEY CLUSTERED (ID)
+)
+GO
+CREATE PROC MessageInsert 
+(@content NVARCHAR(max), @title NVARCHAR(200), @authorID INT, @createDate DATE, @expireDate DATE) AS
+INSERT dbo.UserMessages
+        ( content ,title ,authorID ,createDate ,expireDate )
+VALUES  ( @content ,@title ,@authorID ,@createDate ,@expireDate )
+SELECT IDENT_CURRENT('dbo.UserMessages') AS ID
+GO
+CREATE PROC MessageUpdate
+(@ID INT, @content NVARCHAR(max), @title NVARCHAR(200), @authorID INT, @createDate DATE, @expireDate DATE) AS
+UPDATE dbo.UserMessages SET content=@content, title=@title, authorID=@authorID, createDate=@createDate, expireDate=@expireDate
+WHERE ID = @ID
+GO
+CREATE PROC MessageDelete (@ID INT) AS 
+DELETE dbo.UserMessages WHERE ID=@ID
 GO
