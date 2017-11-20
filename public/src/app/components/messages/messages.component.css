@@ -1,0 +1,7 @@
+.modal-backdrop{
+  z-index: 1020!important;
+}
+
+.modal-backdrop.fade.in {
+  z-index: 1020!important;
+}

@@ -1,11 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService, AuthenticationService } from '../../services';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import {
+  MessageService,
+  UserService,
+  AuthenticationService
+} from '../../services';
 import { Message, CurrentUser } from '../../Models';
-import * as hf from '../helpers/helper.functions'
+import * as hf from '../helpers/helper.functions';
+import { Console } from '@angular/core/src/console';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+interface MsgUsers {
+  UserID: number;
+  UserName: string;
+  Checked: boolean;
+}
 
 @Component({
   selector: 'app-mssg',
-  templateUrl: './messages.component.html'
+  templateUrl: './messages.component.html',
+  styleUrls: ['./messages.component.css']
 })
 export class MessageComponent implements OnInit {
   currentUser: CurrentUser = this.auth.getUser();
@@ -18,18 +31,40 @@ export class MessageComponent implements OnInit {
   errorMessage: string;
   orderbyString = '';
   orderbyClass = 'glyphicon glyphicon-sort';
-  expire: string
+  expire: string;
+  userList: MsgUsers[] = [];
+  public modalRef: BsModalRef;
+  @ViewChild('content') msgTemp: TemplateRef<any>;
 
-  constructor( public serv: MessageService, private auth: AuthenticationService ) {}
+  constructor(
+    public serv: MessageService,
+    private srvUsr: UserService,
+    private auth: AuthenticationService,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit() {
-    this.serv.getMessage().subscribe(cols => (this.collection = cols));
+    if (this.currentUser.jobClass === 3) {
+      this.serv.getUserMessages(this.currentUser.userID).subscribe(cols => {
+        this.collection = cols;
+      });
+    } else {
+      this.serv.getAuthorMessages(this.currentUser.userID).subscribe(cols => {
+        this.collection = cols;
+      });
+    }
     this.TableBack();
   }
 
   CreateNew() {
     this.model = new Message();
-    this.expire = hf.handleDate(new Date())
+    this.expire = hf.handleDate(new Date());
+    this.srvUsr.getUserChain(this.currentUser.userID).subscribe(
+      usr =>
+        (this.userList = usr.map(u => {
+          return { UserID: u.UserID, UserName: u.UserName, Checked: false };
+        }))
+    );
     this.showTable = false;
     this.Formstate = 'Create';
     this.headerText = 'Create New Message';
@@ -43,31 +78,52 @@ export class MessageComponent implements OnInit {
   Delete(id: number) {
     this.loadDetails(id, 'Delete');
   }
+  PopUpThis(id: number) {
+    this.loadDetails(id, 'Popup');
+  }
   loadDetails(id, state: string) {
     this.serv.getMessage(id).subscribe(ret => {
-      this.model = ret[0];
-      this.showTable = false;
-      this.Formstate = state;
-      this.headerText =
-        state === 'Details' ? 'Message ' + state : state + ' Message';
+      this.serv.getMessageUsers(id).subscribe(ret1 => {
+        this.userList = ret1;
+        this.model = ret[0];
+        this.expire = hf.handleDate(new Date(this.model.expireDate));
+        if (state === 'Popup') {
+          this.modalRef = this.modalService.show(this.msgTemp);
+        } else {
+          this.showTable = false;
+          this.Formstate = state;
+          this.headerText =
+            state === 'Details' ? 'Message ' + state : state + ' Message';
+        }
+      });
     }, err => (this.errorMessage = err.message));
   }
   TableBack() {
     this.showTable = true;
     this.Formstate = null;
+    this.model = new Message();
     this.headerText = 'Global Messages';
     this.errorMessage = null;
   }
-  HandleForm(event) {
-    event.preventDefault();
+  HandleForm(formValid) {
+    if (!formValid) {
+      return;
+    }
     const newObj: Message = this.model;
-    newObj.authorID = this.currentUser.userID
-    newObj.authorName = this.currentUser.UserName
-    newObj.createDate = new Date()
-    newObj.expireDate = new Date(this.expire)
+    newObj.authorID = this.currentUser.userID;
+    newObj.authorName = this.currentUser.UserName;
+    newObj.createDate = new Date();
+    newObj.expireDate = new Date(this.expire);
+
+    const selUsers = this.userList.filter(c => c.Checked === true);
+    if (selUsers.length <= 0 && this.Formstate !== 'Delete') {
+      this.errorMessage = 'Please Select Any of the Users';
+      return;
+    }
+
     switch (this.Formstate) {
       case 'Create':
-        this.serv.InsertMessage(newObj).subscribe(ret => {
+        this.serv.InsertMessage(newObj, selUsers).subscribe(ret => {
           if (ret.error) {
             this.errorMessage = ret.error.message;
           } else if (ret.affected > 0) {
@@ -76,7 +132,7 @@ export class MessageComponent implements OnInit {
         });
         break;
       case 'Edit':
-        this.serv.UpdateMessage(newObj.ID, newObj).subscribe(ret => {
+        this.serv.UpdateMessage(newObj.ID, newObj, selUsers).subscribe(ret => {
           if (ret.error) {
             this.errorMessage = ret.error.message;
           } else if (ret.affected > 0) {
@@ -108,5 +164,13 @@ export class MessageComponent implements OnInit {
       this.orderbyClass = 'glyphicon glyphicon-sort';
       this.orderbyString = '';
     }
+  }
+  ToggleAllUsers(value) {
+    this.userList.forEach(drg => (drg.Checked = value));
+  }
+  msgDismiss() {
+    this.serv.GotItMessage(this.model.ID, this.currentUser.userID).subscribe(ret => {
+      this.modalRef.hide();
+    })
   }
 }

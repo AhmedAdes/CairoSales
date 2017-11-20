@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
-import { AlertModule, DatepickerModule } from 'ngx-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { CustomMaterialModule } from './components/material.module';
@@ -13,6 +12,7 @@ import { NguiMapModule } from '@ngui/map';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { ModalModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import {
@@ -166,8 +166,7 @@ const toastrConfig = {
     Approuting,
     CustomPipesModule,
     NgxPaginationModule,
-    AlertModule.forRoot(),
-    DatepickerModule.forRoot(),
+    ModalModule.forRoot(),
     VisitModule,
     HelperModule,
     ChartsModule,

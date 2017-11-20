@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SurveyQuestionService, AuthenticationService } from '../../../services';
+import {
+  SurveyQuestionService,
+  AuthenticationService
+} from '../../../services';
 import { SurveyQuestion, SurveyAnswer, CurrentUser } from '../../../Models';
 
 @Component({
@@ -17,16 +20,30 @@ export class SurveyQuestionsComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  orderbyString: string = "";
-  orderbyClass: string = "glyphicon glyphicon-sort";
-  ansChanged: number
-  oldAnswerEdit: string = ""
+  orderbyString: string = '';
+  orderbyClass: string = 'glyphicon glyphicon-sort';
+  ansChanged: number;
+  oldAnswerEdit: string = '';
 
-  constructor(private srvQ: SurveyQuestionService, private auth: AuthenticationService) { }
+  constructor(
+    private srvQ: SurveyQuestionService,
+    private auth: AuthenticationService
+  ) {}
 
   ngOnInit() {
-    this.srvQ.getQuestion().subscribe(cols => { if (cols.error) { this.errorMessage = cols.error.message } else { this.collection = cols } },
-      err => { console.log(err); this.errorMessage = err.error.message; });
+    this.srvQ.getQuestion().subscribe(
+      cols => {
+        if (cols.error) {
+          this.errorMessage = cols.error.message;
+        } else {
+          this.collection = cols;
+        }
+      },
+      err => {
+        console.log(err);
+        this.errorMessage = err.error.message;
+      }
+    );
     this.TableBack();
   }
   CreateNew() {
@@ -51,12 +68,15 @@ export class SurveyQuestionsComponent implements OnInit {
     this.srvQ.getQuestion(id).subscribe(ret => {
       this.model = ret[0];
       this.srvQ.getAnswer(id).subscribe(ans => {
-        this.Answers = ans
+        this.Answers = ans;
         this.showTable = false;
         this.Formstate = state;
-        this.headerText = state == 'Details' ? 'Survey Question ' + state : state + ' Survey Question';
-      })
-    }, err => this.errorMessage = err.message)
+        this.headerText =
+          state === 'Details'
+            ? 'Survey Question ' + state
+            : state + ' Survey Question';
+      });
+    }, err => (this.errorMessage = err.message));
   }
   TableBack() {
     this.showTable = true;
@@ -66,7 +86,7 @@ export class SurveyQuestionsComponent implements OnInit {
   }
   HandleForm(event) {
     event.preventDefault();
-    var newQst: SurveyQuestion = this.model;
+    const newQst: SurveyQuestion = this.model;
     switch (this.Formstate) {
       case 'Create':
         this.srvQ.InsertQuestion(newQst, this.Answers).subscribe(ret => {
@@ -78,13 +98,15 @@ export class SurveyQuestionsComponent implements OnInit {
         });
         break;
       case 'Edit':
-        this.srvQ.UpdateQuestion(newQst.QID, newQst, this.Answers).subscribe(ret => {
-          if (ret.error) {
-            this.errorMessage = ret.error.message;
-          } else if (ret.affected > 0) {
-            this.ngOnInit();
-          }
-        });
+        this.srvQ
+          .UpdateQuestion(newQst.QID, newQst, this.Answers)
+          .subscribe(ret => {
+            if (ret.error) {
+              this.errorMessage = ret.error.message;
+            } else if (ret.affected > 0) {
+              this.ngOnInit();
+            }
+          });
         break;
       case 'Delete':
         this.srvQ.DeleteQuestion(newQst.QID).subscribe(ret => {
@@ -100,11 +122,11 @@ export class SurveyQuestionsComponent implements OnInit {
     }
   }
   SortTable(column: string) {
-    if (this.orderbyString.indexOf(column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
+    if (this.orderbyString.indexOf(column) === -1) {
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
       this.orderbyString = '+' + column;
-    } else if (this.orderbyString.indexOf('-' + column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
+    } else if (this.orderbyString.indexOf('-' + column) === -1) {
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
       this.orderbyString = '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
@@ -118,8 +140,8 @@ export class SurveyQuestionsComponent implements OnInit {
     this.Answers.splice(index, 1);
     this.ansChanged = this.Answers.length;
   }
-  EditAnswer(index){
-    this.answerModel = new SurveyAnswer()
+  EditAnswer(index) {
+    this.answerModel = new SurveyAnswer();
     this.answerModel.AnswerID = this.Answers[index].AnswerID;
     this.answerModel.AnswerText = this.Answers[index].AnswerText;
     this.oldAnswerEdit = this.Answers[index].AnswerText;

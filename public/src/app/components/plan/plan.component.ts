@@ -26,8 +26,8 @@ export class PlanComponent implements OnInit {
     plnSpecs: PlanSpecs[] = []
     plnDrugs: PlanDrugs[] = []
     plnImps: PlanImps[] = []
-    orderbyString: string = ""
-    orderbyClass: string = "glyphicon glyphicon-sort"
+    orderbyString: string = ''
+    orderbyClass: string = 'glyphicon glyphicon-sort'
     yesterday: string
     thisday: string
 
@@ -116,14 +116,14 @@ export class PlanComponent implements OnInit {
         var selSpec = this.plnSpecs.filter(c => c.Checked == true)
         var selImp = this.plnImps.filter(c => c.Checked == true)
 
-        if (selDrugs.length <= 0 && this.Formstate != "Delete") {
-            this.errorMessage = "Please Select Any of the Products"; return;
+        if (selDrugs.length <= 0 && this.Formstate != 'Delete') {
+            this.errorMessage = 'Please Select Any of the Products'; return;
         }
-        if (selSpec.length <= 0 && this.Formstate != "Delete") {
-            this.errorMessage = "Please Select Any of the Specifications"; return;
+        if (selSpec.length <= 0 && this.Formstate != 'Delete') {
+            this.errorMessage = 'Please Select Any of the Specifications'; return;
         }
-        if (selImp.length <= 0 && this.Formstate != "Delete") {
-            this.errorMessage = "Please Select Any of the Cycles"; return;
+        if (selImp.length <= 0 && this.Formstate != 'Delete') {
+            this.errorMessage = 'Please Select Any of the Cycles'; return;
         }
         switch (this.Formstate) {
             case 'Create':
@@ -160,10 +160,10 @@ export class PlanComponent implements OnInit {
 
     SortTable(column: string) {
         if (this.orderbyString.indexOf(column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
             this.orderbyString = '+' + column;
         } else if (this.orderbyString.indexOf('-' + column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
             this.orderbyString = '-' + column;
         } else {
             this.orderbyClass = 'glyphicon glyphicon-sort';
@@ -205,12 +205,12 @@ export class PlanComponent implements OnInit {
         // this.plnDrugs.forEach(drg => { if (drg.SalesLineID == value) { drg.Checked = true } else { drg.Checked = false } })
     }
     constructPlanName() {
-        this.model.PlanName = ""
+        this.model.PlanName = ''
         if (this.model.SalesLineID) {
             this.model.PlanName = this.lines.filter(ln => ln.SalesLineID == this.model.SalesLineID)[0].LineName
         }
         if (this.cnvFromDate) {
-            this.model.PlanName += ", "
+            this.model.PlanName += ', '
             this.model.PlanName += this.cnvFromDate
         }
     }

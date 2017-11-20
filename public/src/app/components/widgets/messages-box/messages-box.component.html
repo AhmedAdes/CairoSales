@@ -1,30 +1,57 @@
 <!-- Menu toggle button -->
-<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"> <i
-	class="fa fa-envelope-o"></i> <span class="label label-success"
-	[innerHTML]="(messages | async)?.length"></span>
+<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+  <i class="fa fa-envelope-o"></i>
+  <span class="label label-success" [innerHTML]="(messages | async)?.length"></span>
 </a>
 <ul class="dropdown-menu">
-	<li class="header">{{(messages | async)?.length}} Messages Waiting</li>
-	<li>
-		<!-- inner menu: contains the messages -->
-		<ul class="menu">
-			<li *ngFor="let msg of messages | async; let i = index">
-				<!-- start message --> <a href="javascript:void(0)">
-					<div class="pull-left">
-						<!-- User Image -->
-						<!-- <img src="{{msg.author.avatarUrl}}" class="img-circle"
+  <li class="header">{{(messages | async)?.length}} Messages Waiting</li>
+  <li>
+    <!-- inner menu: contains the messages -->
+    <ul class="menu">
+      <li *ngFor="let msg of messages | async; let i = index">
+        <!-- start message -->
+        <a href="javascript:void(0)" (click)="POPUP(msg.ID)">
+          <div class="pull-left">
+            <!-- User Image -->
+            <!-- <img src="{{msg.author.avatarUrl}}" class="img-circle"
               alt="{{ msg.author.getName() }}"> -->
-              <h4>{{msg.authorName}}</h4>
-					</div> <!-- Message title and timestamp -->
-					<h4>
-						{{msg.title}} <small><i class="fa fa-clock-o"></i>
-							{{msg.createDate | date:'mediumDate'}}</small>
-					</h4> <!-- The message -->
-					<p>{{msg.content}}</p>
-			</a>
-			</li>
-			<!-- end message -->
-		</ul> <!-- /.menu -->
-	</li>
-	<!-- <li class="footer"><a href="javascript:void(0)">{{ 'MSGBOX.FOOTER' }}</a></li> -->
+            <h4>{{msg.authorName}}</h4>
+          </div>
+          <!-- Message title and timestamp -->
+          <h4>
+            {{msg.title}}
+            <small>
+              <i class="fa fa-clock-o"></i>
+              {{msg.createDate | date:'mediumDate'}}</small>
+          </h4>
+          <!-- The message -->
+          <p>{{msg.content}}</p>
+        </a>
+      </li>
+    </ul>
+    <!-- /.menu -->
+  </li>
+  <!-- end message -->
+  <li class="footer">
+    <a routerLink="/home/msg" href="javascript:void(0)">VIEW ALL MESSAGES</a>
+  </li>
+  <!-- <li class="footer"><a href="javascript:void(0)">{{ 'MSGBOX.FOOTER' }}</a></li> -->
 </ul>
+
+
+<ng-template #content>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Message from: {{model.authorName}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{model.content}}</p>
+    <small class="text-muted pull-right">Sent at {{model.createDate | date:'mediumDate'}}</small>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="msgDismiss()">Got it</button>
+    <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Close</button>
+  </div>
+</ng-template>

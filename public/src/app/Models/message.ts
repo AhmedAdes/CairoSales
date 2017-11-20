@@ -9,6 +9,7 @@ export class Message {
   // public destination: User;
   createDate: Date;
   expireDate: Date;
+  users: any[];
 
   // public constructor(data: any = {}) {
   //   this.content = data.content || '';

@@ -22,6 +22,14 @@ router.get('/:id', function (req, res, next) {
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
 
+router.get('/answers/:qID(\\d+)', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("QID", req.params.qID);
+    request.query(`SELECT AnswerID, AnswerText, a.QID, Keyword, QText FROM dbo.SurveyAnswers a JOIN dbo.SurveyQuestions q ON a.QID=q.QID Where a.QID=@QID`)
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
 router.get('/answers/:all', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);

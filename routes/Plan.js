@@ -86,9 +86,6 @@ router.post('/', function (req, res, next) {
                     .then(function (recordset, returnValue, affected) {
                         planID = recordset[0][0].PlanID;
                         console.log('PlanID: ' + planID);
-                        console.log(specs);
-                        console.log(drugs);
-                        console.log(imps);
 
                         promises.push(Promise.map(specs, function (spec) {
                             var request = trans.request();
