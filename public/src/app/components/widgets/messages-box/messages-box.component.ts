@@ -21,7 +21,7 @@ export class MessagesBoxComponent implements OnInit {
   listmsg: any[];
   mesCount: Observable<number>;
   currentUser: CurrentUser = this.auth.getUser();
-  model: Message = new Message()
+  model: Message = new Message();
   public modalRef: BsModalRef;
   @ViewChild('content') msgTemp: TemplateRef<any>;
 
@@ -38,28 +38,35 @@ export class MessagesBoxComponent implements OnInit {
       .valueChanges()
       .map(msgs =>
         msgs.filter((msg: Message) => {
-          if (
-            msg.users.findIndex(
-              elm =>
-                JSON.stringify(elm) ===
-                JSON.stringify({ [this.currentUser.userID]: true })
-            ) === -1
-          ) {
-            return false;
+          if (msg.users) {
+            if (
+              msg.users.findIndex(
+                elm =>
+                  JSON.stringify(elm) ===
+                  JSON.stringify({ [this.currentUser.userID]: true })
+              ) === -1
+            ) {
+              return false;
+            }
+            return true;
           }
-          return true;
+          return false;
         })
       );
   }
 
   public ngOnInit() {}
   public POPUP(id: number) {
-    this.messages.subscribe( msgs => this.model = msgs.find(msg => msg.ID === id))
+    this.messages.subscribe(
+      msgs => (this.model = msgs.find(msg => msg.ID === id))
+    );
     this.modalRef = this.modalService.show(this.msgTemp);
   }
   msgDismiss() {
-    this.serv.GotItMessage(this.model.ID, this.currentUser.userID).subscribe(ret => {
-      this.modalRef.hide();
-    })
+    this.serv
+      .GotItMessage(this.model.ID, this.currentUser.userID)
+      .subscribe(ret => {
+        this.modalRef.hide();
+      });
   }
 }
