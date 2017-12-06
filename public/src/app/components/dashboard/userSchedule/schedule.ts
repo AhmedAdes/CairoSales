@@ -45,7 +45,8 @@ export class UserScheduleComponent implements OnInit, OnChanges {
   }
   viewBulk() {
     this.ngOnInit()
-    this.srvSchd.getUserScheduleDate(this.dispUser.userID, this.strdate).subscribe(scd => this.userSched = scd[0]);
+    this.srvSchd.getUserScheduleDate(this.dispUser.userID, this.strdate).subscribe(scd => this.userSched = scd[0],
+      err => hf.handleError(err));
   }
   changeArrowClass() {
     this.appliedClass = !this.appliedClass

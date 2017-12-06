@@ -10,22 +10,23 @@ import * as hf from '../helper.functions'
     `]
 })
 export class PlanSliderComponent implements OnInit {
-    constructor(private srvPlan: PlanService) { }
     @Input() currentUser: CurrentUser;
     @Output() planChanged = new EventEmitter()
     userPlan: MonthPlan[] = [];
-    selectedPlan: number = 0
+    selectedPlan = 0
     FromDate: string
     ToDate: string
+
+    constructor(private srvPlan: PlanService) { }
 
     ngOnInit() {
         this.srvPlan.getUserPlan(this.currentUser.userID).subscribe(pln => {
             this.userPlan = pln;
-            if (!this.userPlan) return;
-            this.selectedPlan = this.userPlan.findIndex(p => new Date() >= new Date(p.FromDate) && 
+            if (!this.userPlan) return
+            this.selectedPlan = this.userPlan.findIndex(p => new Date() >= new Date(p.FromDate) &&
                                                             new Date() < new Date(new Date(p.ToDate).setDate(new Date(p.ToDate).getDate()+1)))
             this.changeView()
-        });
+        }, err => hf.handleError(err));
     }
     previousPlan() {
         this.selectedPlan--;

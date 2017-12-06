@@ -5,7 +5,7 @@ import { Gifts, PromoTools, VisitGifts, VisitDrugs } from '../../../Models';
 import { emailValidator } from '../../../Pipes/validators';
 
 @Component({
-    selector: 'visit-gifts',
+    selector: 'app-visit-gifts',
     templateUrl: './visitgifts.html'
 })
 export class VisitGiftsComponent implements OnInit, OnChanges {
@@ -40,9 +40,9 @@ export class VisitGiftsComponent implements OnInit, OnChanges {
 
     AddGift(event) {
         event.preventDefault();
-        if (this.visGifts.findIndex(x => x.ToolID == this.giftmodel.ToolID) == -1) {
-            this.giftmodel.GiftName = this.gifts.filter(obj => obj.GiftID == this.giftmodel.GiftID)[0].GiftName;
-            this.giftmodel.ToolName = this.promoTools.filter(obj => obj.ToolID == this.giftmodel.ToolID)[0].ToolName;
+        if (this.visGifts.findIndex(x => x.ToolID == this.giftmodel.ToolID) === -1) {
+            this.giftmodel.GiftName = this.gifts.filter(obj => obj.GiftID === this.giftmodel.GiftID)[0].GiftName;
+            this.giftmodel.ToolName = this.promoTools.filter(obj => obj.ToolID === this.giftmodel.ToolID)[0].ToolName;
             this.visGifts.push(this.giftmodel);
             this.giftmodel = new VisitGifts();
             this.gftform.reset();
@@ -51,19 +51,19 @@ export class VisitGiftsComponent implements OnInit, OnChanges {
 
     ongiftChange(obj) {
         if (obj.target.value) {
-            var giftId = obj.target.value.split(':')[1].trim();
+            const giftId = obj.target.value.split(':')[1].trim();
             this.dispTools = this.promoTools.filter(p => p.GiftID == giftId)
             if (this.visDrugs.length > 0) {
-                this.dispTools = this.dispTools.filter(d => this.visDrugs.findIndex(g => g.DrugID == d.DrugID) >= 0)
+                this.dispTools = this.dispTools.filter(d => this.visDrugs.findIndex(g => g.DrugID === d.DrugID) >= 0)
             }
         }
     }
 
     ngOnChanges(changes: any) {
         if (this.drgsChanged) {
-            this.dispTools = this.promoTools.filter(p => p.GiftID == this.giftmodel.GiftID)
+            this.dispTools = this.promoTools.filter(p => p.GiftID === this.giftmodel.GiftID)
             if (this.visDrugs.length > 0) {
-                this.dispTools = this.dispTools.filter(d => this.visDrugs.findIndex(g => g.DrugID == d.DrugID) >= 0)
+                this.dispTools = this.dispTools.filter(d => this.visDrugs.findIndex(g => g.DrugID === d.DrugID) >= 0)
             }
         }
     }

@@ -10,6 +10,7 @@
       <p>{{errorMessage}}</p>
     </div>
   </div>
+    <sk-folding-cube [isRunning]="spinner"></sk-folding-cube>
   <div class="panel-body table-responsive" *ngIf="showTable">
     <ul class="nav nav-tabs nav-justified">
       <!--<li id="tab1" role="presentation" class="tabs active"><a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Hospital')">Hospital</a></li> -->
@@ -432,7 +433,8 @@
         </div>
         <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
           <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit' || Formstate =='Complete Data'">Save</button>
-          <span *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit' || Formstate =='Complete Data'"> | </span>
+          <span *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit' || Formstate =='Complete Data'">
+          | </span>
           <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button>
           <span *ngIf="Formstate == 'Delete'"> | </span>
           <button type="submit" value="Remove" class="btn btn-info" *ngIf="Formstate == 'RemoveRequest'">Request to Remove</button>

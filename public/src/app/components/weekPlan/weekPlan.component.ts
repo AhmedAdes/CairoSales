@@ -11,16 +11,7 @@ import * as hf from '../helpers/helper.functions'
 })
 
 export class WeekPlanComponent implements OnInit {
-    constructor(private auth: AuthenticationService, private srvDst: DestinationService,
-        private srvUsr: UserService, private srvPln: WeekPlanService, fb: FormBuilder) {
-        this.inFrm = fb.group({
-            'weekNo': [null],
-            'monthNo': [null],
-            'strtDate': [this.cnvStartDate, Validators.required]
-        })
-        this.inFrm.controls['strtDate'].valueChanges.subscribe(val => this.onDateChanged(val))
-    }
-    currentUser: CurrentUser = this.auth.getUser();
+  currentUser: CurrentUser = this.auth.getUser();
     showTable: boolean;
     Formstate: string;
     headerText: string;
@@ -33,35 +24,46 @@ export class WeekPlanComponent implements OnInit {
     users: any[] = [];
     destinations: Destination[] = [];
     thisday: string;
-    orderbyString: string = "";
-    orderbyClass: string = "glyphicon glyphicon-sort";
+    orderbyString = '';
+    orderbyClass = 'glyphicon glyphicon-sort';
     inFrm: FormGroup;
     cnvStartDate: string;
     lastDate: string
     plnDest: WeekPlanDest[] = []
     selDest: WeekPlanDest[] = []
-    loadingDetails: boolean = false
+    loadingDetails = false
+
+    constructor(private auth: AuthenticationService, private srvDst: DestinationService,
+        private srvUsr: UserService, private srvPln: WeekPlanService, fb: FormBuilder) {
+        this.inFrm = fb.group({
+            'weekNo': [null],
+            'monthNo': [null],
+            'strtDate': [this.cnvStartDate, Validators.required]
+        })
+        this.inFrm.controls['strtDate'].valueChanges.subscribe(val => this.onDateChanged(val))
+    }
 
     ngOnInit() {
         this.srvUsr.getuser().subscribe(cols => {
             this.Allusers = cols;
-            var unique = this.Allusers.map(function (obj) { return { UserID: obj.UserID, UserName: obj.UserName, LineName: obj.LineName } });
-            this.users = unique.filter((x, i, a) => a.findIndex(U => U.UserID == x.UserID) == i)
-            if (this.currentUser.jobClass == 3) {
+            const unique = this.Allusers.map(function (obj) { return {
+              UserID: obj.UserID, UserName: obj.UserName, LineName: obj.LineName
+            } });
+            this.users = unique.filter((x, i, a) => a.findIndex(U => U.UserID === x.UserID) === i)
+            if (this.currentUser.jobClass === 3) {
                 this.selUser = this.users.filter(u => u.UserID === this.currentUser.userID)[0]
-                this.srvPln.getUserPlan(this.selUser.UserID).subscribe(cols => {
-                    this.collection = cols
+                this.srvPln.getUserPlan(this.selUser.UserID).subscribe( pln => {
+                    this.collection = pln
                     this.TableBack()
                 })
-            }
-            else {
+            } else {
                 this.TableBack();
             }
-        })
+        }, err => hf.handleError(err))
     }
     CreateNew() {
         this.model = new WeekPlan();
-        var today = new Date();
+        const today = new Date();
         this.cnvStartDate = hf.handleDate(today);
         // this.updateValidators('all')
         this.showTable = false;
@@ -71,7 +73,7 @@ export class WeekPlanComponent implements OnInit {
         this.srvPln.getLastWeekPlanDate(this.currentUser.userID).subscribe(dt => {
             this.lastDate = hf.handleDate(new Date(dt[0].lastDate))
             this.cnvStartDate = this.lastDate;
-        })
+        }, err => hf.handleError(err))
         // this.selDest.forEach(drg => drg.Selected = false)
     }
     EditThis(id: number) {
@@ -96,8 +98,8 @@ export class WeekPlanComponent implements OnInit {
                 this.showTable = false;
                 this.Formstate = state;
                 this.headerText = state == 'Details' ? 'Week Plan ' + state : state + ' Week Plan';
-            }, err => this.errorMessage = err.message);
-        }, err => this.errorMessage = err.message)
+            }, err => hf.handleError(err));
+        }, err => hf.handleError(err))
         this.loadingDetails = false
     }
     onDateChanged(value) {
@@ -112,37 +114,37 @@ export class WeekPlanComponent implements OnInit {
         event.preventDefault();
         this.model.StartDate = new Date(this.cnvStartDate)
         this.model.UserID = this.currentUser.userID
-        var selDests = this.plnDest.filter(c => c.Selected == true)
-        if (selDests.length <= 0 && this.Formstate != "Delete") {
-            this.errorMessage = "Please Select Any of the Products"; return;
+        const selDests = this.plnDest.filter(c => c.Selected == true)
+        if (selDests.length <= 0 && this.Formstate !== 'Delete') {
+          hf.handleError('Please Select Any of the Products'); return;
         }
         switch (this.Formstate) {
             case 'Create':
                 this.srvPln.InsertPlan(this.model, selDests).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Edit':
                 this.srvPln.UpdatePlan(this.model.WplanID, this.model, selDests).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Delete':
                 this.srvPln.DeletePlan(this.model.WplanID).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             default:
                 break;
@@ -157,22 +159,22 @@ export class WeekPlanComponent implements OnInit {
         this.Formstate = null;
         this.headerText = 'Week Plan';
         this.errorMessage = null;
-        this.inFrm.controls['strtDate'].enable()        
+        this.inFrm.controls['strtDate'].enable()
         this.loadingDetails = false
     }
     ToggleAllDest(value) {
         this.plnDest.forEach(dst => dst.Selected = value)
     }
     SortTable(column: string) {
-        if (this.orderbyString.indexOf(column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-            this.orderbyString = '+' + column;
-        } else if (this.orderbyString.indexOf('-' + column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-            this.orderbyString = '-' + column;
+        if (this.orderbyString.indexOf(column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+            this.orderbyString =  '+' + column;
+        } else if (this.orderbyString.indexOf('-' + column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+            this.orderbyString =  '-' + column;
         } else {
             this.orderbyClass = 'glyphicon glyphicon-sort';
-            this.orderbyString = '';
+            this.orderbyString =  '';
         }
     }
 }

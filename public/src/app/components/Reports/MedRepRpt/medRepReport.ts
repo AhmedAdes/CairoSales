@@ -6,7 +6,7 @@ import * as hf from '../../helpers/helper.functions'
 import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
-  selector: 'rpt-medrep',
+  selector: 'app-rpt-medrep',
   templateUrl: './medRepReport.html',
   styleUrls: ['../../../Styles/PrintPortrait.css']
 })
@@ -23,7 +23,7 @@ export class MedicalRepReportComponent implements OnInit {
   sumCustomers
   sumLogins
   reportHeader: string
-  orderbyString = ''
+  orderbyString =  ''
   orderbyClass = 'glyphicon glyphicon-sort'
 
   chartData = [{ data: [], label: '' }];
@@ -41,9 +41,7 @@ export class MedicalRepReportComponent implements OnInit {
     private auth: AuthenticationService, private location: Location) { }
 
   ngOnInit() {
-    this.srvln.getLine().subscribe(spc => {
-      this.salesLines = spc;
-    })
+    this.srvln.getLine().subscribe(spc => this.salesLines = spc )
   }
 
   ViewReport() {
@@ -63,8 +61,8 @@ export class MedicalRepReportComponent implements OnInit {
             }]
             this.lineChartLabels = vis[0].map(data => { return data.DayDate.split('T')[0] })
             this.forceChartRefresh()
-          })
-      })
+          }, err => hf.handleError(err))
+      }, err => hf.handleError(err))
   }
   goBack() {
     this.location.back()
@@ -78,15 +76,15 @@ export class MedicalRepReportComponent implements OnInit {
     }, 10);
   }
   SortTable(column: string) {
-    if (this.orderbyString.indexOf(column) == -1) {
+    if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
-    } else if (this.orderbyString.indexOf('-' + column) == -1) {
+      this.orderbyString =  '+' + column;
+    } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
 }

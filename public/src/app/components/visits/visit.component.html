@@ -8,6 +8,7 @@
       <p>{{errorMessage}}</p>
     </div>
   </div>
+  <sk-folding-cube [isRunning]="spinner"></sk-folding-cube>
   <div class="card-block" *ngIf="showTable">
     <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;" *ngIf="currentUser.jobClass != 3">
       <label for="userID" class="control-lable col-md-3 text-right">Select a User</label>
@@ -19,9 +20,9 @@
       </div>
     </div>
     <div *ngIf="selUser">
-      <visit-uservisits [UserID]="selUser.UserID" [currentUser]="currentUser" [collection]="collection" (DeleteEvent)="Delete($event)"
+      <app-visit-uservisits [UserID]="selUser.UserID" [currentUser]="currentUser" [collection]="collection" (DeleteEvent)="Delete($event)"
         (DetailEvent)="ShowDetails($event)" (EditEvent)="EditThis($event)" (DetailEvent)="ShowDetails($event)">
-      </visit-uservisits>
+      </app-visit-uservisits>
     </div>
   </div>
 
@@ -126,8 +127,9 @@
         <div class="card">
           <h3 class="card-header alert alert-success" style="margin: 10px 5px; padding: 5px;">Products</h3>
           <div class="card-block">
-            <visit-drugs *ngIf="Formstate!='Details' && Formstate!='Delete'" [currentUser]="currentUser" [visDrugs]="VisDrugs" [visAnsrs]="visAnsrs"
-              [drugmodel]="visDrugModel" [allAnswers]="allAns" (drugChanged)="drugChangeEvent($event)" (ansChanged)="ansChangeEvent($event)"></visit-drugs>
+            <app-visit-drugs *ngIf="Formstate!='Details' && Formstate!='Delete'" [currentUser]="currentUser" [visDrugs]="VisDrugs" [visAnsrs]="visAnsrs"
+              [drugmodel]="visDrugModel" [allAnswers]="allAns" (drugChanged)="drugChangeEvent($event)" (ansChanged)="ansChangeEvent($event)">
+            </app-visit-drugs>
           </div>
           <table id="tblProducts" class="table table-hover table-striped">
             <thead>
@@ -152,8 +154,9 @@
         <div class="card">
           <h3 class="card-header alert alert-warning" style="margin: 10px 5px; padding: 5px;">Promotional Tools</h3>
           <div class="card-block">
-            <visit-gifts *ngIf="Formstate!='Details' && Formstate!='Delete'" [visGifts]="VisGifts" [visDrugs]="VisDrugs" [giftmodel]="visGiftModel"
-              [drgsChanged]="drgsChanged"></visit-gifts>
+            <app-visit-gifts *ngIf="Formstate!='Details' && Formstate!='Delete'" [visGifts]="VisGifts" [visDrugs]="VisDrugs" [giftmodel]="visGiftModel"
+              [drgsChanged]="drgsChanged">
+            </app-visit-gifts>
           </div>
           <table id="tblGifts" class="table table-hover table-striped">
             <thead>

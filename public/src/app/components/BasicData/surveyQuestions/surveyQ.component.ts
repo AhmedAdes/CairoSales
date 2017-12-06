@@ -4,9 +4,10 @@ import {
   AuthenticationService
 } from '../../../services';
 import { SurveyQuestion, SurveyAnswer, CurrentUser } from '../../../Models';
+import * as hf from '../../helpers/helper.functions';
 
 @Component({
-  selector: 'bsc-surveyQ',
+  selector: 'app-bsc-srvy-q',
   templateUrl: './surveyQ.component.html'
 })
 export class SurveyQuestionsComponent implements OnInit {
@@ -20,10 +21,10 @@ export class SurveyQuestionsComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  orderbyString: string = '';
-  orderbyClass: string = 'glyphicon glyphicon-sort';
+  orderbyString = '';
+  orderbyClass = 'glyphicon glyphicon-sort';
   ansChanged: number;
-  oldAnswerEdit: string = '';
+  oldAnswerEdit = '';
 
   constructor(
     private srvQ: SurveyQuestionService,
@@ -34,15 +35,11 @@ export class SurveyQuestionsComponent implements OnInit {
     this.srvQ.getQuestion().subscribe(
       cols => {
         if (cols.error) {
-          this.errorMessage = cols.error.message;
+          hf.handleError(cols.error)
         } else {
           this.collection = cols;
         }
-      },
-      err => {
-        console.log(err);
-        this.errorMessage = err.error.message;
-      }
+      }, err => hf.handleError(err)
     );
     this.TableBack();
   }
@@ -75,8 +72,8 @@ export class SurveyQuestionsComponent implements OnInit {
           state === 'Details'
             ? 'Survey Question ' + state
             : state + ' Survey Question';
-      });
-    }, err => (this.errorMessage = err.message));
+      }, err => hf.handleError(err));
+    }, err => hf.handleError(err));
   }
   TableBack() {
     this.showTable = true;
@@ -91,31 +88,31 @@ export class SurveyQuestionsComponent implements OnInit {
       case 'Create':
         this.srvQ.InsertQuestion(newQst, this.Answers).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Edit':
         this.srvQ
           .UpdateQuestion(newQst.QID, newQst, this.Answers)
           .subscribe(ret => {
             if (ret.error) {
-              this.errorMessage = ret.error.message;
+              hf.handleError(ret.error)
             } else if (ret.affected > 0) {
               this.ngOnInit();
             }
-          });
+          }, err => hf.handleError(err));
         break;
       case 'Delete':
         this.srvQ.DeleteQuestion(newQst.QID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       default:
         break;
@@ -124,13 +121,13 @@ export class SurveyQuestionsComponent implements OnInit {
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
+      this.orderbyString =  '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
   ansChangeEvent(value) {

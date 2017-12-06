@@ -8,6 +8,7 @@
             <p>{{errorMessage}}</p>
         </div>
     </div>
+    <sk-folding-cube [isRunning]="spinner"></sk-folding-cube>
     <div class="panel-body" *ngIf="showTable">
         <table id="tblRegions" class="table table-hover table-striped table-responsive">
             <colgroup>

@@ -29,7 +29,7 @@ export class SurveyAnswersComponent implements OnInit, OnChanges {
     //     this.answers = ans[0]
     // });
   }
-  ngOnChanges(){
+  ngOnChanges() {
     if (this.ansModel.QID) {
       this.EditForm = true
     }

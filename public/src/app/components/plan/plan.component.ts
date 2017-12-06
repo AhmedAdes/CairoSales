@@ -26,10 +26,11 @@ export class PlanComponent implements OnInit {
     plnSpecs: PlanSpecs[] = []
     plnDrugs: PlanDrugs[] = []
     plnImps: PlanImps[] = []
-    orderbyString: string = ''
-    orderbyClass: string = 'glyphicon glyphicon-sort'
+    orderbyString = ''
+    orderbyClass = 'glyphicon glyphicon-sort'
     yesterday: string
     thisday: string
+    spinner = true
 
     constructor(private srvPlan: PlanService, private srvImp: ImportanceService, private srvDrug: DrugService,
         private srvSpec: MedSpecService, private srvLine: LineService,
@@ -57,11 +58,11 @@ export class PlanComponent implements OnInit {
                     this.TableBack();
                 });
             })
-        }, err => this.errorMessage = err.message)
+        }, err => hf.handleError(err))
     }
     CreateNew() {
         this.model = new MonthPlan();
-        var today = new Date();
+        const today = new Date();
         this.cnvFromDate = hf.handleDate(today);
         this.cnvToDate = hf.handleDate(today);
         this.updateValidators('all')
@@ -97,12 +98,13 @@ export class PlanComponent implements OnInit {
                 this.plnImps = det.imps
                 this.showTable = false;
                 this.Formstate = state;
-                this.headerText = state == 'Details'? 'Plan ' + state : state + ' Plan';
-            }, err => this.errorMessage = err.message);
-        }, err => this.errorMessage = err.message)
+                this.headerText = state == 'Details' ? 'Plan ' + state : state + ' Plan';
+            }, err => hf.handleError(err));
+        }, err => hf.handleError(err))
     }
     TableBack() {
         this.showTable = true;
+        this.spinner = false
         this.Formstate = null;
         this.headerText = 'Plan';
         this.errorMessage = null;
@@ -112,46 +114,49 @@ export class PlanComponent implements OnInit {
         event.preventDefault();
         this.model.FromDate = new Date(this.cnvFromDate);
         this.model.ToDate = new Date(this.cnvToDate);
-        var selDrugs = this.plnDrugs.filter(c => c.Checked == true)
-        var selSpec = this.plnSpecs.filter(c => c.Checked == true)
-        var selImp = this.plnImps.filter(c => c.Checked == true)
+        const selDrugs = this.plnDrugs.filter(c => c.Checked == true)
+        const selSpec = this.plnSpecs.filter(c => c.Checked == true)
+        const selImp = this.plnImps.filter(c => c.Checked == true)
 
-        if (selDrugs.length <= 0 && this.Formstate != 'Delete') {
-            this.errorMessage = 'Please Select Any of the Products'; return;
+        if (selDrugs.length <= 0 && this.Formstate !== 'Delete') {
+          hf.handleError('Please Select Any of the Products')
+          return;
         }
-        if (selSpec.length <= 0 && this.Formstate != 'Delete') {
-            this.errorMessage = 'Please Select Any of the Specifications'; return;
+        if (selSpec.length <= 0 && this.Formstate !== 'Delete') {
+          hf.handleError('Please Select Any of the Specifications')
+          return;
         }
-        if (selImp.length <= 0 && this.Formstate != 'Delete') {
-            this.errorMessage = 'Please Select Any of the Cycles'; return;
+        if (selImp.length <= 0 && this.Formstate !== 'Delete') {
+          hf.handleError('Please Select Any of the Cycles')
+          return;
         }
         switch (this.Formstate) {
             case 'Create':
                 this.srvPlan.InsertPlan(this.model, selDrugs, selSpec, selImp).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Edit':
                 this.srvPlan.UpdatePlan(this.model.PlanID, this.model, selDrugs, selSpec, selImp).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Delete':
                 this.srvPlan.DeletePlan(this.model.PlanID).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             default:
                 break;
@@ -161,13 +166,13 @@ export class PlanComponent implements OnInit {
     SortTable(column: string) {
         if (this.orderbyString.indexOf(column) == -1) {
             this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-            this.orderbyString = '+' + column;
+            this.orderbyString =  '+' + column;
         } else if (this.orderbyString.indexOf('-' + column) == -1) {
             this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-            this.orderbyString = '-' + column;
+            this.orderbyString =  '-' + column;
         } else {
             this.orderbyClass = 'glyphicon glyphicon-sort';
-            this.orderbyString = '';
+            this.orderbyString =  '';
         }
     }
 
@@ -179,16 +184,19 @@ export class PlanComponent implements OnInit {
     updateValidators(all: string) {
         switch (all) {
             case 'all':
-                this.inFrm.controls['fromDate'].setValidators(Validators.compose([Validators.required, planDateInRange(this.collection, this.model.PlanID, this.model.SalesLineID)]));
+                this.inFrm.controls['fromDate'].setValidators(Validators.compose([Validators.required,
+                  planDateInRange(this.collection, this.model.PlanID, this.model.SalesLineID)]));
                 this.inFrm.controls['fromDate'].markAsTouched()
                 this.inFrm.controls['fromDate'].updateValueAndValidity()
-                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required, planDateInRange(this.collection, this.model.PlanID, this.model.SalesLineID),
+                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required,
+                  planDateInRange(this.collection, this.model.PlanID, this.model.SalesLineID),
                 minDate(this.inFrm.controls['fromDate'].value)]));
                 this.inFrm.controls['toDate'].markAsTouched()
                 this.inFrm.controls['toDate'].updateValueAndValidity()
                 break;
             case 'to':
-                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required, planDateInRange(this.collection, this.model.PlanID, this.model.SalesLineID),
+                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required,
+                  planDateInRange(this.collection, this.model.PlanID, this.model.SalesLineID),
                 minDate(this.inFrm.controls['fromDate'].value)]));
                 this.inFrm.controls['toDate'].markAsTouched()
                 this.inFrm.controls['toDate'].updateValueAndValidity()

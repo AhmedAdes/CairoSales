@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ContactUsService, AuthenticationService } from '../../services';
 import { ContactUs, MessageTypes, CurrentUser } from '../../Models';
+import * as hf from '../helpers/helper.functions';
 
 @Component({
     selector: 'app-cntct',
@@ -9,14 +10,6 @@ import { ContactUs, MessageTypes, CurrentUser } from '../../Models';
 })
 export class ContactUsComponent implements OnInit {
     inFrm: FormGroup;
-    constructor(private srvCont: ContactUsService, private auth: AuthenticationService, fb: FormBuilder) {
-        this.inFrm = fb.group({
-            'Title': [null, Validators.required],
-            'Type': [null, Validators.required],
-            'Description': [null, Validators.required]
-        })
-    }
-
     currentUser: CurrentUser = this.auth.getUser();
     collection: ContactUs[] = [];
     msgTypeList = MessageTypes
@@ -26,20 +19,28 @@ export class ContactUsComponent implements OnInit {
     Formstate: string;
     headerText: string;
     errorMessage: string;
-    orderbyString: string = "";
-    orderbyClass: string = "glyphicon glyphicon-sort";
+    orderbyString = '';
+    orderbyClass = 'glyphicon glyphicon-sort';
+
+    constructor(private srvCont: ContactUsService, private auth: AuthenticationService, fb: FormBuilder) {
+        this.inFrm = fb.group({
+            'Title': [null, Validators.required],
+            'Type': [null, Validators.required],
+            'Description': [null, Validators.required]
+        })
+    }
 
     ngOnInit() {
         if (this.currentUser.jobClass < 1) {
             this.srvCont.getContactUs().subscribe(cols => {
                 this.collection = cols;
                 this.TableBack();
-            })
+            }, err => hf.handleError(err))
         } else {
             this.srvCont.getUserContactUs(this.currentUser.userID).subscribe(cols => {
                 this.collection = cols;
                 this.TableBack();
-            })
+            }, err => hf.handleError(err))
         }
     }
 
@@ -65,7 +66,7 @@ export class ContactUsComponent implements OnInit {
             this.showTable = false;
             this.Formstate = state;
             this.headerText = state == 'Details' ? 'Message ' + state : state + ' Message';
-        }, err => this.errorMessage = err.message)
+        }, err => hf.handleError(err))
     }
     TableBack() {
         this.showTable = true;
@@ -81,44 +82,44 @@ export class ContactUsComponent implements OnInit {
             case 'Create':
                 this.srvCont.InsertContactUs(this.model).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Edit':
                 this.srvCont.UpdateContactUs(this.model.ID, this.model).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Delete':
                 this.srvCont.DeleteContactUs(this.model.ID).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             default:
                 break;
         }
     }
     SortTable(column: string) {
-        if (this.orderbyString.indexOf(column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-            this.orderbyString = '+' + column;
-        } else if (this.orderbyString.indexOf('-' + column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-            this.orderbyString = '-' + column;
+        if (this.orderbyString.indexOf(column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+            this.orderbyString =  '+' + column;
+        } else if (this.orderbyString.indexOf('-' + column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+            this.orderbyString =  '-' + column;
         } else {
             this.orderbyClass = 'glyphicon glyphicon-sort';
-            this.orderbyString = '';
+            this.orderbyString =  '';
         }
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GiftService, AuthenticationService } from '../../../services';
 import { Gifts, CurrentUser } from '../../../Models';
+import * as hf from '../../helpers/helper.functions';
 
 @Component({
   selector: 'app-gift',
@@ -16,13 +17,13 @@ export class GiftComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  orderbyString: string = '';
-  orderbyClass: string = 'glyphicon glyphicon-sort';
+  orderbyString =  '';
+  orderbyClass = 'glyphicon glyphicon-sort';
 
   constructor(public serv: GiftService, private auth: AuthenticationService) { }
 
   ngOnInit() {
-    this.serv.getGift().subscribe(cols => this.collection = cols);
+    this.serv.getGift().subscribe(cols => this.collection = cols, err => hf.handleError(err));
     this.TableBack();
   }
 
@@ -48,7 +49,7 @@ export class GiftComponent implements OnInit {
       this.showTable = false;
       this.Formstate = state;
       this.headerText = state == 'Details' ? 'Product ' + state : state + ' Product';
-    }, err => this.errorMessage = err.message);
+    }, err => hf.handleError(err));
   }
 
   TableBack() {
@@ -59,34 +60,34 @@ export class GiftComponent implements OnInit {
   }
   HandleForm(event) {
     event.preventDefault();
-    var newObject: Gifts = this.model;
+    const newObject: Gifts = this.model;
     switch (this.Formstate) {
       case 'Create':
         this.serv.InsertGift(newObject).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Edit':
         this.serv.UpdateGift(newObject.GiftID, newObject).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Delete':
         this.serv.DeleteGift(newObject.GiftID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       default:
         break;
@@ -95,13 +96,13 @@ export class GiftComponent implements OnInit {
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) == -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
+      this.orderbyString =  '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) == -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
 }

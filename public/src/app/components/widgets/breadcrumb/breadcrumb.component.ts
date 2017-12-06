@@ -1,15 +1,15 @@
-import { Component }  from '@angular/core';
-import { Router }             from '@angular/router';
-import { BreadcrumbService }        from '../../../services';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { BreadcrumbService } from '../../../services';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html'
 })
 export class BreadcrumbComponent {
-  display: boolean = false;
-  private header: string = '';
-  private description: string = '';
+  display = false;
+  private header = '';
+  private description = '';
   private levels: Array<any> = [];
 
   constructor(private breadServ: BreadcrumbService) {

@@ -13,7 +13,7 @@ export class DestinationRemoveComponent implements OnInit {
   @Output() DestRemove = new EventEmitter()
   @Output() DestDetail = new EventEmitter()
   @Output() DestDelete = new EventEmitter()
-  orderbyString = '+Destination';
+  orderbyString =  '+Destination';
   orderbyClass = 'glyphicon glyphicon-sort';
   p: number
 
@@ -32,13 +32,13 @@ export class DestinationRemoveComponent implements OnInit {
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
+      this.orderbyString =  '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
 }

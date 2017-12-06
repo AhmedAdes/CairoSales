@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService, AuthenticationService, UserService } from '../../services';
 import { User, CurrentUser } from '../../Models';
+import * as hf from '../helpers/helper.functions';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,14 +27,14 @@ export class DashboardComponent implements OnInit {
     this.srvUser.getUserChain(this.currentUser.userID).subscribe(cols => {
       this.collection = cols;
       // var unique = this.collection.map(function (obj) { return obj.UserID; });
-      this.users = this.collection.filter((x, i, a) => a.indexOf(x) == i)
+      this.users = this.collection.filter((x, i, a) => a.indexOf(x) === i)
       this.srvDash.getUserChainCounts(this.currentUser.userID).subscribe(ret => {
         this.planned = ret.planned[0].visCount
         this.committed = ret.committed[0].visCount
         this.today = ret.today[0].visCount
         this.promo = ret.promo[0].promoCount
-      })
-    })
+      }, err => hf.handleError(err))
+    }, err => hf.handleError(err))
   }
 
   UserChanged($user) {

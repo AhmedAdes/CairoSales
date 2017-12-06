@@ -4,9 +4,10 @@ import { DrugService, SurveyQuestionService } from '../../../services';
 import { Drugs, VisitDrugs, SurveyAnswer, CurrentUser, VisitAnswers } from '../../../Models';
 import { CustomMaterialModule } from '../../material.module';
 import 'rxjs/add/operator/map';
+import * as hf from '../../helpers/helper.functions'
 
 @Component({
-  selector: 'visit-drugs',
+  selector: 'app-visit-drugs',
   templateUrl: './visitdrugs.html',
   styles: [`.x-radio-group {
     display: inline-flex;
@@ -50,8 +51,8 @@ export class VisitDrugsComponent implements OnInit {
         const unique = ans.map(function (obj) { return obj.QID; });
         this.quests = unique.filter((x, i, a) => a.indexOf(x) === i)
         this.CreateQuestAnswers()
-      })
-    });
+      }, err => hf.handleError(err))
+    }, err => hf.handleError(err));
   }
   CreateQuestAnswers() {
     this.surveyAns = this.quests.map(q => {

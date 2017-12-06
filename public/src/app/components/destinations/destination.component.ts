@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {
   DestinationService,
   RegionService,
@@ -18,12 +18,13 @@ import {
   IMSData
 } from '../../Models';
 import { NguiMapModule, NguiMapComponent } from '@ngui/map';
+import * as hf from '../helpers/helper.functions';
 
 @Component({
   selector: 'app-dest',
   templateUrl: './destination.component.html'
 })
-export class DestinationComponent implements OnInit {
+export class DestinationComponent implements OnInit, AfterViewInit {
   currentUser: CurrentUser = this.auth.getUser();
   collection: Destination[] = [];
   filteredDest: Destination[] = [];
@@ -36,6 +37,7 @@ export class DestinationComponent implements OnInit {
   srchAsgn: Destination = new Destination();
   model: Destination = new Destination();
   showTable: boolean;
+  spinner = true;
   Formstate: string;
   headerText: string;
   errorMessage: string;
@@ -49,7 +51,7 @@ export class DestinationComponent implements OnInit {
   DestUsers: any[] = [];
   IMSList: IMSData[] = [];
   allIMSList: IMSData[] = [];
-  orderbyString = '-Assigned;-PlanExist;';
+  orderbyString =  '-Assigned;-PlanExist;';
   orderbyClass = 'glyphicon glyphicon-sort';
   curMonth = new Date().getMonth();
   selIMS: any;
@@ -71,6 +73,7 @@ export class DestinationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.spinner = true
     this.srvMed.getSpec().subscribe(spec => {
       this.MedSpecList = spec;
       this.srvImp.getImp().subscribe(imp => {
@@ -79,9 +82,7 @@ export class DestinationComponent implements OnInit {
           this.IMSList = ims;
           this.srvIms.getIMS().subscribe(i => {
             this.allIMSList = i;
-            this.srvReg.getRegion().subscribe(reg => {
-              this.AllRegions = reg;
-            });
+            this.srvReg.getRegion().subscribe(reg => this.AllRegions = reg, err => hf.handleError(err));
             if (
               this.currentUser.jobClass < 1 ||
               this.currentUser.jobClass === 99
@@ -101,7 +102,7 @@ export class DestinationComponent implements OnInit {
                   d => d.AssignRequest === true
                 );
                 this.TableBack();
-              });
+              }, err => hf.handleError(err));
             } else {
               this.serv
                 .getUserChainDestination(this.currentUser.userID)
@@ -118,11 +119,9 @@ export class DestinationComponent implements OnInit {
                   );
                   this.serv
                     .getUserNotAssignedDestination(this.currentUser.userID)
-                    .subscribe(asgn => {
-                      this.toAssignList = asgn;
-                    });
+                    .subscribe(asgn => this.toAssignList = asgn, err => hf.handleError(err) );
                   this.TableBack();
-                });
+                }, err => hf.handleError(err));
             }
             this.srchObj.DestType = 'Clinic (Doctor)';
             this.srchAprv.DestType = 'Clinic (Doctor)';
@@ -133,10 +132,12 @@ export class DestinationComponent implements OnInit {
               lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.33193496
             };
             this.mrkPos = this.locPos;
-          });
-        });
-      });
-    }, err => (this.errorMessage = err.message));
+          }, err => hf.handleError(err));
+        }, err => hf.handleError(err));
+      }, err => hf.handleError(err));
+    }, err => hf.handleError(err));
+  }
+  ngAfterViewInit() {
   }
 
   CreateNew() {
@@ -144,22 +145,20 @@ export class DestinationComponent implements OnInit {
     this.model.DestType = this.srchObj.DestType;
     this.serv.getAllDestUsers().subscribe(usr => {
       this.UserList = usr;
-      let unique = this.UserList.map(function(obj) {
-        return obj.LineName;
-      });
-      this.lines = unique.filter((x, i, a) => a.indexOf(x) == i);
-      this.DestUsers = this.UserList.filter(u => u.selected == true).map(ud => {
+      const unique = this.UserList.map(obj => { return obj.LineName });
+      this.lines = unique.filter((x, i, a) => a.indexOf(x) === i);
+      this.DestUsers = this.UserList.filter(u => u.selected === true).map(ud => {
         return {
           DestID: this.model.DestID,
           UserID: ud.UserID,
           LineID: ud.LineName
         };
       });
-    });
+    }, err => hf.handleError(err));
     this.showTable = false;
     if (this.currentUser.jobClass < 1) {
       this.Formstate = 'Create';
-    } else if (this.currentUser.jobClass == 3) {
+    } else if (this.currentUser.jobClass === 3) {
       this.Formstate = 'CreateRequest';
     }
     this.headerText = 'Create New Customer';
@@ -190,12 +189,10 @@ export class DestinationComponent implements OnInit {
         this.RegionList = reg;
         this.serv.getDestUsers(id).subscribe(usr => {
           this.UserList = usr[0];
-          let unique = this.UserList.map(function(obj) {
-            return obj.LineName;
-          });
-          this.lines = unique.filter((x, i, a) => a.indexOf(x) == i);
+          const unique = this.UserList.map(function(obj) { return obj.LineName; });
+          this.lines = unique.filter((x, i, a) => a.indexOf(x) === i);
           this.DestUsers = this.UserList
-            .filter(u => u.selected == true)
+            .filter(u => u.selected === true)
             .map(ud => {
               return {
                 DestID: this.model.DestID,
@@ -205,18 +202,18 @@ export class DestinationComponent implements OnInit {
             });
           this.showTable = false;
           this.Formstate = state;
-          this.headerText =
-            state == 'Details' ? 'Customer ' + state : state + ' a Customer';
+          this.headerText = state == 'Details' ? 'Customer ' + state : state + ' a Customer';
           this.locPos = {
             lat: this.model.GPSLoclat ? this.model.GPSLoclat : 30.14400328,
             lng: this.model.GPSLoclng ? this.model.GPSLoclng : 31.33193496
           };
           this.zoom = 12;
-        });
-      });
-    }, err => (this.errorMessage = err.message));
+        }, err => hf.handleError(err));
+      }, err => hf.handleError(err));
+    }, err => hf.handleError(err));
   }
   TableBack() {
+    this.spinner = false
     this.showTable = true;
     this.Formstate = null;
     this.headerText = 'Customers';
@@ -233,7 +230,7 @@ export class DestinationComponent implements OnInit {
   }
   onProvinceChanged(newobj) {
     if (newobj.target.value) {
-      let prov = newobj.target.value
+      const prov = newobj.target.value
         .split(':')[1]
         .trim()
         .toString();
@@ -253,7 +250,7 @@ export class DestinationComponent implements OnInit {
         this.Formstate === 'Edit' ||
         this.Formstate === 'Complete Data')
     ) {
-      this.errorMessage = 'Please, Complete the Required Fields';
+      hf.handleError('Please, Complete the Required Fields')
       return;
     }
     if (this.currentUser.jobClass === 3 && this.Formstate === 'CreateRequest') {
@@ -266,10 +263,10 @@ export class DestinationComponent implements OnInit {
       });
     }
     if (this.DestUsers.length <= 0 && this.Formstate !== 'Delete' && this.Formstate !== 'AssignRequest') {
-      this.errorMessage = 'Please, Select a Medical Rep. for each Sales Line';
+      hf.handleError('Please, Select a Medical Rep. for each Sales Line')
       return;
     }
-    let newDestination: Destination = this.model;
+    const newDestination: Destination = this.model;
     newDestination.CreateUser = this.currentUser.userID;
     newDestination.SpecName = this.MedSpecList.find(
       sp => sp.SpecID === this.model.MedSpecID
@@ -294,9 +291,9 @@ export class DestinationComponent implements OnInit {
     newDestination.GPSLoclng = parseFloat(
       (<number>this.mrkPos.lng).toPrecision(12)
     );
-    let dest = this.lines
+    const dest = this.lines
       .map(l => {
-        let d = this.DestUsers.filter(du => du.LineID == l);
+        const d = this.DestUsers.filter(du => du.LineID == l);
         if (d.length > 0) {
           return d[0];
         } else {
@@ -309,7 +306,7 @@ export class DestinationComponent implements OnInit {
       case 'CreateRequest':
         this.serv.InsertDestination(newDestination, dest).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             // this.ngOnInit();
             newDestination.DestID = ret.set.DestID;
@@ -317,7 +314,7 @@ export class DestinationComponent implements OnInit {
             this.IMSSelected();
             this.TableBack();
           }
-        }, err => (this.errorMessage = err.message));
+        }, err => hf.handleError(err));
         break;
       case 'Edit':
       case 'Complete Data':
@@ -325,52 +322,52 @@ export class DestinationComponent implements OnInit {
           .UpdateDestination(newDestination.DestID, newDestination, dest)
           .subscribe(ret => {
             if (ret.error) {
-              this.errorMessage = ret.error.message;
+              hf.handleError(ret.error)
             } else if (ret.affected > 0) {
               // this.ngOnInit();
-              let indx = this.collection.findIndex(
-                dst => dst.DestID == newDestination.DestID
+              const indx = this.collection.findIndex(
+                dst => dst.DestID === newDestination.DestID
               );
               this.collection.fill(newDestination, indx, indx + 1);
               this.IMSSelected();
               this.TableBack();
             }
-          }, err => (this.errorMessage = err.message));
+          }, err => hf.handleError(err));
         break;
       case 'Delete':
         this.serv.DeleteDestination(newDestination.DestID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             // this.ngOnInit();
-            let indx = this.collection.findIndex(
-              dst => dst.DestID == newDestination.DestID
+            const indx = this.collection.findIndex(
+              dst => dst.DestID === newDestination.DestID
             );
             this.collection.splice(indx, 1);
             this.IMSSelected();
             this.TableBack();
           }
-        }, err => (this.errorMessage = err.message));
+        }, err => hf.handleError(err));
         break;
       case 'RemoveRequest':
         this.serv
           .RemoveDestination(newDestination.DestID, this.currentUser.userID)
           .subscribe(ret => {
             if (ret.error) {
-              this.errorMessage = ret.error.message;
+              hf.handleError(ret.error)
             } else if (ret.affected > 0) {
               // this.ngOnInit();
               newDestination.RemoveRequest = true;
               newDestination.RemoveUser = this.currentUser.userID;
               newDestination.RemoveUserName = this.currentUser.UserName;
-              let indx = this.collection.findIndex(
-                dst => dst.DestID == newDestination.DestID
+              const indx = this.collection.findIndex(
+                dst => dst.DestID === newDestination.DestID
               );
               this.collection.fill(newDestination, indx, indx + 1);
               this.IMSSelected();
               this.TableBack();
             }
-          }, err => (this.errorMessage = err.message));
+          }, err => hf.handleError(err));
         break;
       case 'AssignRequest':
         this.serv
@@ -380,20 +377,20 @@ export class DestinationComponent implements OnInit {
           )
           .subscribe(ret => {
             if (ret.error) {
-              this.errorMessage = ret.error.message;
+              hf.handleError(ret.error)
             } else if (ret.affected > 0) {
               // this.ngOnInit();
               newDestination.AssignRequest = true;
               newDestination.AssignUser = this.currentUser.userID;
               newDestination.AssignUserName = this.currentUser.UserName;
-              let indx = this.toAssignList.findIndex(
-                dst => dst.DestID == newDestination.DestID
+              const indx = this.toAssignList.findIndex(
+                dst => dst.DestID === newDestination.DestID
               );
               this.toAssignList.fill(newDestination, indx, indx + 1);
               this.IMSSelected();
               this.TableBack();
             }
-          }, err => (this.errorMessage = err.message));
+          }, err => hf.handleError(err));
         break;
       default:
         break;
@@ -402,67 +399,67 @@ export class DestinationComponent implements OnInit {
   ApproveDestination(id: number) {
     this.serv.ApproveDestination(id, this.currentUser.userID).subscribe(ret => {
       if (ret.error) {
-        this.errorMessage = ret.error.message;
+        hf.handleError(ret.error)
       } else if (ret.affected > 0) {
-        let tabs = document.getElementsByClassName('tabs');
+        const tabs = document.getElementsByClassName('tabs');
         for (let i = 0; i < tabs.length; i++) {
           tabs[i].className = 'tabs';
         }
         document.getElementById('tab2').className = 'active';
         this.ngOnInit();
       }
-    }, err => (this.errorMessage = err.message));
+    }, err => hf.handleError(err));
   }
   RemoveDestination(id: number) {
     const userID = this.toRemoveList.find(r => r.DestID === id).RemoveUser;
     this.serv.GrantRemoveDestination(id, userID).subscribe(ret => {
       if (ret.error) {
-        this.errorMessage = ret.error.message;
+        hf.handleError(ret.error)
       } else if (ret.affected > 0) {
-        let tabs = document.getElementsByClassName('tabs');
+        const tabs = document.getElementsByClassName('tabs');
         for (let i = 0; i < tabs.length; i++) {
           tabs[i].className = 'tabs';
         }
         document.getElementById('tab2').className = 'active';
         this.ngOnInit();
       }
-    }, err => (this.errorMessage = err.message));
+    }, err => hf.handleError(err));
   }
   AssignDestination(id: number) {
     const userID = this.toAssignList.find(r => r.DestID === id).AssignUser;
     this.serv.GrantAssignDestination(id, userID).subscribe(ret => {
       if (ret.error) {
-        this.errorMessage = ret.error.message;
+        hf.handleError(ret.error)
       } else if (ret.affected > 0) {
-        let tabs = document.getElementsByClassName('tabs');
+        const tabs = document.getElementsByClassName('tabs');
         for (let i = 0; i < tabs.length; i++) {
           tabs[i].className = 'tabs';
         }
         document.getElementById('tab2').className = 'active';
         this.ngOnInit();
       }
-    }, err => (this.errorMessage = err.message));
+    }, err => hf.handleError(err));
   }
   SortTable(column: string) {
     const sortCol = column === 'ClassColumn' ? this.ClassColumn : column;
     if (this.orderbyString.indexOf(sortCol) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + sortCol;
+      this.orderbyString =  '+' + sortCol;
     } else if (this.orderbyString.indexOf('-' + sortCol) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + sortCol;
+      this.orderbyString =  '-' + sortCol;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
   userSelected(obj) {
-    let index = this.DestUsers.findIndex(d => d.LineID == obj.LineID);
+    const index = this.DestUsers.findIndex(d => d.LineID == obj.LineID);
     if (!obj.userID) {
       this.DestUsers.splice(index, index + 1);
       return;
     }
-    let destuser = {
+    const destuser = {
       DestID: this.model.DestID,
       UserID: obj.userID,
       LineID: obj.LineID

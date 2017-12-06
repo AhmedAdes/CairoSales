@@ -6,7 +6,7 @@ import * as hf from '../../helpers/helper.functions'
 import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
-    selector: 'rpt-visComp',
+    selector: 'app-rpt-viscomp',
     templateUrl: './visitCompare.html',
     styleUrls: ['../../../Styles/PrintPortrait.css']
 })
@@ -19,7 +19,7 @@ export class VisCompareReportComponent implements OnInit {
 
     pieChartLabels: string[] = [];
     pieChartData: number[] = [];
-    pieChartType: string = 'pie';
+    pieChartType = 'pie';
     colorsEmpty: Array<Color> = []
     ChartOptions: any = {
         responsive: true,
@@ -39,7 +39,7 @@ export class VisCompareReportComponent implements OnInit {
 
     newSchedule(datevalue: Date) {
         this.selectedDate = datevalue ? datevalue : new Date()
-        var user = this.selectedUser ? this.selectedUser : this.currentUser.userID
+        const user = this.selectedUser ? this.selectedUser : this.currentUser.userID
         this.srv.getUserVisitCompare(user, hf.handleDate(this.selectedDate)).subscribe(rat => {
             this.pieChartLabels = rat.map(data => { return data.VisType })
             this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
@@ -50,14 +50,14 @@ export class VisCompareReportComponent implements OnInit {
             //     key: 'Visits Count', //key  - the name of the series.
             //     color: '#ff7f0e'  //color - optional: choose your own line color.
             // }]
-        });
+        }, err => hf.handleError(err));
     }
     newUser() {
         this.srv.getUserVisitCompare(this.selectedUser, hf.handleDate(this.selectedDate)).subscribe(rat => {
             this.pieChartLabels = rat.map(data => { return data.VisType })
             this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
             this.forceChartRefresh()
-        });
+        }, err => hf.handleError(err));
     }
     goBack() {
         this.location.back()

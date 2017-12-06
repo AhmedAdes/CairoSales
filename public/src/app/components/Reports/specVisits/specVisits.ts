@@ -6,13 +6,11 @@ import * as hf from '../../helpers/helper.functions'
 import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
-    selector: 'rpt-spec',
+    selector: 'app-rpt-spec',
     templateUrl: './specVisits.html',
     styleUrls: ['../../../Styles/PrintPortrait.css']
 })
 export class SpecVisitsComponent implements OnInit {
-    constructor(private srv: ReportsService, private srvSpec: MedSpecService,
-        private auth: AuthenticationService, private srvIms: IMSService, private location: Location) { }
     currentUser: CurrentUser = this.auth.getUser()
     selectedSpec: number
     specList: MedSpec[] = []
@@ -24,7 +22,7 @@ export class SpecVisitsComponent implements OnInit {
 
     pieChartLabels: string[] = [];
     pieChartData: number[] = [];
-    pieChartType: string = 'pie';
+    pieChartType = 'pie';
     colorsEmpty: Array<Color> = []
     pieChartOptions: any = {
         responsive: true,
@@ -32,7 +30,10 @@ export class SpecVisitsComponent implements OnInit {
     };
     @ViewChild(BaseChartDirective) _chart;
 
-    ngOnInit() {
+    constructor(private srv: ReportsService, private srvSpec: MedSpecService,
+        private auth: AuthenticationService, private srvIms: IMSService, private location: Location) { }
+
+ngOnInit() {
         this.srvSpec.getSpec().subscribe(spc => {
             this.specList = spc;
             this.srvIms.getIMS().subscribe(ims => this.imsList = ims)
@@ -40,7 +41,9 @@ export class SpecVisitsComponent implements OnInit {
     }
 
     ViewReport() {
-        this.srv.getSpecVisits(this.selectedSpec, hf.handleDate(new Date(this.fromDate)), hf.handleDate(new Date(this.toDate)), this.imsID).subscribe(ret => {
+        this.srv.getSpecVisits(this.selectedSpec,
+          hf.handleDate(new Date(this.fromDate)),
+          hf.handleDate(new Date(this.toDate)), this.imsID).subscribe(ret => {
             if (ret.length > 0) {
                 this.pieChartLabels = ret.map(dat => { return dat.IMS == null ? 'N/A' : dat.IMS })
                 this.pieChartData = ret.map(dat => { return dat.VisCount == null ? 0 : dat.VisCount })
@@ -49,7 +52,7 @@ export class SpecVisitsComponent implements OnInit {
                 this.pieChartData = [0]
             }
             this.forceChartRefresh()
-        })
+        }, err => hf.handleError(err))
     }
     goBack() {
         this.location.back()

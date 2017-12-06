@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DrugService, AuthenticationService, LineService } from '../../../services';
 import { Drugs, CurrentUser, SalesLine } from '../../../Models';
+import * as hf from '../../helpers/helper.functions'
 
 @Component({
   selector: 'app-drug',
@@ -16,7 +17,7 @@ export class DrugComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  orderbyString = '';
+  orderbyString =  '';
   orderbyClass = 'glyphicon glyphicon-sort';
   lines: SalesLine[] = []
 
@@ -28,8 +29,8 @@ export class DrugComponent implements OnInit {
       this.srvlne.getLine().subscribe(ln => {
         this.lines = ln;
         this.TableBack();
-      })
-    });
+      }, err => hf.handleError(err))
+    }, err => hf.handleError(err));
   }
 
   CreateNew() {
@@ -54,7 +55,7 @@ export class DrugComponent implements OnInit {
       this.showTable = false;
       this.Formstate = state;
       this.headerText = state == 'Details' ? 'Product ' + state : state + ' Product';
-    }, err => this.errorMessage = err.message);
+    }, err => hf.handleError(err));
   }
 
   TableBack() {
@@ -65,49 +66,49 @@ export class DrugComponent implements OnInit {
   }
   HandleForm(event) {
     event.preventDefault();
-    let newObject: Drugs = this.model;
+    const newObject: Drugs = this.model;
     switch (this.Formstate) {
       case 'Create':
         this.serv.InsertDrug(newObject).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Edit':
         this.serv.UpdateDrug(newObject.DrugID, newObject).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Delete':
         this.serv.DeleteDrug(newObject.DrugID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       default:
         break;
     }
   }
   SortTable(column: string) {
-    if (this.orderbyString.indexOf(column) == -1) {
+    if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
-    } else if (this.orderbyString.indexOf('-' + column) == -1) {
+      this.orderbyString =  '+' + column;
+    } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
 }

@@ -29,7 +29,7 @@ export class MessageComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  orderbyString = '';
+  orderbyString =  '';
   orderbyClass = 'glyphicon glyphicon-sort';
   expire: string;
   userList: MsgUsers[] = [];
@@ -45,13 +45,9 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
     if (this.currentUser.jobClass === 3) {
-      this.serv.getUserMessages(this.currentUser.userID).subscribe(cols => {
-        this.collection = cols;
-      });
+      this.serv.getUserMessages(this.currentUser.userID).subscribe(cols => this.collection = cols, err => hf.handleError(err) );
     } else {
-      this.serv.getAuthorMessages(this.currentUser.userID).subscribe(cols => {
-        this.collection = cols;
-      });
+      this.serv.getAuthorMessages(this.currentUser.userID).subscribe(cols => this.collection = cols, err => hf.handleError(err) );
     }
     this.TableBack();
   }
@@ -60,10 +56,9 @@ export class MessageComponent implements OnInit {
     this.model = new Message();
     this.expire = hf.handleDate(new Date());
     this.srvUsr.getUserChain(this.currentUser.userID).subscribe(
-      usr =>
-        (this.userList = usr.map(u => {
+      usr => this.userList = usr.map(u => {
           return { UserID: u.UserID, UserName: u.UserName, Checked: false };
-        }))
+        }), err => hf.handleError(err)
     );
     this.showTable = false;
     this.Formstate = 'Create';
@@ -96,7 +91,7 @@ export class MessageComponent implements OnInit {
             state === 'Details' ? 'Message ' + state : state + ' Message';
         }
       });
-    }, err => (this.errorMessage = err.message));
+    }, err => hf.handleError(err));
   }
   TableBack() {
     this.showTable = true;
@@ -117,7 +112,7 @@ export class MessageComponent implements OnInit {
 
     const selUsers = this.userList.filter(c => c.Checked === true);
     if (selUsers.length <= 0 && this.Formstate !== 'Delete') {
-      this.errorMessage = 'Please Select Any of the Users';
+      hf.handleError('Please Select Any of the Users')
       return;
     }
 
@@ -125,29 +120,29 @@ export class MessageComponent implements OnInit {
       case 'Create':
         this.serv.InsertMessage(newObj, selUsers).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Edit':
         this.serv.UpdateMessage(newObj.ID, newObj, selUsers).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Delete':
         this.serv.DeleteMessage(newObj.ID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       default:
         break;
@@ -156,21 +151,19 @@ export class MessageComponent implements OnInit {
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
+      this.orderbyString =  '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
   ToggleAllUsers(value) {
     this.userList.forEach(drg => (drg.Checked = value));
   }
   msgDismiss() {
-    this.serv.GotItMessage(this.model.ID, this.currentUser.userID).subscribe(ret => {
-      this.modalRef.hide();
-    })
+    this.serv.GotItMessage(this.model.ID, this.currentUser.userID).subscribe(ret => this.modalRef.hide(), err => hf.handleError(err) )
   }
 }

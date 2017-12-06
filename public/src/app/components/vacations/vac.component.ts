@@ -11,18 +11,6 @@ import * as hf from '../helpers/helper.functions'
 })
 export class VacationComponent implements OnInit {
     inFrm: FormGroup;
-    constructor(private srvVac: VacationService, private srvUser: UserService,
-        private auth: AuthenticationService, fb: FormBuilder) {
-        this.inFrm = fb.group({
-            'fromDate': [this.cnvFromDate, Validators.required],
-            'toDate': [this.cnvToDate, Validators.required],
-            'UserID': [null, Validators.required],
-            'VacType': [null, Validators.required],
-            'Notes': [null]
-        })
-        this.inFrm.controls['fromDate'].valueChanges.subscribe(val => this.FromDateChange(val))
-    }
-
     currentUser: CurrentUser = this.auth.getUser();
     collection: Vacation[] = [];
     userList: User[] = [];
@@ -35,8 +23,21 @@ export class VacationComponent implements OnInit {
     Formstate: string;
     headerText: string;
     errorMessage: string;
-    orderbyString: string = "";
-    orderbyClass: string = "glyphicon glyphicon-sort";
+    orderbyString = '';
+    orderbyClass = 'glyphicon glyphicon-sort';
+    spinner = true
+
+    constructor(private srvVac: VacationService, private srvUser: UserService,
+        private auth: AuthenticationService, fb: FormBuilder) {
+        this.inFrm = fb.group({
+            'fromDate': [this.cnvFromDate, Validators.required],
+            'toDate': [this.cnvToDate, Validators.required],
+            'UserID': [null, Validators.required],
+            'VacType': [null, Validators.required],
+            'Notes': [null]
+        })
+        this.inFrm.controls['fromDate'].valueChanges.subscribe(val => this.FromDateChange(val))
+    }
 
     ngOnInit() {
         this.srvUser.getuser().subscribe(usr => {
@@ -46,26 +47,25 @@ export class VacationComponent implements OnInit {
                     this.collection = cols;
                     this.TableBack();
                 })
-            }
-            else {
+            } else {
                 this.srvVac.getVacation().subscribe(cols => {
                     this.collection = cols;
                     this.TableBack();
                 })
             }
-        }, err => this.errorMessage = err.message)
+        }, err => hf.handleError(err))
     }
 
     CreateNew() {
         this.model = new Vacation();
-        var today = new Date();
+        const today = new Date();
         this.cnvFromDate = hf.handleDate(today);
         this.cnvToDate = hf.handleDate(today);
         if (this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99) {
             this.model.UserID = this.currentUser.userID
-            this.inFrm.controls["UserID"].disable()
+            this.inFrm.controls['UserID'].disable()
         } else {
-            this.inFrm.controls["UserID"].enable()
+            this.inFrm.controls['UserID'].enable()
         }
         this.updateValidators('to')
         this.showTable = false;
@@ -87,17 +87,18 @@ export class VacationComponent implements OnInit {
             this.model = ret[0];
             this.cnvFromDate = this.model.FromDate.toString().split('T')[0];
             this.cnvToDate = this.model.ToDate.toString().split('T')[0];
-            this.inFrm.controls["UserID"].disable()
+            this.inFrm.controls['UserID'].disable()
             this.updateValidators('to')
             this.FromDateChange(this.inFrm.controls['fromDate'].value)
 
             this.showTable = false;
             this.Formstate = state;
             this.headerText = state == 'Details' ? 'Vacation ' + state : state + ' Vacation';
-        }, err => this.errorMessage = err.message)
+        }, err => hf.handleError(err))
     }
     TableBack() {
         this.showTable = true;
+        this.spinner = false;
         this.Formstate = null;
         this.inFrm.reset();
         this.headerText = 'User Vacations';
@@ -111,63 +112,66 @@ export class VacationComponent implements OnInit {
             case 'Create':
                 this.srvVac.InsertVacation(this.model).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Edit':
                 this.srvVac.UpdateVacation(this.model.VacID, this.model).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Delete':
                 this.srvVac.DeleteVacation(this.model.VacID).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             default:
                 break;
         }
     }
     SortTable(column: string) {
-        if (this.orderbyString.indexOf(column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-            this.orderbyString = '+' + column;
-        } else if (this.orderbyString.indexOf('-' + column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-            this.orderbyString = '-' + column;
+        if (this.orderbyString.indexOf(column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+            this.orderbyString =  '+' + column;
+        } else if (this.orderbyString.indexOf('-' + column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+            this.orderbyString =  '-' + column;
         } else {
             this.orderbyClass = 'glyphicon glyphicon-sort';
-            this.orderbyString = '';
+            this.orderbyString =  '';
         }
     }
     FromDateChange(value) {
-        if (!value) return;
+        if (!value) {return};
         this.updateValidators('to')
     }
     updateValidators(all: string) {
         switch (all) {
             case 'all':
-                this.inFrm.controls['fromDate'].setValidators(Validators.compose([Validators.required, planDateInRange(this.collection, this.model.VacID, this.model.UserID)]));
+                this.inFrm.controls['fromDate'].setValidators(Validators.compose([Validators.required,
+                  planDateInRange(this.collection, this.model.VacID, this.model.UserID)]));
                 this.inFrm.controls['fromDate'].markAsTouched()
                 this.inFrm.controls['fromDate'].updateValueAndValidity()
-                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required, planDateInRange(this.collection, this.model.VacID, this.model.UserID),
+                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required,
+                  planDateInRange(this.collection, this.model.VacID, this.model.UserID),
                 minDate(this.inFrm.controls['fromDate'].value)]));
                 this.inFrm.controls['toDate'].markAsTouched()
                 this.inFrm.controls['toDate'].updateValueAndValidity()
                 break;
             case 'to':
-                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required, minDate(this.inFrm.controls['fromDate'].value)]));
+                this.inFrm.controls['toDate'].setValidators(Validators.compose([Validators.required,
+                  minDate(this.inFrm.controls['fromDate'].value)]));
                 this.inFrm.controls['toDate'].markAsTouched()
                 this.inFrm.controls['toDate'].updateValueAndValidity()
                 break;

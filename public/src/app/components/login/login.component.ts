@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { User } from '../../Models';
 
 import { AuthenticationService } from '../../services/auth.service';
+import * as hf from '../helpers/helper.functions'
 
 @Component({
-    selector: 'login',
+    selector: 'app-login',
     templateUrl: './login.component.html',
     styles: [`
         h1 {
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        var newuser = {
+        const newuser = {
             LoginName: this.model.username,
             UserPass: this.model.password
         };
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['home/dashboard']);
                 } else {
                     this.error = result.error;
+                    hf.handleError(this.error)
                     this.loading = false;
                 }
             });
@@ -57,7 +59,7 @@ export class LoginComponent implements OnInit {
 }
 
 @Component({
-    selector: 'logout',
+    selector: 'app-logout',
     template: ''
 })
 export class LogOutComponent implements OnInit {

@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
 import { HelperModule } from '../helpers/helper.module'
+import { NgSpinKitModule } from 'ng-spin-kit'
 
 import {
   IDIReportsComponent, IDIReportHomeComponent, IDIStillInProductionComponent,
@@ -13,14 +14,15 @@ import {
 } from './';
 import { idiReportRouting } from './idiReports.routing'
 
-import { IDIReportsService, AuthenticationService } from "../../services";
-import { CustomPipesModule } from "../../pipes/pipe.module";
+import { IDIReportsService, AuthenticationService } from '../../services';
+import { CustomPipesModule } from '../../pipes/pipe.module';
 
 @NgModule({
   imports: [
     CommonModule, FormsModule,
     ReactiveFormsModule, CustomPipesModule, HttpModule,
-    RouterModule, NgxPaginationModule, ChartsModule, HelperModule, idiReportRouting
+    RouterModule, NgxPaginationModule, ChartsModule, HelperModule,
+    idiReportRouting, NgSpinKitModule
   ],
   declarations: [
     IDIReportsComponent, IDIReportHomeComponent, IDIStillInProductionComponent,

@@ -13,6 +13,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ModalModule } from 'ngx-bootstrap';
+import { NgSpinKitModule } from 'ng-spin-kit'
 
 import { AppComponent } from './app.component';
 import {
@@ -160,9 +161,9 @@ const toastrConfig = {
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    RouterModule,
     ToastrModule.forRoot(toastrConfig),
     ToastContainerModule.forRoot(),
-    RouterModule,
     Approuting,
     CustomPipesModule,
     NgxPaginationModule,
@@ -178,7 +179,8 @@ const toastrConfig = {
     }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule /**/
+    AngularFireAuthModule,
+    NgSpinKitModule /**/
   ],
   declarations: [
     AppComponent,

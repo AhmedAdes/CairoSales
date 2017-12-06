@@ -6,7 +6,7 @@ import * as hf from '../../helpers/helper.functions'
 import { BaseChartDirective, Color } from 'ng2-charts';
 
 @Component({
-  selector: 'rpt-medrep-weekly',
+  selector: 'app-rpt-medrep-weekly',
   templateUrl: './medRepWeekly.html',
   styleUrls: ['../../../Styles/PrintPortrait.css']
 })
@@ -20,7 +20,7 @@ export class MedRepWeeklyReportComponent implements OnInit {
   lineID: number = null
   sumD1; sumD2; sumD3; sumD4; sumD5; sumD6; sumD7
   reportHeader: string
-  orderbyString = ''
+  orderbyString =  ''
   orderbyClass = 'glyphicon glyphicon-sort'
   errorMessage: string;
 
@@ -37,17 +37,16 @@ export class MedRepWeeklyReportComponent implements OnInit {
 
   constructor(private srv: ReportsService, private srvln: LineService,
     private auth: AuthenticationService, private location: Location) { }
+
   ngOnInit() {
-    this.srvln.getLine().subscribe(spc => {
-      this.salesLines = spc;
-    }, err => this.errorMessage = err.message)
+    this.srvln.getLine().subscribe(spc => this.salesLines = spc, err => hf.handleError(err))
   }
 
   ViewReport() {
     this.srv.getMedicalRepWeeklyReport(hf.handleDate(new Date(this.fromDate)),
       hf.handleDate(new Date(this.toDate)),
       this.lineID).subscribe(ret => {
-        if (ret.error) { this.errorMessage = ret.error.message; return; }
+        if (ret.error) { hf.handleError(ret.error); return; }
         this.medicalRep = ret
         this.reportHeader = `Medical Rep. Weekly Summary Report From ${this.fromDate} To ${this.toDate}`
         this.sumD1 = this.medicalRep.reduce((a, b) => a + b.Day1, 0)
@@ -60,7 +59,7 @@ export class MedRepWeeklyReportComponent implements OnInit {
         this.srv.getSalesLineVisitRate(hf.handleDate(new Date(this.fromDate)),
           hf.handleDate(new Date(this.toDate)),
           this.lineID).subscribe(vis => {
-            if (vis.error) { this.errorMessage = vis.error.message; return; }
+            if (vis.error) { hf.handleError(vis.error); return; }
             this.chartData = [{
               data: vis[0].map(da => { return da.visCount == null ? 0 : da.visCount }),
               label: 'Visit Count'
@@ -68,8 +67,8 @@ export class MedRepWeeklyReportComponent implements OnInit {
             this.lineChartLabels = vis[0].map(data => { return data.DayDate.split('T')[0] })
             this.forceChartRefresh()
             this.errorMessage = null
-          }, err => this.errorMessage = err.message)
-      }, err => this.errorMessage = err.message)
+          }, err => hf.handleError(err))
+      }, err => hf.handleError(err))
   }
   goBack() {
     this.location.back()
@@ -83,15 +82,15 @@ export class MedRepWeeklyReportComponent implements OnInit {
     }, 10);
   }
   SortTable(column: string) {
-    if (this.orderbyString.indexOf(column) == -1) {
+    if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
-    } else if (this.orderbyString.indexOf('-' + column) == -1) {
+      this.orderbyString =  '+' + column;
+    } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
 }

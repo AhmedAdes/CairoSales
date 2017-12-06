@@ -19,11 +19,11 @@ export class TopUsersComponent implements OnInit {
 
   ngOnInit() {
     this.today  = new Date()
-    var firstDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() , 1)
-    var secondDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 1)
-    var secDate: Date = new Date(secondDate.setDate(secondDate.getDate() - 1))
+    const firstDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() , 1)
+    const secondDate: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 1)
+    const secDate: Date = new Date(secondDate.setDate(secondDate.getDate() - 1))
     this.srvUsr.getuser(this.currentUser.userID).subscribe(usr => {
-      var selUsr: User = usr[0]
+      const selUsr: User = usr[0]
       this.lineID = selUsr.SalesLineID
       this.lineName = selUsr.LineName
       console.log(firstDate)
@@ -34,7 +34,7 @@ export class TopUsersComponent implements OnInit {
                                                       Visits: col.CommittedVisits + ' of ' + col.Planned,
                                                       ComVisitPrcnt: col.ComVisitPrcnt,
                                                     photo: col.photo ? "data:image/PNG;base64," + btoa([].reduce.call(new Uint8Array(col.photo.data),function(p,c){return p+String.fromCharCode(c)},'')) : './assets/img/avatar5.png'}})
-      )
-    })
+                                                    , err => hf.handleError(err))
+    }, err => hf.handleError(err))
   }
 }

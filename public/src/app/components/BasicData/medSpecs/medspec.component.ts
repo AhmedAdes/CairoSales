@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MedSpecService, AuthenticationService } from '../../../services';
 import { MedSpec, CurrentUser } from '../../../Models';
+import * as hf from '../../helpers/helper.functions';
 
 @Component({
   selector: 'app-spec',
@@ -8,8 +9,6 @@ import { MedSpec, CurrentUser } from '../../../Models';
   providers: [MedSpecService]
 })
 export class MedSpecComponent implements OnInit {
-
-  constructor(public serv: MedSpecService, private auth: AuthenticationService) { }
 
   currentUser: CurrentUser = this.auth.getUser();
   collection: MedSpec[] = [];
@@ -19,11 +18,13 @@ export class MedSpecComponent implements OnInit {
   Formstate: string;
   headerText: string;
   errorMessage: string;
-  orderbyString: string = "";
-  orderbyClass: string = "glyphicon glyphicon-sort";
+  orderbyString =  '';
+  orderbyClass = 'glyphicon glyphicon-sort';
+
+  constructor(public serv: MedSpecService, private auth: AuthenticationService) { }
 
   ngOnInit() {
-    this.serv.getSpec().subscribe(cols => this.collection = cols);
+    this.serv.getSpec().subscribe(cols => this.collection = cols, err => hf.handleError(err));
     this.TableBack();
   }
 
@@ -48,7 +49,7 @@ export class MedSpecComponent implements OnInit {
       this.showTable = false;
       this.Formstate = state;
       this.headerText = state == 'Details' ? 'Account ' + state : state + ' Account';
-    }, err => this.errorMessage = err.message)
+    }, err => hf.handleError(err))
   }
   TableBack() {
     this.showTable = true;
@@ -58,34 +59,34 @@ export class MedSpecComponent implements OnInit {
   }
   HandleForm(event) {
     event.preventDefault();
-    var newObject: MedSpec = this.model;
+    const newObject: MedSpec = this.model;
     switch (this.Formstate) {
       case 'Create':
         this.serv.InsertSpec(newObject).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Edit':
         this.serv.UpdateSpec(newObject.SpecID, newObject).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       case 'Delete':
         this.serv.DeleteSpec(newObject.SpecID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        });
+        }, err => hf.handleError(err));
         break;
       default:
         break;
@@ -93,14 +94,14 @@ export class MedSpecComponent implements OnInit {
   }
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-      this.orderbyString = '+' + column;
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+      this.orderbyString =  '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-      this.orderbyString = '-' + column;
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
 

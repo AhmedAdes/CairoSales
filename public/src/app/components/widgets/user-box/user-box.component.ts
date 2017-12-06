@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService, VisitService, DestinationService, UserService } from '../../../services';
 import { User, CurrentUser, NodeUrl } from '../../../Models';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import * as hf from '../../helpers/helper.functions'
 
 @Component({
   /* tslint:disable */
@@ -39,8 +40,8 @@ export class UserBoxComponent implements OnInit {
           // this.currentUser.photo = item.file
           this.uploader.clearQueue()
         };
-      })
-    })
+      }, err => hf.handleError(err))
+    }, err => hf.handleError(err))
   }
 
   private logout = (): void => {

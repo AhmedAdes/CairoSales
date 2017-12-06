@@ -4,15 +4,13 @@ import { Region } from '../../Models/region';
 import { provinces } from '../../Models/BasicObjects';
 import { CurrentUser } from '../../Models/user';
 import { AuthenticationService } from '../../services/auth.service';
+import * as hf from '../helpers/helper.functions'
 
 @Component({
   selector: 'app-region',
   templateUrl: './region.component.html'
 })
 export class RegionComponent implements OnInit {
-
-  constructor(public serv: RegionService, private auth: AuthenticationService) { }
-
   currentUser: CurrentUser = this.auth.getUser();
   collection: Region[] = [];
   srchObj: Region = new Region();
@@ -22,14 +20,16 @@ export class RegionComponent implements OnInit {
   headerText: string;
   errorMessage: string;
   ProvinceList: any[] = provinces;
-  orderbyString: string = "";
-  orderbyClass: string = "glyphicon glyphicon-sort";
+  orderbyString = '';
+  orderbyClass = 'glyphicon glyphicon-sort';
+
+  constructor(public serv: RegionService, private auth: AuthenticationService) { }
 
   ngOnInit() {
     if (this.currentUser.jobClass < 1) {
-      this.serv.getRegion().subscribe(cols => this.collection = cols, err => this.errorMessage = err.message);
+      this.serv.getRegion().subscribe(cols => this.collection = cols, err => hf.handleError(err));
     } else {
-      this.serv.getUserChainRegions(this.currentUser.userID).subscribe(cols => this.collection = cols, err => this.errorMessage = err.message);
+      this.serv.getUserChainRegions(this.currentUser.userID).subscribe(cols => this.collection = cols, err => hf.handleError(err));
     }
     this.TableBack();
   }
@@ -55,7 +55,7 @@ export class RegionComponent implements OnInit {
       this.showTable = false;
       this.Formstate = state;
       this.headerText = state == 'Details' ? 'Province ' + state : state + ' Province';
-    }, err => this.errorMessage = err.message);
+    }, err => hf.handleError(err));
   }
   TableBack() {
     this.showTable = true;
@@ -65,34 +65,34 @@ export class RegionComponent implements OnInit {
   }
   HandleForm(event) {
     event.preventDefault();
-    var newRegion: Region = this.model;
+    const newRegion: Region = this.model;
     switch (this.Formstate) {
       case 'Create':
         this.serv.InsertRegion(newRegion).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        }, err => this.errorMessage = err.message);
+        }, err => hf.handleError(err));
         break;
       case 'Edit':
         this.serv.UpdateRegion(newRegion.RegionID, newRegion).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        }, err => this.errorMessage = err.message);
+        }, err => hf.handleError(err));
         break;
       case 'Delete':
         this.serv.DeleteRegion(newRegion.RegionID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message;
+            hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
-        }, err => this.errorMessage = err.message);
+        }, err => hf.handleError(err));
         break;
       default:
         break;
@@ -101,22 +101,22 @@ export class RegionComponent implements OnInit {
   ApproveRegion(id: number) {
     this.serv.ApproveRegion(id, this.currentUser.userID).subscribe(ret => {
       if (ret.error) {
-        this.errorMessage = ret.error.message;
+        hf.handleError(ret.error)
       } else if (ret.affected > 0) {
         this.ngOnInit();
       }
-    }, err => this.errorMessage = err.message);
+    }, err => hf.handleError(err));
   }
   SortTable(column: string) {
-    if (this.orderbyString.indexOf(column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-      this.orderbyString = '+' + column;
-    } else if (this.orderbyString.indexOf('-' + column) == -1) {
-      this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-      this.orderbyString = '-' + column;
+    if (this.orderbyString.indexOf(column) === -1) {
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+      this.orderbyString =  '+' + column;
+    } else if (this.orderbyString.indexOf('-' + column) === -1) {
+      this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
 }

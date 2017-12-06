@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { Visits, CurrentUser } from '../../../Models';
 
 @Component({
-    selector: 'visit-uservisits',
+    selector: 'app-visit-uservisits',
     templateUrl: './UserVisits.html',
     styles: [`
         .card-title a {
@@ -11,8 +11,6 @@ import { Visits, CurrentUser } from '../../../Models';
     `]
 })
 export class UserVisitsComponent implements OnInit, OnChanges {
-    constructor() { }
-
     @Input() collection: Visits[] = [];
     @Input() UserID: number;
     @Input() currentUser: CurrentUser;
@@ -21,10 +19,12 @@ export class UserVisitsComponent implements OnInit, OnChanges {
     @Output() EditEvent = new EventEmitter();
     userVisits: Visits[] = [];
     srchObj: Visits = new Visits();
-    orderbyString: string = "";
-    orderbyClass: string = "glyphicon glyphicon-sort";
+    orderbyString = '';
+    orderbyClass = 'glyphicon glyphicon-sort';
     userName: string;
-    appliedClass: boolean = true
+    appliedClass = true
+
+    constructor() { }
 
     ngOnInit() {
         this.userVisits = this.collection.filter(obj => obj.UserID == this.UserID)
@@ -40,14 +40,14 @@ export class UserVisitsComponent implements OnInit, OnChanges {
 
     SortTable(column: string) {
         if (this.orderbyString.indexOf(column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-            this.orderbyString = '+' + column;
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+            this.orderbyString =  '+' + column;
         } else if (this.orderbyString.indexOf('-' + column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-            this.orderbyString = '-' + column;
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+            this.orderbyString =  '-' + column;
         } else {
             this.orderbyClass = 'glyphicon glyphicon-sort';
-            this.orderbyString = '';
+            this.orderbyString =  '';
         }
     }
 

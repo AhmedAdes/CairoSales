@@ -42,7 +42,7 @@ export class VisitComponent implements OnInit {
   drgAnsrs: any[] = [];
   visDrugModel: VisitDrugs = new VisitDrugs();
   visGiftModel: VisitGifts = new VisitGifts();
-  orderbyString = '';
+  orderbyString =  '';
   orderbyClass = 'glyphicon glyphicon-sort';
   yesterday: string
   thisday: string
@@ -58,6 +58,7 @@ export class VisitComponent implements OnInit {
   zoom = 8
   public modalRef: BsModalRef;
   showCustModal: boolean
+  spinner = true;
   @ViewChild('template') custTemp: TemplateRef<any>
 
   constructor(private serv: VisitService, private srvGift: GiftService, private srvDrug: DrugService,
@@ -154,7 +155,7 @@ export class VisitComponent implements OnInit {
             if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
               this.srvDest.getApprovedRegionDestinations(this.model.RegionID).subscribe(dst => {
                 if (dst.error) {
-                  this.errorMessage = dst.error.message ? dst.error.message : dst.error;
+                  hf.handleError(dst.error)
                 } else {
                   this.destinations = dst;
                   this.ViewDests = this.destinations.filter(obj => obj.DestType === this.model.DestType);
@@ -164,12 +165,12 @@ export class VisitComponent implements OnInit {
                   this.Formstate = state;
                   this.headerText = state === 'Details' ? 'Visit ' + state : state + ' Visit';
                 }
-              });
+              }, err => hf.handleError(err));
             } else {
               this.srvDest.getPlanApprovedRegionDestinations(this.model.RegionID, this.currentUser.userID, this.cnvVisitDate)
                 .subscribe(dst => {
                   if (dst.error) {
-                    this.errorMessage = dst.error.message ? dst.error.message : dst.error;
+                    hf.handleError(dst.error)
                   } else {
                     this.destinations = dst[0];
                     this.ViewDests = this.destinations.filter(obj => obj.DestType === this.model.DestType);
@@ -179,15 +180,16 @@ export class VisitComponent implements OnInit {
                     this.Formstate = state;
                     this.headerText = state === 'Details' ? 'Visit ' + state : state + ' Visit';
                   }
-                });
+                }, err => hf.handleError(err));
             }
-          })
-        })
+          }, err => hf.handleError(err))
+        }, err => hf.handleError(err))
       });
-    }, err => this.errorMessage = err.message);
+    }, err => hf.handleError(err));
   }
   TableBack() {
     this.showTable = true;
+    this.spinner = false
     this.Formstate = null;
     this.headerText = 'Visits';
     this.errorMessage = null;
@@ -198,7 +200,7 @@ export class VisitComponent implements OnInit {
     event.preventDefault();
     if (this.stillSaving) { return }
     if (this.VisDrugs.length <= 0 && this.Formstate !== 'Delete') {
-      this.errorMessage = 'Please Add Some Products';
+      hf.handleError('Please Add Some Products');
       this.stillSaving = false
       return;
     }
@@ -214,9 +216,9 @@ export class VisitComponent implements OnInit {
       case 'Create':
         this.serv.InsertVisit(this.model, this.VisDrugs, this.VisGifts, this.visAnsrs).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message ? ret.error.message
-              .includes('Violation of UNIQUE KEY') ? `Can't Insert two visits for the same Customer
-                        in the same day` : ret.error.message : ret.error;
+            ret.error.message && ret.error.message
+              .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
+                        in the same day`) : hf.handleError(ret.error)
           } else {
             this.ngOnInit();
           }
@@ -225,9 +227,9 @@ export class VisitComponent implements OnInit {
       case 'Edit':
         this.serv.UpdateVisit(this.model.VisitID, this.model, this.VisDrugs, this.VisGifts, this.visAnsrs).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message ? ret.error.message
-              .includes('Violation of UNIQUE KEY') ? `Can't Insert two visits for the same Customer
-                        in the same day` : ret.error.message : ret.error;
+            ret.error.message && ret.error.message
+            .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
+                      in the same day`) : hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
@@ -236,9 +238,9 @@ export class VisitComponent implements OnInit {
       case 'Delete':
         this.serv.DeleteVisit(this.model.VisitID).subscribe(ret => {
           if (ret.error) {
-            this.errorMessage = ret.error.message ? ret.error.message.includes('Violation of UNIQUE KEY') ?
-              `Can't Insert two visits for the same Customer
-                        in the same day` : ret.error.message : ret.error;
+            ret.error.message && ret.error.message
+            .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
+                      in the same day`) : hf.handleError(ret.error)
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
@@ -251,13 +253,13 @@ export class VisitComponent implements OnInit {
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString = '+' + column;
+      this.orderbyString =  '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString = '-' + column;
+      this.orderbyString =  '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString = '';
+      this.orderbyString =  '';
     }
   }
   disableDateField() {
@@ -273,7 +275,7 @@ export class VisitComponent implements OnInit {
       const visDate = this.model.VisitDate == null ? new Date() : this.model.VisitDate
       this.srvDest.getPlanApprovedRegionDestinations(region, this.currentUser.userID, hf.handleDate(visDate)).subscribe(dst => {
         if (dst.error) {
-          this.errorMessage = dst.error.message ? dst.error.message : dst.error;
+          hf.handleError(dst.error)
         } else {
           this.destinations = dst[0];
           if (this.destinations.length > 0) {
@@ -302,7 +304,7 @@ export class VisitComponent implements OnInit {
       const Dest = newobj.target.value.split(':')[1].trim();
       this.srvDest.checkMaxVisit(Dest, this.currentUser.userID, this.cnvVisitDate).subscribe(ret => {
         if (ret.error) {
-          this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+          hf.handleError(ret.error)
         } else {
           if (ret.length <= 0) { return }
           if (ret[0].Allowed) {
@@ -338,15 +340,15 @@ export class VisitComponent implements OnInit {
   }
   DeleteDrug(index) {
     const drg = this.VisDrugs[index].DrugID
-    const AnsToBeRemoved = this.visAnsrs.filter(v => v.DrugID == drg)
+    const AnsToBeRemoved = this.visAnsrs.filter(v => v.DrugID === drg)
     while (AnsToBeRemoved.length) {
-      let c = AnsToBeRemoved.pop()
-      this.visAnsrs.splice(this.visAnsrs.findIndex(i => i.AnswerID == c.AnswerID && i.DrugID == drg), 1);
+      const c = AnsToBeRemoved.pop()
+      this.visAnsrs.splice(this.visAnsrs.findIndex(i => i.AnswerID === c.AnswerID && i.DrugID === drg), 1);
     }
-    const GftToBeRemoved = this.VisGifts.filter(v => v.DrugID == drg)
+    const GftToBeRemoved = this.VisGifts.filter(v => v.DrugID === drg)
     while (GftToBeRemoved.length) {
-      let c = GftToBeRemoved.pop()
-      this.VisGifts.splice(this.VisGifts.findIndex(i => i.GiftID == c.GiftID && i.DrugID == drg), 1);
+      const c = GftToBeRemoved.pop()
+      this.VisGifts.splice(this.VisGifts.findIndex(i => i.GiftID === c.GiftID && i.DrugID === drg), 1);
     }
 
     this.VisDrugs.splice(index, 1);
@@ -368,11 +370,11 @@ export class VisitComponent implements OnInit {
   }
   prepareDrgAnsrs(indx) {
     this.selDrugName = this.VisDrugs[indx].DrugName
-    let Ansrs = this.visAnsrs.filter(v => v.DrugID == this.VisDrugs[indx].DrugID)
+    const Ansrs = this.visAnsrs.filter(v => v.DrugID === this.VisDrugs[indx].DrugID)
     this.drgAnsrs = Ansrs.map(q => {
       return {
-        QID: q.QID, QText: this.allAns.filter(a => a.QID == q.QID)[0].QText,
-        Answers: this.allAns.filter(a => a.QID == q.QID)
+        QID: q.QID, QText: this.allAns.filter(a => a.QID === q.QID)[0].QText,
+        Answers: this.allAns.filter(a => a.QID === q.QID)
       }
     })
     this.drgAnsrs.forEach(sr => sr.Answers.forEach(a => a['checked'] = Ansrs.findIndex(i => i.AnswerID == a.AnswerID) >= 0))
@@ -418,13 +420,13 @@ export class VisitComponent implements OnInit {
     this.destModel.GPSLoclng = this.mrkPos.lng
     this.srvDest.UpdateDestinationOnly(this.destModel.DestID, this.destModel).subscribe(ret => {
       if (ret.error) {
-        this.errorMessage = ret.error.message;
+        hf.handleError(ret.error)
       } else if (ret.affected > 0) {
         // this.ngOnInit();
         this.HandleForm(event)
         this.modalRef.hide()
       }
-    }, err => this.errorMessage = err.message);
+    }, err => hf.handleError(err));
   }
   checkCustomerFinished() {
     return this.destModel.GPSLoclat ?

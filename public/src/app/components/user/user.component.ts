@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { UserService, RegionService, AuthenticationService, UserRegionService, LineService } from '../../services';
 import { emailValidator, matchingPasswords, alreadyExist } from '../../pipes/validators';
 import { User, CurrentUser, Region, JobClass, SalesLine, ReplaceUser } from '../../Models';
+import * as hf from '../helpers/helper.functions'
 
 @Component({
     selector: 'app-user',
@@ -11,6 +12,26 @@ import { User, CurrentUser, Region, JobClass, SalesLine, ReplaceUser } from '../
 export class UserComponent implements OnInit {
     inputForm: FormGroup;
     replcForm: FormGroup
+    currentUser: CurrentUser = this.auth.getUser();
+    collection: User[] = [];
+    searchUser: User = new User();
+    model: User;
+    showTable: boolean;
+    spinner = true;
+    Formstate: string;
+    headerText: string;
+    errorMessage: string;
+    classList = JobClass.filter(obj => obj.class > this.currentUser.jobClass && obj.class !== 99);
+    regions: Region[] = [];
+    userRegions: Region[] = [];
+    managerList: User[] = []
+    salesLines: SalesLine[] = []
+    selectedRegion: number;
+    orderbyString = '';
+    orderbyClass = 'glyphicon glyphicon-sort';
+    rplcModel: ReplaceUser
+    replcUsers: User[] = [];
+
 
     constructor(public serv: UserService,
         public regserv: RegionService,
@@ -40,25 +61,6 @@ export class UserComponent implements OnInit {
         this.inputForm.controls['JobClass'].valueChanges.subscribe(value => this.TitleChanged(value))
     }
 
-    currentUser: CurrentUser = this.auth.getUser();
-    collection: User[] = [];
-    searchUser: User = new User();
-    model: User;
-    showTable: boolean;
-    Formstate: string;
-    headerText: string;
-    errorMessage: string;
-    classList = JobClass.filter(obj => obj.class > this.currentUser.jobClass && obj.class != 99);
-    regions: Region[] = [];
-    userRegions: Region[] = [];
-    managerList: User[] = []
-    salesLines: SalesLine[] = []
-    selectedRegion: number;
-    orderbyString: string = "";
-    orderbyClass: string = "glyphicon glyphicon-sort";
-    rplcModel: ReplaceUser
-    replcUsers: User[] = [];
-
     ngOnInit() {
         this.serv.getUserChain(this.currentUser.userID).subscribe(cols => {
             this.collection = cols;
@@ -73,14 +75,16 @@ export class UserComponent implements OnInit {
     }
     CompleteLogin() {
         if (this.model.UserName) {
-            var sp = this.model.UserName.split(" ");
+            const sp = this.model.UserName.split(' ');
             this.model.LoginName = sp[0].charAt(0) + '.' + sp[sp.length - 1];
         }
     }
     CreateNew() {
         this.model = new User();
-        this.inputForm.controls['LoginName'].setValidators(Validators.compose([Validators.required, alreadyExist(this.collection, 'LoginName', '')]));
-        this.inputForm.controls["UserName"].enable()
+        this.inputForm.controls['LoginName'].setValidators(Validators.compose([Validators.required,
+          alreadyExist(this.collection, 'LoginName', '')]));
+
+        this.inputForm.controls['UserName'].enable()
         this.showTable = false;
         this.Formstate = 'Create';
         this.headerText = 'Create New User';
@@ -112,27 +116,28 @@ export class UserComponent implements OnInit {
                     this.Formstate = state;
                     this.headerText = state + ' User';
                 })
-            })
-        }
-        else {
+            }, err => hf.handleError(err))
+        } else {
             this.serv.getuser(id).subscribe(ret => {
                 this.usrRegServ.getUSerRegion(id).subscribe(ret1 => {
                     this.userRegions = ret1;
                     this.model = ret[0];
                     if (state == 'Edit') {
-                        this.inputForm.controls["UserName"].disable()
+                        this.inputForm.controls['UserName'].disable()
                         this.inputForm.controls['ConfPass'].setValue(this.model.UserPass);
-                        this.inputForm.controls['LoginName'].setValidators(Validators.compose([Validators.required, alreadyExist(this.collection, 'LoginName', this.model.LoginName)]));
+                        this.inputForm.controls['LoginName'].setValidators(Validators.compose([Validators.required,
+                          alreadyExist(this.collection, 'LoginName', this.model.LoginName)]));
                         this.inputForm.updateValueAndValidity();
                     }
                     this.showTable = false;
                     this.Formstate = state;
                     this.headerText = state == 'Details' ? 'User ' + state : state + ' User';
                 });
-            })
+            }, err => hf.handleError(err))
         }
     }
     TableBack() {
+      this.spinner = false
         this.showTable = true;
         this.Formstate = null;
         this.headerText = 'Users';
@@ -141,49 +146,49 @@ export class UserComponent implements OnInit {
     }
     HandleForm(event) {
         event.preventDefault();
-        var newUser: User = this.model;
+        const newUser: User = this.model;
         // newUser.DirectManager = this.currentUser.userID;
         switch (this.Formstate) {
             case 'Create':
                 this.serv.InsertUser(newUser, this.userRegions).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) { this.ngOnInit(); }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Edit':
                 this.serv.UpdateUser(newUser.UserID, newUser, this.userRegions).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message ? ret.error.message : ret.error;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) { this.ngOnInit(); }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Delete':
                 this.serv.DeleteUser(newUser.UserID).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Disable':
                 this.serv.DisableUser(newUser.UserID).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             case 'Replace':
                 this.serv.RotateUsers(this.rplcModel.user1ID, this.rplcModel.user2ID).subscribe(ret => {
                     if (ret.error) {
-                        this.errorMessage = ret.error.message;
+                        hf.handleError(ret.error)
                     } else if (ret.affected > 0) {
                         this.ngOnInit();
                     }
-                });
+                }, err => hf.handleError(err));
                 break;
             default:
                 break;
@@ -193,16 +198,16 @@ export class UserComponent implements OnInit {
     ApproveUser(id: number) {
         this.serv.ApproveUser(id, this.currentUser.userID).subscribe(ret => {
             if (ret.error) {
-                this.errorMessage = ret.error.message;
+                hf.handleError(ret.error)
             } else if (ret.affected > 0) {
                 this.ngOnInit();
             }
-        });
+        }, err => hf.handleError(err));
     }
 
     addRegion() {
-        if (this.selectedRegion != null && this.userRegions.findIndex(x => x.RegionID == this.selectedRegion) == -1) {
-            var regio: Region = this.regions.filter(obj => obj.RegionID == this.selectedRegion)[0];
+        if (this.selectedRegion != null && this.userRegions.findIndex(x => x.RegionID === this.selectedRegion) === -1) {
+            const regio: Region = this.regions.find(obj => obj.RegionID === this.selectedRegion);
             this.userRegions.push(regio);
         }
     }
@@ -211,23 +216,23 @@ export class UserComponent implements OnInit {
         this.userRegions.splice(index, 1);
     }
     SortTable(column: string) {
-        if (this.orderbyString.indexOf(column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes";
-            this.orderbyString = '+' + column;
-        } else if (this.orderbyString.indexOf('-' + column) == -1) {
-            this.orderbyClass = "glyphicon glyphicon-sort-by-attributes-alt";
-            this.orderbyString = '-' + column;
+        if (this.orderbyString.indexOf(column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
+            this.orderbyString =  '+' + column;
+        } else if (this.orderbyString.indexOf('-' + column) === -1) {
+            this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
+            this.orderbyString =  '-' + column;
         } else {
             this.orderbyClass = 'glyphicon glyphicon-sort';
-            this.orderbyString = '';
+            this.orderbyString =  '';
         }
     }
     TitleChanged(value) {
         if (!value) return
-        var Class = JobClass.find(c => c.class == JobClass.find(l => l.name == value).class - 1)
-        this.managerList = this.collection.filter(usr => usr.JobClass == Class.name && usr.SalesLineID == this.model.SalesLineID)
+        const Class = JobClass.find(c => c.class === JobClass.find(l => l.name == value).class - 1)
+        this.managerList = this.collection.filter(usr => usr.JobClass === Class.name && usr.SalesLineID === this.model.SalesLineID)
 
-        if (Class.class == 1) {
+        if (Class.class === 1) {
             this.inputForm.controls['manager'].clearValidators()
         } else {
             this.inputForm.controls['manager'].setValidators([Validators.required])
