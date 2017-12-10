@@ -24,7 +24,7 @@ import * as hf from '../helpers/helper.functions';
   selector: 'app-dest',
   templateUrl: './destination.component.html'
 })
-export class DestinationComponent implements OnInit, AfterViewInit {
+export class DestinationComponent implements OnInit {
   currentUser: CurrentUser = this.auth.getUser();
   collection: Destination[] = [];
   filteredDest: Destination[] = [];
@@ -136,8 +136,6 @@ export class DestinationComponent implements OnInit, AfterViewInit {
         }, err => hf.handleError(err));
       }, err => hf.handleError(err));
     }, err => hf.handleError(err));
-  }
-  ngAfterViewInit() {
   }
 
   CreateNew() {

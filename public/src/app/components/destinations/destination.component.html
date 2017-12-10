@@ -10,16 +10,18 @@
       <p>{{errorMessage}}</p>
     </div>
   </div>
-    <sk-folding-cube [isRunning]="spinner"></sk-folding-cube>
+  <sk-folding-cube [isRunning]="spinner"></sk-folding-cube>
   <div class="panel-body table-responsive" *ngIf="showTable">
     <ul class="nav nav-tabs nav-justified">
-      <!--<li id="tab1" role="presentation" class="tabs active"><a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Hospital')">Hospital</a></li> -->
       <li id="tab2" role="presentation" class="tabs active">
         <a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Clinic (Doctor)')">Clinic (Doctor)</a>
       </li>
       <li id="tab3" role="presentation" class="tabs">
         <a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Pharmacy')">Pharmacy</a>
       </li>
+      <!-- <li id="tab4" role="presentation" class="tabs">
+        <a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Hospital')">Hospital</a>
+      </li> -->
     </ul>
     <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;">
       <label for="IMSID" class="control-label col-md-2 col-sm-2 text-right">IMS Region</label>
@@ -434,7 +436,7 @@
         <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
           <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit' || Formstate =='Complete Data'">Save</button>
           <span *ngIf="Formstate =='Create' || Formstate == 'CreateRequest' || Formstate =='Edit' || Formstate =='Complete Data'">
-          | </span>
+            | </span>
           <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button>
           <span *ngIf="Formstate == 'Delete'"> | </span>
           <button type="submit" value="Remove" class="btn btn-info" *ngIf="Formstate == 'RemoveRequest'">Request to Remove</button>
