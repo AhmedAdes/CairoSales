@@ -71,7 +71,7 @@ export class UserComponent implements OnInit {
                     this.TableBack();
                 })
             });
-        });
+        }, err => hf.handleError(err));
     }
     CompleteLogin() {
         if (this.model.UserName) {
