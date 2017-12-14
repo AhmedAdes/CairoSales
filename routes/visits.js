@@ -10,7 +10,12 @@ var Promise = require('bluebird');
 router.get('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT v.*, d.Destination, d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, d.SpecName, d.ImpName, d.VisitsNo, u.UserName
+    request.query(`SELECT v.VisitID ,v.VisitDate ,v.DestID ,v.UserID ,v.VisitTime ,v.GeneralComment ,
+                        v.VisitType ,v.AccompanyID ,v.CreateDate ,v.HospitalVisit ,v.DoctorName ,v.SpecID, 
+                        CASE WHEN v.HospitalVisit = 1 THEN d.Destination + ' - ' + v.DoctorName ELSE d.Destination END Destination, 
+                        d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, 
+                        CASE WHEN v.HospitalVisit = 1 THEN (SELECT SpecName FROM dbo.MediSpecification WHERE SpecID = v.SpecID) 
+                        ELSE d.SpecName END SpecName, d.ImpName, d.VisitsNo, u.UserName
                     FROM dbo.Visits v JOIN dbo.vwDestinations d ON v.DestID = d.DestID JOIN dbo.Users u ON v.UserID = u.UserID ORDER BY VisitID DESC`)
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
@@ -18,7 +23,12 @@ router.get('/', function (req, res, next) {
 router.get('/UserVisits/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT v.*, d.Destination, d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, d.SpecName, d.ImpName, d.VisitsNo, u.UserName
+    request.query(`SELECT v.VisitID ,v.VisitDate ,v.DestID ,v.UserID ,v.VisitTime ,v.GeneralComment ,
+                        v.VisitType ,v.AccompanyID ,v.CreateDate ,v.HospitalVisit ,v.DoctorName ,v.SpecID, 
+                        CASE WHEN v.HospitalVisit = 1 THEN d.Destination + ' - ' + v.DoctorName ELSE d.Destination END Destination, 
+                        d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, 
+                        CASE WHEN v.HospitalVisit = 1 THEN (SELECT SpecName FROM dbo.MediSpecification WHERE SpecID = v.SpecID) 
+                        ELSE d.SpecName END SpecName, d.ImpName, d.VisitsNo, u.UserName
                     FROM dbo.Visits v JOIN dbo.vwDestinations d ON v.DestID = d.DestID JOIN dbo.Users u ON v.UserID = u.UserID
                     WHERE v.UserID IN (SELECT ${req.params.id} UNION SELECT UserID FROM dbo.fncUserChain(${req.params.id}))`)
         .then(function (recordset) { res.json(recordset); })
@@ -37,10 +47,14 @@ router.get('/UserVisitsCount/:id', function (req, res, next) {
 router.get('/UserVisitsDate/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var request = new sql.Request(sqlConn);
-    request.query(`SELECT v.*, d.Destination, d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, d.SpecName, d.ImpName
-                    , d.VisitsNo, u.UserName, s.LineName
+    request.query(`SELECT v.VisitID ,v.VisitDate ,v.DestID ,v.UserID ,v.VisitTime ,v.GeneralComment ,
+                        v.VisitType ,v.AccompanyID ,v.CreateDate ,v.HospitalVisit ,v.DoctorName ,v.SpecID, 
+                        CASE WHEN v.HospitalVisit = 1 THEN d.Destination + ' - ' + v.DoctorName ELSE d.Destination END Destination, 
+                        d.DestType, d.Address, d.RegionID, d.RegionName, d.ProvinceID, 
+                        CASE WHEN v.HospitalVisit = 1 THEN (SELECT SpecName FROM dbo.MediSpecification WHERE SpecID = v.SpecID) 
+                        ELSE d.SpecName END SpecName, d.ImpName, d.VisitsNo, u.UserName, s.LineName
                     FROM dbo.Visits v JOIN dbo.vwDestinations d ON v.DestID = d.DestID JOIN dbo.Users u ON v.UserID = u.UserID 
-					JOIN dbo.SalesLines s ON u.SalesLineID = s.SalesLineID
+                    JOIN dbo.SalesLines s ON u.SalesLineID = s.SalesLineID
                     WHERE FORMAT(VisitDate, 'MM-yyyy') = FORMAT(GETDATE(), 'MM-yyyy') 
                     And v.UserID IN (SELECT ${req.params.id} UNION SELECT UserID FROM dbo.fncUserChain(${req.params.id})) 
                     ORDER BY VisitID DESC`)
@@ -95,6 +109,9 @@ router.post('/', function (req, res, next) {
                 request.input("GeneralComment", vis.GeneralComment);
                 request.input("VisitType", vis.VisitType);
                 request.input("AccompanyID", vis.AccompanyID);
+                request.input("HospitalVisit", vis.HospitalVisit);
+                request.input("DoctorName", vis.DoctorName);
+                request.input("SpecID", vis.SpecID);
                 request.execute("VisitInsert")
                     .then(function (recordset, returnValue, affected) {
                         visID = recordset[0][0].VisitID;
@@ -176,6 +193,9 @@ router.put('/:id', function (req, res, next) {
                 request.input("GeneralComment", vis.GeneralComment);
                 request.input("VisitType", vis.VisitType);
                 request.input("AccompanyID", vis.AccompanyID);
+                request.input("HospitalVisit", vis.HospitalVisit);
+                request.input("DoctorName", vis.DoctorName);
+                request.input("SpecID", vis.SpecID);
                 request.execute("VisitsUpdate")
                     .then(function (recordset) {
                         console.log('Visit Updated');

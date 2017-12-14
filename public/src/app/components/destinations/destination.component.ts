@@ -152,14 +152,16 @@ export class DestinationComponent implements OnInit {
           LineID: ud.LineName
         };
       });
+      if (this.currentUser.jobClass < 1) {
+        this.Formstate = 'Create';
+      } else if (this.currentUser.jobClass === 3) {
+        this.Formstate = 'CreateRequest';
+      }
+      this.headerText = 'Create New Customer';
+      setTimeout(() => {
+        this.showTable = false;
+      }, 500);
     }, err => hf.handleError(err));
-    this.showTable = false;
-    if (this.currentUser.jobClass < 1) {
-      this.Formstate = 'Create';
-    } else if (this.currentUser.jobClass === 3) {
-      this.Formstate = 'CreateRequest';
-    }
-    this.headerText = 'Create New Customer';
   }
   EditThis(id: number) {
     if (this.currentUser.jobClass < 1) {
@@ -195,6 +197,7 @@ export class DestinationComponent implements OnInit {
               return {
                 DestID: this.model.DestID,
                 UserID: ud.UserID,
+                UserName: this.UserList.find(u => u.UserID == ud.UserID).UserName,
                 LineID: ud.LineName
               };
             });
@@ -239,6 +242,36 @@ export class DestinationComponent implements OnInit {
       this.model.RegionID = null;
     }
   }
+  IMSSelected() {
+    if (this.selIMS) {
+      this.filteredDest = this.collection.filter(
+        d => d.IMSID == this.selIMS && d.Approved === true && d.DestType === this.srchObj.DestType
+      );
+      this.toApproveList = this.collection.filter(
+        d =>
+          d.IMSID == this.selIMS && (d.Approved === false || d.Approved == null) && d.DestType === this.srchObj.DestType
+      );
+      this.toRemoveList = this.collection.filter(
+        d => d.IMSID == this.selIMS && d.RemoveRequest === true && d.DestType === this.srchObj.DestType
+      );
+      if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
+        this.toAssignList = this.collection.filter(
+          d => d.IMSID == this.selIMS && d.AssignRequest === true && d.DestType === this.srchObj.DestType
+        );
+      }
+    } else {
+      this.filteredDest = this.collection.filter(d => d.Approved === true);
+      this.toApproveList = this.collection.filter(
+        d => d.Approved === false || d.Approved == null && d.DestType === this.srchObj.DestType
+      );
+      this.toRemoveList = this.collection.filter(d => d.RemoveRequest === true && d.DestType === this.srchObj.DestType);
+      if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
+        this.toAssignList = this.collection.filter(
+          d => d.AssignRequest === true && d.DestType === this.srchObj.DestType
+        );
+      }
+    }
+  }
   HandleForm(formvalid) {
     // event.preventDefault();
     if (
@@ -266,39 +299,31 @@ export class DestinationComponent implements OnInit {
     }
     const newDestination: Destination = this.model;
     newDestination.CreateUser = this.currentUser.userID;
-    newDestination.SpecName = this.MedSpecList.find(
-      sp => sp.SpecID === this.model.MedSpecID
-    ).SpecName;
-    newDestination.RegionName = this.RegionList.find(
-      sp => sp.RegionID === this.model.RegionID
-    ).RegionName;
-    newDestination.RegionProvince =
-      newDestination.RegionName + ' - ' + newDestination.ProvinceID;
-    newDestination.IMS = this.allIMSList.find(
-      sp => sp.IMSID === this.model.IMSID
-    ).IMS;
-    newDestination.ImpName = this.VisImpList.find(
-      sp => sp.ImpID === this.model.VisitImpID
-    ).ImpName;
-    newDestination.VisitsNo = this.VisImpList.find(
-      sp => sp.ImpID === this.model.VisitImpID
-    ).VisitsNo;
-    newDestination.GPSLoclat = parseFloat(
-      (<number>this.mrkPos.lat).toPrecision(12)
-    );
-    newDestination.GPSLoclng = parseFloat(
-      (<number>this.mrkPos.lng).toPrecision(12)
-    );
-    const dest = this.lines
-      .map(l => {
-        const d = this.DestUsers.filter(du => du.LineID == l);
-        if (d.length > 0) {
-          return d[0];
-        } else {
-          return null;
-        }
-      })
-      .filter(du => du != null);
+    newDestination.RegionName = this.RegionList.find(sp => sp.RegionID === this.model.RegionID).RegionName;
+    newDestination.RegionProvince = newDestination.RegionName + ' - ' + newDestination.ProvinceID;
+    newDestination.IMS = this.allIMSList.find(sp => sp.IMSID === this.model.IMSID).IMS;
+    if (this.model.DestType !== 'Hospital') {
+      newDestination.SpecName = this.MedSpecList.find(sp => sp.SpecID === this.model.MedSpecID).SpecName;
+      newDestination.ImpName = this.VisImpList.find(sp => sp.ImpID === this.model.VisitImpID).ImpName;
+      newDestination.VisitsNo = this.VisImpList.find(sp => sp.ImpID === this.model.VisitImpID).VisitsNo;
+    }
+    newDestination.GPSLoclat = parseFloat((<number>this.mrkPos.lat).toPrecision(12));
+    newDestination.GPSLoclng = parseFloat((<number>this.mrkPos.lng).toPrecision(12));
+    let dest
+    if (this.model.DestType !== 'Hospital') {
+      dest = this.lines
+        .map(l => {
+          const d = this.DestUsers.filter(du => du.LineID == l);
+          if (d.length > 0) {
+            return d[0];
+          } else {
+            return null;
+          }
+        })
+        .filter(du => du != null);
+    } else {
+      dest = this.DestUsers
+    }
     switch (this.Formstate) {
       case 'Create':
       case 'CreateRequest':
@@ -451,8 +476,7 @@ export class DestinationComponent implements OnInit {
       this.orderbyString =  '';
     }
   }
-  userSelected(obj) {
-    const index = this.DestUsers.findIndex(d => d.LineID == obj.LineID);
+  userSelected(obj) {const index = this.DestUsers.findIndex(d => d.LineID == obj.LineID);
     if (!obj.userID) {
       this.DestUsers.splice(index, index + 1);
       return;
@@ -460,42 +484,28 @@ export class DestinationComponent implements OnInit {
     const destuser = {
       DestID: this.model.DestID,
       UserID: obj.userID,
+      UserName: this.UserList.find(usr => usr.UserID == obj.userID).UserName,
       LineID: obj.LineID
     };
-    if (index >= 0) {
-      this.DestUsers.fill(destuser, index, index + 1);
+    if (this.model.DestType === 'Hospital') {
+      const idx = this.DestUsers.findIndex(d => d.UserID == obj.userID);
+      if (idx >= 0) {
+        this.DestUsers.fill(destuser, idx, idx + 1);
+      } else {
+        this.DestUsers.push(destuser);
+      }
     } else {
-      this.DestUsers.push(destuser);
+      if (index >= 0) {
+        this.DestUsers.fill(destuser, index, index + 1);
+      } else {
+        this.DestUsers.push(destuser);
+      }
     }
   }
-  IMSSelected() {
-    if (this.selIMS) {
-      this.filteredDest = this.collection.filter(
-        d => d.IMSID == this.selIMS && d.Approved === true
-      );
-      this.toApproveList = this.collection.filter(
-        d =>
-          d.IMSID == this.selIMS && (d.Approved === false || d.Approved == null)
-      );
-      this.toRemoveList = this.collection.filter(
-        d => d.IMSID == this.selIMS && d.RemoveRequest === true
-      );
-      if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
-        this.toAssignList = this.collection.filter(
-          d => d.IMSID == this.selIMS && d.AssignRequest === true
-        );
-      }
-    } else {
-      this.filteredDest = this.collection.filter(d => d.Approved === true);
-      this.toApproveList = this.collection.filter(
-        d => d.Approved === false || d.Approved == null
-      );
-      this.toRemoveList = this.collection.filter(d => d.RemoveRequest === true);
-      if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
-        this.toAssignList = this.collection.filter(
-          d => d.AssignRequest === true
-        );
-      }
+  RemoveUser(id) {
+    if (id) {
+      const idx = this.DestUsers.findIndex(d => d.UserID == id);
+      this.DestUsers.splice(idx, idx + 1);
     }
   }
   log({ target: marker }, str) {

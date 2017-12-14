@@ -83,4 +83,10 @@ export class DestinationService {
   checkMaxVisit(id: number, userID: number, visitDate: string) {
     return this.http.get(this.url + 'checkMaxVisit/' + id + '.' + userID + '.' + visitDate, this.options).map(res => res.json());
   }
+  getUserHospitals(userId) {
+    return this.http.get(this.url + 'getUserHospitals/' + userId, this.options).map(res => res.json());
+  }
+  getHospitalDoctors(destID) {
+    return this.http.get(this.url + 'getHospitalDoctors/' + destID, this.options).map(res => res.json());
+  }
 }

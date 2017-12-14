@@ -4,7 +4,7 @@
     <h2> {{headerText}} </h2>
     <h3> {{srchObj.DestType}} </h3>
     <button *ngIf="!Formstate && currentUser.jobClass < 1 " class="btn btn-primary" (click)="CreateNew()">Create New</button>
-    <button *ngIf="!Formstate && currentUser.jobClass == 3 " class="btn btn-primary" (click)="CreateNew()">Request Adding New Customer</button>
+    <button *ngIf="!Formstate && currentUser.jobClass == 3 " class="btn btn-primary" (click)="CreateNew()">Request Adding New {{srchObj.DestType}}</button>
     <!--<br><br>&& (curMonth==6 || curMonth==12)-->
     <div class="alert alert-danger" *ngIf="errorMessage">
       <p>{{errorMessage}}</p>
@@ -19,9 +19,9 @@
       <li id="tab3" role="presentation" class="tabs">
         <a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Pharmacy')">Pharmacy</a>
       </li>
-      <!-- <li id="tab4" role="presentation" class="tabs">
+      <li id="tab4" role="presentation" class="tabs">
         <a data-toggle="tab" href="javascript:void(0)" (click)="TabClicked('Hospital')">Hospital</a>
-      </li> -->
+      </li>
     </ul>
     <div class="form-group row alert alert-success" style="margin: 10px 5px; padding: 5px;">
       <label for="IMSID" class="control-label col-md-2 col-sm-2 text-right">IMS Region</label>
@@ -231,25 +231,25 @@
     <form #f="ngForm" (submit)="HandleForm(f.valid)">
       <div class="form-horizontal">
 
-        <h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this customer ?</h2>
+        <h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this {{srchObj.DestType}} ?</h2>
         <br>
         <div class="card">
           <h3 class="card-header">Basic Data</h3>
           <div class="card-block">
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !destin.valid }">
               <label for="Destination" class="control-label col-md-2 col-sm-2">{{srchObj.DestType}} Name
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-10 col-sm-10">
                 <input class="form-control" type="text" name="Destination" [(ngModel)]="model.Destination" #destin="ngModel" required [readOnly]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                 <div class='error' *ngIf="destin.touched && !destin.valid">
-                  <div class="alert alert-danger" *ngIf="destin.hasError('required')">Customer Name is required.</div>
+                  <div class="alert alert-danger" *ngIf="destin.hasError('required')">{{srchObj.DestType}} Name is required.</div>
                 </div>
               </div>
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !provinceID.valid }">
               <label for="ProvinceID" class="control-label col-md-2 col-sm-2">Province
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-10 col-sm-10">
                 <select class="form-control" name="ProvinceID" [(ngModel)]="model.ProvinceID" #provinceID="ngModel" required (change)="onProvinceChanged($event)"
@@ -264,7 +264,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !regionID.valid }">
               <label for="RegionID" class="control-label col-md-2 col-sm-2">Region
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-10 col-sm-10">
                 <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" (change)="generateCity()" #regionID="ngModel" required
@@ -279,7 +279,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !imsID.valid }">
               <label for="IMSID" class="control-label col-md-2 col-sm-2">IMS Region
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-10 col-sm-10">
                 <select class="form-control" name="IMSID" [(ngModel)]="model.IMSID" #imsID="ngModel" required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
@@ -293,7 +293,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && (!city.valid || !street.valid ) }">
               <label for="Address" class="control-label col-md-2 col-sm-2">Address 1
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-5 col-sm-5">
                 <input class="form-control" type="text" name="City" placeholder="City" [(ngModel)]="model.City" #city="ngModel" (change)="generateAddress()"
@@ -306,7 +306,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && (!build.valid || !flor.valid || !flat.valid ) }">
               <label for="Address" class="control-label col-md-2 col-sm-2">Address 2
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-4 col-sm-4">
                 <input class="form-control" type="text" name="Building" placeholder="Building No." [(ngModel)]="model.Building" #build="ngModel"
@@ -327,12 +327,13 @@
                 <textarea rows="2" cols="10" class="form-control" name="Address" [(ngModel)]="model.Address" #address="ngModel" readonly></textarea>
               </div>
             </div>
-            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !specID.valid }">
+            <div *ngIf="srchObj.DestType != 'Hospital'" class="form-group" [ngClass]="{ 'has-error': f.submitted && !specID.valid }">
               <label for="MedSpecID" class="control-label col-md-2 col-sm-2">Speciality
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="MedSpecID" [(ngModel)]="model.MedSpecID" #specID="ngModel" required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
+                <select class="form-control" name="MedSpecID" [(ngModel)]="model.MedSpecID" #specID="ngModel"
+                  required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                   <option value="">Select a Speciality...</option>
                   <option *ngFor="let i of MedSpecList" [ngValue]="i.SpecID">{{i.SpecName}}</option>
                 </select>
@@ -341,12 +342,13 @@
                 </div>
               </div>
             </div>
-            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !impID.valid }">
+            <div *ngIf="srchObj.DestType != 'Hospital'" class="form-group" [ngClass]="{ 'has-error': f.submitted && !impID.valid }">
               <label for="VisitImpID" class="control-label col-md-2 col-sm-2">Importance
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="VisitImpID" [(ngModel)]="model.VisitImpID" #impID="ngModel" required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
+                <select class="form-control" name="VisitImpID" [(ngModel)]="model.VisitImpID" #impID="ngModel"
+                  required [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
                   <option value="">Select an Importance...</option>
                   <option *ngFor="let i of VisImpList" [ngValue]="i.ImpID">{{i.ImpName}} - {{i.VisitsNo}} Visits</option>
                 </select>
@@ -358,11 +360,32 @@
           </div>
         </div>
         <div class="card">
-          <h3 class="card-header">the Customer will be visited by:</h3>
-          <div class="card-block">
+          <h3 class="card-header">the {{srchObj.DestType}} will be visited by:</h3>
+          <div *ngIf="srchObj.DestType != 'Hospital'" class="card-block">
             <div *ngFor="let line of lines">
               <dest-lineusers [UserList]="UserList" [line]="line" (userSelected)="userSelected($event)" [disable]="!(Formstate =='Create' || Formstate =='Edit')"></dest-lineusers>
             </div>
+          </div>
+          <div *ngIf="srchObj.DestType == 'Hospital'" class="card-block">
+            <dest-lineusers [UserList]="UserList" [line]="'All'" (userSelected)="userSelected($event)" [disable]="!(Formstate =='Create' || Formstate =='Edit')"></dest-lineusers>
+            <table calss="table table-responsive table-hover">
+              <colgroup>
+                <col class="w-10">
+                <col class="w-90">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <th>User Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let usr of DestUsers">
+                  <td><button type="button" class="btn btn-danger" title="Delete" (click)='RemoveUser(usr.UserID)'><i class="glyphicon glyphicon-trash"></i></button></td>
+                  <td>{{usr.UserName}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -381,7 +404,7 @@
         </div>
         <br>
 
-        <div class="card">
+        <div class="card" *ngIf="srchObj.DestType != 'Hospital'">
           <h3 class="card-header">Complementary Data</h3>
           <div class="card-block">
             <div class="form-group">
@@ -392,7 +415,7 @@
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mobile.valid }">
               <label for="Mobile" class="control-label col-md-2 col-sm-2">Mobile
-                <span class="require-red">*</span>
+                <span class="text-danger">*</span>
               </label>
               <div class="col-md-10 col-sm-10">
                 <input class="form-control" type="text" name="Mobile" [(ngModel)]="model.Mobile" #mobile="ngModel" required [disabled]="Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">

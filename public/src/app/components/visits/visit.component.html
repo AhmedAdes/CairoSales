@@ -2,7 +2,8 @@
   <div class="card-header">
 
     <h2> {{headerText}} </h2>
-    <button *ngIf="!Formstate" class="btn btn-primary" (click)="CreateNew()">Create New</button>
+    <button *ngIf="!Formstate" class="btn btn-primary" (click)="CreateNew(false)">Create New Visit</button>
+    <button *ngIf="!Formstate" class="btn btn-primary" (click)="CreateNew(true)">Create New Hospital Visit</button>
     <br *ngIf="!Formstate">
     <div class="alert alert-danger" *ngIf="errorMessage">
       <p>{{errorMessage}}</p>
@@ -14,9 +15,9 @@
       <label for="userID" class="control-lable col-md-3 text-right">Select a User</label>
       <div class="col-md-9">
         <select class="form-control" name="userID" (change)="UserChanged($event)">
-                    <option value="null">Select a User...</option>
-                    <option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName + " @ "+ user.LineName}}</option>
-                </select>
+          <option value="null">Select a User...</option>
+          <option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName + " @ "+ user.LineName}}</option>
+        </select>
       </div>
     </div>
     <div *ngIf="selUser">
@@ -27,99 +28,153 @@
   </div>
 
   <div class="card-block" *ngIf="Formstate">
-    <form [formGroup]="inFrm" (submit)="inFrm.valid && HandleForm($event)" novalidate>
+    <form [formGroup]="inFrm" (submit)="HandleForm(inFrm.value)" novalidate>
       <div class="form-horizontal">
-
         <h2 *ngIf="Formstate == 'Delete'">Are you sure you want to delete this visit ?</h2>
         <br>
         <div class="card">
           <h3 class="card-header alert alert-info" style="margin: 10px 5px; padding: 5px;">Basic Data</h3>
           <div class="card-block">
-            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visType'].valid }">
+            <div class="form-group" [ngClass]="{ 'has-error': inFrm.get('submitted') && !inFrm.get('visType').valid }">
               <label for="VisitType" class="control-label col-md-2 col-sm-2">Visit Type</label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="VisitType" [(ngModel)]="model.VisitType" [formControl]="inFrm.controls['visType']">
-                                    <option value="">Select a Visit Type...</option>
-                                    <option *ngFor="let i of visTypes" [ngValue]="i.name">{{i.name}}</option>
-                                </select>
-                <div class='error' *ngIf="inFrm.controls['visType'].touched && !inFrm.controls['visType'].valid">
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['visType'].hasError('required')">Visit Type is required.</div>
+                <select class="form-control" name="VisitType" [(ngModel)]="model.VisitType" formControlName="visType">
+                  <option value="">Select a Visit Type...</option>
+                  <option *ngFor="let i of visTypes" [ngValue]="i.name">{{i.name}}</option>
+                </select>
+                <div class='error' *ngIf="inFrm.get('visType').touched && !inFrm.get('visType').valid">
+                  <div class="alert alert-danger" *ngIf="inFrm.get('visType').hasError('required')">Visit Type is required.</div>
                 </div>
               </div>
             </div>
-            <div class="form-group" *ngIf="model.VisitType == 'Coaching Visit-With Manager'" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['accompanyID'].valid }">
+            <div class="form-group" *ngIf="model.VisitType == 'Coaching Visit-With Manager'" [ngClass]="{ 'has-error': inFrm.get('submitted') && !inFrm.get('accompanyID').valid }">
               <label for="AccompanyID" class="control-label col-md-2 col-sm-2">Accompanied By</label>
               <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="AccompanyID" [(ngModel)]="model.AccompanyID" [formControl]="inFrm.controls['accompanyID']">
-                                    <option value="">Select a Manger...</option>
-                                    <option *ngFor="let i of managers" [ngValue]="i.UserID">{{i.UserName}} - {{i.JobClass}}</option>
-                                </select>
-                <div class='error' *ngIf="inFrm.controls['accompanyID'].touched && !inFrm.controls['accompanyID'].valid">
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['accompanyID'].hasError('mngrRequired')">Accompanied By field is required.</div>
+                <select class="form-control" name="AccompanyID" [(ngModel)]="model.AccompanyID" formControlName="accompanyID">
+                  <option value="">Select a Manger...</option>
+                  <option *ngFor="let i of managers" [ngValue]="i.UserID">{{i.UserName}} - {{i.JobClass}}</option>
+                </select>
+                <div class='error' *ngIf="inFrm.get('accompanyID').touched && !inFrm.get('accompanyID').valid">
+                  <div class="alert alert-danger" *ngIf="inFrm.get('accompanyID').hasError('mngrRequired')">Accompanied By field is required.</div>
                 </div>
               </div>
             </div>
-            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visDate'].valid }">
+            <div class="form-group" [ngClass]="{ 'has-error': inFrm.get('submitted') && !inFrm.get('visDate').valid }">
               <label for="VisitDate" class="control-label col-md-2 col-sm-2">Visit Date</label>
               <div class="col-md-10 col-sm-10">
-                <input id="VisitDate" class="form-control" type="date" name="VisitDate" [(ngModel)]="cnvVisitDate" [formControl]="inFrm.controls['visDate']"
+                <input id="VisitDate" class="form-control" type="date" name="VisitDate" [(ngModel)]="cnvVisitDate" formControlName="visDate"
                   [min]="yesterday" [max]="thisday">
-                <div class='error' *ngIf="(inFrm.controls['visDate'].touched && !inFrm.controls['visDate'].valid) || (inFrm.get('submitted') && !inFrm.controls['visDate'].valid)">
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('required')">Visit Date is required.</div>
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('minDate')">Visit Date must be within two days old.</div>
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['visDate'].hasError('maxDate')">Visit Date must be within two days old.</div>
+                <div class='error' *ngIf="(inFrm.get('visDate').touched && !inFrm.get('visDate').valid) || (inFrm.get('submitted') && !inFrm.get('visDate').valid)">
+                  <div class="alert alert-danger" *ngIf="inFrm.get('visDate').hasError('required')">Visit Date is required.</div>
+                  <div class="alert alert-danger" *ngIf="inFrm.get('visDate').hasError('minDate')">Visit Date must be within two days old.</div>
+                  <div class="alert alert-danger" *ngIf="inFrm.get('visDate').hasError('maxDate')">Visit Date must be within two days old.</div>
                 </div>
               </div>
             </div>
-            <!--<div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['visTime'].valid }">
-                <label for="VisitTime" class="control-label col-md-2 col-sm-2">Visit Time</label>
+            <!-- <div class="form-group" [ngClass]="{ 'has-error': inFrm.get('submitted') && !visTime.valid }">
+                     <label for="VisitTime" class="control-label col-md-2 col-sm-2">Visit Time</label>
+                     <div class="col-md-10 col-sm-10">
+                        <input class="form-control" type="time" name="VisitTime" [(ngModel)]="cnvVisitTime" formControlName="visTime">
+                        <div class='error' *ngIf="(visTime.touched && !visTime.valid) || (inFrm.get('submitted') && !visTime.valid)">
+                           <div class="alert alert-danger" *ngIf="visTime.hasError('required')">Visit Time is required.</div>
+                           <div class="alert alert-danger" *ngIf="visTime.hasError('maxTime')">Visit Time is Invalid.</div>
+                        </div>
+                     </div>
+                  </div> -->
+            <div *ngIf="isHospital">
+              <div class="form-group" [ngClass]="{ 'has-error': inFrm.get('submitted') && !inFrm.get('destination').valid }">
+                <label for="DestID" class="control-label col-md-2 col-sm-2">Hospital</label>
                 <div class="col-md-10 col-sm-10">
-                    <input class="form-control" type="time" name="VisitTime" [(ngModel)]="cnvVisitTime" [formControl]="inFrm.controls['visTime']">
-                    <div class='error' *ngIf="(inFrm.controls['visTime'].touched && !inFrm.controls['visTime'].valid) || (inFrm.submitted && !inFrm.controls['visTime'].valid)">
-                        <div class="alert alert-danger" *ngIf="inFrm.controls['visTime'].hasError('required')">Visit Time is required.</div>
-                        <div class="alert alert-danger" *ngIf="inFrm.controls['visTime'].hasError('maxTime')">Visit Time is Invalid.</div>
-                    </div>
+                  <select class="form-control" name="DestID" [(ngModel)]="model.DestID" formControlName="destination">
+                    <option value="">Select a Hospital...</option>
+                    <option *ngFor="let i of ViewDests" [ngValue]="i.DestID">{{i.Destination}}</option>
+                  </select>
+                  <div class='error' *ngIf="(inFrm.get('destination').touched && !inFrm.get('destination').valid) || (inFrm.get('submitted') && !inFrm.get('destination').valid)">
+                    <div class="alert alert-danger" *ngIf="inFrm.get('destination').hasError('required')">Hospital is required.</div>
+                    <div class="alert alert-danger" *ngIf="inFrm.get('destination').hasError('maxVisit')">this Hospital has been visited the max numbers of visits allowed this month.</div>
+                  </div>
                 </div>
-            </div>-->
-            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['region'].valid }">
-              <label for="RegionID" class="control-label col-md-2 col-sm-2">Regions</label>
-              <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" [formControl]="inFrm.controls['region']" (change)="onRegChange($event)">
+              </div>
+              <div class="card row" formGroupName="docGroup">
+                <h4 class="card-header text-center">Available Doctors
+                  <small class="text-muted">choose one from the list</small>
+                </h4>
+                <div class="card-body">
+                  <div class="col-md-6 col-sm-12 col-12">
+                    <div class="form-group">
+                      <label for="Doctor" class="control-label col-md-4 col-sm-4">Doctor</label>
+                      <div class="col-md-8 col-sm-8">
+                        <input class="form-control" type="text" name="Doctor" formControlName="doctor">
+                        <small class="text-muted">you can search for existing doctos or add new one</small>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="MedSpecID" class="control-label col-md-4 col-sm-4">Speciality</label>
+                      <div class="col-md-8 col-sm-8">
+                        <select class="form-control" name="MedSpecID" formControlName="spec" [disabled]="Formstate == 'Complete Data' || Formstate == 'RemoveRequest' || Formstate == 'AssignRequest'">
+                          <option value="">Select a Speciality...</option>
+                          <option *ngFor="let i of MedSpecList" [ngValue]="i.SpecID">{{i.SpecName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="button" class="btn btn-info pull-right" (click)="AddDoctor()"> Add New </button>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-12">
+                    <ul id="doclist" class="list-group list-group-flush d-flex flex-column"
+                      style="width: 100%; height: 250px; border: 1.5px gray solid; overflow-y: scroll;">
+                      <a href="javascript:void(0)" *ngFor="let doct of hsptlDocs; let i = index" class="list-group-item list-group-item-action"
+                        id="'doc' + i" (click)="listClick($event, i)" [ngClass]="{'active': selectedIndex == i}">
+                        <strong>{{doct.DoctorName}}</strong> :
+                        <small class="text-light">{{doct.SpecName}}</small>
+                      </a>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!isHospital">
+              <div class="form-group" [ngClass]="{ 'has-error': inFrm.get('submitted') && !inFrm.get('region').valid }">
+                <label for="RegionID" class="control-label col-md-2 col-sm-2">Regions</label>
+                <div class="col-md-10 col-sm-10">
+                  <select class="form-control" name="RegionID" [(ngModel)]="model.RegionID" formControlName="region" (change)="onRegChange($event)">
                     <option value="">Select a Province...</option>
                     <option *ngFor="let i of regions" [ngValue]="i.RegionID">{{i.RegionName}} - {{i.ProvinceID}}</option>
-                </select>
-                <div class='error' *ngIf="inFrm.controls['region'].touched && !inFrm.controls['region'].valid">
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['region'].hasError('required')">Province is required.</div>
+                  </select>
+                  <div class='error' *ngIf="inFrm.get('region').touched && !inFrm.get('region').valid">
+                    <div class="alert alert-danger" *ngIf="inFrm.get('region').hasError('required')">Province is required.</div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-offset-2 col-sm-offset-2">
-                <label class="radio-inline control-label col-md-5 col-sm-5">
-                                    <input type="radio" name="DestType" (change)="onDestTypeChange($event, 'Clinic (Doctor)')" [checked]="model.DestType == 'Clinic (Doctor)'">Clinic (Doctor)
-                                </label>
-                <label class="radio-inline control-label col-md-5 col-sm-5">
-                                    <input type="radio" name="DestType" (change)="onDestTypeChange($event, 'Pharmacy')" [checked]="model.DestType == 'Pharmacy'">Pharmacy
-                                </label>
+              <div class="form-group">
+                <div class="col-md-offset-2 col-sm-offset-2">
+                  <label class="radio-inline control-label col-md-5 col-sm-5">
+                    <input type="radio" name="DestType" (change)="onDestTypeChange($event, 'Clinic (Doctor)')" [checked]="model.DestType == 'Clinic (Doctor)'">Clinic (Doctor)
+                  </label>
+                  <label class="radio-inline control-label col-md-5 col-sm-5">
+                    <input type="radio" name="DestType" (change)="onDestTypeChange($event, 'Pharmacy')" [checked]="model.DestType == 'Pharmacy'">Pharmacy
+                  </label>
+                </div>
               </div>
-            </div>
-            <div class="form-group" [ngClass]="{ 'has-error': inFrm.submitted && !inFrm.controls['destination'].valid }">
-              <label for="DestID" class="control-label col-md-2 col-sm-2">Customer</label>
-              <div class="col-md-10 col-sm-10">
-                <select class="form-control" name="DestID" [(ngModel)]="model.DestID" [formControl]="inFrm.controls['destination']" (change)="onDestChange($event)">
-                                    <option value="">Select a Customer...</option>
-                                    <option *ngFor="let i of ViewDests" [ngValue]="i.DestID">{{i.Destination}}</option>
-                                </select>
-                <div class='error' *ngIf="(inFrm.controls['destination'].touched && !inFrm.controls['destination'].valid) || (inFrm.get('submitted') && !inFrm.controls['destination'].valid)">
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['destination'].hasError('required')">Customer is required.</div>
-                  <div class="alert alert-danger" *ngIf="inFrm.controls['destination'].hasError('maxVisit')">this Customer has been visited the max numbers of visits allowed this month.</div>
+              <div class="form-group" [ngClass]="{ 'has-error': inFrm.get('submitted') && !inFrm.get('destination').valid }">
+                <label for="DestID" class="control-label col-md-2 col-sm-2">Customer</label>
+                <div class="col-md-10 col-sm-10">
+                  <select class="form-control" name="DestID" [(ngModel)]="model.DestID" formControlName="destination">
+                    <option value="">Select a Customer...</option>
+                    <option *ngFor="let i of ViewDests" [ngValue]="i.DestID">{{i.Destination}}</option>
+                  </select>
+                  <div class='error' *ngIf="(inFrm.get('destination').touched && !inFrm.get('destination').valid) || (inFrm.get('submitted') && !inFrm.get('destination').valid)">
+                    <div class="alert alert-danger" *ngIf="inFrm.get('destination').hasError('required')">Customer is required.</div>
+                    <div class="alert alert-danger" *ngIf="inFrm.get('destination').hasError('maxVisit')">this Customer has been visited the max numbers of visits allowed this month.</div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label for="GeneralComment" class="control-label col-md-2 col-sm-2">Overall Comments</label>
               <div class="col-md-10 col-sm-10">
-                <textarea rows="4" cols="10" class="form-control" type="text" name="GeneralComment" [(ngModel)]="model.GeneralComment" [formControl]="inFrm.controls['generalComment']"></textarea>
+                <textarea rows="4" cols="10" class="form-control" type="text" name="GeneralComment" [(ngModel)]="model.GeneralComment" formControlName="generalComment"></textarea>
               </div>
             </div>
           </div>
@@ -144,7 +199,8 @@
                 <td>{{item.DrugName}}</td>
                 <td>{{item.Comment}}</td>
                 <td>
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#surveyModal" (click)="prepareDrgAnsrs(i)"><i class="fa fa-comment"></i> Survey</button>
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#surveyModal" (click)="prepareDrgAnsrs(i)">
+                    <i class="fa fa-comment"></i> Survey</button>
                   <button type="button" class="btn btn-default" *ngIf="Formstate!='Details' && Formstate!='Delete'" (click)="DeleteDrug(i)">Delete</button>
                 </td>
               </tr>
@@ -172,13 +228,15 @@
                 <td>{{item.GiftName}}</td>
                 <td>{{item.ToolName}}</td>
                 <td>{{item.Qty}}</td>
-                <td><button type="button" class="btn btn-default" (click)="DeleteGift(i)">Delete</button></td>
+                <td>
+                  <button type="button" class="btn btn-default" (click)="DeleteGift(i)">Delete</button>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="form-group no-print col-md-offset-2 col-md-10 col-sm-10">
-          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'" [disabled]='!inFrm.valid || inFrm.get("submitted")'>Save</button>          |
+          <button type="submit" value="Save" class="btn btn-info" *ngIf="Formstate!='Details' && Formstate!='Delete'">Save</button> |
           <button type="submit" value="Delete" class="btn btn-info" *ngIf="Formstate == 'Delete'">Delete</button> |
           <button type="button" (click)="TableBack()" class="btn btn-danger">Back to List</button>
         </div>
@@ -197,12 +255,13 @@
       <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Survey of Product: {{selDrugName}}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
         <div *ngFor="let qst of drgAnsrs; let i = index" class="col-lg-offset-2 col-md-offset-2 col-lg-10 col-md-10 col-sm-12 text-left">
-          <label class="control-label">{{i+1}}- {{qst.QText}} ?</label><br>
+          <label class="control-label">{{i+1}}- {{qst.QText}} ?</label>
+          <br>
           <md-radio-group class="x-radio-group">
             <div *ngFor="let ans of qst.Answers">
               <md-radio-button class="x-radio-button" [value]="ans.AnswerID" [checked]="ans.checked" style="font-weight: normal!important">{{ans.AnswerText}}</md-radio-button>
@@ -260,13 +319,16 @@
         <div class="card">
           <h3 class="card-header">Location on map</h3>
           <div class="card-block">
-            <button type="button" (click)="ChangePosition()">Focus on Province</button><br><br>
+            <button type="button" (click)="ChangePosition()">Focus on Province</button>
+            <br>
+            <br>
             <ngui-map #map [center]="locPos" [zoom]="zoom" geoFallbackCenter="" (idle)="onIdle($event)">
               <marker [position]="locPos" [draggable]="true" (dragend)="log($event, 'dragend')">
               </marker>
             </ngui-map>
           </div>
-        </div><br>
+        </div>
+        <br>
 
         <div class="card">
           <h3 class="card-header">Complementary Data</h3>

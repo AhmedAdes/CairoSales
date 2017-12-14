@@ -4,10 +4,10 @@ import { DestinationUser } from '../../../Models';
     selector: 'dest-lineusers',
     template: `
     <div class="row form-group">
-        <label for="SelectUser" class="control-label col-md-4 col-sm-4">{{line}} Sales Line</label>
-         <div class="col-md-8 col-sm-8">
+        <label for="SelectUser" class="control-label col-md-3 col-sm-4">{{line}} Sales Line</label>
+         <div class="col-md-9 col-sm-8">
             <select class="form-control" name="SelectUser" [(ngModel)]="SelectedUser"
-                (change)="SelectChanged()" #usr="ngModel" [disabled]="disable">
+                (change)="line != 'All' && SelectChanged()" #usr="ngModel" [disabled]="disable">
                 <option value="">Select a Medical Rep.</option>
                 <option *ngFor="let i of dispUsers" [ngValue]="i.UserID">{{i.UserName}}</option>
             </select>
@@ -15,6 +15,8 @@ import { DestinationUser } from '../../../Models';
                 <div class="alert alert-danger" *ngIf="usr.hasError('required')">A Rep. is required.</div>
             </div>
         </div>
+        <button type="button" class="col-md-offset-2 btn btn-primary" *ngIf="line == 'All' && !disable"
+         (click)="SelectChanged()">Add User</button>
     </div>
     `
 })
@@ -29,8 +31,8 @@ export class LineUsersComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.dispUsers = this.UserList.filter(u => u.LineName == this.line)
-        var SelectedUsers = this.dispUsers.filter(u => u.selected == true)
+        this.dispUsers = this.line == 'All' ? this.UserList : this.UserList.filter(u => u.LineName == this.line)
+        const SelectedUsers = this.dispUsers.filter(u => u.selected == true)
         if (SelectedUsers.length > 0) { this.SelectedUser = SelectedUsers[0].UserID }
     }
 

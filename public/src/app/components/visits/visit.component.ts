@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {
-  VisitService, GiftService, DrugService, DestinationService,
+  VisitService, GiftService, DrugService, DestinationService, MedSpecService,
   UserRegionService, AuthenticationService, SurveyQuestionService
 } from '../../services';
 import { emailValidator, matchingPasswords, minDate, maxDate } from '../../pipes/validators';
 import {
-  Visits, CurrentUser, VisitDrugs, Drugs, VisitGifts, Gifts,
+  Visits, CurrentUser, VisitDrugs, Drugs, VisitGifts, Gifts, MedSpec,
   Destination, Region, VisitTypes, User, VisitAnswers, SurveyAnswer
 } from '../../Models';
 import * as hf from '../helpers/helper.functions'
@@ -52,6 +52,8 @@ export class VisitComponent implements OnInit {
   selUser: any
   selDrugName: any
   stillSaving: boolean
+  MedSpecList: MedSpec[] = [];
+  hsptlDocs = []
   locPos: any
   mrkPos: any
   fallback: '[30.082824203107098, 31.34755614624021]'
@@ -59,31 +61,16 @@ export class VisitComponent implements OnInit {
   public modalRef: BsModalRef;
   showCustModal: boolean
   spinner = true;
+  isHospital = false;
+  selectedIndex
   @ViewChild('template') custTemp: TemplateRef<any>
 
   constructor(private serv: VisitService, private srvGift: GiftService, private srvDrug: DrugService,
     private srvDest: DestinationService, private srvUreg: UserRegionService, private modalService: BsModalService,
-    private auth: AuthenticationService, fb: FormBuilder, private srvQ: SurveyQuestionService) {
-    this.inFrm = fb.group({
-      'visType': [null, Validators.required],
-      'accompanyID': [null],
-      'visDate': [this.cnvVisitDate, Validators.required],
-      // 'visTime': [this.cnvVisitTime, Validators.required],
-      'region': [null, Validators.required],
-      'destination': [null, Validators.required],
-      'generalComment': [null]
-    }, {
-        validator: (group: FormGroup) => {
-          if (group.controls['visType'].value === 'Coaching Visit-With Manager' && !group.controls['accompanyID'].value) {
-            return { mngrRequired: true };
-          }
-        }
-      })
-    this.inFrm.controls['visDate'].valueChanges.subscribe(val => this.onDateChanged(val))
-    // this.inFrm.controls['visTime'].valueChanges.subscribe(val => this.onTimeChanged(val))
-  }
+    private auth: AuthenticationService, fb: FormBuilder, private srvQ: SurveyQuestionService, private srvSpc: MedSpecService) {}
 
   ngOnInit() {
+    this.InitiatetheForm()
     this.serv.getUserVisitsByDate(this.currentUser.userID).subscribe(cols => {
       this.collection = cols;
       const unique = this.collection.map(function (obj) { return { UserID: obj.UserID, UserName: obj.UserName, LineName: obj.LineName } });
@@ -94,6 +81,7 @@ export class VisitComponent implements OnInit {
         this.srvUreg.getUserManagers(this.currentUser.userID).subscribe(mng => {
           this.managers = mng
           this.srvQ.getAllAnswers().subscribe(ans => {
+            this.srvSpc.getSpec().subscribe(spc => this.MedSpecList = spc)
             this.allAns = ans
             this.TableBack();
           })
@@ -101,8 +89,31 @@ export class VisitComponent implements OnInit {
       })
     });
   }
-  CreateNew() {
+  InitiatetheForm(): any {
+    this.inFrm = new FormGroup({
+      visType: new FormControl('', Validators.required),
+      accompanyID: new FormControl(''),
+      visDate: new FormControl(this.cnvVisitDate, Validators.required),
+      region: new FormControl('', Validators.required),
+      destination: new FormControl('', Validators.required ),
+      generalComment: new FormControl(''),
+      docGroup: new FormGroup({
+        doctor: new FormControl(''),
+        spec: new FormControl('')
+      })
+    }, (group: FormGroup) => {
+        if (group.controls['visType'].value === 'Coaching Visit-With Manager' && !group.controls['accompanyID'].value) {
+          return { mngrRequired: true };
+        }
+      }
+    )
+    this.inFrm.get('visDate').valueChanges.subscribe(val => this.onDateChanged(val))
+    this.inFrm.get('destination').valueChanges.subscribe(val => this.onDestChange(val))
+    // this.inFrm.controls['visTime'].valueChanges.subscribe(val => this.onTimeChanged(val))
+  }
+  CreateNew(isHosptl) {
     this.model = new Visits();
+    this.isHospital = isHosptl
     this.destModel = new Destination();
     this.model.DestType = 'Clinic (Doctor)';
     this.model.VisitType = 'Single';
@@ -115,10 +126,22 @@ export class VisitComponent implements OnInit {
     this.thisday = this.cnvVisitDate;
     this.inFrm.controls['visDate'].setValidators(Validators.compose([Validators.required, maxDate(new Date(this.cnvVisitDate)),
     minDate(new Date(this.yesterday))]));
+    if (isHosptl) {
+      this.model.DestType = 'Hospital'
+      this.srvDest.getUserHospitals(this.currentUser.userID).subscribe(hsp => {
+        if (hsp.error) {
+          hf.handleError(hsp.error)
+        } else {
+          this.ViewDests = hsp[0]
+          this.showTable = false;
+        }
+      }, err => hf.handleError(err))
+    } else {
+      this.showTable = false;
+    }
     this.VisDrugs = [];
     this.VisGifts = [];
     this.visAnsrs = [];
-    this.showTable = false;
     this.Formstate = 'Create';
     this.headerText = 'Create New Visit';
     this.disableDateField()
@@ -152,27 +175,25 @@ export class VisitComponent implements OnInit {
           this.VisGifts = ret2;
           this.srvQ.getVisitDrugAnswers(id).subscribe(ret3 => {
             this.visAnsrs = ret3
-            if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
-              this.srvDest.getApprovedRegionDestinations(this.model.RegionID).subscribe(dst => {
-                if (dst.error) {
-                  hf.handleError(dst.error)
+            this.isHospital = this.model.HospitalVisit
+            if (this.model.HospitalVisit) {
+              this.srvDest.getUserHospitals(this.currentUser.userID).subscribe(hsp => {
+                if (hsp.error) {
+                  hf.handleError(hsp.error)
                 } else {
-                  this.destinations = dst;
-                  this.ViewDests = this.destinations.filter(obj => obj.DestType === this.model.DestType);
-                  this.destModel = this.destinations.find(obj => obj.DestID === this.model.DestID)
-                  // this.showCustModal = this.checkCustomerFinished()
+                  this.ViewDests = hsp[0]
                   this.showTable = false;
                   this.Formstate = state;
                   this.headerText = state === 'Details' ? 'Visit ' + state : state + ' Visit';
                 }
-              }, err => hf.handleError(err));
+              }, err => hf.handleError(err))
             } else {
-              this.srvDest.getPlanApprovedRegionDestinations(this.model.RegionID, this.currentUser.userID, this.cnvVisitDate)
-                .subscribe(dst => {
+              if (this.currentUser.jobClass < 1 || this.currentUser.jobClass === 99) {
+                this.srvDest.getApprovedRegionDestinations(this.model.RegionID).subscribe(dst => {
                   if (dst.error) {
                     hf.handleError(dst.error)
                   } else {
-                    this.destinations = dst[0];
+                    this.destinations = dst;
                     this.ViewDests = this.destinations.filter(obj => obj.DestType === this.model.DestType);
                     this.destModel = this.destinations.find(obj => obj.DestID === this.model.DestID)
                     // this.showCustModal = this.checkCustomerFinished()
@@ -181,6 +202,22 @@ export class VisitComponent implements OnInit {
                     this.headerText = state === 'Details' ? 'Visit ' + state : state + ' Visit';
                   }
                 }, err => hf.handleError(err));
+              } else {
+                this.srvDest.getPlanApprovedRegionDestinations(this.model.RegionID, this.currentUser.userID, this.cnvVisitDate)
+                  .subscribe(dst => {
+                    if (dst.error) {
+                      hf.handleError(dst.error)
+                    } else {
+                      this.destinations = dst[0];
+                      this.ViewDests = this.destinations.filter(obj => obj.DestType === this.model.DestType);
+                      this.destModel = this.destinations.find(obj => obj.DestID === this.model.DestID)
+                      // this.showCustModal = this.checkCustomerFinished()
+                      this.showTable = false;
+                      this.Formstate = state;
+                      this.headerText = state === 'Details' ? 'Visit ' + state : state + ' Visit';
+                    }
+                  }, err => hf.handleError(err));
+              }
             }
           }, err => hf.handleError(err))
         }, err => hf.handleError(err))
@@ -189,16 +226,25 @@ export class VisitComponent implements OnInit {
   }
   TableBack() {
     this.showTable = true;
-    this.spinner = false
     this.Formstate = null;
     this.headerText = 'Visits';
+    this.spinner = false
+    this.inFrm.reset();
     this.errorMessage = null;
     this.stillSaving = false
-    this.inFrm.reset();
+    this.hsptlDocs = []
   }
-  HandleForm(event?) {
-    event.preventDefault();
+  resetForm() {
+    this.stillSaving = false
+    this.errorMessage = null;
+    this.VisDrugs = []
+    this.VisGifts = []
+    this.inFrm.get('docGroup').get('doctor').setValue('')
+    this.inFrm.get('docGroup').get('spec').setValue('')
+  }
+  HandleForm(formValue) {
     if (this.stillSaving) { return }
+    if (this.inFrm.invalid) { this.stillSaving = false; return }
     if (this.VisDrugs.length <= 0 && this.Formstate !== 'Delete') {
       hf.handleError('Please Add Some Products');
       this.stillSaving = false
@@ -210,6 +256,11 @@ export class VisitComponent implements OnInit {
     this.model.VisitDate = new Date(this.cnvVisitDate);
     this.model.VisitTime = new Date(this.cnvVisitDate + 'T' + this.cnvVisitTime);
     this.model.VisitTime.setHours(this.model.VisitTime.getHours() - 2)
+    this.model.HospitalVisit = this.isHospital
+    if (this.isHospital) {
+      this.model.DoctorName = this.hsptlDocs[this.selectedIndex].DoctorName
+      this.model.SpecID = this.hsptlDocs[this.selectedIndex].SpecID
+    }
     // if (this.model.VisitTime.getHours() > new Date().getHours()) {
     // }
     switch (this.Formstate) {
@@ -218,9 +269,9 @@ export class VisitComponent implements OnInit {
           if (ret.error) {
             ret.error.message && ret.error.message
               .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
-                        in the same day`) : hf.handleError(ret.error)
+                        in the same day`) : hf.handleError(ret.error); this.stillSaving = false
           } else {
-            this.ngOnInit();
+            if (this.isHospital) { this.resetForm(); hf.showSuccessVisit() } else { this.ngOnInit() }
           }
         });
         break;
@@ -229,7 +280,7 @@ export class VisitComponent implements OnInit {
           if (ret.error) {
             ret.error.message && ret.error.message
             .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
-                      in the same day`) : hf.handleError(ret.error)
+                      in the same day`) : hf.handleError(ret.error); this.stillSaving = false
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
@@ -240,7 +291,7 @@ export class VisitComponent implements OnInit {
           if (ret.error) {
             ret.error.message && ret.error.message
             .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
-                      in the same day`) : hf.handleError(ret.error)
+                      in the same day`) : hf.handleError(ret.error); this.stillSaving = false
           } else if (ret.affected > 0) {
             this.ngOnInit();
           }
@@ -299,23 +350,51 @@ export class VisitComponent implements OnInit {
       }
     }
   }
-  onDestChange(newobj) {
-    if (newobj.target.value) {
-      const Dest = newobj.target.value.split(':')[1].trim();
-      this.srvDest.checkMaxVisit(Dest, this.currentUser.userID, this.cnvVisitDate).subscribe(ret => {
+  onDestChange(val) {
+    if (val) {
+      // const Dest = +newobj.target.value.split(':')[1].trim();
+      if (this.isHospital) {
+        this.srvDest.getHospitalDoctors(+val).subscribe(ret => {
+          this.hsptlDocs = ret[0]
+          this.model.RegionID = this.ViewDests.find(d => d.DestID === val).RegionID
+          this.inFrm.get('region').setValue(this.ViewDests.find(d => d.DestID === val).RegionID)
+          if (this.Formstate !== 'Create') {
+            this.selectedIndex = this.hsptlDocs.findIndex(h => h.DoctorName == this.model.DoctorName && h.SpecID == this.model.SpecID)
+          }
+        })
+      } else {
+      this.srvDest.checkMaxVisit(val, this.currentUser.userID, this.cnvVisitDate).subscribe(ret => {
         if (ret.error) {
           hf.handleError(ret.error)
         } else {
-          if (ret.length <= 0) { return }
-          if (ret[0].Allowed) {
-            // this.destModel = this.destinations.find(d => d.DestID == Dest)
-            // this.showCustModal = this.checkCustomerFinished()
-          } else {
-            this.inFrm.controls['destination'].setErrors({ 'maxVisit': true });
+            if (ret.length <= 0) { return }
+            if (ret[0].Allowed) {
+              // this.destModel = this.destinations.find(d => d.DestID == Dest)
+              // this.showCustModal = this.checkCustomerFinished()
+            } else {
+              this.inFrm.controls['destination'].setErrors({ 'maxVisit': true });
+            }
           }
-        }
-      })
+        })
+      }
     }
+  }
+  AddDoctor() {
+    if (this.inFrm.get('docGroup').get('doctor').value && this.inFrm.get('docGroup').get('spec').value ) {
+      if (this.hsptlDocs.findIndex(d => d.DoctorName == this.inFrm.get('docGroup').get('doctor').value &&
+          d.SpecID == this.inFrm.get('docGroup').get('spec').value) <= -1) {
+        const docObj = {
+          DoctorName: this.inFrm.get('docGroup').get('doctor').value,
+          SpecID: this.inFrm.get('docGroup').get('spec').value,
+          SpecName: this.MedSpecList.find(s => s.SpecID == this.inFrm.get('docGroup').get('spec').value).SpecName,
+        }
+        this.hsptlDocs.push(docObj)
+        this.selectedIndex = this.hsptlDocs.length - 1
+      }
+    }
+  }
+  listClick(event, newValue) {
+    this.selectedIndex = newValue;
   }
   onDateChanged(value) {
     // let newtimedate = new Date(value + 'T' + this.cnvVisitTime)

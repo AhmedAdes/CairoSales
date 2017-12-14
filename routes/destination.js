@@ -104,6 +104,22 @@ router.get('/AlldestUsers', function (req, res, next) {
         .then(function (recordset) { res.json(recordset) })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 })
+router.get('/getUserHospitals/:userId', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("UserID", req.params.userId);
+    request.execute(`procGetUserHospitals`)
+        .then(function (recordset) { res.json(recordset) })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+})
+router.get('/getHospitalDoctors/:destID', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("DestID", req.params.destID);
+    request.execute(`procGetHospitalDoctors`)
+        .then(function (recordset) { res.json(recordset) })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+})
 router.post('/', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var dest = req.body.dst;
@@ -175,7 +191,6 @@ router.post('/', function (req, res, next) {
     })
 
 });
-
 router.put('/:id', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     var dest = req.body.dst;

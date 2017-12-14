@@ -18,6 +18,9 @@ export class Visits {
   GeneralComment: string;
   UserName: string;
   LineName: string;
+  HospitalVisit: boolean;
+  DoctorName: string;
+  SpecID: number;
 }
 
 export class VisitDrugs {

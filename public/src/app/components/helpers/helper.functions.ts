@@ -45,3 +45,7 @@ export function handleError(err) {
   }
   swal('Some Error Occured', errorMessage, 'error');
 }
+
+export function showSuccessVisit () {
+  swal('Visit Saved Successfully', 'Continue to add more visits for this Hospital or press the Back to List button', 'success');
+}
