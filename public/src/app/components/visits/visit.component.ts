@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router'
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import {
   VisitService, GiftService, DrugService, DestinationService, MedSpecService,
@@ -32,6 +33,7 @@ export class VisitComponent implements OnInit {
   headerText: string;
   errorMessage: string;
   users: any[] = [];
+  docNameslist: string[] = [];
   destinations: Destination[] = [];
   ViewDests: Destination[] = [];
   regions: Region[] = [];
@@ -62,10 +64,11 @@ export class VisitComponent implements OnInit {
   showCustModal: boolean
   spinner = true;
   isHospital = false;
+  savedSome = false;
   selectedIndex
   @ViewChild('template') custTemp: TemplateRef<any>
 
-  constructor(private serv: VisitService, private srvGift: GiftService, private srvDrug: DrugService,
+  constructor(private serv: VisitService, private srvGift: GiftService, private srvDrug: DrugService, private route: ActivatedRoute,
     private srvDest: DestinationService, private srvUreg: UserRegionService, private modalService: BsModalService,
     private auth: AuthenticationService, fb: FormBuilder, private srvQ: SurveyQuestionService, private srvSpc: MedSpecService) {}
 
@@ -225,6 +228,11 @@ export class VisitComponent implements OnInit {
     }, err => hf.handleError(err));
   }
   TableBack() {
+    if (this.savedSome) {
+      this.savedSome = false
+      this.ngOnInit()
+      return
+    }
     this.showTable = true;
     this.Formstate = null;
     this.headerText = 'Visits';
@@ -238,6 +246,7 @@ export class VisitComponent implements OnInit {
     this.stillSaving = false
     this.errorMessage = null;
     this.VisDrugs = []
+    this.visAnsrs = []
     this.VisGifts = []
     this.inFrm.get('docGroup').get('doctor').setValue('')
     this.inFrm.get('docGroup').get('spec').setValue('')
@@ -247,6 +256,11 @@ export class VisitComponent implements OnInit {
     if (this.inFrm.invalid) { this.stillSaving = false; return }
     if (this.VisDrugs.length <= 0 && this.Formstate !== 'Delete') {
       hf.handleError('Please Add Some Products');
+      this.stillSaving = false
+      return;
+    }
+    if (!this.selectedIndex) {
+      hf.handleError('Please select a Doctor from the list');
       this.stillSaving = false
       return;
     }
@@ -271,7 +285,15 @@ export class VisitComponent implements OnInit {
               .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
                         in the same day`) : hf.handleError(ret.error); this.stillSaving = false
           } else {
-            if (this.isHospital) { this.resetForm(); hf.showSuccessVisit() } else { this.ngOnInit() }
+            if (this.isHospital) {
+              this.resetForm()
+              this.savedSome = true
+              hf.showSuccessVisit()
+              this.route.fragment.subscribe(f => {
+                const element = document.querySelector('#basic')
+                if (element) {element.scrollIntoView(true)}
+              })
+            } else { this.ngOnInit() }
           }
         });
         break;
@@ -356,6 +378,7 @@ export class VisitComponent implements OnInit {
       if (this.isHospital) {
         this.srvDest.getHospitalDoctors(+val).subscribe(ret => {
           this.hsptlDocs = ret[0]
+          this.docNameslist = ret[0].map(doc => {return doc.DoctorName})
           this.model.RegionID = this.ViewDests.find(d => d.DestID === val).RegionID
           this.inFrm.get('region').setValue(this.ViewDests.find(d => d.DestID === val).RegionID)
           if (this.Formstate !== 'Create') {
@@ -382,7 +405,7 @@ export class VisitComponent implements OnInit {
   AddDoctor() {
     if (this.inFrm.get('docGroup').get('doctor').value && this.inFrm.get('docGroup').get('spec').value ) {
       if (this.hsptlDocs.findIndex(d => d.DoctorName == this.inFrm.get('docGroup').get('doctor').value &&
-          d.SpecID == this.inFrm.get('docGroup').get('spec').value) <= -1) {
+      d.SpecID == this.inFrm.get('docGroup').get('spec').value) <= -1) {
         const docObj = {
           DoctorName: this.inFrm.get('docGroup').get('doctor').value,
           SpecID: this.inFrm.get('docGroup').get('spec').value,
@@ -391,6 +414,11 @@ export class VisitComponent implements OnInit {
         this.hsptlDocs.push(docObj)
         this.selectedIndex = this.hsptlDocs.length - 1
       }
+    }
+  }
+  docSelect() {
+    if (this.inFrm.get('docGroup').get('doctor').value) {
+      this.selectedIndex = this.hsptlDocs.findIndex(d => d.DoctorName == this.inFrm.get('docGroup').get('doctor').value)
     }
   }
   listClick(event, newValue) {

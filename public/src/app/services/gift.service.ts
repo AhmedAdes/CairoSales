@@ -7,11 +7,11 @@ import { AuthenticationService } from './auth.service';
 @Injectable()
 export class GiftService {
 
-  constructor(private http: Http, private authService: AuthenticationService) { }
-
   url = NodeUrl + 'gift/';
   headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.token });
   options = new RequestOptions({ headers: this.headers });
+
+  constructor(private http: Http, private authService: AuthenticationService) { }
 
   getGift(id?: number) {
     let geturl = this.url;

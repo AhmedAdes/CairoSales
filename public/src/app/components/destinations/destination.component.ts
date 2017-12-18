@@ -505,7 +505,7 @@ export class DestinationComponent implements OnInit {
   RemoveUser(id) {
     if (id) {
       const idx = this.DestUsers.findIndex(d => d.UserID == id);
-      this.DestUsers.splice(idx, idx + 1);
+      this.DestUsers.splice(idx, 1);
     }
   }
   log({ target: marker }, str) {

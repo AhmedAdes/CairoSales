@@ -9,6 +9,7 @@ import { CustomMaterialModule } from '../material.module'
 import { NguiMapModule } from '@ngui/map'
 import { ModalModule } from 'ngx-bootstrap'
 import { NgSpinKitModule } from 'ng-spin-kit'
+import { Ng2CompleterModule } from 'ng2-completer';
 
 import { VisitComponent, UserVisitsComponent, VisitDrugsComponent, VisitGiftsComponent } from './'
 import {
@@ -23,7 +24,7 @@ import { CustomPipesModule } from '../../pipes/pipe.module';
     ReactiveFormsModule, CustomPipesModule, HttpModule,
     RouterModule, NgxPaginationModule,
     BrowserAnimationsModule, CustomMaterialModule, NguiMapModule, ModalModule.forRoot(),
-    NgSpinKitModule
+    NgSpinKitModule, Ng2CompleterModule
   ],
   declarations: [
     VisitComponent, UserVisitsComponent, VisitDrugsComponent, VisitGiftsComponent

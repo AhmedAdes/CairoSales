@@ -115,8 +115,7 @@ router.post('/', function (req, res, next) {
                 request.execute("VisitInsert")
                     .then(function (recordset, returnValue, affected) {
                         visID = recordset[0][0].VisitID;
-                        console.log('VisitID: ' + visID);
-
+                        
                         promises.push(Promise.map(drugs, function (drug) {
                             var request = trans.request();
                             request.input("VisitID", visID);
