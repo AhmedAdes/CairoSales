@@ -259,7 +259,7 @@ export class VisitComponent implements OnInit {
       this.stillSaving = false
       return;
     }
-    if (!this.selectedIndex) {
+    if (this.isHospital && !this.selectedIndex) {
       hf.handleError('Please select a Doctor from the list');
       this.stillSaving = false
       return;
