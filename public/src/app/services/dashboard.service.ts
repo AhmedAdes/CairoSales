@@ -24,8 +24,8 @@ export class DashboardService {
         return this.http.get(this.url + 'UserChainSchedule/' + id, this.options).map(res => res.json());
     }
 
-    getUserVisitRate(id: number, month: number) {
-        return this.http.get(this.url + 'UserVisitRate/' + id + '/' + month, this.options).map(res => res.json());
+    getUserVisitRate(id: number, visdate: string) {
+        return this.http.get(this.url + 'UserVisitRate/' + id + '/' + visdate, this.options).map(res => res.json());
     }
 
     getUserChainVisitRate(id: number, month: number) {

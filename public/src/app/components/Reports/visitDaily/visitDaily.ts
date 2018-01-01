@@ -39,7 +39,7 @@ export class VisDailyReportComponent implements OnInit {
     }
     newSchedule(datevalue: Date) {
         this.selectedDate = datevalue == null ? new Date() : datevalue
-        this.srv.getUserVisitRate(this.selectedUser == null ? this.currentUser.userID : this.selectedUser, this.selectedDate.getMonth() + 1)
+        this.srv.getUserVisitRate(this.selectedUser == null ? this.currentUser.userID : this.selectedUser, hf.handleDate(this.selectedDate))
         .subscribe(rat => {
             this.userRate = rat[0];
             this.chartData = [{
@@ -51,7 +51,7 @@ export class VisDailyReportComponent implements OnInit {
         }, err => hf.handleError(err));
     }
     newUser() {
-        this.srv.getUserVisitRate(this.selectedUser, this.selectedDate.getMonth() + 1).subscribe(rat => {
+        this.srv.getUserVisitRate(this.selectedUser,  hf.handleDate(this.selectedDate)).subscribe(rat => {
             this.userRate = rat[0];
             this.chartData = [{
                 data: rat[0].map(da => { return da.visCount == null ? 0 : da.visCount }),

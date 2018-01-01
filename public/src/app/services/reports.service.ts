@@ -73,9 +73,9 @@ export class ReportsService {
       )
       .map(res => res.json());
   }
-  getUserVisitRate(id: number, month: number) {
+  getUserVisitRate(id: number, visdate: string) {
     return this.http
-      .get(this.url + 'UserVisitRate/' + id + '/' + month, this.options)
+      .get(this.url + 'UserVisitRate/' + id + '/' + visdate, this.options)
       .map(res => res.json());
   }
   getMedicalRepReport(from: string, to: string, lineID: number) {

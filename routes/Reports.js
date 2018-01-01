@@ -9,9 +9,8 @@ router.get('/visitCompare/:userID.:visitDate', function (req, res, next) {
     var request = new sql.Request(sqlConn);
     request.input("UserID", req.params.userID);
     request.input("VisitDate", req.params.visitDate);
-    console.log(req.params)
     request.query(`SELECT * FROM  dbo.fncVisitComparisonReport(@UserID, @VisitDate)`)
-        .then(function (recordset) { res.json(recordset); console.log(recordset);})
+        .then(function (recordset) { res.json(recordset);})
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
 router.get('/specVisits/:specID.:from.:to.:imsID', function (req, res, next) {
@@ -96,12 +95,12 @@ router.get('/drugPromoAnalysis/:from.:to.:drugId.:crt', function (req, res, next
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
-router.get('/UserVisitRate/:id/:month', function (req, res, next) {
+router.get('/UserVisitRate/:id/:visdate', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     // var user = req.params.id;
     var request = new sql.Request(sqlConn);
     request.input("UserID", req.params.id);
-    request.input("Month", req.params.month);
+    request.input("VisitDate", req.params.visdate);
     request.execute("prcUserMonthVisitsReport")
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })

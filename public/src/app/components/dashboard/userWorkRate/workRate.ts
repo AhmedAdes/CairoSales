@@ -18,6 +18,7 @@ export class UserWorkRateComponent implements OnInit, OnChanges {
     @Input() user?: User;
     @Input() chain?: boolean;
     selectedMonth: number = new Date().getMonth() + 1;
+    selDateValue: Date
     appliedClass = true
 
     @ViewChild(BaseChartDirective) _chart;
@@ -68,11 +69,12 @@ export class UserWorkRateComponent implements OnInit, OnChanges {
     }
     newSchedule(datevalue: Date) {
         this.selectedMonth = datevalue.getMonth() + 1;
+        this.selDateValue = datevalue
         this.viewBulk()
     }
     viewBulk() {
         this.ngOnInit();
-        this.srvDash.getUserVisitRate(this.dispUser.userID, this.selectedMonth).subscribe(rat => {
+        this.srvDash.getUserVisitRate(this.dispUser.userID, hf.handleDate(this.selDateValue)).subscribe(rat => {
             // this.userRate = rat[0].map(data => {
             //     return { x: new Date(data.DayDate), y: data.visCount == null ? 0 : data.visCount }
             // })

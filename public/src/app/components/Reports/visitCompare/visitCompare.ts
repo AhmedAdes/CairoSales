@@ -15,6 +15,7 @@ export class VisCompareReportComponent implements OnInit {
     currentUser: CurrentUser = this.auth.getUser();
     selectedUser: number;
     userList: User[] = [];
+    data: any[]
     selectedDate: Date = new Date();
 
     pieChartLabels: string[] = [];
@@ -41,9 +42,10 @@ export class VisCompareReportComponent implements OnInit {
         this.selectedDate = datevalue ? datevalue : new Date()
         const user = this.selectedUser ? this.selectedUser : this.currentUser.userID
         this.srv.getUserVisitCompare(user, hf.handleDate(this.selectedDate)).subscribe(rat => {
-            this.pieChartLabels = rat.map(data => { return data.VisType })
-            this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
-            this.forceChartRefresh()
+          this.data = rat
+          this.pieChartLabels = rat.map(data => { return data.VisType })
+          this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
+          this.forceChartRefresh()
 
             // [{
             //     values: this.userRate,      //values - represents the array of {x,y} data points
@@ -54,9 +56,10 @@ export class VisCompareReportComponent implements OnInit {
     }
     newUser() {
         this.srv.getUserVisitCompare(this.selectedUser, hf.handleDate(this.selectedDate)).subscribe(rat => {
-            this.pieChartLabels = rat.map(data => { return data.VisType })
-            this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
-            this.forceChartRefresh()
+          this.data = rat
+          this.pieChartLabels = rat.map(data => { return data.VisType })
+          this.pieChartData = rat.map(data => { return data.VisCount == null ? 0 : data.VisCount })
+          this.forceChartRefresh()
         }, err => hf.handleError(err));
     }
     goBack() {

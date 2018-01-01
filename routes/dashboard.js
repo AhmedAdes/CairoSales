@@ -27,12 +27,12 @@ router.get('/UserChainSchedule/:id', function (req, res, next) {
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
-router.get('/UserVisitRate/:id/:month', function (req, res, next) {
+router.get('/UserVisitRate/:id/:visDate', function (req, res, next) {
     res.setHeader('Content-Type', 'application/json');
     // var user = req.params.id;
     var request = new sql.Request(sqlConn);
     request.input("UserID", req.params.id);
-    request.input("Month", req.params.month);
+    request.input("VisitDate", req.params.visDate);
     request.execute("prcUserMonthVisitsReport")
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
