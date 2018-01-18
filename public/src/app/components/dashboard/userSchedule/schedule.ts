@@ -34,16 +34,18 @@ export class UserScheduleComponent implements OnInit, OnChanges {
       }
     }
   }
-
   ngOnChanges(changes: SimpleChanges) {
     this.viewBulk()
   }
-
   newSchedule(datevalue: Date) {
+    if (!datevalue) { return }
     this.strdate = hf.handleDate(datevalue)
     this.viewBulk()
   }
   viewBulk() {
+    if (!this.strdate) {
+      return;
+    }
     this.ngOnInit()
     this.srvSchd.getUserScheduleDate(this.dispUser.userID, this.strdate).subscribe(scd => this.userSched = scd[0],
       err => hf.handleError(err));
