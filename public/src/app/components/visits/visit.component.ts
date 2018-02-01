@@ -336,7 +336,7 @@ export class VisitComponent implements OnInit {
     }
   }
   disableDateField() {
-    if (new Date() > new Date(this.cnvVisitDate + 'T' + '08:00:00')) {
+    if (new Date() > new Date(this.cnvVisitDate + 'T' + '23:59:00')) {
       this.inFrm.controls['visDate'].disable();
     } else {
       this.inFrm.controls['visDate'].enable()

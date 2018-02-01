@@ -42,7 +42,7 @@ export class VacationComponent implements OnInit {
     ngOnInit() {
         this.srvUser.getuser().subscribe(usr => {
             this.userList = usr;
-            if (this.currentUser.jobClass > 1 && this.currentUser.jobClass < 99) {
+            if (this.currentUser.jobClass > 1 ) {
                 this.srvVac.getUserVacations(this.currentUser.userID).subscribe(cols => {
                     this.collection = cols;
                     this.TableBack();
