@@ -469,7 +469,7 @@ export class VisitComponent implements OnInit {
     }
   }
   UserChanged($user) {
-    this.selUser = this.users.filter(u => u.UserName === $user.target.value.split('@')[0].trim())[0]
+    this.selUser = this.users.find(u => u.userID === $user.target.value.trim())
   }
   DeleteGift(index) {
     this.VisGifts.splice(index, 1);

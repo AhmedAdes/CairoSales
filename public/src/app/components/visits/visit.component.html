@@ -16,7 +16,7 @@
       <div class="col-md-9">
         <select class="form-control" name="userID" (change)="UserChanged($event)">
           <option value="null">Select a User...</option>
-          <option *ngFor="let user of users" [ngValue]="user.UserID">{{user.UserName + " @ "+ user.LineName}}</option>
+          <option *ngFor="let user of users" [value]="user.UserID">{{user.UserName + " @ "+ user.LineName}}</option>
         </select>
       </div>
     </div>
