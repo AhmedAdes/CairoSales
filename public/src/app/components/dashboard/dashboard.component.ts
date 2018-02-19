@@ -39,6 +39,6 @@ export class DashboardComponent implements OnInit {
 
   UserChanged($user) {
     this.seluser = null
-    this.seluser = this.collection.filter(u => u.UserName == $user.target.value.split('@')[0].trim())[0]
+    this.seluser = this.collection.find(u => u.UserID == $user.target.value.trim())
   }
 }
