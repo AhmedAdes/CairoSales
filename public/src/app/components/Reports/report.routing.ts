@@ -5,7 +5,8 @@ import { AuthGuard } from '../../services/auth.guard';
 import {
   ReportsComponent, ReportHomeComponent, VisCompareReportComponent, SpecVisitsComponent, PromoReportComponent,
   DrugCommentReportComponent, DrugPeriodReportComponent, DrugCustomerReportComponent, DrugSpecsReportComponent,
-  MedicalRepReportComponent, MedRepWeeklyReportComponent, VisDailyReportComponent, DrugPromoReportComponent
+  MedicalRepReportComponent, MedRepWeeklyReportComponent, VisDailyReportComponent, DrugPromoReportComponent,
+  CustomerPeriodReportComponent
 } from './';
 
 // noinspection TypeScriptValidateTypes
@@ -25,7 +26,8 @@ const routes: Routes = [
       { path: 'drgcomment', component: DrugCommentReportComponent, canActivate: [AuthGuard] },
       { path: 'drgcust', component: DrugCustomerReportComponent, canActivate: [AuthGuard] },
       { path: 'drgspec', component: DrugSpecsReportComponent, canActivate: [AuthGuard] },
-      { path: 'drgpromo', component: DrugPromoReportComponent, canActivate: [AuthGuard] },/**/
+      { path: 'drgpromo', component: DrugPromoReportComponent, canActivate: [AuthGuard] },
+      { path: 'custperiod', component: CustomerPeriodReportComponent, canActivate: [AuthGuard] },/**/
     ]
   }
 ];

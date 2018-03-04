@@ -14,4 +14,6 @@ export * from './drugAnalysis/Specs/drugSpecs'
 export * from './drugAnalysis/promo/drugPromo'
 
 
+export * from './custAnalysis/custPeriod/custPeriod'
+
 export * from '../dashboard/scoreCard/scoreCard';

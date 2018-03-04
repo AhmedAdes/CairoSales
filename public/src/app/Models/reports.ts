@@ -12,7 +12,7 @@ export class rptdrugAnalysis {
     UserName: string;
     VisitID: number;
     VisitDate: Date;
-    DrugID: number;
+    DrugID?: number;
     DestID: number;
     Destination: string;
     DestType: string;
@@ -22,7 +22,7 @@ export class rptdrugAnalysis {
     ImpName: string;
     SpecName: string;
     RegionProvince: string;
-    Comment: string;
+    Comment?: string;
     GiftID: number;
     GiftName: string;
     ToolID: number;

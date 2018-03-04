@@ -44,7 +44,7 @@ export class VisitComponent implements OnInit {
   drgAnsrs: any[] = [];
   visDrugModel: VisitDrugs = new VisitDrugs();
   visGiftModel: VisitGifts = new VisitGifts();
-  orderbyString =  '';
+  orderbyString = '';
   orderbyClass = 'glyphicon glyphicon-sort';
   yesterday: string
   thisday: string
@@ -70,7 +70,7 @@ export class VisitComponent implements OnInit {
 
   constructor(private serv: VisitService, private srvGift: GiftService, private srvDrug: DrugService, private route: ActivatedRoute,
     private srvDest: DestinationService, private srvUreg: UserRegionService, private modalService: BsModalService,
-    private auth: AuthenticationService, fb: FormBuilder, private srvQ: SurveyQuestionService, private srvSpc: MedSpecService) {}
+    private auth: AuthenticationService, fb: FormBuilder, private srvQ: SurveyQuestionService, private srvSpc: MedSpecService) { }
 
   ngOnInit() {
     this.InitiatetheForm()
@@ -98,17 +98,17 @@ export class VisitComponent implements OnInit {
       accompanyID: new FormControl(''),
       visDate: new FormControl(this.cnvVisitDate, Validators.required),
       region: new FormControl('', Validators.required),
-      destination: new FormControl('', Validators.required ),
+      destination: new FormControl('', Validators.required),
       generalComment: new FormControl(''),
       docGroup: new FormGroup({
         doctor: new FormControl(''),
         spec: new FormControl('')
       })
     }, (group: FormGroup) => {
-        if (group.controls['visType'].value === 'Coaching Visit-With Manager' && !group.controls['accompanyID'].value) {
-          return { mngrRequired: true };
-        }
+      if (group.controls['visType'].value === 'Coaching Visit-With Manager' && !group.controls['accompanyID'].value) {
+        return { mngrRequired: true };
       }
+    }
     )
     this.inFrm.get('visDate').valueChanges.subscribe(val => this.onDateChanged(val))
     this.inFrm.get('destination').valueChanges.subscribe(val => this.onDestChange(val))
@@ -291,7 +291,7 @@ export class VisitComponent implements OnInit {
               hf.showSuccessVisit()
               this.route.fragment.subscribe(f => {
                 const element = document.querySelector('#basic')
-                if (element) {element.scrollIntoView(true)}
+                if (element) { element.scrollIntoView(true) }
               })
             } else { this.ngOnInit() }
           }
@@ -301,7 +301,7 @@ export class VisitComponent implements OnInit {
         this.serv.UpdateVisit(this.model.VisitID, this.model, this.VisDrugs, this.VisGifts, this.visAnsrs).subscribe(ret => {
           if (ret.error) {
             ret.error.message && ret.error.message
-            .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
+              .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
                       in the same day`) : hf.handleError(ret.error); this.stillSaving = false
           } else if (ret.affected > 0) {
             this.ngOnInit();
@@ -312,7 +312,7 @@ export class VisitComponent implements OnInit {
         this.serv.DeleteVisit(this.model.VisitID).subscribe(ret => {
           if (ret.error) {
             ret.error.message && ret.error.message
-            .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
+              .includes('Violation of UNIQUE KEY') ? hf.handleError(`Can't Insert two visits for the same Customer
                       in the same day`) : hf.handleError(ret.error); this.stillSaving = false
           } else if (ret.affected > 0) {
             this.ngOnInit();
@@ -326,13 +326,13 @@ export class VisitComponent implements OnInit {
   SortTable(column: string) {
     if (this.orderbyString.indexOf(column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes';
-      this.orderbyString =  '+' + column;
+      this.orderbyString = '+' + column;
     } else if (this.orderbyString.indexOf('-' + column) === -1) {
       this.orderbyClass = 'glyphicon glyphicon-sort-by-attributes-alt';
-      this.orderbyString =  '-' + column;
+      this.orderbyString = '-' + column;
     } else {
       this.orderbyClass = 'glyphicon glyphicon-sort';
-      this.orderbyString =  '';
+      this.orderbyString = '';
     }
   }
   disableDateField() {
@@ -378,7 +378,7 @@ export class VisitComponent implements OnInit {
       if (this.isHospital) {
         this.srvDest.getHospitalDoctors(+val).subscribe(ret => {
           this.hsptlDocs = ret[0]
-          this.docNameslist = ret[0].map(doc => {return doc.DoctorName})
+          this.docNameslist = ret[0].map(doc => { return doc.DoctorName })
           this.model.RegionID = this.ViewDests.find(d => d.DestID === val).RegionID
           this.inFrm.get('region').setValue(this.ViewDests.find(d => d.DestID === val).RegionID)
           if (this.Formstate !== 'Create') {
@@ -386,10 +386,10 @@ export class VisitComponent implements OnInit {
           }
         })
       } else {
-      this.srvDest.checkMaxVisit(val, this.currentUser.userID, this.cnvVisitDate).subscribe(ret => {
-        if (ret.error) {
-          hf.handleError(ret.error)
-        } else {
+        this.srvDest.checkMaxVisit(val, this.currentUser.userID, this.cnvVisitDate).subscribe(ret => {
+          if (ret.error) {
+            hf.handleError(ret.error)
+          } else {
             if (ret.length <= 0) { return }
             if (ret[0].Allowed) {
               // this.destModel = this.destinations.find(d => d.DestID == Dest)
@@ -403,9 +403,9 @@ export class VisitComponent implements OnInit {
     }
   }
   AddDoctor() {
-    if (this.inFrm.get('docGroup').get('doctor').value && this.inFrm.get('docGroup').get('spec').value ) {
+    if (this.inFrm.get('docGroup').get('doctor').value && this.inFrm.get('docGroup').get('spec').value) {
       if (this.hsptlDocs.findIndex(d => d.DoctorName == this.inFrm.get('docGroup').get('doctor').value &&
-      d.SpecID == this.inFrm.get('docGroup').get('spec').value) <= -1) {
+        d.SpecID == this.inFrm.get('docGroup').get('spec').value) <= -1) {
         const docObj = {
           DoctorName: this.inFrm.get('docGroup').get('doctor').value,
           SpecID: this.inFrm.get('docGroup').get('spec').value,

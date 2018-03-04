@@ -148,4 +148,15 @@ router.get('/DrugSurveyReport/:from/:to/:drugid', function (req, res, next) {
         .then(function (recordset) { res.json(recordset); })
         .catch(function (err) { res.json({ error: err }); console.log(err); })
 });
+router.get('/custPeriodAnalysis/:from/:to/:destid', function (req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
+    var request = new sql.Request(sqlConn);
+    request.input("FromDate", req.params.from);
+    request.input("ToDate", req.params.to);
+    request.input("DestID", req.params.destid);
+    request.execute("prcCustPeriodAnalysisReport")
+        .then(function (recordset) { res.json(recordset); })
+        .catch(function (err) { res.json({ error: err }); console.log(err); })
+});
+
 module.exports = router;

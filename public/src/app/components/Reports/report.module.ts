@@ -5,13 +5,14 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
+import { NgSpinKitModule } from 'ng-spin-kit'
 import { HelperModule } from '../helpers/helper.module'
 
 import {
   ReportsComponent, ReportHomeComponent, VisCompareReportComponent, SpecVisitsComponent, PromoReportComponent,
   VisDailyReportComponent, MedicalRepReportComponent, MedRepWeeklyReportComponent,
   DrugCommentReportComponent, DrugPeriodReportComponent, DrugCustomerReportComponent, DrugSpecsReportComponent,
-  DrugPromoReportComponent
+  DrugPromoReportComponent, CustomerPeriodReportComponent
 } from './';
 import {
   VisitService, AuthenticationService, DrugService, IMSService, MedSpecService, UserService,
@@ -24,14 +25,15 @@ import { reportRouting } from './report.routing';
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
     CustomPipesModule, HttpModule, RouterModule,
-    NgxPaginationModule, ChartsModule, HelperModule, reportRouting
+    NgxPaginationModule, ChartsModule, HelperModule,
+    NgSpinKitModule, reportRouting
   ],
   declarations: [ReportsComponent, ReportHomeComponent, VisCompareReportComponent,
     SpecVisitsComponent, PromoReportComponent, VisDailyReportComponent,
     MedicalRepReportComponent, MedRepWeeklyReportComponent,
     DrugCommentReportComponent, DrugPeriodReportComponent,
     DrugCustomerReportComponent, DrugSpecsReportComponent,
-    DrugPromoReportComponent/**/],
+    DrugPromoReportComponent, CustomerPeriodReportComponent/**/],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [VisitService, AuthenticationService, DrugService, IMSService, MedSpecService, UserService,
     DestinationService, RegionService, PromoToolsService, GiftService, LineService, ReportsService],
