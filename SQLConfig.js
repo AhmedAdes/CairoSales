@@ -20,9 +20,9 @@
     IDIConfig: {
         user: 'sa',
         password: 'ITD@reY0u2',
-        server: '105.198.224.91', //105.199.10.121,44444//105.198.224.91//SQL-SRV // You can use 'localhost\\instance' to connect to named instance  
+        server: '105.199.10.121', //105.199.10.121,44444//105.198.224.91//SQL-SRV // You can use 'localhost\\instance' to connect to named instance  
         database: 'IDIData',
-        port: '44444',
+        port: '25864',
         options: {
             encrypt: true // Use this if you're on Windows Azure
         }
