@@ -22,6 +22,7 @@ app.set("views", path.join(__dirname, "public/dist"));
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
+
 app.use(cors());
 app.use(compression());
 app.use(logger("dev"));
